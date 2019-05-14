@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the CardslideComponent component.
@@ -14,9 +15,15 @@ export class CardslideComponent {
 
   text: string;
 
-  constructor() {
+  constructor(
+    private event :Events
+  ) {
     console.log('Hello CardslideComponent Component');
     this.text = 'Hello World';
+  }
+
+  getToDeal(data){
+    this.event.publish('change-tab', 1 ,"mobile");
   }
 
 }

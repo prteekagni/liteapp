@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, Events, Tabs } from 'ionic-angular';
 
 
 @IonicPage()
@@ -12,10 +12,23 @@ export class TabsPage {
   DealsPage: any = 'DealsPage';
   ProductsPage: any = 'ProductsPage';
   MyaccountPage: any = 'MyaccountPage';
+  @ViewChild(Tabs) tabs: Tabs;
 
+  tab2Params = { data: ''};
 
-  constructor() {
   
 
+
+  constructor(
+    private events: Events
+  ) {
+
+
+  
+    this.events.subscribe('change-tab', (tab, data) => {
+      this.tabs.select(tab);
+      this.tab2Params.data = data;
+      console.log(this.tab2Params.data)
+    })
   }
 }

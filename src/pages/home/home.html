@@ -1,44 +1,40 @@
-
 <ion-header>
   <ion-navbar>
-    <ion-title>Deals Locker Lite</ion-title>
+    <ion-title>Deals Locker Lite
+      <ion-icon name="star-outline"></ion-icon>  
+      <ion-icon ios="ios-star" md="md-star" style="font-size:20px;" text-right></ion-icon>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-
-
-  <button ion-button (click)="nav11()"></button>
-
-
-<ion-row>
+  <ion-row>
     <ion-item no-lines class="leftpadding">
-    <ion-scroll scrollX="true" scroll-avatar>
+      <ion-scroll scrollX="true" scroll-avatar>
         <ion-avatar>
-          <img src="../../assets/imgs/logo.png" class="scroll-item"/>
-          <img src="../../assets/imgs/logo.png" class="scroll-item"/>
-          <img src="../../assets/imgs/logo.png" class="scroll-item"/>
-          <img src="../../assets/imgs/logo.png" class="scroll-item"/>
+          <img src="../../assets/imgs/logo.png" class="scroll-item" style="border: 1px solid grey;" />
+          <img src="../../assets/imgs/1.png" class="scroll-item"  style="border: 1px solid grey;"/>
+          <img src="../../assets/imgs/2.jpg" class="scroll-item"  style="border: 1px solid grey;"/>
+          <img src="../../assets/imgs/3.png" class="scroll-item"  style="border: 1px solid grey;" />
+          <img src="../../assets/imgs/4.png" class="scroll-item" style="border: 1px solid grey;"/>
+          <img src="../../assets/imgs/6.png" class="scroll-item" style="border: 1px solid grey;" />
         </ion-avatar>
-    </ion-scroll>
+      </ion-scroll>
     </ion-item>
   </ion-row>
 
   <ion-row>
     <ion-col col-12>
-       <slide></slide>
+      <slide></slide>
     </ion-col>
-   
   </ion-row>
 
   <cardslide></cardslide>
 
   <singleadd></singleadd>
-<h2>Deals On Amazon</h2>
- <cardslide></cardslide>
- <singleadd></singleadd>
-
- <h2>Deals On Flipkart</h2>
+  <h2>Deals On Amazon</h2>
   <cardslide></cardslide>
-
+  <singleadd></singleadd>
+  <h2>Deals On Flipkart</h2>
+  <cardslide></cardslide>
 </ion-content>

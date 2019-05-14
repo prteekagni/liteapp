@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, Inject, forwardRef, Output, EventEmitter } from '@angular/core';
+import { IonicPage, NavController, NavParams, Tabs, Events } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the HomePage page.
@@ -16,7 +17,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class HomePage {
 
   slides;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private events: Events
+  ) {
   }
 
   ionViewDidLoad() {
@@ -28,9 +34,7 @@ export class HomePage {
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
       { 'image': 'http://elinfinitoindia.in/images/logo.png' }
     ];
-    
   }
-
 
   nav11() {
     this.navCtrl.push('ProductlistPage');
