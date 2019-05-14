@@ -1,0 +1,30 @@
+<ion-row>
+  <ion-col col-12 style="background:white">
+    <!-- <ion-row *ngIf= "view">
+      <ion-col col-2 offset-9 text-right>
+          <span style="color:orangered" (click)="ViewAll()">View All</span>
+      </ion-col>
+    </ion-row> -->
+      <ion-item no-lines class="paddingleft">
+        <ion-scroll scrollX="true" scroll-avatar id="largecardcontainer">
+          <ion-card class="scroll-item" id="largecard" (click)="getList(item);">
+            <img src="../../assets/imgs/logo.png" class="largecardimg" />
+          </ion-card>
+             <ion-card class="scroll-item" id="largecard" (click)="getList(item);">
+            <img src="../../assets/imgs/logo.png" class="largecardimg" />
+          </ion-card>
+             <ion-card class="scroll-item" id="largecard" (click)="getList(item);">
+            <img src="../../assets/imgs/logo.png" class="largecardimg" />
+          </ion-card>
+             <ion-card class="scroll-item" id="largecard" (click)="getList(item);">
+            <img src="../../assets/imgs/logo.png" class="largecardimg" />
+          </ion-card>
+        </ion-scroll>
+        <ng-template #loading>
+          dfjghfjkdghjkh
+        
+        </ng-template>
+      </ion-item>
+  
+    </ion-col>
+</ion-row>

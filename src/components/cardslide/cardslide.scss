@@ -1,0 +1,94 @@
+cardslide {
+    ion-scroll {
+        white-space: nowrap;
+        height: 100%;
+        margin-top: 10px;
+    }
+
+    // horizontal scroll of cards container , it will be removed from ionic 4( need edit )
+    ion-scroll[scrollX] {
+        white-space: nowrap;
+        height: 200px;
+        overflow: hidden;
+
+        .scroll-item {
+            display: inline-block;
+        }
+
+        img {
+            margin: 5px;
+            width: 80px;
+            height: 100%;
+        }
+    }
+
+    // 
+    ion-scroll[scroll-avatar] {
+        height: 58px; // height: 140px;
+    }
+
+    /* Hide ion-content scrollbar */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /*to reduce the padding on left of card container for scrolling cards */
+    .paddingleft {
+        padding-left: 0px !important;
+    }
+
+    /*this is used as a container to show largecards */
+    #largecardcontainer {
+        margin: 5px;
+        margin-left: 0px;
+        margin-right: 0px;
+        height: 195px;
+        margin-top: 0px;
+    }
+
+    // this is used for cards used to display stores and brands
+    #largecard {
+        position: relative;
+        text-align: center;
+        height: 165px;
+        width: 130px;
+        margin-right: 0px;
+        padding: 0px;
+        margin-left: 10px;
+        -webkit-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+        box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+        border-radius: 10px;
+    }
+
+    // to reduce the padding on right side for better UI while scrolling
+    .item-md.item-block .item-inner {
+        padding-right: 0px;
+    }
+
+    // this class is used for logo display on cards
+    .largecardimg {
+        width: 100% !important;
+        margin: 5px auto !important;
+        height: 165px !important;
+        margin-top: 0px !important;
+    }
+
+    // the title of cards displaying title of cards
+    .cartcard-title {
+        position: absolute;
+        top: 20%;
+        font-size: 1.7em;
+        width: 100%;
+        font-weight: bold;
+        color: white;
+    }
+
+    .label-md {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    background-color:white;
+}
