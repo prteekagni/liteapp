@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the MyaccountPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-myaccount',
@@ -20,6 +13,11 @@ export class MyaccountPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyaccountPage');
+  }
+
+
+  gotoRegister() {
+    this.navCtrl.push('RegisterPage');
   }
 
 }

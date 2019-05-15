@@ -91,4 +91,10 @@ cardslide {
     }
 
     background-color:white;
+
+    .item[no-lines],
+    .item.item[no-lines] .item-inner {
+
+        background-color: transparent;
+    }
 }

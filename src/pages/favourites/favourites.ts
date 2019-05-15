@@ -15,10 +15,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FavouritesPage {
 
+  de: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.de = JSON.parse(localStorage.getItem('Deal' || '[]'));
     console.log('ionViewDidLoad FavouritesPage');
   }
 

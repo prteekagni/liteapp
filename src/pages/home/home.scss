@@ -46,5 +46,9 @@
          background-image: none !important;
      }
 
-     
+     .item[no-lines],
+     .item.item[no-lines] .item-inner {
+
+         background-color: transparent;
+     }
  }
