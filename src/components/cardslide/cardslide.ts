@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 /**
@@ -14,16 +14,20 @@ import { Events } from 'ionic-angular';
 export class CardslideComponent {
 
   text: string;
+  @Output() voted = new EventEmitter<any>();
+
 
   constructor(
     private event :Events
   ) {
     console.log('Hello CardslideComponent Component');
     this.text = 'Hello World';
+
+
   }
 
   getToDeal(data){
-    this.event.publish('change-tab', 1 ,"mobile");
+    this.voted.emit('hello');
   }
 
 }

@@ -26,6 +26,9 @@ export class ProductsPage {
 
 
   gotoProducts() {
-    this.navCtrl.push('ProductlistPage');
+    this.navCtrl.push('ProductlistPage', {
+      id: '123',
+      type:'products'
+    });
   }
 }

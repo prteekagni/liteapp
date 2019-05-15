@@ -63,4 +63,8 @@ export class DealsPage {
    
   }
 
+  goTo() {
+    this.navCtrl.push('ProductlistPage');
+  }
+
 }

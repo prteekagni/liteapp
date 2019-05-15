@@ -40,4 +40,10 @@ export class HomePage {
     this.navCtrl.push('ProductlistPage');
   }
 
+
+  homevote(data) {
+   this.events.publish('change-tab', 1, "mobile");
+   
+  }
+
 }
