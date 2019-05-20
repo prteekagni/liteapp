@@ -8,6 +8,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SharedProvider } from '../providers/shared/shared';
 import { AuthenticateProvider } from '../providers/authenticate/authenticate';
 import { DealsProvider } from '../providers/deals/deals';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { AppMinimize } from '@ionic-native/app-minimize'
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { DealsProvider } from '../providers/deals/deals';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SharedProvider,
     AuthenticateProvider,
-    DealsProvider
+    DealsProvider,
+    GooglePlus,
+    AppMinimize,
+    SocialSharing
   ]
 })
 export class AppModule {}

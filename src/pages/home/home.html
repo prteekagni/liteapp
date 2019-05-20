@@ -13,7 +13,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
+<!-- 
 <ion-content>
   <ion-row>
     <ion-item no-lines class="leftpadding">
@@ -44,4 +44,33 @@
   <singleadd></singleadd>
   <h2>Deals On Flipkart</h2>
   <cardslide></cardslide>
+</ion-content> -->
+
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+   <div *ngIf="isLoggedIn; else loginTemplate">
+    <h1>Welcome, {{displayName}}!</h1>
+    <p>Email: {{email}}<br>
+      Family Name: {{familyName}}<br>
+      Given Name: {{givenName}}<br>
+      User ID: {{userId}}</p>
+    <p><ion-avatar item-left>
+        <img src="{{imageUrl}}">
+       </ion-avatar></p>
+    <p><button ion-button (click)="logout()">Logout From Google</button></p>
+  </div>
+
+  <ng-template #loginTemplate>
+    <h1>Please Login to see your Google Account Information</h1>
+    <p><button ion-button (click)="login()">Login With Google</button></p>
+  </ng-template>
 </ion-content>

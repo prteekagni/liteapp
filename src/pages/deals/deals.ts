@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, ItemSliding } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ItemSliding, Platform, Events } from 'ionic-angular';
+import { AppMinimize } from '@ionic-native/app-minimize';
 
 /**
  * Generated class for the DealsPage page.
@@ -18,17 +19,34 @@ export class DealsPage {
 
 
     @ViewChild(Content) content: Content;
-  deals;
+    deals;
   items;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private renderer: Renderer
-    ,
-  private elem: ElementRef) {
+
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private renderer: Renderer,
+    private elem: ElementRef,
+    private platform: Platform,
+    private appMinimize: AppMinimize, 
+    private events: Events
+  ) {
+
+
+
  
   }
 
+  ionViewWillEnter() {
+   
+    console.log('willenter')
+  
+  }
+
   ionViewDidLoad() {
+
 
 
     // let yOffset = document.getElementById("mobile").offsetTop;
@@ -54,9 +72,7 @@ export class DealsPage {
   }
 
 
-  ionViewWillEnter() {
   
-  }
 
 
   viewMore(data) {

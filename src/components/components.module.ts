@@ -7,6 +7,7 @@ import { SingleaddComponent } from './singleadd/singleadd';
 import { LoginComponent } from './login/login';
 import { ProfileComponent } from './profile/profile';
 import { SquareComponent } from './square/square';
+import { CardlistComponent } from './cardlist/cardlist';
 @NgModule({
 	declarations: [
     SlideComponent,
@@ -15,7 +16,8 @@ import { SquareComponent } from './square/square';
     SingleaddComponent,
     LoginComponent,
     ProfileComponent,
-    SquareComponent],
+    SquareComponent,
+    CardlistComponent],
 	imports: [IonicModule],
 	exports: [
     SlideComponent,
@@ -24,6 +26,7 @@ import { SquareComponent } from './square/square';
     SingleaddComponent,
     LoginComponent,
     ProfileComponent,
-    SquareComponent]
+    SquareComponent,
+    CardlistComponent]
 })
 export class ComponentsModule {}
