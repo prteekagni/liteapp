@@ -11,6 +11,8 @@ import { DealsProvider } from '../providers/deals/deals';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AppMinimize } from '@ionic-native/app-minimize'
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     DealsProvider,
     GooglePlus,
     AppMinimize,
-    SocialSharing
+    SocialSharing,
+    LocalNotifications
   ]
 })
 export class AppModule {}

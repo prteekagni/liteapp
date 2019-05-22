@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Tabs, Events, Platform, LoadingCon
 import { TabsPage } from '../tabs/tabs';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AppMinimize } from '@ionic-native/app-minimize';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @IonicPage()
@@ -19,8 +20,11 @@ export class HomePage {
   givenName: any;
   userId: any;
   imageUrl: any;
-  
+  timeStarts: any;
+  date: any;
   isLoggedIn: boolean = false;
+  data = { date: '', time: '' };
+  lnotification: any = [];
   
   
   constructor(
@@ -30,7 +34,8 @@ export class HomePage {
     private googlePlus: GooglePlus,
     private platform: Platform,
     private appMinimize: AppMinimize,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private localNotifications: LocalNotifications
   ) {  
   }
 
@@ -40,6 +45,17 @@ export class HomePage {
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
     ];
+
+    
+  // this.localNotifications.on("yes", function(notification) {
+  //   alert(notification);
+   
+  // });
+
+    this.localNotifications.on("yes").subscribe(res => {
+     alert(res);
+    })
+  
   }
 
   nav11() {
@@ -64,7 +80,44 @@ export class HomePage {
    
   }
  
-                                                                
+
+  goToNotification() {
+    this.navCtrl.push('NotificationPage');
+  }
+              
+  
+
+  goToFav() {
+    
+    
+  }
+
+  set(data) {
+    var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+    this.date = new Date(utc +" "+this.timeStarts);
+    console.log(this.date)
+    console.log(this.timeStarts)
+    let notification: any = {
+      id: data,
+      title: 'Do you want to go see a movie tonight?',
+    actions: [{ id: 'yes', title: 'Reschedule' }],
+      trigger: { at: this.date },
+      led: 'FF0000',
+    }
+
+
+      this.lnotification = JSON.parse(localStorage.getItem('notification')) || [];
+    this.lnotification.push(notification);
+
+    localStorage.setItem('notification', JSON.stringify(this.lnotification));
+   
+
+    console.log(this.lnotification);
+    this.localNotifications.schedule(this.lnotification);
+
+  }
+
+
                                
 
 }

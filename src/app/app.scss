@@ -16,6 +16,11 @@
 // automatically applied to the <body> element in the app.
 
 
-ion-content{
-    background: url('../assets/ba.jpg');
+ion-content {
+    // background: url('../assets/ba.jpg');
+    // background: url(../assets/ba.jpg);
+    // background-repeat: no-repeat;
+    // background-attachment: fixed;
+    // background-position: center;
+    // background-size: cover;
 }
