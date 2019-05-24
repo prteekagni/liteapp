@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the ProfileComponent component.
@@ -14,9 +16,18 @@ export class ProfileComponent {
 
   text: string;
 
-  constructor() {
+  constructor(
+    private authService: AuthenticateProvider,
+    private events: Events
+  ) {
     console.log('Hello ProfileComponent Component');
     this.text = 'Hello World';
+  }
+
+
+  logOut() {
+    this.events.publish('logout', 'false');
+    this.authService.setUserLogout();
   }
 
 }

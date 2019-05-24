@@ -24,18 +24,18 @@
   </ion-card-content>
 </ion-card> -->
 
-<ion-card style="margin-top:75px;" *ngFor="let item of de">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
+  <ion-card style="margin-top:75px;" *ngFor="let item of de">
+    <img src="../../assets/imgs/logo.png" style="width: 150px;
     margin-top: -39px;
     z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
+    position: absolute;" />
+    <ion-card-content>
+      <p style="margin-left: 150px;">
+        The most popular industrial group ever, and largely
+        responsible for bringing the music to a mass audience.
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="danger" icon-start (click)="save()">
           <ion-icon name='star'></ion-icon>
@@ -43,10 +43,10 @@
         </button>
       </ion-col>
       <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='musical-notes'></ion-icon>
-        Buy
-        </button>
+        <label for="Time">Set Reminder</label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" 
+        [(ngModel)]="timeStarts" (ionChange)="setData(item)">
+        </ion-datetime>
       </ion-col>
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-start>
@@ -56,9 +56,9 @@
       </ion-col>
     </ion-row>
 
-</ion-card>
+  </ion-card>
 
-<!-- <ion-card style="margin-top:75px;">
+  <!-- <ion-card style="margin-top:75px;">
   <img src="../../assets/imgs/logo.png" style="width: 150px;
     margin-top: -39px;
     z-index: 91554;
@@ -159,10 +159,10 @@
 </ion-card> -->
 
 
-<!-- </ion-col> -->
-<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-  </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+  <!-- </ion-col> -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

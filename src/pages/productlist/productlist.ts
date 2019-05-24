@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit  } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, Img } from 'ionic-angular';
 import { updateImgs } from 'ionic-angular/umd/components/content/content';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /**
  * Generated class for the ProductlistPage page.
@@ -18,10 +19,15 @@ export class ProductlistPage  {
 
 
   deals;
+  timeStarts;
+  date;
   de: any = [];
+  lnotification: any = [];
   @ViewChild(Content) _content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+  private localNotifications : LocalNotifications) {
     
     console.log(this.navParams.get('type'));
   }
@@ -34,48 +40,38 @@ export class ProductlistPage  {
 
 
   ionViewWillEnter() {
+  //  this.de = JSON.parse(localStorage.getItem('Deal' || '[]'));
+  //  console.log('ionViewDidLoad ProductlistPage');
+    
+    
+    
     this.de = [
       {
-        'name': 'p',
-        'img':'http://elinfinitoindia.in/images/logo.png'
+        "title": "Amazon",
+        "Description": "hi this is description and is must of it",
+        "image": "../../assets/imgs/logo.png",
+        "link":"https://amazon.in"
       },
-       {
-        'name': 'p1',
-        'img':'http://elinfinitoindia.in/images/logo.png'
+      {
+        "title": "Amazon1",
+        "Description": "hi this is description and is must of it",
+        "image": "../../assets/imgs/logo.png",
+        "link":"https://amazon.in"
       },
-        {
-        'name': 'p2',
-        'img':'http://elinfinitoindia.in/images/logo.png'
+      {
+        "title": "Amazon2",
+        "Description": "hi this is description and is must of it",
+        "image": "../../assets/imgs/logo.png",
+        "link":"https://amazon.in"
       },
-         {
-        'name': 'p3',
-        'img':'http://elinfinitoindia.in/images/logo.png'
-      },
-          {
-        'name': 'p4',
-        'img':'http://elinfinitoindia.in/images/logo.png'
-      },
-           {
-        'name': 'p5',
-        'img':'http://elinfinitoindia.in/images/logo.png'
-      },
-            {
-        'name': 'p6',
-        'img':'http://elinfinitoindia.in/images/logo.png'
-      },
-             {
-        'name': 'p7',
-        'img':'../../assets/imgs/1.png'
-      },
-              {
-        'name': 'p8',
-        'img':'../../assets/imgs/1.png'
-      },
-               {
-        'name': 'p9',
-        'img':'../../assets/imgs/1.png'
+      {
+        "title": "Amazon3",
+        "Description": "hi this is description and is must of it",
+        "image": "../../assets/imgs/logo.png",
+        "link":"https://amazon.in"
       },
     ]
+   
   }
 
 
@@ -87,7 +83,8 @@ export class ProductlistPage  {
    
     var deal = {
       "name": "gdfgdfgfteek",
-      "age":"55"
+      "age": "55",
+      "reminder":"3:59"
     }
 
     var deals = [];
@@ -104,6 +101,32 @@ export class ProductlistPage  {
       }
     });
   
+  }
+
+
+  setData(data) {
+   var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+   this.date = new Date(utc + " " + this.timeStarts);
+   console.log(this.date)
+   console.log(this.timeStarts)
+   let notification: any = {
+     id: data,
+     title: 'Do you want to go see a movie tonight?',
+     actions: [{ id: 'yes', title: 'Reschedule' }],
+     trigger: { at: this.date },
+     led: 'FF0000',
+   }
+   
+   
+   this.lnotification = JSON.parse(localStorage.getItem('notification')) || [];
+   this.lnotification.push(notification);
+   
+   localStorage.setItem('notification', JSON.stringify(this.lnotification));
+   
+   
+   console.log(this.lnotification);
+   this.localNotifications.schedule(this.lnotification);
+   
   }
 
 }

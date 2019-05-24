@@ -12,6 +12,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AppMinimize } from '@ionic-native/app-minimize'
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { HttpClientModule } from '@angular/common/http';
+import { Network } from '@ionic-native/network';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
-    })
+    }),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +41,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     GooglePlus,
     AppMinimize,
     SocialSharing,
-    LocalNotifications
+    LocalNotifications,
+    Network
   ]
 })
 export class AppModule {}

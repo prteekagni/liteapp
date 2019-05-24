@@ -5,18 +5,19 @@
 </ion-header>
 
 <ion-content>
-<ion-card style="margin-top:75px;" *ngFor="let item of de">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
+  <ion-card style="margin-top:75px;" *ngFor="let item of de" 
+  (swipe)="swipeEvent($event)">
+    <img src="../../assets/imgs/logo.png" style="width: 150px;
     margin-top: -39px;
     z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
+    position: absolute;" />
+    <ion-card-content>
+      <p style="margin-left: 150px;">
+        The most popular industrial group ever, and largely
+        responsible for bringing the music to a mass audience.
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="danger" icon-start (click)="save()">
           <ion-icon name='star'></ion-icon>
@@ -26,7 +27,7 @@
       <ion-col text-center>
         <button ion-button clear small color="danger" icon-start>
           <ion-icon name='musical-notes'></ion-icon>
-        Buy
+          Buy
         </button>
       </ion-col>
       <ion-col text-right>
@@ -37,6 +38,6 @@
       </ion-col>
     </ion-row>
 
-</ion-card>
+  </ion-card>
 
 </ion-content>

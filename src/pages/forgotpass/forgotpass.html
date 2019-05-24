@@ -10,6 +10,56 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+ 
+
+    <ng-container *ngIf="expression; then thenTemplate; else elseTemplate"></ng-container>
+   <ng-template #thenTemplate>
+    <ion-row text-center>
+      <form #sendEmail="ngForm">
+        <ion-col col-10 offset-1>
+
+          <ion-item>
+            <ion-label stacked>Enter Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6 offset-3>
+          <button ion-button type="submit" block class="submitbutton" (click)="sendOtp()" [disabled]="sendEmail.invalid">
+            Send OTP
+          </button>
+        </ion-col>
+
+
+      </form>
+
+    </ion-row>
+  </ng-template>
+  <ng-template #elseTemplate>
+    <ion-row text-center>
+
+      <ion-col col-10 offset-1>
+        <form #otpForm="ngForm">
+          <ion-item>
+            <ion-label stacked>Verify Otp</ion-label>
+            <ion-input type="number" required [(ngModel)]="otp" name="otp" ></ion-input>
+          </ion-item>
+      
+      <ion-col col-6 offset-3>
+        <button ion-button type="submit" block class="submitbutton" (click)="verifyOtp()" [disabled]="otpForm.invalid">
+          Verify Otp
+        </button>
+      </ion-col>
+        </form>
+
+      </ion-col>
+      <ion-col col-6 offset-3>
+        <button ion-button type="submit" clear class="submitbutton" (click)="resendOtp()">
+          Resend Otp
+        </button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
 
 </ion-content>

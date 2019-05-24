@@ -14,4 +14,35 @@ export class AuthenticateProvider {
     console.log('Hello AuthenticateProvider Provider');
   }
 
+
+  checkUserLogin() {
+    if (localStorage.getItem('isLoggedIn') === "true") {
+      return true;
+    }
+    else {
+      return false;
+    }
+    
+  }
+
+  setUserLogin() {
+    localStorage.setItem('isLoggedIn', 'true');
+  }
+
+  setUserLogout() {
+    localStorage.setItem('isLoggedIn', '');
+  }
+
+ verifyOtp(data){
+    return this.http.post("/VerifyOtp",data);
+  }
+
+
+  sendOtp(data){
+    return this.http.post("/users/ForgetPassword",data);
+  }
+
+
+
+
 }

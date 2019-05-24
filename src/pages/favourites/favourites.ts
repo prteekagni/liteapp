@@ -24,4 +24,10 @@ export class FavouritesPage {
     console.log('ionViewDidLoad FavouritesPage');
   }
 
+  swipeEvent(event) {
+    console.log(event);
+     this.de.forEach(element => {
+       console.log(element)
+    });
+  }
 }

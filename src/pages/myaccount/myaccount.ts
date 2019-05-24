@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
 
 @IonicPage()
 @Component({
@@ -9,11 +10,32 @@ import { GooglePlus } from '@ionic-native/google-plus';
 })
 export class MyaccountPage {
 
+
+  isLoggedIn: boolean;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-  private googlePlus:GooglePlus
+    private googlePlus:GooglePlus,
+    private authService: AuthenticateProvider,
+    private events : Events
   ) {
+  }
+
+
+  ionViewWillEnter() {
+  
+    this.events.subscribe('login', (res) => {
+      this.isLoggedIn = true;
+      console.log(this.isLoggedIn);
+
+    })
+
+    this.events.subscribe('logout', (res) => {
+      this.isLoggedIn = false;
+      console.log(this.isLoggedIn);
+    })
+    this.isLoggedIn = this.authService.checkUserLogin();
   }
 
   ionViewDidLoad() {
