@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 /**
  * Generated class for the SquareComponent component.
@@ -13,6 +13,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class SquareComponent {
 
   text: string;
+  @Input() items
+           ;
   @Output() clickeve = new EventEmitter();
 
   constructor() {

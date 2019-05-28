@@ -1,3 +1,19 @@
 profile {
+    .profileimage {
+        width: 120px;
+        margin-top: 20px;
+    }
 
+    .list-md .item-input:last-child {
+        border-bottom: 0px;
+    }
+
+    .ion-input {
+        border-bottom: none !important;
+        box-shadow: none;
+    }
+
+    // .lastchildnoborder .item-inner {
+    //     border-bottom: 0px !important;
+    // }
 }

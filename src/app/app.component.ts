@@ -5,11 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network'
 import { SharedProvider } from '../providers/shared/shared';
 
+declare var window: { KochavaTracker }
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
 
   rootPage: any = 'TabsPage';
   counter = 0;
@@ -26,6 +28,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
+
+      // Kochava Tracker Initialization
+      var configMapObject = {};
+      configMapObject[window.KochavaTracker.PARAM_ANDROID_APP_GUID_STRING_KEY]
+        = "kodeals-locker-lite-lnfe1m8y";
+      configMapObject[window.KochavaTracker.PARAM_LOG_LEVEL_ENUM_KEY] = window.KochavaTracker.LOG_LEVEL_ENUM_TRACE_VALUE;
+      window.KochavaTracker.configure(configMapObject);
       // var a = this.sharedService.isConnected();
       // alert(a);
     });

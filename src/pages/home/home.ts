@@ -24,22 +24,19 @@ export class HomePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
-    private googlePlus: GooglePlus,
     private platform: Platform,
-    private appMinimize: AppMinimize,
-    private loadingCtrl: LoadingController,
     private localNotifications: LocalNotifications,
     private sharedService: SharedProvider,
 
   ) {
 
-    platform.ready().then(() => {
-      this.isConnected = this.sharedService.checkNetworkStatus();
-    })
+    // platform.ready().then(() => {
+    //   this.isConnected = this.sharedService.checkNetworkStatus();
+    // })
 
-    platform.resume.subscribe(() => {
-      this.isConnected = this.sharedService.checkNetworkStatus();
-    });
+    // platform.resume.subscribe(() => {
+    //   this.isConnected = this.sharedService.checkNetworkStatus();
+    // });
 
   }
 
@@ -52,9 +49,6 @@ export class HomePage {
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
     ];
 
-    this.localNotifications.on("yes").subscribe(res => {
-      alert(res);
-    })
 
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
-import { Events } from 'ionic-angular';
+import { Events, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProfileComponent component.
@@ -15,10 +15,11 @@ import { Events } from 'ionic-angular';
 export class ProfileComponent {
 
   text: string;
-
+  changepassword: boolean = false;
   constructor(
     private authService: AuthenticateProvider,
-    private events: Events
+    private events: Events,
+    private alertCtrl: AlertController
   ) {
     console.log('Hello ProfileComponent Component');
     this.text = 'Hello World';
@@ -26,8 +27,40 @@ export class ProfileComponent {
 
 
   logOut() {
-    this.events.publish('logout', 'false');
-    this.authService.setUserLogout();
+    if (alert) {
+      console.log(alert);
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm',
+        message: 'Do you want to logout?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Logout',
+            handler: () => {
+              this.authService.setUserLogout();
+              this.events.publish('logout', 'false');
+            }
+          }
+        ]
+      });
+      alert.present();
+      
+    }
+  
+   
+  }
+
+
+  changePassword(){
+    this.changepassword = true;
   }
 
 }

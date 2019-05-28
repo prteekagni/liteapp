@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content (ionScroll)="scrollHandler($event)">
  <ion-row>
     <ion-col col-12>
        <slide></slide>
@@ -29,35 +29,47 @@
 
 
 
+<ng-template #loading>
+ <ion-spinner name="bubbles"></ion-spinner>
+</ng-template>
 
-<h3>Mobiles</h3>
-<cardslide ></cardslide>
+<!-- mobile -->
+ 
+<h3 id="mobiles">Mobiles</h3>
+<ng-container *ngIf="mobile; else elseTemplate">
+  <cardslide></cardslide>
+</ng-container>
+<ng-template #elseTemplate>
+  <ng-container *ngTemplateOutlet="loading"></ng-container>
+</ng-template>
 
-<h3>Men's Fashion</h3>
+
+<!-- men's fashion -->
+<h3 id="mensfashion">Men's Fashion</h3>
 <square (clickeve)="goTo()"></square>
-
+<ng-container *ngTemplateOutlet="loading"></ng-container>
 <singleadd></singleadd>
 
 
 <h3>Women's Fashion</h3>
-<square></square>
+<square id="womanfashion"></square>
   
 <h3>Gadget's Zone</h3>
-<square></square>
+<square id="gadgets"></square>
 
 <h3>Super Saver Deals</h3>
 
   <h3>Deals for you</h3>
-<cardslide></cardslide>
+<cardslide id="dealsforyou"></cardslide>
 
 <h3>Accessories</h3>
-<square></square>
+<square id="accessories"></square>
  <h3>Mobile Accessories</h3>
-<square></square>
+<square id="mobileacc"></square>
 
-
+ 
  <h3>Flat 50%</h3>
-<cardslide></cardslide>
+<cardslide id="flat50"></cardslide>
 
 
 </ion-content>
