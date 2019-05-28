@@ -24,3 +24,7 @@ ion-content {
     // background-position: center;
     // background-size: cover;
 }
+
+.header-md::after {
+    background-image: none !important;
+}

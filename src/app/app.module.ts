@@ -14,7 +14,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from '@ionic-native/network';
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,9 @@ import { Network } from '@ionic-native/network';
     AppMinimize,
     SocialSharing,
     LocalNotifications,
-    Network
+    Network,
+    OneSignal
+    
   ]
 })
 export class AppModule {}

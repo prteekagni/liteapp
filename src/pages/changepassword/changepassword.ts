@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ChangepasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ViewController, Events, App } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,11 +8,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChangepasswordPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public events: Events,
+    public appCtrl: App
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangepasswordPage');
   }
 
+  dismiss(){
+    this.viewCtrl.dismiss();
+  }
+
+  changePassword() {
+    this.viewCtrl.dismiss();
+    this.navCtrl.setRoot('TabsPage');
+    
+  }
 }

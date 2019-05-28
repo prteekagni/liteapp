@@ -30,10 +30,9 @@
       <ion-col text-center>
         <button ion-button clear small color="danger" icon-start>
           <ion-icon name='musical-notes'></ion-icon>
-          Listen
-          
+          Remind
         </button>
-        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)">
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
       </ion-datetime> 
       </ion-col>
       <ion-col text-right>

@@ -38,4 +38,8 @@ export class LoginComponent {
   }
   
 
+  gotoRegister(){
+    this.navCtrl.push('RegisterPage');
+  }
+
 }

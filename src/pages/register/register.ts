@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, Events } from 'ionic-angular';
+import { SharedProvider } from '../../providers/shared/shared';
 
 /**
  * Generated class for the RegisterPage page.
@@ -15,10 +16,12 @@ import { IonicPage, NavController, NavParams, Platform, Events } from 'ionic-ang
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-  
-  private platform : Platform, private events
-                                       : Events
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private platform: Platform,
+    private events: Events,
+    private sharedService: SharedProvider
   ) {
     let backAction = this.platform.registerBackButtonAction(() => {
       console.log("second");
@@ -41,5 +44,12 @@ export class RegisterPage {
       this.navCtrl.popToRoot();
     }
 }  
+
+  loginWithEmail() {
+    // var eventMapObject = {}
+    // eventMapObject["name"] = "Registration";
+    this.sharedService.registerEventTrack();
+   
+  }
 
 }

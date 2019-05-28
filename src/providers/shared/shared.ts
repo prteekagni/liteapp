@@ -4,8 +4,11 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Network } from '@ionic-native/network';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+
+declare var window: { KochavaTracker }
+
 @Injectable()
-  
+
 export class SharedProvider {
 
   loading;
@@ -26,7 +29,7 @@ export class SharedProvider {
       // We just got a connection but we need to wait briefly
       // before we determine the connection type. Might need to wait.
       // prior to doing any api requests as well.
-      
+
       this.events.publish('nstatus', true);
     });
 
@@ -107,15 +110,28 @@ export class SharedProvider {
 
   checkNetworkStatus() {
     let conntype = this.network.type;
-    
-    if ( conntype === "NONE" || conntype === "none")
-    {
+
+    if (conntype === "NONE" || conntype === "none") {
       return false;
     }
     else {
       return true;
     }
-    
+
+  }
+
+  intializeTracker() {
+    var configMapObject = {};
+    configMapObject[window.KochavaTracker.PARAM_ANDROID_APP_GUID_STRING_KEY]
+      = "kodeals-locker-lite-lnfe1m8y";
+    window.KochavaTracker.configure(configMapObject);
+  }
+
+  registerEventTrack() {
+     var eventMapObject = {}
+    eventMapObject["name"] = "Registration";
+    eventMapObject["	user_id"]="Prateek"
+    window.KochavaTracker.sendEventMapObject(window.KochavaTracker.EVENT_TYPE_REGISTRATION_COMPLETE_STRING_KEY, eventMapObject);
   }
 
 

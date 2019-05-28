@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network'
 import { SharedProvider } from '../providers/shared/shared';
+import { OneSignal } from '@ionic-native/onesignal';
 
 declare var window: { KochavaTracker }
 
@@ -20,7 +21,9 @@ export class MyApp {
     private events: Events,
     private network: Network,
     private toastCtrl: ToastController,
-    private sharedService: SharedProvider
+    private sharedService: SharedProvider,
+    private oneSignal: OneSignal
+
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -28,15 +31,23 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
+      // if (platform.is('android')) {
+
+      //   var configMapObject = {};
+      //   configMapObject[window.KochavaTracker.PARAM_ANDROID_APP_GUID_STRING_KEY]
+      //     = "kodeals-locker-lite-lnfe1m8y";
+      //   configMapObject[window.KochavaTracker.PARAM_LOG_LEVEL_ENUM_KEY] = window.KochavaTracker.LOG_LEVEL_ENUM_TRACE_VALUE;
+      //   window.KochavaTracker.configure(configMapObject);
+
+      // }
 
       // Kochava Tracker Initialization
-      var configMapObject = {};
-      configMapObject[window.KochavaTracker.PARAM_ANDROID_APP_GUID_STRING_KEY]
-        = "kodeals-locker-lite-lnfe1m8y";
-      configMapObject[window.KochavaTracker.PARAM_LOG_LEVEL_ENUM_KEY] = window.KochavaTracker.LOG_LEVEL_ENUM_TRACE_VALUE;
-      window.KochavaTracker.configure(configMapObject);
+
       // var a = this.sharedService.isConnected();
       // alert(a);
+
+      this.initializeOneSignal();
+      this.initializeTracker();
     });
 
     platform.resume.subscribe(() => {
@@ -76,6 +87,21 @@ export class MyApp {
     // })
   }
 
+  initializeOneSignal() {
+    this.oneSignal.startInit('85ba853d-6931-4776-ac42-ce54c6fd8ba8', '340483402651');
 
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+    this.oneSignal.endInit();
+  }
+
+  initializeTracker() {
+    this.sharedService.intializeTracker();
+  }
 }

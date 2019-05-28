@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
 import { Events, AlertController } from 'ionic-angular';
-
+import { ModalController , ViewController} from 'ionic-angular';
 /**
  * Generated class for the ProfileComponent component.
  *
@@ -17,9 +17,13 @@ export class ProfileComponent {
   text: string;
   changepassword: boolean = false;
   constructor(
+
     private authService: AuthenticateProvider,
     private events: Events,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    private viewCtrl: ViewController
+
   ) {
     console.log('Hello ProfileComponent Component');
     this.text = 'Hello World';
@@ -60,7 +64,16 @@ export class ProfileComponent {
 
 
   changePassword(){
-    this.changepassword = true;
+  
+ let contactModal = this.modalCtrl.create('ChangepasswordPage');
+   contactModal.present();
+  
+    
+  
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
 }
