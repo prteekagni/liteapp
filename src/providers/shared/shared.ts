@@ -3,6 +3,21 @@ import { LoadingController, ToastController, Events } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Network } from '@ionic-native/network';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+
+
+
+let options: NativeTransitionOptions = {
+  direction: 'up',
+  duration: 500,
+  slowdownfactor: 3,
+  slidePixels: 20,
+  iosdelay: 100,
+  androiddelay: 150,
+  fixedPixelsTop: 0,
+  fixedPixelsBottom: 60
+};
+
 
 
 declare var window: { KochavaTracker }
@@ -19,7 +34,8 @@ export class SharedProvider {
     private socialSharing: SocialSharing,
     private toastCtrl: ToastController,
     private network: Network,
-    private events: Events
+    private events: Events,
+    private nativeTrasnitions: NativePageTransitions
 
   ) {
 
@@ -38,14 +54,13 @@ export class SharedProvider {
       // We just got a connection but we need to wait briefly
       // before we determine the connection type. Might need to wait.
       // prior to doing any api requests as well.
-
-
       this.events.publish('nstatus', false);
     });
-
-
-
     console.log('Hello SharedProvider Provider');
+
+    
+    
+    
   }
 
 
@@ -130,9 +145,34 @@ export class SharedProvider {
   registerEventTrack() {
      var eventMapObject = {}
     eventMapObject["name"] = "Registration";
-    eventMapObject["	user_id"]="Prateek"
+    eventMapObject["user_id"]="Prateek"
     window.KochavaTracker.sendEventMapObject(window.KochavaTracker.EVENT_TYPE_REGISTRATION_COMPLETE_STRING_KEY, eventMapObject);
   }
+
+
+  saveNotification(data) {
+    var a = JSON.parse(localStorage.get('Notification'));
+    a.push(data);
+    localStorage.setItem('Notification', JSON.stringify(a));
+  }
+
+  getSavedNotification() {
+    return JSON.parse(localStorage.getItem('Notification'));
+  }
+
+
+  nativeSlide() {
+    this.nativeTrasnitions.slide(options)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    
+  }
+
+
 
 
 }

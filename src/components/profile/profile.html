@@ -12,19 +12,24 @@
 <ion-row>
   <ion-col col-12>
 
-  <form #profileForm="ngForm">
+  <form  [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-list>
 
   <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" formControlName="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="email" formControlName="email"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-label floating>Mobile Number</ion-label>
+    <ion-input type="number" formControlName="mobile"></ion-input>
   </ion-item>
 
+  <button ion-button  type="submit" >Submit</button>
 </ion-list>
   <!-- <ion-item>
     <ion-label fixed>Username</ion-label>
@@ -48,7 +53,7 @@
     Change Password
   </ion-item>
   <ion-item (click)="logOut()">
-    <ion-icon name="leaf" item-start></ion-icon>
+    <ion-icon name="leaf" item-start (click)="logOut()"></ion-icon>
     Sign out
   </ion-item>
 </ion-list>

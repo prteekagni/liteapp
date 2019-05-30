@@ -92,10 +92,12 @@ export class MyApp {
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
+    this.oneSignal.handleNotificationReceived().subscribe((res) => {
       // do something when notification is received
+      res=>this.onNotificationRecieved(res.notification.payload);
     });
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
+    this.oneSignal.handleNotificationOpened().subscribe((res) => {
+      res => this.onNotificationOpened(res.notification.payload);
       // do something when a notification is opened
     });
     this.oneSignal.endInit();
@@ -103,5 +105,15 @@ export class MyApp {
 
   initializeTracker() {
     this.sharedService.intializeTracker();
+  }
+
+
+  onNotificationRecieved(data) {
+    alert(JSON.stringify(data));
+    this.sharedService.saveNotification(data)
+  }
+
+  onNotificationOpened(data) {
+    
   }
 }

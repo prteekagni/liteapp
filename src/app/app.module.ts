@@ -15,6 +15,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from '@ionic-native/network';
 import { OneSignal } from '@ionic-native/onesignal';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { OneSignal } from '@ionic-native/onesignal';
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
     }),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +47,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     SocialSharing,
     LocalNotifications,
     Network,
-    OneSignal
+    OneSignal,
+    NativePageTransitions
     
   ]
 })
