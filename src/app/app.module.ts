@@ -17,6 +17,9 @@ import { Network } from '@ionic-native/network';
 import { OneSignal } from '@ionic-native/onesignal';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageProvider } from '../providers/storage/storage';
+import { NotificationProvider } from '../providers/notification/notification';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       tabsHideOnSubPages: true,
     }),
     HttpClientModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +51,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     LocalNotifications,
     Network,
     OneSignal,
-    NativePageTransitions
+    NativePageTransitions,
+    StorageProvider,
+    NotificationProvider
     
   ]
 })

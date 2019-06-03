@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http'; import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, Events } from 'ionic-angular';
+import { LoadingController, ToastController, Events, AlertController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Network } from '@ionic-native/network';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-
-
 
 let options: NativeTransitionOptions = {
   direction: 'up',
@@ -35,11 +33,11 @@ export class SharedProvider {
     private toastCtrl: ToastController,
     private network: Network,
     private events: Events,
-    private nativeTrasnitions: NativePageTransitions
+    private nativeTrasnitions: NativePageTransitions,
+    private alertCtrl: AlertController,
+
 
   ) {
-
-
     this.network.onConnect().subscribe(() => {
       console.log('network connected!');
       // We just got a connection but we need to wait briefly
@@ -57,10 +55,6 @@ export class SharedProvider {
       this.events.publish('nstatus', false);
     });
     console.log('Hello SharedProvider Provider');
-
-    
-    
-    
   }
 
 
@@ -160,7 +154,6 @@ export class SharedProvider {
     return JSON.parse(localStorage.getItem('Notification'));
   }
 
-
   nativeSlide() {
     this.nativeTrasnitions.slide(options)
       .then(res => {
@@ -171,8 +164,6 @@ export class SharedProvider {
       });
     
   }
-
-
 
 
 }

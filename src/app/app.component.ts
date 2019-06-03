@@ -16,7 +16,10 @@ export class MyApp {
 
   rootPage: any = 'TabsPage';
   counter = 0;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
     public app: App,
     private events: Events,
     private network: Network,
@@ -46,8 +49,8 @@ export class MyApp {
       // var a = this.sharedService.isConnected();
       // alert(a);
 
-      this.initializeOneSignal();
-      this.initializeTracker();
+      // this.initializeOneSignal();
+      // this.initializeTracker();
     });
 
     platform.resume.subscribe(() => {

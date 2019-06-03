@@ -21,6 +21,7 @@ export class HomePage {
   isConnected: boolean;
 
   constructor(
+
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
@@ -40,7 +41,7 @@ export class HomePage {
 
   }
 
-  
+
 
   ionViewDidLoad() {
 

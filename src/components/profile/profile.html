@@ -13,41 +13,30 @@
   <ion-col col-12>
 
   <form  [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <ion-list>
-
+  <ion-list>
   <ion-item>
     <ion-label floating>Name</ion-label>
-    <ion-input type="text" formControlName="name"></ion-input>
+    <ion-input type="text" formControlName="name" [disabled]="editFrom"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Email</ion-label>
-    <ion-input type="email" formControlName="email"></ion-input>
+    <ion-input type="email" formControlName="email" [disabled]="editFrom"></ion-input>
   </ion-item>
-
   <ion-item>
     <ion-label floating>Mobile Number</ion-label>
-    <ion-input type="number" formControlName="mobile"></ion-input>
+    <ion-input type="number" formControlName="mobile" [disabled]="editFrom"></ion-input>
   </ion-item>
-
-  <button ion-button  type="submit" >Submit</button>
-</ion-list>
-  <!-- <ion-item>
-    <ion-label fixed>Username</ion-label>
-    <ion-input type="text" name="Username"  [disabled]="editFormStatus"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Email</ion-label>
-      <ion-input type="email"  name="Email"  [disabled]="editFormStatus"></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label fixed>Mobile Number</ion-label>
-      <ion-input type="text"  name="PhoneNo" [disabled]="editFormStatus" class="lastchildnoborder"></ion-input>
-    </ion-item> -->
+  <button ion-button  type="submit" *ngIf="!editForm">Submit</button>
+  </ion-list>
  </form>
 <ion-list>
   <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
     Others
   </ion-list-header> 
+   <ion-item (click)="editProfile()">
+    <ion-icon name="leaf"  item-start></ion-icon>
+   Edit Profile
+  </ion-item>
   <ion-item (click)="changePassword()">
     <ion-icon name="leaf"  item-start></ion-icon>
     Change Password

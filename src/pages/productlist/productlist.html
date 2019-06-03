@@ -6,14 +6,7 @@
 
 <ion-content>
   <ion-card *ngFor="let item of de" style="margin-top:75px;">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-       -moz-box-shadow: 0 8px 6px -6px black;
-            box-shadow: 0 8px 6px -6px black;
-" />
+  <img src="../../assets/imgs/logo.png" style="width: 150px;"  class=dealsimage/>
   <ion-card-content>
     <p style="margin-left: 150px;">
       The most popular industrial group ever, and largely
@@ -22,23 +15,24 @@
   </ion-card-content>
    <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger" icon-start (click)="
+        setAsFav(item)">
           <ion-icon name='star'></ion-icon>
           Favorite
         </button>
       </ion-col>
       <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger" icon-start (click)="remindBtn(item)">
           <ion-icon name='musical-notes'></ion-icon>
           Remind
         </button>
-        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
-      </ion-datetime> 
+        <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+      </ion-datetime>  -->
       </ion-col>
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-start>
           <ion-icon name='share-alt'></ion-icon>
-          Share
+          Buy
         </button>
       </ion-col>
     </ion-row>

@@ -19,15 +19,7 @@ export class ProfileComponent {
   text: string;
   changepassword: boolean = false;
   profileForm;
-
-
-
-
-
-
-
-
-
+  editFrom: boolean = true;
   constructor(
 
     private authService: AuthenticateProvider,
@@ -48,7 +40,6 @@ export class ProfileComponent {
         email: ['eln@gmail.com']
       }
     );
-    
   }
 
 
@@ -78,20 +69,14 @@ export class ProfileComponent {
         ]
       });
       alert.present();
-      
     }
-  
-   
   }
 
 
   changePassword(){
   
- let contactModal = this.modalCtrl.create('ChangepasswordPage');
+   let contactModal = this.modalCtrl.create('ChangepasswordPage');
    contactModal.present();
-  
-    
-  
   }
 
   dismiss() {
@@ -100,7 +85,12 @@ export class ProfileComponent {
 
 
   onSubmit() {
-    console.warn(this.profileForm.value);
+    console.log(this.profileForm.value);
+  }
+
+
+  editProfile() {
+    this.editFrom = !this.editFrom;
     
   }
 

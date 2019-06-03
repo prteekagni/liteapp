@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the FavouritesPage page.
@@ -16,12 +17,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class FavouritesPage {
 
   de: any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storageService: StorageProvider) {
   }
 
   ionViewDidLoad() {
-    this.de = JSON.parse(localStorage.getItem('Deal' || '[]'));
-    console.log('ionViewDidLoad FavouritesPage');
+  this.storageService.getDeals().then(res => {
+    this.de = res;
+    this.de.forEach(element => {
+      element.time = "";
+    });
+  });
+  
   }
 
   swipeEvent(event) {

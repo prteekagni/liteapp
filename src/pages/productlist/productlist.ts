@@ -1,7 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Platform, ToastController, Item, AlertController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Observable } from 'rxjs/Observable';
+import { StorageProvider } from '../../providers/storage/storage';
+import { deals } from '../../models/deal';
+import { NotificationProvider } from '../../providers/notification/notification';
+import { AlertInputOptions } from 'ionic-angular/umd/components/alert/alert-options';
+import { SharedProvider } from '../../providers/shared/shared';
+
 
 
 @IonicPage()
@@ -12,108 +18,93 @@ import { Observable } from 'rxjs/Observable';
 export class ProductlistPage {
 
 
-  deals;
-  timeStarts;
-  date;
+  @ViewChild(Content) _content: Content;
+
   de: any = [];
   lnotification: any = [];
-  @ViewChild(Content) _content: Content;
-  des;
+  items: deals[] = [];
+  newItem: deals = <deals>{};
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
-    private localNotifications: LocalNotifications) {
+    private storageService: StorageProvider,
+    private plt: Platform,
+    private toastController: ToastController,
+    private notificationService: NotificationProvider,
+    public alertCtrl: AlertController,
+    public sharedService: SharedProvider
+
+  ) {
     console.log(this.navParams.get('type'));
   }
 
   ionViewDidLoad() {
-    this.de = JSON.parse(localStorage.getItem('deal' || '[]'));
-    this.de.forEach(element => {
-      element.time = ""
+    this.storageService.getDeals().then(res => {
+      this.de = res;
+      this.de.forEach(element => {
+        element.time = "";
+      });
     });
 
-    console.log(this.de);
-
-    console.log('ionViewDidLoad ProductlistPage');
   }
 
   ionViewWillEnter() {
-    //  this.de = JSON.parse(localStorage.getItem('Deal' || '[]'));
-    //  console.log('ionViewDidLoad ProductlistPage');  
-  }
 
-  doInfinite() {
-    alert('gello')
-  }
-
-  save() {
-
-    var deal = {
-      "name": "gdfgdfgfteek",
-      "age": "55",
-      "reminder": "3:59"
+    this.newItem = {
+      id: 1,
+      title: "string",
+      link: "string",
+      image: "string",
+      description: "string",
+      reminder: "string"
     }
 
-    var deals = [];
-    deals.push(deal);
-
-    var de = JSON.parse(localStorage.getItem('Deal'));
-    deals.push(de);
-    de.forEach(element => {
-      if (element.name === deal.name) {
-        console.log('already present')
+    this.storageService.addDeals(this.newItem).then(res => {
+      this.newItem = <deals>{};
+      if (res == true) {
+        this.showToast('Item added!');
       }
       else {
-        localStorage.setItem('Deal', JSON.stringify(deals));
+        this.showToast('Already in the list');
+
       }
     });
 
   }
+ remindBtn(item) {
+   this.notificationService.remindBtn((time) => {
+     this.notificationService.setNotification(item, time)
+       .then(res => {
+         if (res == false) {
+           this.showToast('Reminder Updated');
+         }
+         else {
+           this.showToast('Reminder Scheduled');
+         }
+       })
+   })
+  }
 
 
-  setData(data) {
-    var index = 0;
-    var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-    this.date = new Date(utc + " " + data.time);
-    console.log(this.date);
-    console.log(data.time);
-
-
-    // this.de.forEach(element => {
-    
-    //   if (element.title == data.title) {
-    //     element.time = data.time  
-    //     console.log(index);
-    //     var a = JSON.parse(localStorage.getItem('deals'));
+  setAsFav(data) {
+    this.storageService.addDeals(data).then(res => {
+      if (res == true) {
+        this.showToast('Deal added to favourite');
+      }
+      else{
+        this.showToast('Deal already present');
+      }
+    })
+  }
   
-        
-    //   }
-    //   ++index;
-    // });
-
-    // console.log(this.de);
-
-
-
-
-    // let notification: any = {
-    //   id: data,
-    //   title: 'Do you want to go see a movie tonight?',
-    //   actions: [{ id: 'yes', title: 'Reschedule' }],
-    //   trigger: { at: this.date },
-    //   led: 'FF0000',
-    // }
-
-
-    // this.lnotification = JSON.parse(localStorage.getItem('notification')) || [];
-    // this.lnotification.push(notification);
-
-    // localStorage.setItem('notification', JSON.stringify(this.lnotification));
-
-
-    // console.log(this.lnotification);
-    // this.localNotifications.schedule(this.lnotification);
-
+  // Helper
+  async showToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
