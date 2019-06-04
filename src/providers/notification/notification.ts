@@ -28,13 +28,13 @@ export class NotificationProvider {
     alertBtn.addInput({
       type: 'radio',
       label: '30 Mins',
-      value: '30',
+      value: '1',
       checked: true
     });
     alertBtn.addInput({
       type: 'radio',
       label: '1 Hour',
-      value: '60',
+      value: '2',
       checked: false
     });
 
@@ -74,11 +74,13 @@ export class NotificationProvider {
 
   setNotification(data, time): Promise<any>{
     
-    var timeInMiliSeconds = (+time) * (60 * 60);
+    var timeInMiliSeconds = (+time) * (60 * 1000);
+    console.log(timeInMiliSeconds);
     var nTime = new Date().getTime() + timeInMiliSeconds;
+    console.log(nTime);
 
     let notification: any = {
-      id: data,
+      id: data.id,
       title: 'Do you want to go see a movie tonight?',
       actions: [{ id: 'reschedule', title: 'Reschedule' }],
       trigger: { at: nTime },
@@ -86,23 +88,21 @@ export class NotificationProvider {
     }
 
     return this.storageService.addNotification(notification).then(res => {
+     this.scheduleNotification(notification);
       return res;
     });
-    // this.lnotification = JSON.parse(localStorage.getItem('notification')) || [];
-    // this.lnotification.push(notification);
-    // localStorage.setItem('notification', JSON.stringify(this.lnotification));
-    // console.log(this.lnotification);
-    // this.localNotifications.schedule(this.lnotification);
-    
-    
   }
 
-  scheduleNotification() {
-    this.storageService.getNotification().then(res => {
-      this.lNotification = res;
-    });
+  scheduleNotification(data) {
+    // this.storageService.getNotification().then(res => {
+    //   this.lNotification = JSON.stringify(res);
+    // });
 
-    this.localNotification.schedule(this.lNotification);
+    // this.localNotification.schedule(this.lNotification);
+    console.log(data);
+    this.localNotification.schedule(data);
+ 
+
   }
 
     

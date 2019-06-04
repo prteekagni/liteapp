@@ -44,10 +44,6 @@ export class ProfileComponent {
 
 
   logOut() {
-    if (alert) {
-      console.log(alert);
-    }
-    else {
       let alert = this.alertCtrl.create({
         title: 'Confirm',
         message: 'Do you want to logout?',
@@ -69,7 +65,6 @@ export class ProfileComponent {
         ]
       });
       alert.present();
-    }
   }
 
 

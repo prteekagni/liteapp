@@ -23,7 +23,7 @@ export class ProductlistPage {
   de: any = [];
   lnotification: any = [];
   items: deals[] = [];
-  newItem: deals = <deals>{};
+  newItem: deals[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -40,37 +40,74 @@ export class ProductlistPage {
   }
 
   ionViewDidLoad() {
-    this.storageService.getDeals().then(res => {
-      this.de = res;
-      this.de.forEach(element => {
-        element.time = "";
-      });
-    });
+    
+    // this.storageService.getDeals().then(res => {
+    //   this.de = res;
+    //   this.de.forEach(element => {
+    //     element.time = "";
+    //   });
+    // });
 
   }
 
   ionViewWillEnter() {
 
-    this.newItem = {
-      id: 1,
-      title: "string",
-      link: "string",
-      image: "string",
-      description: "string",
-      reminder: "string"
-    }
+    this.newItem = [
+      {
+        id: 1,
+        title: "string",
+        link: "string",
+        image: "string",
+        description: "string",
+        reminder: "string"
+      },
+      {
+        id: 2,
+        title: "string",
+        link: "string",
+        image: "string",
+        description: "string",
+        reminder: "string"
+      },
+      
+      {
+        id: 3,
+        title: "string",
+        link: "string",
+        image: "string",
+        description: "string",
+        reminder: "string"
+      },
+      
+    ];
 
-    this.storageService.addDeals(this.newItem).then(res => {
-      this.newItem = <deals>{};
+ 
+   
+
+    // this.storageService.addDeals(this.newItem).then(res => {
+    //   this.newItem = <deals>{};
+    //   if (res == true) {
+    //     this.showToast('Item added!');
+    //   }
+    //   else {
+    //     this.showToast('Already in the list');
+
+    //   }
+    // });
+
+  }
+
+  setDealAsFav(element) {
+    this.storageService.addDeals(element).then(res => {
       if (res == true) {
         this.showToast('Item added!');
       }
       else {
         this.showToast('Already in the list');
-
+    
       }
     });
-
+    
   }
  remindBtn(item) {
    this.notificationService.remindBtn((time) => {
@@ -88,8 +125,11 @@ export class ProductlistPage {
 
 
   setAsFav(data) {
+    this.sharedService.addToFavEventTrack(data);
+    
     this.storageService.addDeals(data).then(res => {
       if (res == true) {
+
         this.showToast('Deal added to favourite');
       }
       else{

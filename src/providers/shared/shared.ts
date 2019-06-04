@@ -143,15 +143,12 @@ export class SharedProvider {
     window.KochavaTracker.sendEventMapObject(window.KochavaTracker.EVENT_TYPE_REGISTRATION_COMPLETE_STRING_KEY, eventMapObject);
   }
 
-
-  saveNotification(data) {
-    var a = JSON.parse(localStorage.get('Notification'));
-    a.push(data);
-    localStorage.setItem('Notification', JSON.stringify(a));
-  }
-
-  getSavedNotification() {
-    return JSON.parse(localStorage.getItem('Notification'));
+  addToFavEventTrack(data) {
+    var eventMapObject = {}
+    eventMapObject["name"] = "addToWishList";
+    eventMapObject["id"] = data.id;
+    eventMapObject["title"] = data.title;
+    window.KochavaTracker.sendEventMapObject(window.KochavaTracker.EVENT_TYPE_ADD_TO_WISHLIST_STRING_KEY, eventMapObject);
   }
 
   nativeSlide() {

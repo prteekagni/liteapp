@@ -31,13 +31,13 @@ export class HomePage {
 
   ) {
 
-    // platform.ready().then(() => {
-    //   this.isConnected = this.sharedService.checkNetworkStatus();
-    // })
+    platform.ready().then(() => {
+      this.isConnected = this.sharedService.checkNetworkStatus();
+    })
 
-    // platform.resume.subscribe(() => {
-    //   this.isConnected = this.sharedService.checkNetworkStatus();
-    // });
+    platform.resume.subscribe(() => {
+      this.isConnected = this.sharedService.checkNetworkStatus();
+    });
 
   }
 
@@ -77,7 +77,12 @@ export class HomePage {
   }
 
   goToFav() {
-    this.navCtrl.push('FavouritesPage');
+   const animationsOptions = {
+     animation: 'wp-transition',
+     duration: 1000
+   }
+   
+    this.navCtrl.push('FavouritesPage', {},animationsOptions);
   }
 
   toggle() {

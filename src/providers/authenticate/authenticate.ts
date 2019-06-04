@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 /*
   Generated class for the AuthenticateProvider provider.
@@ -10,7 +11,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticateProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(
+    public http: HttpClient,
+    public googlePlus: GooglePlus
+  ) {
     console.log('Hello AuthenticateProvider Provider');
   }
 
@@ -30,6 +34,9 @@ export class AuthenticateProvider {
   }
 
   setUserLogout() {
+    this.googlePlus.logout().then(res => {
+  
+    });
     localStorage.setItem('isLoggedIn', '');
   }
 
@@ -38,11 +45,7 @@ export class AuthenticateProvider {
   }
 
 
-  sendOtp(data){
-    return this.http.post("/users/ForgetPassword",data);
+  sendOtp(data) {
+    return this.http.post("/users/ForgetPassword", data);
   }
-
-
-
-
 }

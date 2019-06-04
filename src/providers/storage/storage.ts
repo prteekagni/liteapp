@@ -4,8 +4,9 @@ import { Storage } from '@ionic/storage';
 import { deals } from '../../models/deal';
 import { adjustRendered } from 'ionic-angular/umd/components/virtual-scroll/virtual-util';
 
-const DEALS_KEY = 'Deals';
-const N_KEY = 'Notifications';
+const DEALS_KEY = 'deals';
+const N_KEY = 'notifications';
+const P_KEY = 'pushNotifications'
 
 @Injectable()
 export class StorageProvider {
@@ -22,22 +23,43 @@ export class StorageProvider {
   addDeals(item: deals): Promise<any> {
     return this.storage.get(DEALS_KEY).then((items: deals[]) => {
       if (items) {
-        for (let i of items) {
-          if (i.id === item.id) {
-            return false;
-          }
-          else {
-            items.push(item);
-            this.storage.set(DEALS_KEY, items);
-            return true;
-          }
+        if (items.find(x => x.id === item.id)) {
+          return false;
         }
+        else {
+          items.push(item);
+          this.storage.set(DEALS_KEY, items);
+          return true;
+        }
+
+        //   for (let i of items) {
+        //     if (i.id === item.id) {
+        //       return false;
+        //     }
+        //     else {
+        //       items.push(item);
+        //       this.storage.set(DEALS_KEY, items);
+        //       return true;
+        //     }
+        //   }
+        // }
+        // else {
+        //   this.storage.set(DEALS_KEY, [item]);
+        //   return true;
+        // }
+        // });
       }
+
       else {
         this.storage.set(DEALS_KEY, [item]);
         return true;
       }
-    });
+
+
+
+
+    }
+    )
 
   }
 
@@ -69,8 +91,6 @@ export class StorageProvider {
 
   // DELETE
 
-
-
   deleteDelete(id: number): Promise<deals> {
     return this.storage.get(DEALS_KEY).then((items: deals[]) => {
       if (!items || items.length === 0) {
@@ -90,7 +110,7 @@ export class StorageProvider {
     return this.storage.get(N_KEY).then(items => {
       if (items) {
         for (let i of items) {
-          if (i.id.id === item.id.id) {
+          if (i.id === item.id) {
             this.updateNotification(item).then(res => {
               console.log(res);
             });
@@ -114,16 +134,15 @@ export class StorageProvider {
     return this.storage.get(N_KEY);
   }
 
-
   updateNotification(item): Promise<any> {
 
     var a = this.storage.get(N_KEY).then((items: any[]) => {
       if (!items || items.length === 0) {
         return null;
       }
-      let newItems: deals[] = [];
+      let newItems: any[] = [];
       for (let i of items) {
-        if (i.id.id === item.id.id) {
+        if (i.id === item.id) {
           newItems.push(item);
           this.storage.set(N_KEY, newItems);
           return true;
@@ -133,8 +152,50 @@ export class StorageProvider {
           return false;
         }
       }
-   
+
     });
     return a;
+  }
+
+  savePushNotification(item): Promise<any> {
+    return this.storage.get(P_KEY).then((items: deals[]) => {
+      if (items) {
+        for (let i of items) {
+          if (i.id === item.id) {
+            return false;
+          }
+          else {
+            items.push(item);
+            this.storage.set(P_KEY, items);
+            return true;
+          }
+        }
+      }
+      else {
+        this.storage.set(P_KEY, [item]);
+        return true;
+      }
+    });
+
+  }
+
+  removePushNotification(id: number): Promise<any> {
+    return this.storage.get(P_KEY).then((items: deals[]) => {
+      if (!items || items.length === 0) {
+        return null;
+      }
+      let toKeep: deals[] = [];
+      for (let i of items) {
+        if (i.id !== id) {
+          toKeep.push(i);
+        }
+      }
+      return this.storage.set(DEALS_KEY, toKeep);
+    });
+
+  }
+
+  getPushNotification(): Promise<any> {
+    return this.storage.get(P_KEY);
   }
 }
