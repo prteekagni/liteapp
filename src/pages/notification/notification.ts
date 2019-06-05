@@ -25,7 +25,10 @@ export class NotificationPage {
   ionViewDidLoad() {
     this.storageService.getPushNotification().then(res => {
       console.log(res);
-   })
+    });
+    this.storageService.getNotification().then(res => {
+      console.log(res);
+    })
   }
 
 }

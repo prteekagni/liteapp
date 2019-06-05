@@ -109,23 +109,18 @@ export class StorageProvider {
   addNotification(item: any): Promise<any> {
     return this.storage.get(N_KEY).then(items => {
       if (items) {
-        for (let i of items) {
-          if (i.id === item.id) {
-            this.updateNotification(item).then(res => {
-              console.log(res);
-            });
-            return false;
-          }
-          else {
-            items.push(item);
-            this.storage.set(N_KEY, items);
+        if (items.find(x => x.id === item.id)) {
+          return this.updateNotification(item).then(res => {
             return true;
-          }
+           });
+        }
+        else {
+          items.push(item);
+          this.storage.set(N_KEY, items);
         }
       }
       else {
         this.storage.set(N_KEY, [item]);
-        return true;
       }
     })
   }
@@ -135,8 +130,7 @@ export class StorageProvider {
   }
 
   updateNotification(item): Promise<any> {
-
-    var a = this.storage.get(N_KEY).then((items: any[]) => {
+    return this.storage.get(N_KEY).then((items: any[]) => {
       if (!items || items.length === 0) {
         return null;
       }
@@ -145,16 +139,14 @@ export class StorageProvider {
         if (i.id === item.id) {
           newItems.push(item);
           this.storage.set(N_KEY, newItems);
-          return true;
-        } else {
+        }
+        else {
           newItems.push(i);
           this.storage.set(N_KEY, newItems);
-          return false;
         }
       }
-
+      return true
     });
-    return a;
   }
 
   savePushNotification(item): Promise<any> {

@@ -26,12 +26,45 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button (click)="toggle()">fffff</button>
-
-  <ng-container
-    *ngIf="isConnected; then connected; else notconnected"
-  ></ng-container>
+  <ng-container *ngIf="isConnected; then connected; else notconnected">
+  </ng-container>
   <ng-template #connected>
+    <cardgrid></cardgrid>
+    <ion-row>
+      <ion-col col-12>
+        <slide></slide>
+      </ion-col>
+    </ion-row>
+    <h4>Food</h4>
+    <cardslide (voted)="homevote($event)"></cardslide>
+    <singleadd></singleadd>
+    <h2></h2>
+    <h4>Mobiles</h4>
+    <cardslide></cardslide>
+    <singleadd></singleadd>
+    <h2>Grocery and health</h2>
+    <cardslide></cardslide>
+      <h2>For Men's</h2>
+    <cardslide></cardslide>
+      <h2>For Womns'</h2>
+    <cardslide></cardslide>
+    <h2>Travel</h2>
+        <cardslide></cardslide>
+         <h2>For Baby'</h2>
+    <cardslide></cardslide>
+     <h2>Shoes</h2>
+    <cardslide></cardslide>
+     <h2>Accessories</h2>
+    <cardslide></cardslide>
+     <h2>Entertainment</h2>
+    <cardslide></cardslide>
+  </ng-template>
+  <ng-template #notconnected>
+    <h3>Please connecet to internet</h3>
+  </ng-template>
+</ion-content>
+
+<!-- 
     <ion-row>
       <ion-item no-lines class="leftpadding">
         <ion-scroll scrollX="true" scroll-avatar>
@@ -70,20 +103,4 @@
         </ion-scroll>
       </ion-item>
     </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <slide></slide>
-      </ion-col>
-    </ion-row>
-    <cardslide (voted)="homevote($event)"></cardslide>
-    <singleadd></singleadd>
-    <h2>Deals On Amazon</h2>
-    <cardslide></cardslide>
-    <singleadd></singleadd>
-    <h2>Deals On Flipkart</h2>
-    <cardslide></cardslide>
-  </ng-template>
-  <ng-template #notconnected>
-    <h3>Please connecet to internet</h3>
-  </ng-template>
-</ion-content>
+ -->

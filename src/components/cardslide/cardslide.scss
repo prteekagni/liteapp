@@ -51,7 +51,7 @@ cardslide {
         position: relative;
         text-align: center;
         height: 165px;
-        width: 130px;
+        width: 28vw;
         margin-right: 0px;
         padding: 0px;
         margin-left: 10px;
@@ -96,5 +96,9 @@ cardslide {
     .item.item[no-lines] .item-inner {
 
         background-color: transparent;
+    }
+
+    ion-col{
+        
     }
 }

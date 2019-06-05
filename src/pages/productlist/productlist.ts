@@ -113,11 +113,11 @@ export class ProductlistPage {
    this.notificationService.remindBtn((time) => {
      this.notificationService.setNotification(item, time)
        .then(res => {
-         if (res == false) {
-           this.showToast('Reminder Updated');
+         if (res == true) {
+          this.showToast('Reminder Updated')
          }
          else {
-           this.showToast('Reminder Scheduled');
+           this.showToast('Reminder Scheduled')
          }
        })
    })

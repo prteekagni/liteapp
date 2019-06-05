@@ -36,7 +36,7 @@
 <!-- mobile -->
  
 <h3 id="mobiles">Mobiles</h3>
-<ng-container *ngIf="mobile; else elseTemplate">
+<ng-container>
   <cardslide></cardslide>
 </ng-container>
 <ng-template #elseTemplate>
@@ -46,7 +46,7 @@
 
 <!-- men's fashion -->
 <h3 id="mensfashion">Men's Fashion</h3>
-<square (clickeve)="goTo()"></square>
+<square (clickeve)="goTo()" [items]="items"></square>
 <ng-container *ngTemplateOutlet="loading"></ng-container>
 <singleadd></singleadd>
 

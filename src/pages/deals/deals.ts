@@ -38,6 +38,21 @@ export class DealsPage {
   }
 
   ionViewWillEnter() {
+
+    this.items = [
+      {
+      "name":"Pra7teek"
+      },
+      {
+      "name":"Prateek"
+      },
+      {
+      "name":"Prateek"
+      },
+    ]
+
+
+
     
     this.mobile = true;
     let yOffset = document.getElementById("mobiles").offsetTop;
