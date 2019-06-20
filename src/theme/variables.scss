@@ -37,7 +37,8 @@ $colors: (primary: #488aff,
 secondary: #32db64,
 danger: #f53d3d,
 light: #f4f4f4,
-dark: #222);
+dark: #222,
+theme: orangered);
 
 
 // App iOS Variables
@@ -51,10 +52,13 @@ dark: #222);
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-$toolbar-background:white;
-
-// App Windows Variables
+// 
+$toolbar-background:transparent;
+$text-input-highlight-color-valid:#488aff;
+$text-input-md-show-focus-highlight:orangered;
+$alert-md-button-text-color:orangered;
+$segment-button-md-text-color-activated:orangered;
+$segment-button-md-border-color-activated:orangered; // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
 

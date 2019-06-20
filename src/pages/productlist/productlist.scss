@@ -13,4 +13,28 @@ page-productlist {
         padding-bottom: 0px !important;
         padding-left: 5px !important;
     }
+
+    .dealsimage {
+        margin-top: -39px;
+        z-index: 91554;
+        position: absolute;
+        -webkit-box-shadow: 0 8px 6px -6px black;
+        -moz-box-shadow: 0 8px 6px -6px black;
+        box-shadow: 0 8px 6px -6px black;
+    }
+
+    .toolbar-background-md {
+        background: transparent;
+
+    }
+
+    .toolbar-title-md {
+        color: orangered;
+    }
+
+    .bar-button-default-md,
+    .bar-button-clear-md-default,
+    .bar-button-md-default{
+        color: orangered;
+    }
 }

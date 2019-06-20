@@ -16,9 +16,9 @@ cardslide {
         }
 
         img {
-            margin: 5px;
-            width: 80px;
-            height: 100%;
+            // margin: 5px;
+            // // width: 80px;
+            // height: 100%;
         }
     }
 
@@ -51,7 +51,7 @@ cardslide {
         position: relative;
         text-align: center;
         height: 165px;
-        width: 130px;
+        width: 28vw;
         margin-right: 0px;
         padding: 0px;
         margin-left: 10px;
@@ -68,10 +68,15 @@ cardslide {
 
     // this class is used for logo display on cards
     .largecardimg {
-        width: 100% !important;
-        margin: 5px auto !important;
-        height: 165px !important;
-        margin-top: 0px !important;
+        // width: 100% !important;
+        // margin: 5px auto !important;
+        // height: 165px !important;
+        // margin-top: 0px !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
     }
 
     // the title of cards displaying title of cards
@@ -91,4 +96,12 @@ cardslide {
     }
 
     background-color:white;
+
+    .item[no-lines],
+    .item.item[no-lines] .item-inner {
+
+        background-color: transparent;
+    }
+
+    ion-col {}
 }

@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row text-center class="mt5">
+    <ion-col col-12 icon-start>
+      <img src="assets/imgs/logo.png" alt="" width="80px;">
+    </ion-col>
+  </ion-row>
+  <ion-row text-center>
+
+    <ion-col col-10 offset-1>
+  <form #heroForm="ngForm">
+    <ion-item>
+      <ion-icon name="call"></ion-icon>
+      <ion-label stacked>Name</ion-label>
+      <ion-input type="text" required name="Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call"></ion-icon>
+      <ion-label stacked>Mobile Number</ion-label>
+      <ion-input type="number" required name="PhoneNo" minlength=10></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call"></ion-icon>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" required name="Email" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Enter Password</ion-label>
+      <ion-input type="password" required name="password" ></ion-input>
+    </ion-item>
+  </form>
+  </ion-col>
+  <ion-col col-6 offset-3>
+    <button ion-button type="submit" block class="submitbutton"  (click)="loginWithEmail()">
+      Login
+    </button>
+    </ion-col>
+
+  </ion-row>
+</ion-content>

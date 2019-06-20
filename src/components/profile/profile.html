@@ -1,4 +1,47 @@
-<!-- Generated template for the ProfileComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-row text-center>
+  <ion-col col-12>
+  <div >
+    <img src="../../assets/imgs/logo.png" alt="" srcset="" class="profileimage">
+  </div>
+  </ion-col>
+  <ion-col col-12>
+    <h3>Prateek Agnihotri</h3>
+  </ion-col>
+</ion-row>
+<ion-row>
+<ion-col col-12>
+  <form  #profileForm="ngForm">
+  <ion-list>
+  <ion-item>
+    <ion-label floating >Name</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.name" color="theme" name="name" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="profile.email" name="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Mobile Number</ion-label>
+    <ion-input type="number" [(ngModel)]="profile.mobile" name="mobile"></ion-input>
+  </ion-item>
+  </ion-list>
+  </form>
+<ion-list>
+  <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
+    Others
+  </ion-list-header> 
+   <ion-item (click)="updateProfile(profileForm)">
+    <ion-icon name="leaf"  item-start></ion-icon>
+   Edit Profile
+  </ion-item>
+  <ion-item (click)="changePassword()">
+    <ion-icon name="leaf"  item-start></ion-icon>
+    Change Password
+  </ion-item>
+  <ion-item (click)="logOut()">
+    <ion-icon name="leaf" item-start></ion-icon>
+    Sign out
+  </ion-item>
+</ion-list>
+  </ion-col>
+</ion-row>

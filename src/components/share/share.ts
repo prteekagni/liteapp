@@ -19,4 +19,9 @@ export class ShareComponent {
     this.text = 'Hello World';
   }
 
+
+  shareApp() {
+    
+  }
+
 }

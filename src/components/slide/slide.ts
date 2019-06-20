@@ -1,17 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Slides } from 'ionic-angular';
 
-/**
- * Generated class for the SlideComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'slide',
   templateUrl: 'slide.html'
 })
-export class SlideComponent {
+export class SlideComponent implements OnInit{
 
+   @ViewChild(Slides) slides: Slides;
   text: string;
 
   constructor() {
@@ -19,4 +16,8 @@ export class SlideComponent {
     this.text = 'Hello World';
   }
 
+   ngOnInit(): void {
+  
+   }
+  
 }

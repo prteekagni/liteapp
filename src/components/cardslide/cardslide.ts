@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the CardslideComponent component.
@@ -13,10 +14,20 @@ import { Component } from '@angular/core';
 export class CardslideComponent {
 
   text: string;
+  @Output() voted = new EventEmitter<any>();
 
-  constructor() {
+
+  constructor(
+    private event :Events
+  ) {
     console.log('Hello CardslideComponent Component');
     this.text = 'Hello World';
+
+
+  }
+
+  getToDeal(data){
+    this.voted.emit('hello');
   }
 
 }
