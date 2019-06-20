@@ -1,14 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, Platform, ToastController, Item, AlertController } from 'ionic-angular';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { Observable } from 'rxjs/Observable';
+import { IonicPage, NavController, NavParams, Content, Platform, ToastController, Item, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { deals } from '../../models/deal';
 import { NotificationProvider } from '../../providers/notification/notification';
-import { AlertInputOptions } from 'ionic-angular/umd/components/alert/alert-options';
 import { SharedProvider } from '../../providers/shared/shared';
-
-
 
 @IonicPage()
 @Component({
@@ -33,10 +28,13 @@ export class ProductlistPage {
     private toastController: ToastController,
     private notificationService: NotificationProvider,
     public alertCtrl: AlertController,
-    public sharedService: SharedProvider
-
-  ) {
+    public sharedService: SharedProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private modalController: ModalController
+  )
+  {
     console.log(this.navParams.get('type'));
+    console.log(this.navParams.get('id'));
   }
 
   ionViewDidLoad() {
@@ -69,7 +67,6 @@ export class ProductlistPage {
         description: "string",
         reminder: "string"
       },
-      
       {
         id: 3,
         title: "string",
@@ -78,23 +75,7 @@ export class ProductlistPage {
         description: "string",
         reminder: "string"
       },
-      
     ];
-
- 
-   
-
-    // this.storageService.addDeals(this.newItem).then(res => {
-    //   this.newItem = <deals>{};
-    //   if (res == true) {
-    //     this.showToast('Item added!');
-    //   }
-    //   else {
-    //     this.showToast('Already in the list');
-
-    //   }
-    // });
-
   }
 
   setDealAsFav(element) {
@@ -146,5 +127,18 @@ export class ProductlistPage {
     });
     toast.present();
   }
+
+
+  getDeal(){
+   
+    let dealmodal = this.modalController.create('DealdetailPage', {}, {
+      // cssClass: 'mymodal',
+      showBackdrop: true,
+      enableBackdropDismiss:true
+    })
+    
+    dealmodal.present();
+ }
+  
 
 }

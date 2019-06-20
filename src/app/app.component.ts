@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { Platform, App, Events, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, App, Events, ToastController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network'
 import { SharedProvider } from '../providers/shared/shared';
 import { OneSignal } from '@ionic-native/onesignal';
 import { StorageProvider } from '../providers/storage/storage';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 declare var window: { KochavaTracker }
 
@@ -14,7 +15,7 @@ declare var window: { KochavaTracker }
 })
 export class MyApp {
 
-
+ @ViewChild(Nav) nav: Nav;
   rootPage: any = 'TabsPage';
   counter = 0;
   constructor(
@@ -27,7 +28,8 @@ export class MyApp {
     private toastCtrl: ToastController,
     private sharedService: SharedProvider,
     private oneSignal: OneSignal,
-    private storageService: StorageProvider
+    private storageService: StorageProvider,
+    private deeplinks: Deeplinks
 
   ) {
     platform.ready().then(() => {
@@ -35,8 +37,31 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      // this.initializeOneSignal();
-      // this.initializeTracker();
+      this.deeplinks.route({
+        '/': 'TabsPage',
+        '/products': 'ProductsPage',
+        '/productlist/:id': 'ProductlistPage',
+        '/todays-event': 'EventPage',
+        '/Dealdetail/:id':'DealdetailPage'
+      
+      }).subscribe(match => {
+        // match.$route - the route we matched, which is the matched entry from the arguments to route()
+        // match.$args - the args passed in the link
+        // match.$link - the full link data
+        this.nav.push(match.$route, match.$args).then(res => {
+          console.log('push successful')
+        }, err => {
+          this.nav.push('HomePage');
+          console.log('unsuccesful')
+        });
+      
+      }, nomatch => {
+        // nomatch.$link - the full link data
+        alert(JSON.stringify(nomatch))
+      });
+      
+      this.initializeOneSignal();
+      this.initializeTracker();
     });
   }
 

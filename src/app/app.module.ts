@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -20,11 +20,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
 import { StorageProvider } from '../providers/storage/storage';
 import { NotificationProvider } from '../providers/notification/notification';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Deeplinks } from '@ionic-native/deeplinks';
+
 
 @NgModule({
   declarations: [
     MyApp,
   ],
+  // schemas: [
+  //   NO_ERRORS_SCHEMA
+  // ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
@@ -32,7 +38,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     }),
     HttpClientModule,
     ReactiveFormsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +60,12 @@ import { NotificationProvider } from '../providers/notification/notification';
     OneSignal,
     NativePageTransitions,
     StorageProvider,
-    NotificationProvider
+    NotificationProvider,
+    Deeplinks
+    
+  ],
+  exports: [
+    
     
   ]
 })

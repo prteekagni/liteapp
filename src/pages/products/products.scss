@@ -69,7 +69,7 @@ page-products {
     }
 
     .roundedcorner {
-        height: 30vh;
+        height: 25vh;
         border-radius: 10px;
     }
 
@@ -79,8 +79,23 @@ page-products {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width:80px;
+        width: 80px;
     }
 
+    // .show-background {
+    //     background-color: white;
+    //     transition: background-color 500ms linear;
+    //     color: orangered;
+    // }
 
+   
+
+    .toolbar-background-md {
+        background: transparent;
+
+    }
+
+    .toolbar-title-md {
+        color: orangered;
+    }
 }

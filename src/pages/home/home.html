@@ -1,5 +1,74 @@
-<ion-header>
+<!-- <ion-header no-border>
   <ion-navbar>
+    <ion-title>
+      <ion-row>
+        <ion-col col-6 text-left>
+          Deals Locker Lite
+        </ion-col>
+        <ion-col col-6 text-right>
+          <span>
+            <ion-icon
+              ios="ios-notifications"
+              md="md-notifications"
+              (click)="goToNotification()"
+            ></ion-icon>
+          </span>
+
+          <ion-icon
+            ios="ios-notifications"
+            md="md-star"
+            (click)="goToFav()"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<!-- <ion-header no-border>
+  <ion-navbar color="">
+            <ion-icon 
+            ios="ios-notifications" 
+            md="md-notifications" 
+            (click)="goToNotification()">
+            </ion-icon>
+          <ion-icon
+            ios="ios-notifications"
+            md="md-star"
+            (click)="goToFav()"
+          ></ion-icon>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-header [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+  <!-- <ion-toolbar>
+    <ion-title>
+      <ion-row>
+        <ion-col col-6 text-left>
+          Deals Locker Lite
+        </ion-col>
+        <ion-col col-6 text-right>
+          <span>
+            <ion-icon
+              ios="ios-notifications"
+              md="md-notifications"
+              (click)="goToNotification()"
+              class="mytextcolor"
+            >
+            </ion-icon>
+          </span>
+          <ion-icon
+            ios="ios-notifications"
+            md="md-star"
+            (click)="goToFav()"
+            class="mytextcolor"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar> -->
+
+  <ion-navbar [color]="co" id="navbar">
     <ion-title>
       <ion-row>
         <ion-col col-6 text-left>
@@ -25,43 +94,122 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content #pageContent fullscreen>
+  <!-- <div class="header-image"></div> -->
+
+  <ion-slides
+    pager
+    speed="1000"
+    effect="slides"
+    autoplay="1000"
+    class="mainslide"
+    loop="true"
+  >
+    <ion-slide>
+      <div class="header-image"></div>
+    </ion-slide>
+    <ion-slide>
+      <div class="header-image"></div>
+    </ion-slide>
+  </ion-slides>
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
-  <ng-template #connected>
+  <ng-template #connected class="main-content">
     <cardgrid></cardgrid>
     <ion-row>
       <ion-col col-12>
         <slide></slide>
       </ion-col>
     </ion-row>
-    <h4>Food</h4>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h2>Food</h2>
+      </ion-col>
+    </ion-row>
+
     <cardslide (voted)="homevote($event)"></cardslide>
     <singleadd></singleadd>
-    <h2></h2>
-    <h4>Mobiles</h4>
+
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h2>Mobiles</h2>
+      </ion-col>
+    </ion-row>
+
     <cardslide></cardslide>
     <singleadd></singleadd>
-    <h2>Grocery and health</h2>
-    <cardslide></cardslide>
-      <h2>For Men's</h2>
-    <cardslide></cardslide>
-      <h2>For Womns'</h2>
-    <cardslide></cardslide>
-    <h2>Travel</h2>
-        <cardslide></cardslide>
-         <h2>For Baby'</h2>
-    <cardslide></cardslide>
-     <h2>Shoes</h2>
-    <cardslide></cardslide>
-     <h2>Accessories</h2>
-    <cardslide></cardslide>
-     <h2>Entertainment</h2>
-    <cardslide></cardslide>
+
+    <ng-container *ngIf="secondpage">
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>Grocery and health</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>For Men's</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>For Womns'</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>Travel</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+    </ng-container>
+
+    <ng-container *ngIf="thirdpage">
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>For Baby'</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>Shoes</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>Accessories</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>Entertainment</h2>
+        </ion-col>
+      </ion-row>
+
+      <cardslide></cardslide>
+    </ng-container>
   </ng-template>
   <ng-template #notconnected>
     <h3>Please connecet to internet</h3>
   </ng-template>
+  <ion-infinite-scroll
+    (ionInfinite)="doInfinite($event)"
+    [enabled]="morePagesAvailable"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <!-- 

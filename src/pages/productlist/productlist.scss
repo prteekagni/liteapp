@@ -22,4 +22,19 @@ page-productlist {
         -moz-box-shadow: 0 8px 6px -6px black;
         box-shadow: 0 8px 6px -6px black;
     }
+
+    .toolbar-background-md {
+        background: transparent;
+
+    }
+
+    .toolbar-title-md {
+        color: orangered;
+    }
+
+    .bar-button-default-md,
+    .bar-button-clear-md-default,
+    .bar-button-md-default{
+        color: orangered;
+    }
 }

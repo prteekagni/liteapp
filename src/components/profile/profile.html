@@ -7,33 +7,30 @@
   <ion-col col-12>
     <h3>Prateek Agnihotri</h3>
   </ion-col>
- 
 </ion-row>
 <ion-row>
-  <ion-col col-12>
-
-  <form  [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<ion-col col-12>
+  <form  #profileForm="ngForm">
   <ion-list>
   <ion-item>
-    <ion-label floating>Name</ion-label>
-    <ion-input type="text" formControlName="name" [disabled]="editFrom"></ion-input>
+    <ion-label floating >Name</ion-label>
+    <ion-input type="text" [(ngModel)]="profile.name" color="theme" name="name" ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Email</ion-label>
-    <ion-input type="email" formControlName="email" [disabled]="editFrom"></ion-input>
+    <ion-input type="email" [(ngModel)]="profile.email" name="email"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Mobile Number</ion-label>
-    <ion-input type="number" formControlName="mobile" [disabled]="editFrom"></ion-input>
+    <ion-input type="number" [(ngModel)]="profile.mobile" name="mobile"></ion-input>
   </ion-item>
-  <button ion-button  type="submit" *ngIf="!editForm">Submit</button>
   </ion-list>
- </form>
+  </form>
 <ion-list>
   <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
     Others
   </ion-list-header> 
-   <ion-item (click)="editProfile()">
+   <ion-item (click)="updateProfile(profileForm)">
     <ion-icon name="leaf"  item-start></ion-icon>
    Edit Profile
   </ion-item>

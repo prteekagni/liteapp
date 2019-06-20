@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 
 /**
@@ -15,6 +15,9 @@ import { StorageProvider } from '../../providers/storage/storage';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
+  segments = '0';
+  @ViewChild('pageSlider') pageSlider: Slides;
+  de: any;
 
   constructor(
     public navCtrl: NavController,
@@ -27,8 +30,25 @@ export class NotificationPage {
       console.log(res);
     });
     this.storageService.getNotification().then(res => {
-      console.log(res);
+      this.de = res;
     })
+  }
+
+   selectTab(indx) {
+    this.segments = indx;
+    // this.tabsindex.emit(indx);
+     this.pageSlider.slideTo(indx);
+
+  }
+   changeWillSlide($event) {
+    // this.segments = $event._snapIndex.toString();
+    //  this.segme.emit($event._snapIndex.toString());
+    //  console.log($event._snapIndex.toString())
+     this.segments = $event._snapIndex.toString();
+  }
+
+  slideindexs(index) {
+    this.segments = index.toString();
   }
 
 }

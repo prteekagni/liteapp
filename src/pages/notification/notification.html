@@ -1,12 +1,124 @@
-
 <ion-header>
-  <ion-navbar>
-    <ion-title>notification</ion-title>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      Notifications
+    </ion-title>
   </ion-navbar>
+
+  <ion-toolbar no-border-top class="toolbardnp">
+    <ion-segment [(ngModel)]="segments">
+      <ion-segment-button value="popular" (click)="selectTab(0)" value="0">
+        Push
+      </ion-segment-button>
+      <ion-segment-button value="all" (click)="selectTab(1)" value="1">
+        All
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-card style="margin-top:75px;" *ngFor="let item of de">
+  <ion-slides
+    #pageSlider
+    (ionSlideWillChange)="changeWillSlide($event)"
+    effect="slide"
+    speed="800"
+  >
+    <ion-slide>
+      <ion-card style="border-radius: 10px;" *ngFor="let item of de">
+        <ion-card-content style=" padding:5px 10px;">
+          <img
+            src="../../assets/imgs/logo.png"
+            style="width: 140px;
+    margin: 8px auto; -webkit-box-shadow: 0 8px 6px -6px black;
+        -moz-box-shadow: 0 8px 6px -6px black;
+        box-shadow: 0 8px 6px -6px black;"
+          />
+          <p style="">
+            The most popular industrial group ever, and largely responsible for
+            bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="save()"
+            >
+              <ion-icon name="star"></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name="musical-notes"></ion-icon>
+              Buy
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name="share-alt"></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+   <ion-card style="border-radius: 10px;" *ngFor="let item of de">
+        <ion-card-content style=" padding:5px 10px;">
+          <img
+            src="../../assets/imgs/logo.png"
+            style="width: 140px;
+    margin: 8px auto; -webkit-box-shadow: 0 8px 6px -6px black;
+        -moz-box-shadow: 0 8px 6px -6px black;
+        box-shadow: 0 8px 6px -6px black;"
+          />
+          <p style="">
+            The most popular industrial group ever, and largely responsible for
+            bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="save()"
+            >
+              <ion-icon name="star"></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name="musical-notes"></ion-icon>
+              Buy
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name="share-alt"></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+  <!-- <ion-card style="margin-top:75px;" *ngFor="let item of de">
   <img src="../../assets/imgs/logo.png" style="width: 150px;
     margin-top: -39px;
     z-index: 91554;
@@ -38,5 +150,5 @@
       </ion-col>
     </ion-row>
 
-</ion-card>
+</ion-card> -->
 </ion-content>

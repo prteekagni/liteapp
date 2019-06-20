@@ -1,3 +1,26 @@
 page-notification {
+    .toolbar-background-md {
+        background: transparent;
 
+    }
+
+    .toolbar-title-md {
+        color: orangered;
+    }
+
+    .slide-zoom {
+        height: 95%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .bar-button-default-md,
+    .bar-button-clear-md-default,
+    .bar-button-md-default {
+        color: orangered;
+    }
+
+    .toolbardnp{
+        padding:0px;
+    }
 }

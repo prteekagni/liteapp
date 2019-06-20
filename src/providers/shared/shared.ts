@@ -17,7 +17,6 @@ let options: NativeTransitionOptions = {
 };
 
 
-
 declare var window: { KochavaTracker }
 
 @Injectable()

@@ -44,8 +44,16 @@ export class AuthenticateProvider {
     return this.http.post("/VerifyOtp",data);
   }
 
-
   sendOtp(data) {
     return this.http.post("/users/ForgetPassword", data);
   }
+
+  // register user
+  registerUser() { }
+  
+  // login user with email
+  loginUser() { }
+  
+  // 
+
 }

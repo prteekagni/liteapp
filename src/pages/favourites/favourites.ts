@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
+import { SharedProvider } from '../../providers/shared/shared';
 
 /**
  * Generated class for the FavouritesPage page.
@@ -18,17 +19,25 @@ export class FavouritesPage {
 
   de: any = [];
   constructor(
+
     public navCtrl: NavController,
     public navParams: NavParams,
-    public storageService: StorageProvider) {
+    public storageService: StorageProvider,
+    public sharedService: SharedProvider
+  
+  ) {
   }
 
   ionViewDidLoad() {
+    this.sharedService.createLoader();
   this.storageService.getDeals().then(res => {
     this.de = res;
     this.de.forEach(element => {
       element.time = "";
+     
     });
+    this.sharedService.dismissLoader();
+    
   });
   
   }

@@ -75,13 +75,11 @@ export class NotificationProvider {
   setNotification(data, time): Promise<any>{
     
     var timeInMiliSeconds = (+time) * (60 * 1000);
-    console.log(timeInMiliSeconds);
     var nTime = new Date().getTime() + timeInMiliSeconds;
-    console.log(nTime);
 
     let notification: any = {
       id: data.id,
-      title: 'Do you want to go see a movie tonight?',
+      title: data.title,
       actions: [{ id: 'reschedule', title: 'Reschedule' }],
       trigger: { at: nTime },
       led: 'FF0000',
@@ -94,17 +92,7 @@ export class NotificationProvider {
   }
 
   scheduleNotification(data) {
-    // this.storageService.getNotification().then(res => {
-    //   this.lNotification = JSON.stringify(res);
-    // });
-
-    // this.localNotification.schedule(this.lNotification);
     console.log(data);
     this.localNotification.schedule(data);
- 
-
   }
-
-    
-
 }
