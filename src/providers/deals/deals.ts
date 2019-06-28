@@ -2,12 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-/*
-  Generated class for the DealsProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+const apiUrl = "https://my-json-server.typicode.com/elinfinitoindia/demoserver/"
 @Injectable()
 export class DealsProvider {
 
@@ -16,18 +12,18 @@ export class DealsProvider {
   }
 
   // get store links 
-  getStoreLinks(): Observable<any>{
-    return
+  getStoreLinks(){
+    return this.http.get(apiUrl + "storeLinks");
   }
 
   // get ads data 
   getAdsData() {
-    
+    return this.http.get(apiUrl + "ads");
   }
 
   // get Deals Categories
   getDealsCategory() {
-    
+    return this.http.get(apiUrl + 'DealC')
   }
 
   // get deals for category
@@ -42,7 +38,7 @@ export class DealsProvider {
 
   //get product category
   getProductCategory() {
-    
+    return this.http.get(apiUrl + "productC")
   }
 
   // get products by category

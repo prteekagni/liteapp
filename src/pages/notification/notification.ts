@@ -17,7 +17,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 export class NotificationPage {
   segments = '0';
   @ViewChild('pageSlider') pageSlider: Slides;
-  de: any;
+  pushNotification: any;
+  localNotification: any;
 
   constructor(
     public navCtrl: NavController,
@@ -27,10 +28,11 @@ export class NotificationPage {
 
   ionViewDidLoad() {
     this.storageService.getPushNotification().then(res => {
+      this.pushNotification = res;
       console.log(res);
     });
     this.storageService.getNotification().then(res => {
-      this.de = res;
+      this.localNotification = res;
     })
   }
 

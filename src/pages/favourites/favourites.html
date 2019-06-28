@@ -6,23 +6,26 @@
 
 <ion-content>
   <ng-container
-    *ngIf="de.length > 0; then thenTemplate; else elseTemplate"
+    *ngIf="fav; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
+    
     <ion-card
       style="margin-top:75px;"
-      *ngFor="let item of de"
-      (swipe)="swipeEvent($event)">
-      <img src="../../assets/imgs/logo.png"
+      *ngFor="let item of fav"
+      (swipe)="swipeEvent($event)"
+    >
+      <img
+        [src]="item.image"
         style="width: 150px;
     margin-top: -39px;
     z-index: 91554;
     position: absolute;"
       />
       <ion-card-content>
-        <p style="margin-left: 150px;">
-          The most popular industrial group ever, and largely responsible for
-          bringing the music to a mass audience.
+        <p style="margin-left: 150px; min-height: 100px">
+          {{item.title}} <br>
+        {{item.description}}
         </p>
       </ion-card-content>
       <ion-row no-padding>
@@ -33,7 +36,7 @@
             small
             color="danger"
             icon-start
-            (click)="save()"
+            (click)="remove(item.id)"
           >
             <ion-icon name="star"></ion-icon>
             Remove
@@ -56,5 +59,6 @@
   </ng-template>
   <ng-template #elseTemplate>
     <h3>Not Fav Yet</h3>
+     
   </ng-template>
 </ion-content>

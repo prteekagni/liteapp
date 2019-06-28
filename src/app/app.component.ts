@@ -19,13 +19,11 @@ export class MyApp {
   rootPage: any = 'TabsPage';
   counter = 0;
   constructor(
+
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public app: App,
-    private events: Events,
-    private network: Network,
-    private toastCtrl: ToastController,
     private sharedService: SharedProvider,
     private oneSignal: OneSignal,
     private storageService: StorageProvider,
@@ -35,7 +33,9 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      statusBar.styleLightContent();
+      // statusBar.overlaysWebView(true);
+      // statusBar.backgroundColorByHexString('#ffffff');
       splashScreen.hide();
       this.deeplinks.route({
         '/': 'TabsPage',
@@ -60,8 +60,8 @@ export class MyApp {
         alert(JSON.stringify(nomatch))
       });
       
-      this.initializeOneSignal();
-      this.initializeTracker();
+      // this.initializeOneSignal();
+      // this.initializeTracker();
     });
   }
 
@@ -72,10 +72,10 @@ export class MyApp {
 
     this.oneSignal.handleNotificationReceived().subscribe((res) => {
       // do something when notification is received
-      res=>this.onNotificationRecieved(res.notification.payload);
+      this.onNotificationRecieved(res.payload);
     });
     this.oneSignal.handleNotificationOpened().subscribe((res) => {
-      res => this.onNotificationOpened(res.notification.payload);
+     this.onNotificationOpened(res.notification.payload);
       // do something when a notification is opened
     });
     this.oneSignal.endInit();
@@ -87,11 +87,21 @@ export class MyApp {
 
 
   onNotificationRecieved(data) {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
+    console.log(JSON.stringify(data));
     this.storageService.savePushNotification(data);
   }
 
-  onNotificationOpened(data) {
-    
+  onNotificationOpened(payloaddata) {
+    console.log(payloaddata)
+    if (payloaddata.additionalData.page == 'Deals') {
+      this.nav.push('DealdetailPage', {
+        id:
+          payloaddata.additionalData.id
+      })
+    }
+    else {
+      this.nav.setRoot(payloaddata.additionalData.page);
+    }
   }
 }

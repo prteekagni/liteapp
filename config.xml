@@ -81,7 +81,6 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
-    <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
@@ -122,4 +121,11 @@
         <variable name="DEEPLINK_5_SCHEME" value=" " />
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <platform name="android">
+        <preference name="GoogleAndroidClientId" value="340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com" />
+    </platform>
+    <platform name="android">
+        <resource-file src="google-services.json" target="google-services.json" />
+    </platform>
 </widget>

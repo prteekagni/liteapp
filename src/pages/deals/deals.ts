@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ItemSliding, Platform, Events } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { HttpClient } from '@angular/common/http';
+import { DealsProvider } from '../../providers/deals/deals';
 
 /**
  * Generated class for the DealsPage page.
@@ -21,6 +22,8 @@ export class DealsPage {
   items;
   subcategory: any = [];
   mobiless;
+  mfashion;
+
   public mensf;
   public mobile: boolean;
   public mensfashion;
@@ -32,35 +35,21 @@ export class DealsPage {
     private platform: Platform,
     private appMinimize: AppMinimize,
     private events: Events,
-    private http: HttpClient
+    private http: HttpClient,
+    private dealsprovider: DealsProvider
   ) {
   
   }
 
   ionViewWillEnter() {
-
-    this.items = [
-      {
-      "name":"Pra7teek"
-      },
-      {
-      "name":"Prateek"
-      },
-      {
-      "name":"Prateek"
-      },
-    ]
-
-
-
-    
     this.mobile = true;
     let yOffset = document.getElementById("mobiles").offsetTop;
     console.log(yOffset);
     
-    this.http.get('assets/data.json').subscribe(res => {
-      this.subcategory = res;
-    });
+    this.dealsprovider.getDealsCategory().subscribe(res => {
+      this.deals = res;
+      this.mfashion = this.deals.filter(x => x.Category == "MF");
+    })
     console.log('willenter')
     
   }

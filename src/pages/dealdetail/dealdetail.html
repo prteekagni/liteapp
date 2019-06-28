@@ -1,7 +1,7 @@
 <ion-header>
-   <ion-toolbar>
+  <ion-toolbar>
     <ion-title color="theme">
-      Change Password
+      Deal Detail
     </ion-title>
     <ion-buttons start color="theme">
       <button ion-button (click)="dismiss()" color="theme">
@@ -12,6 +12,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-hgfhfghfh
+<ion-content>
+  <ion-row style="margin-top:12px">
+    <ion-col col-12>
+      <img
+        src="../../assets/imgs/logo.png"
+        alt=""
+        srcset=""
+        class="centerboximage"
+      />
+    </ion-col>
+    <ion-col col-12 style="margin-top: 15px;">
+      <h3>Description</h3>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, minus.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error,
+        corporis?
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <ion-list>
+        <ion-item (click)="(fsf)">
+          Add to Favourite
+        </ion-item>
+        <ion-item (click)="(dsfsdf)">
+          Report Issue
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ion-content>
+<ion-footer>
+  <button ion-button block style="margin:0px; height:4rem;">Get Deal</button>
+</ion-footer>

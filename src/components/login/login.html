@@ -1,5 +1,4 @@
 <div>
-  <button ion-button (click)="login()">Login</button>
   <ion-grid class="margintop">
     <ion-row text-center>
       <ion-col col-12 icon-start>
@@ -17,14 +16,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col col-10 offset-1>
-        <button ion-button icon-start block (click)="loginWithG()">
-          <img src="../../assets/imgs/logo.png" alt="" style="width:18%;" />
-          Login with Google
-        </button>
-      </ion-col>
-    </ion-row>
+
     <ion-row text-center>
       <ion-col col-10 offset-1>
         <form #loginForm="ngForm">
@@ -67,6 +59,17 @@
     <ion-row text-center class="forgotbutton">
       <ion-col>
         <span (click)="forgotPassword()">Forgot Password?</span>
+      </ion-col>
+    </ion-row>
+        <ion-row text-center>
+          <ion-col col-12 text-center>
+            Singin using 
+          </ion-col>
+      <ion-col col-3 offset-3>
+          <img src="../../assets/imgs/logo.png" alt="" style="" />
+      </ion-col>
+      <ion-col col-3>
+          <img src="../../assets/imgs/logo.png" alt="" style="" />
       </ion-col>
     </ion-row>
     <ion-row text-center style="border-top:1px solid lightgrey;">

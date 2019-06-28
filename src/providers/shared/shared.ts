@@ -161,5 +161,23 @@ export class SharedProvider {
     
   }
 
+  nativeFlip() {
+    this.nativeTrasnitions.flip(options).then(res => {
+      console.log(res);
+    },
+      err => {
+        console.log(err);
+    })
+  }
+
+  nativeFade() {
+    this.nativeTrasnitions.fade(options).then(res => {
+      console.log(res)
+    },
+    err=>{
+      console.log(err);
+    })
+  }
+
 
 }
