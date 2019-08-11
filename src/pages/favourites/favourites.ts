@@ -3,12 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { SharedProvider } from '../../providers/shared/shared';
 
-/**
- * Generated class for the FavouritesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
+ const animationsOptions = {
+   animation: 'ios-transition',
+   duration: 500
+ }
+ 
 
 @IonicPage()
 @Component({
@@ -17,22 +17,23 @@ import { SharedProvider } from '../../providers/shared/shared';
 })
 export class FavouritesPage {
 
-  de: any = [];
+  fav: any = [];
+
   constructor(
 
     public navCtrl: NavController,
     public navParams: NavParams,
     public storageService: StorageProvider,
-    public sharedService: SharedProvider
-  
+    public sharedService: SharedProvider,  
   ) {
   }
 
   ionViewDidLoad() {
     this.sharedService.createLoader();
   this.storageService.getDeals().then(res => {
-    this.de = res;
-    this.de.forEach(element => {
+    this.fav = res || [];
+    
+    this.fav.forEach(element => {
       element.time = "";
      
     });
@@ -42,10 +43,25 @@ export class FavouritesPage {
   
   }
 
-  swipeEvent(event) {
-    console.log(event);
-     this.de.forEach(element => {
-       console.log(element)
-    });
+  remove(data) {
+    this.storageService.deleteDeals(data).then(res => {
+      this.fav = res;
+      this.fav.forEach(element => {
+        element.time = "";
+      });
+    })
+  }
+
+  backPage(){
+  //  this.nativeTrasnitions.curl(null).then(res=>{
+  //    console.log('done')
+  //  },err=>{
+  //    console.log('err')
+  //  })
+ 
+    
+  
+    this.navCtrl.pop(animationsOptions
+                     );
   }
 }

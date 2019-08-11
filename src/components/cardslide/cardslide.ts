@@ -1,12 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Events } from 'ionic-angular';
+import { Events, NavController } from 'ionic-angular';
 
-/**
- * Generated class for the CardslideComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'cardslide',
   templateUrl: 'cardslide.html'
@@ -14,20 +8,23 @@ import { Events } from 'ionic-angular';
 export class CardslideComponent {
 
   text: string;
-  @Output() voted = new EventEmitter<any>();
-
+  @Input() items;
 
   constructor(
-    private event :Events
-  ) {
+    private event: Events,
+    private navCtrl: NavController
+  )
+  {
     console.log('Hello CardslideComponent Component');
     this.text = 'Hello World';
-
-
   }
 
-  getToDeal(data){
-    this.voted.emit('hello');
+  goToDeal(item) {
+    console.log(item);
+    this.navCtrl.push(
+      'ProductlistPage', {
+       cat:item.Category 
+      }
+    )
   }
-
 }

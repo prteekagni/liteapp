@@ -1,15 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Platform, ModalController, Content } from 'ionic-angular';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { IonicPage, NavController, NavParams, Events, Platform, ModalController, Content, Slides } from 'ionic-angular';
 import { SharedProvider } from '../../providers/shared/shared';
 import { ScrollHideConfig } from '../../directives/scroll/scroll';
+import { FirebaseDynamicLinks } from '@ionic-native/firebase-dynamic-links';
+import { DealsProvider } from '../../providers/deals/deals';
 
 const animationsOptions = {
   animation: 'ios-transition',
   duration: 1000
 }
-
-
 
 @IonicPage()
 @Component({
@@ -18,8 +17,16 @@ const animationsOptions = {
 })
 export class HomePage {
 
+
+  
+  headerScrollConfig: ScrollHideConfig = {
+    cssProperty: 'margin-top',
+    maxValue: 44
+  };
+  
+  @ViewChild(Slides) slides1: Slides;
+ @ViewChild(Content) content: Content;
   slides;
-  date: any;
   isLoggedIn: boolean = false;
   lnotification: any = [];
   isConnected : boolean;
@@ -27,26 +34,32 @@ export class HomePage {
   visibility  : boolean = true;
   secondpage  : boolean = false;
   thirdpage   : boolean = false;
-  @ViewChild(Content) content: Content;
   counter: any = 0;
-  morePagesAvailable: boolean = true;
+  storelinks;
+  food;
+  fashion;
+  grocery
+  mens;
+  womens;
+  travel;
+  baby;
+  shoes;
+  accessories;
+  entertainment;
+  adsData: any = [];
+  mainslide: any = [];
+  defaultImage = '../../assets/images/logo.png';
   
-
-  headerScrollConfig: ScrollHideConfig = {
-    cssProperty: 'margin-top',
-    maxValue: 44
-  };
-  
-
   constructor(
 
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
     private platform: Platform,
-
     private sharedService: SharedProvider,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private firebaseDynamicLinks: FirebaseDynamicLinks,
+    private dealService: DealsProvider
 
   ) {
 
@@ -59,7 +72,8 @@ export class HomePage {
     });
 
     this.showToolbar = false;
-    
+    this.firebaseDynamicLinks.onDynamicLink()
+      .subscribe((res: any) => console.log(res), (error: any) => console.log(error));
   }
 
 
@@ -69,24 +83,13 @@ export class HomePage {
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
       { 'image': 'http://elinfinitoindia.in/images/logo.png' },
     ];
-
-  console.log('ionicviewleave'+ this.showToolbar);
   }
 
   nav11() {
     this.navCtrl.push('ProductlistPage');
   }
 
-  homevote(data) {
-    this.events.publish('change-tab', 1, "mobile");
-  }
-
   ionViewWillEnter() {
-
-console.log(this.content.contentHeight);
-
-    console.log(this.showToolbar);
- 
     this.events.subscribe('nstatus', (res) => {
       if (res == true) {
         this.isConnected = true;
@@ -95,20 +98,33 @@ console.log(this.content.contentHeight);
         this.isConnected = false;
       }
     });
+
+    this.dealService.getStoreLinks().subscribe(res => {
+      this.storelinks = res;
+      this.food = this.storelinks.filter(x => x.category == "Fashion");
+       this.grocery = this.storelinks.filter(x => x.category == "Grocery");
+  this.entertainment =this.storelinks.filter(x => x.category == "Entertainment");
+                      
+    },
+      err => {
+        console.log(err)
+      });
+    
+    this.dealService.getAdsData().subscribe(res => {
+      this.adsData = res || [];
+      if (this.adsData.length > 0) {
+   this.mainslide = this.adsData.filter(x => x.category == "scroll");
+      }
+    }, err => {
+        console.log(err)
+    })
   }
 
   goToNotification() {
     this.navCtrl.push('NotificationPage' , {} , animationsOptions);
   }
 
-  
-
   goToFav() {
-    // const animationsOptions = {
-    //   animation: 'ios-transition',
-    //   duration: 1000
-    // }
-   
     this.navCtrl.push('FavouritesPage', {}, animationsOptions);
   }
 
@@ -116,31 +132,15 @@ console.log(this.content.contentHeight);
     this.isConnected = !this.isConnected;
   }
 
-  onScroll($event) {
-    if ($event) {
-      const scrollTop = $event.scrollTop;
-      this.showToolbar = scrollTop >= 50;
-      console.log(this.showToolbar);
-      this.visibility = scrollTop >= 50;
-    }
-  }
-
 ionViewWillLeave(){
   
 }
   
-  createModal() {
-    let profileModal = this.modalController.create('ChangepasswordPage', {}, {
-      cssClass: 'my-modal'
-    
-   });
-   profileModal.present();
-  }
-
   doInfinite(event) {
 
     if(this.counter == 0) {
       this.secondpage = true;
+      // this.grocery = this.storelinks.filter(x => x.category == "Grocery");
       this.counter++
     }
     else if (this.counter == 1) {

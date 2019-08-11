@@ -4,6 +4,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { deals } from '../../models/deal';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { SharedProvider } from '../../providers/shared/shared';
+import { HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -17,8 +18,8 @@ export class ProductlistPage {
 
   de: any = [];
   lnotification: any = [];
-  items: deals[] = [];
-  newItem: deals[] = [];
+  items;
+  newItem: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -30,11 +31,29 @@ export class ProductlistPage {
     public alertCtrl: AlertController,
     public sharedService: SharedProvider,
     private actionSheetCtrl: ActionSheetController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private http: HttpClient
   )
   {
-    console.log(this.navParams.get('type'));
-    console.log(this.navParams.get('id'));
+    var cat = this.navParams.get('cat');
+    var type = this.navParams.get('type')
+    if(type == "deals"){
+ this.http.get('http://localhost:3000/deals').subscribe(res => {
+      this.items = res;
+      this.newItem = this.items.filter(x => x.category == cat
+                                                          );
+      console.log(this.newItem);
+   })
+    }
+    else if (type == "products") {
+      this.http.get('http://localhost:3000/products').subscribe(res => {
+        this.items = res;
+        this.newItem = this.items.filter(x => x.category == cat);
+        console.log(this.newItem);
+      })
+      
+    }
+   
   }
 
   ionViewDidLoad() {
@@ -50,32 +69,6 @@ export class ProductlistPage {
 
   ionViewWillEnter() {
 
-    this.newItem = [
-      {
-        id: 1,
-        title: "string",
-        link: "string",
-        image: "string",
-        description: "string",
-        reminder: "string"
-      },
-      {
-        id: 2,
-        title: "string",
-        link: "string",
-        image: "string",
-        description: "string",
-        reminder: "string"
-      },
-      {
-        id: 3,
-        title: "string",
-        link: "string",
-        image: "string",
-        description: "string",
-        reminder: "string"
-      },
-    ];
   }
 
   setDealAsFav(element) {
@@ -95,13 +88,13 @@ export class ProductlistPage {
      this.notificationService.setNotification(item, time)
        .then(res => {
          if (res == true) {
-          this.showToast('Reminder Updated')
+           this.showToast('Reminder Updated')
          }
          else {
            this.showToast('Reminder Scheduled')
          }
        })
-   })
+   });
   }
 
 

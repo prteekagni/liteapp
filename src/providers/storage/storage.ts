@@ -31,67 +31,21 @@ export class StorageProvider {
           this.storage.set(DEALS_KEY, items);
           return true;
         }
-
-        //   for (let i of items) {
-        //     if (i.id === item.id) {
-        //       return false;
-        //     }
-        //     else {
-        //       items.push(item);
-        //       this.storage.set(DEALS_KEY, items);
-        //       return true;
-        //     }
-        //   }
-        // }
-        // else {
-        //   this.storage.set(DEALS_KEY, [item]);
-        //   return true;
-        // }
-        // });
       }
-
       else {
         this.storage.set(DEALS_KEY, [item]);
         return true;
       }
-
-
-
-
     }
     )
 
   }
-
   // READ
   getDeals(): Promise<deals[]> {
     return this.storage.get(DEALS_KEY);
   }
 
-  // UPDATE
-  // updateItem(item: deals): Promise<any> {
-  //   return this.storage.get(DEALS_KEY).then((items: deals[]) => {
-  //     if (!items || items.length === 0) {
-  //       return null;
-  //     }
-
-  //     let newItems: deals[] = [];
-
-  //     for (let i of items) {
-  //       if (i.id === item.id) {
-  //         newItems.push(item);
-  //       } else {
-  //         newItems.push(i);
-  //       }
-  //     }
-
-  //     return this.storage.set(DEALS_KEY, newItems);
-  //   });
-  // }
-
-  // DELETE
-
-  deleteDelete(id: number): Promise<deals> {
+  deleteDeals(id: number): Promise<deals> {
     return this.storage.get(DEALS_KEY).then((items: deals[]) => {
       if (!items || items.length === 0) {
         return null;
@@ -152,17 +106,11 @@ export class StorageProvider {
   savePushNotification(item): Promise<any> {
     return this.storage.get(P_KEY).then((items: deals[]) => {
       if (items) {
-        for (let i of items) {
-          if (i.id === item.id) {
-            return false;
-          }
-          else {
             items.push(item);
             this.storage.set(P_KEY, items);
             return true;
           }
-        }
-      }
+      
       else {
         this.storage.set(P_KEY, [item]);
         return true;

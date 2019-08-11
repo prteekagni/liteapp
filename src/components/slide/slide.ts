@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { Slides } from 'ionic-angular';
+import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Slides, Item } from 'ionic-angular';
 
 
 @Component({
@@ -10,6 +10,7 @@ export class SlideComponent implements OnInit{
 
    @ViewChild(Slides) slides: Slides;
   text: string;
+  @Input() items;
 
   constructor() {
     console.log('Hello SlideComponent Component');

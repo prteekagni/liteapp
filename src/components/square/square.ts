@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 /**
  * Generated class for the SquareComponent component.
@@ -13,18 +14,26 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 export class SquareComponent {
 
   text: string;
-  @Input() items
-           ;
+  @Input() items;
   @Output() clickeve = new EventEmitter();
 
-  constructor() {
+  constructor(
+    private navCtrl: NavController
+  ) {
     console.log('Hello SquareComponent Component');
     this.text = 'Hello World';
   }
 
 
-  getOfferDetail() {
-    this.clickeve.emit();
+  getOfferDetail
+  (data) {
+    this.navCtrl.push(
+      'ProductlistPage',
+      {
+        cat: data.Category,
+        type:"deals"
+      }
+    )
   }
 
 }

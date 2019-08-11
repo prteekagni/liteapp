@@ -21,7 +21,6 @@ export class ScrollDirective {
   co;
 
   constructor(private element: ElementRef, private renderer: Renderer2) {
-    console.log(document.getElementById("navbar"));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -57,7 +56,7 @@ export class ScrollDirective {
         if (scrollTop !== 0) {
           if (scrolldiff < 0) {
             this.co = "orange";
-            console.log("scrolling up");
+        
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[2].children[0],
               "notitle"
@@ -74,7 +73,7 @@ export class ScrollDirective {
             );
           }
           if (scrolldiff > 0) {
-            console.log("scrolling up");
+  
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[0],
               "addBackground"
@@ -100,8 +99,6 @@ export class ScrollDirective {
                 .children[0].children[0],
               "addcolortitle"
             );
-
-          console.log("scroll on top, background transparent already added");
         }
       });
     }

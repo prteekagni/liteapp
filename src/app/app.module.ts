@@ -22,6 +22,8 @@ import { StorageProvider } from '../providers/storage/storage';
 import { NotificationProvider } from '../providers/notification/notification';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Deeplinks } from '@ionic-native/deeplinks';
+import { FirebaseDynamicLinks } from '@ionic-native/firebase-dynamic-links';
+import { Clipboard } from '@ionic-native/clipboard';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     NativePageTransitions,
     StorageProvider,
     NotificationProvider,
-    Deeplinks
+    Deeplinks,
+    FirebaseDynamicLinks,
+    Clipboard
     
   ],
   exports: [
