@@ -30,10 +30,6 @@
 
 <ion-content #pageContent fullscreen>
   <!-- <div class="header-image"></div> -->
-
-  <div>
-    
-  </div>
   <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
     <ion-slides
       *ngIf="mainslide.length > 0"
@@ -54,101 +50,125 @@
     </ion-slides>
   </ng-container>
   <ng-template #elseTemplate style="height:40vh">
-   <div style="height:40vh">
-    <ion-spinner name="bubbles" style="margin-top: 20vh;
-    margin-left: 49vw;"></ion-spinner>
-   </div>
+    <div style="height:40vh">
+      <ion-spinner
+        name="bubbles"
+        style="margin-top: 20vh;
+    margin-left: 49vw;"
+      >
+      </ion-spinner>
+    </div>
   </ng-template>
-  
-  
-  
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
   <ng-template #connected class="main-content">
+    <!-- top shops -->
     <cardgrid></cardgrid>
-    <ion-row>
+
+    <!-- top brands  -->
+    <h3>Top brands</h3>
+    <ng-container *ngIf="brands.length > 0; else loading">
+      <ion-row>
+        <ion-item no-lines class="leftpadding">
+          <ion-scroll scrollX="true" scroll-avatar>
+            <ion-avatar>
+              <img
+                src="../../assets/imgs/logo.png"
+                class="scroll-item"
+                style="border: 1px solid grey;"
+                *ngFor="let item of brands"
+              />
+            </ion-avatar>
+          </ion-scroll>
+        </ion-item>
+      </ion-row>
+    </ng-container>
+    <ng-template #loading>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ng-template>
+
+    <!-- Ads -->
+    <!-- <ion-row>
       <ion-col col-12>
         <slide [items]="mainslide"></slide>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
+
+    <!-- Food -->
     <ion-row>
       <ion-col col-12 text-center>
         <h2>Food</h2>
       </ion-col>
     </ion-row>
 
-    <cardslide [items]="food"></cardslide>
-    <singleadd></singleadd>
+    <!-- <ng-container *ngIf="food.length > 0; else loading">
+      <cardslide [items]="food"></cardslide>
+    </ng-container>
+    <ng-template #loading>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ng-template> -->
 
-    <ion-row>
+    <ion-row *ngFor="let item of catego; let i = index" class="mycatego">
+      <ion-col col-12>
+           <ion-row>
       <ion-col col-12 text-center>
-        <h2>Mobiles</h2>
+        <h2>{{item.first_name}}</h2>
       </ion-col>
     </ion-row>
-
-    <cardslide></cardslide>
-    <singleadd [items]="mobile"></singleadd>
-
-    <ng-container *ngIf="secondpage">
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>Grocery and health</h2>
-        </ion-col>
-      </ion-row>
-
-      <cardslide [items]="grocery"></cardslide>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>For Men's</h2>
-        </ion-col>
-      </ion-row>
-
-      <cardslide [items]="mens"></cardslide>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>For Womns'</h2>
-        </ion-col>
-      </ion-row>
-
-      <cardslide [items]="womens"></cardslide>
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>Travel</h2>
-        </ion-col>
-      </ion-row>
-
-      <cardslide [items]="travel"></cardslide>
+    <ng-container >
+      <cardslide [items]=item.category [type]="'store'"></cardslide>
     </ng-container>
+    <ng-template #loading>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ng-template>
+      </ion-col>
+       <singleadd *ngIf="(i % 3) == 0"></singleadd>
+       
+    </ion-row>
 
-    <ng-container *ngIf="thirdpage">
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>For Baby'</h2>
-        </ion-col>
-      </ion-row>
+    <!-- Single Add -->
+    <singleadd></singleadd>
 
-      <cardslide [items]="baby"></cardslide>
+    <!-- <ng-container *ngIf="thirdpage">
+      
       <ion-row>
         <ion-col col-12 text-center>
           <h2>Shoes</h2>
         </ion-col>
       </ion-row>
+      <ng-container *ngIf="shoes.length > 0; else loading">
+        <cardslide [items]="shoes"></cardslide>
+      </ng-container>
+      <ng-template #loading>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </ng-template>
 
-      <cardslide [items]="shoes"></cardslide>
+  
       <ion-row>
         <ion-col col-12 text-center>
           <h2>Accessories</h2>
         </ion-col>
       </ion-row>
+      <ng-container *ngIf="accessories.length > 0; else loading">
+        <cardslide [items]="accessories"></cardslide>
+      </ng-container>
+      <ng-template #loading>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </ng-template>
 
-      <cardslide [items]="accessories"> </cardslide>
+    
       <ion-row>
         <ion-col col-12 text-center>
           <h2>Entertainment</h2>
         </ion-col>
       </ion-row>
-      <cardslide [items]="entertainment"></cardslide>
-    </ng-container>
+      <ng-container *ngIf="entertainment.length > 0; else loading">
+        <cardslide [items]="entertainment"></cardslide>
+      </ng-container>
+      <ng-template #loading>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </ng-template>
+    </ng-container> --> 
   </ng-template>
   <ng-template #notconnected>
     <h3>Please connecet to internet</h3>

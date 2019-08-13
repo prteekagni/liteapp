@@ -42,15 +42,32 @@ export class DealsPage {
   }
 
   ionViewWillEnter() {
-    this.mobile = true;
-    let yOffset = document.getElementById("mobiles").offsetTop;
-    console.log(yOffset);
+    // this.mobile = true;
+   
     
-    this.dealsprovider.getDealsCategory().subscribe(res => {
-      this.deals = res;
-      this.mfashion = this.deals.filter(x => x.Category == "MF");
-    })
+    // this.dealsprovider.getDealsCategory().subscribe(res => {
+    //   this.deals = res;
+    //   // this.mfashion = this.deals.filter(x => x.Category == "MF");
+    // })
     console.log('willenter')
+
+    this.deals = [
+      {
+        "id": "1",
+        "category": "Mobile",
+        "view":"slide"
+      },
+      {
+        "id": "2",
+        "category": "MensFashion",
+        "view":"square"
+      },
+      {
+        "id":"3",
+        "category": "WomenFashion",
+        "view":"square"
+      }
+    ]
     
   }
 

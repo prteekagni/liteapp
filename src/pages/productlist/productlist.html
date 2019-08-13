@@ -5,61 +5,68 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of newItem" style="margin-top:75px;">
-    <img
-      src="../../assets/imgs/logo.png"
-      style="width: 150px;"
-      class="dealsimage"
-    />
-    <ion-card-content>
-      <p style="margin-left: 150px;min-height:100px;">
-       {{item.description}}
-      </p>
-    </ion-card-content>
-    <ion-row no-padding>
-      <ion-col>
-        <button
-          ion-button
-          clear
-          small
-          color="danger"
-          icon-start
-          (click)="setDealAsFav(item)"
-        >
-          <ion-icon name="star"></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button
-          ion-button
-          clear
-          small
-          color="danger"
-          icon-start
-          (click)="remindBtn(item)"
-        >
-          <ion-icon name="musical-notes"></ion-icon>
-          Remind
-        </button>
-        <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+  <ion-list [virtualScroll]="newItem" approxItemHeight="180px">
+    <ion-item *virtualItem="let item">
+      <ion-card style="">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-8>
+              <h4>Bkjfhgkjdfhjkghdkjfg</h4>
+              <p>
+                {{ item.employee_name }}
+              </p>
+            </ion-col>
+            <ion-col col-4>
+              <img
+                src="../../assets/imgs/logo.png"
+                style="width: 180px;"
+                class="dealsimage"
+              />
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="setDealAsFav(item)">
+              <ion-icon name="star"></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="remindBtn(item)">
+              <ion-icon name="musical-notes"></ion-icon>
+              Remind
+            </button>
+            <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
       </ion-datetime>  -->
-      </ion-col>
-      <ion-col text-right>
-        <button
-          ion-button
-          clear
-          small
-          color="danger"
-          icon-start
-          (click)="getDeal()"
-        >
-          <ion-icon name="share-alt"></ion-icon>
-          Buy
-        </button>
-      </ion-col>
-    </ion-row>
-    <!-- <ion-row no-padding>
+          </ion-col>
+          <ion-col text-right>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="getDeal()"
+            >
+            <ion-icon name="share-alt"></ion-icon>
+              Buy
+            </button>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row no-padding>
     <ion-col>
       <button ion-button clear small color="danger" icon-start (click)="save()">
         <ion-icon name='star'></ion-icon>
@@ -81,7 +88,9 @@
       </button>
     </ion-col>
   </ion-row> -->
-  </ion-card>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 
   <!-- <ion-card style="margin-top:75px;">
   <img src="../../assets/imgs/logo.png" style="width: 150px;

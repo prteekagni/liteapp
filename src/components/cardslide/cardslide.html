@@ -5,9 +5,10 @@
         <ion-card
           class="scroll-item"
           id="largecard"
-          (click)="getToDeal(item)" *ngFor="let item of items">
-          <ion-img [src]="item.image" class="largecardimg">
-        </ion-img>
+          (click)="getToDeal(item)"
+          *ngFor="let item of cards"
+        >
+          <ion-img [src]="item.image" class="largecardimg"> </ion-img>
         </ion-card>
       </ion-scroll>
       <ng-template #loading>
