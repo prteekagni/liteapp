@@ -44,6 +44,7 @@ export class SharedProvider {
       // prior to doing any api requests as well.
 
       this.events.publish('nstatus', true);
+      
     });
 
     this.network.onDisconnect().subscribe(() => {
@@ -178,6 +179,8 @@ export class SharedProvider {
       console.log(err);
     })
   }
+
+  
 
 
 }

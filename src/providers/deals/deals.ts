@@ -16,6 +16,10 @@ export class DealsProvider {
     return this.http.get(apiUrl + "storeLinks");
   }
 
+  getStoreCategory(){
+    return this.http.get("https://api.myjson.com/bins/k5qvb");
+  }
+  
   // get ads data 
   getAdsData() {
     return this.http.get(apiUrl + "ads");

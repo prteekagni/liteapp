@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SharedProvider } from '../../providers/shared/shared';
 import { DealsProvider } from '../../providers/deals/deals';
 
-/**
- * Generated class for the ProductsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -33,15 +27,37 @@ export class ProductsPage {
   }
 
   ionViewWillEnter() {
-    this.pCategories
-          = this.dealsService.getProductCategory().subscribe(res => {
-      this.pCategories
-            = res || [];
-    },
-      err => {
-        this.pCategories = [];
-        console.log(this.pCategories);
-    })
+  
+    this.pCategories =  [
+        {
+            "id": "1",
+            "name": "fashion"
+        },
+        {
+            "id": "1",
+            "name": "typicode"
+        },
+        {
+            "id": "2",
+            "name": "For you"
+        },
+        {
+            "id": "3",
+            "name": "Valentine Gift"
+        },
+        {
+            "id": "4",
+            "name": "Testing "
+        }
+    ]
+    //        this.dealsService.getProductCategory().subscribe(res => {
+    //   this.pCategories
+    //         = res || [];
+    // },
+    //   err => {
+    //     this.pCategories = [];
+    //     console.log(this.pCategories);
+    // })
     
   }
 

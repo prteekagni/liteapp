@@ -4,6 +4,7 @@ import { SharedProvider } from '../../providers/shared/shared';
 import { ScrollHideConfig } from '../../directives/scroll/scroll';
 import { FirebaseDynamicLinks } from '@ionic-native/firebase-dynamic-links';
 import { DealsProvider } from '../../providers/deals/deals';
+import { HttpClient } from '@angular/common/http';
 
 const animationsOptions = {
   animation: 'ios-transition',
@@ -17,8 +18,6 @@ const animationsOptions = {
 })
 export class HomePage {
 
-
-  
   headerScrollConfig: ScrollHideConfig = {
     cssProperty: 'margin-top',
     maxValue: 44
@@ -36,19 +35,12 @@ export class HomePage {
   thirdpage   : boolean = false;
   counter: any = 0;
   storelinks;
-  food;
-  fashion;
-  grocery
-  mens;
-  womens;
-  travel;
-  baby;
-  shoes;
-  accessories;
-  entertainment;
-  adsData: any = [];
-  mainslide: any = [];
   defaultImage = '../../assets/images/logo.png';
+  page: number=1;
+  catego: any = [];
+  adsData: any = [];
+  mainslide:any = [];
+  brands:any = [];
   
   constructor(
 
@@ -59,7 +51,8 @@ export class HomePage {
     private sharedService: SharedProvider,
     private modalController: ModalController,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private http:HttpClient
 
   ) {
 
@@ -90,6 +83,19 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
+
+    
+    
+    // this.dealService.getStoreCategory().subscribe(res => {
+    //   this.catego = res;
+    //   console.log(res);
+    // })
+
+    this.http.get('https://reqres.in/api/users?page='+this.page).subscribe(res=> {
+      this.catego = res.data;
+      this.brands = res.data;
+    })
+
     this.events.subscribe('nstatus', (res) => {
       if (res == true) {
         this.isConnected = true;
@@ -99,16 +105,16 @@ export class HomePage {
       }
     });
 
-    this.dealService.getStoreLinks().subscribe(res => {
-      this.storelinks = res;
-      this.food = this.storelinks.filter(x => x.category == "Fashion");
-       this.grocery = this.storelinks.filter(x => x.category == "Grocery");
-  this.entertainment =this.storelinks.filter(x => x.category == "Entertainment");
+    // this.dealService.getStoreLinks().subscribe(res => {
+    //   this.storelinks = res;
+    //   this.Fashion = this.storelinks.filter(x => x.category == "Fashion") || [];
+    //   this.Grocery = this.storelinks.filter(x => x.category == "Grocery") || [];
+    //   this.Entertainment =this.storelinks.filter(x => x.category == "Entertainment") || [];
                       
-    },
-      err => {
-        console.log(err)
-      });
+    // },
+    //   err => {
+    //     console.log(err)
+    //   });
     
     this.dealService.getAdsData().subscribe(res => {
       this.adsData = res || [];
@@ -138,15 +144,24 @@ ionViewWillLeave(){
   
   doInfinite(event) {
 
-    if(this.counter == 0) {
-      this.secondpage = true;
-      // this.grocery = this.storelinks.filter(x => x.category == "Grocery");
-      this.counter++
-    }
-    else if (this.counter == 1) {
-      this.thirdpage = true;
-      this.counter++;
-    }
+    // if(this.counter == 0) {
+    //   this.secondpage = true;
+    //   // this.grocery = this.storelinks.filter(x => x.category == "Grocery");
+    //   this.counter++
+    // }
+    // else if (this.counter == 1) {
+    //   this.thirdpage = true;
+    //   this.counter++;
+    // }
+    this.page++;
+    this.http.get('https://reqres.in/api/users?page=' + this.page).subscribe(res => {
+      
+      res.data.forEach(element => {
+        this.catego.push(element)
+      });
+      
+    })
+    
     setTimeout(() => {
       event.complete(); 
     }, 1000);    

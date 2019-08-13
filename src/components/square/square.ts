@@ -13,7 +13,7 @@ import { NavController } from 'ionic-angular';
 })
 export class SquareComponent {
 
-  text: string;
+  text: any = [];
   @Input() items;
   @Output() clickeve = new EventEmitter();
 
@@ -21,7 +21,33 @@ export class SquareComponent {
     private navCtrl: NavController
   ) {
     console.log('Hello SquareComponent Component');
-    this.text = 'Hello World';
+
+
+    this.text = [
+      {
+        "id": "1",
+        "name": "one",
+        "image":"http://elinfinitoindia.in/images/logo.png"
+      },
+      {
+        "id": "2",
+        "name": "one",
+        "image":"http://elinfinitoindia.in/images/logo.png"
+      },
+      {
+        "id": "3",
+        "name": "one",
+        "image":"http://elinfinitoindia.in/images/logo.png"
+      },
+      {
+        "id": "4",
+        "name": "one",
+        "image":"http://elinfinitoindia.in/images/logo.png"
+      },
+    ]
+
+
+
   }
 
 
