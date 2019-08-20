@@ -1,38 +1,47 @@
 page-productlist {
-    .logo {
-        width: 90px;
-    }
+  .logo {
+    width: 90px;
+  }
 
-    .my-class {
-        display: none;
-    }
+  .my-class {
+    display: none;
+  }
 
-    .nopaddingcard {
-        padding-top: 10px !important;
-        padding-right: 0px !important;
-        padding-bottom: 0px !important;
-        padding-left: 5px !important;
-    }
+  .nopaddingcard {
+    padding-top: 10px !important;
+    padding-right: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 5px !important;
+  }
 
-    .dealsimage {
-        z-index: 91554;
-        -webkit-box-shadow: 0 8px 6px -6px black;
-        -moz-box-shadow: 0 8px 6px -6px black;
-        box-shadow: 0 8px 6px -6px black;
-    }
+  .dealsimage {
+    z-index: 91554;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+  }
 
-    .toolbar-background-md {
-        background: transparent;
+  .toolbar-background-md {
+    background: transparent;
+  }
 
-    }
+  .toolbar-title-md {
+    color: orangered;
+  }
 
-    .toolbar-title-md {
-        color: orangered;
-    }
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: orangered;
+  }
 
-    .bar-button-default-md,
-    .bar-button-clear-md-default,
-    .bar-button-md-default{
-        color: orangered;
-    }
+  .itemtext {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 17px;
+  }
 }

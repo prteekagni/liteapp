@@ -6,22 +6,15 @@
           Deals Locker Lite
         </ion-col>
         <ion-col col-6 text-right>
-          <span>
-            <ion-icon
-              ios="ios-notifications"
-              md="md-notifications"
-              (click)="goToNotification()"
-              class="iconspace"
-              style="margin-left: 5px;
-              font-size:1.3rem;"
-            ></ion-icon>
-          </span>
-
           <ion-icon
             ios="ios-notifications"
-            md="md-star"
-            (click)="goToFav()"
+            md="md-notifications"
+            (click)="goToNotification()"
+            class="iconspace"
+            style="margin-left: 5px;"
           ></ion-icon>
+          <ion-icon ios="ios-notifications" md="md-star" (click)="goToFav()">
+          </ion-icon>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -54,7 +47,7 @@
       <ion-spinner
         name="bubbles"
         style="margin-top: 20vh;
-    margin-left: 49vw;"
+        margin-left: 49vw;"
       >
       </ion-spinner>
     </div>
@@ -100,75 +93,26 @@
         <h2>Food</h2>
       </ion-col>
     </ion-row>
-
-    <!-- <ng-container *ngIf="food.length > 0; else loading">
-      <cardslide [items]="food"></cardslide>
-    </ng-container>
-    <ng-template #loading>
-      <ion-spinner name="bubbles"></ion-spinner>
-    </ng-template> -->
-
+    <cardslide [items]="sjdhfkdsjhf" [type]="'store'"></cardslide>
     <ion-row *ngFor="let item of catego; let i = index" class="mycatego">
       <ion-col col-12>
-           <ion-row>
-      <ion-col col-12 text-center>
-        <h2>{{item.first_name}}</h2>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <h2>{{ item.first_name }}</h2>
+          </ion-col>
+        </ion-row>
+        <ng-container>
+          <cardslide [items]="item.last_name" [type]="'store'"></cardslide>
+        </ng-container>
+        <ng-template #loading>
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ng-template>
       </ion-col>
-    </ion-row>
-    <ng-container >
-      <cardslide [items]=item.category [type]="'store'"></cardslide>
-    </ng-container>
-    <ng-template #loading>
-      <ion-spinner name="bubbles"></ion-spinner>
-    </ng-template>
-      </ion-col>
-       <singleadd *ngIf="(i % 3) == 0"></singleadd>
-       
+      <singleadd *ngIf="i % 3 == 0"></singleadd>
     </ion-row>
 
     <!-- Single Add -->
     <singleadd></singleadd>
-
-    <!-- <ng-container *ngIf="thirdpage">
-      
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>Shoes</h2>
-        </ion-col>
-      </ion-row>
-      <ng-container *ngIf="shoes.length > 0; else loading">
-        <cardslide [items]="shoes"></cardslide>
-      </ng-container>
-      <ng-template #loading>
-        <ion-spinner name="bubbles"></ion-spinner>
-      </ng-template>
-
-  
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>Accessories</h2>
-        </ion-col>
-      </ion-row>
-      <ng-container *ngIf="accessories.length > 0; else loading">
-        <cardslide [items]="accessories"></cardslide>
-      </ng-container>
-      <ng-template #loading>
-        <ion-spinner name="bubbles"></ion-spinner>
-      </ng-template>
-
-    
-      <ion-row>
-        <ion-col col-12 text-center>
-          <h2>Entertainment</h2>
-        </ion-col>
-      </ion-row>
-      <ng-container *ngIf="entertainment.length > 0; else loading">
-        <cardslide [items]="entertainment"></cardslide>
-      </ng-container>
-      <ng-template #loading>
-        <ion-spinner name="bubbles"></ion-spinner>
-      </ng-template>
-    </ng-container> --> 
   </ng-template>
   <ng-template #notconnected>
     <h3>Please connecet to internet</h3>
@@ -177,44 +121,3 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
-
-<!-- 
-    <ion-row>
-      <ion-item no-lines class="leftpadding">
-        <ion-scroll scrollX="true" scroll-avatar>
-          <ion-avatar>
-            <img
-              src="../../assets/imgs/logo.png"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-            <img
-              src="../../assets/imgs/1.png"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-            <img
-              src="../../assets/imgs/2.jpg"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-            <img
-              src="../../assets/imgs/3.png"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-            <img
-              src="../../assets/imgs/4.png"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-            <img
-              src="../../assets/imgs/6.png"
-              class="scroll-item"
-              style="border: 1px solid grey;"
-            />
-          </ion-avatar>
-        </ion-scroll>
-      </ion-item>
-    </ion-row>
- -->

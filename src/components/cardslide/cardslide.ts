@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { Events, NavController } from 'ionic-angular';
 import { DealsProvider } from '../../providers/deals/deals';
 
@@ -6,7 +6,7 @@ import { DealsProvider } from '../../providers/deals/deals';
   selector: 'cardslide',
   templateUrl: 'cardslide.html'
 })
-export class CardslideComponent {
+export class CardslideComponent implements OnInit{
 
   cards: any = [];
   @Input() items;
@@ -34,18 +34,28 @@ export class CardslideComponent {
     //     console.log(err)
     //   });
 
-    if (this.type == "store") {
-      this.dealService.getStoreLinks().subscribe(res => {
-        this.storelinks = res;
-      })
-    }
-    else if(this.type == "deals"){
-    // 
-    }
+
+    // if (this.type == "store") {
+    //   this.dealService.getStoreLinks().subscribe((res:any) => {
+    //     this.cards = res;
+    //     console.log(this.cards);
+    //   })
+    // }
+    // else if(this.type == "deals"){
+    // // 
+    // }
     
   }
 
   ionViewWillEnter() {
+    // if (this.type == "store") {
+    //   this.dealService.getStoreLinks().subscribe(res => {
+    //     this.storelinks = res;
+    //   })
+    // }
+    // else if(this.type == "deals"){
+    // // 
+    // }
   console.log("viewwillenter")
   }
 
@@ -57,6 +67,22 @@ export class CardslideComponent {
        cat:item.Category 
       }
     )
+  }
+
+  ngOnInit(){
+    console.log(this.type);
+      if (this.type == "store") {
+      this.dealService.getStoreLinks().subscribe((res:any) => {
+        this.cards = res.data;
+        console.log(this.cards);
+      })
+    }
+    else if(this.type == "deals"){
+      this.dealService.getStoreLinks().subscribe((res:any) => {
+      this.cards = res.data;
+      console.log(this.cards);
+    })
+    }
   }
 
 }

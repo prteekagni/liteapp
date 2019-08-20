@@ -91,7 +91,7 @@ export class HomePage {
     //   console.log(res);
     // })
 
-    this.http.get('https://reqres.in/api/users?page='+this.page).subscribe(res=> {
+    this.http.get('https://reqres.in/api/users?page='+this.page).subscribe((res:any)=> {
       this.catego = res.data;
       this.brands = res.data;
     })
@@ -154,7 +154,7 @@ ionViewWillLeave(){
     //   this.counter++;
     // }
     this.page++;
-    this.http.get('https://reqres.in/api/users?page=' + this.page).subscribe(res => {
+    this.http.get('https://reqres.in/api/users?page=' + this.page).subscribe((res:any) => {
       
       res.data.forEach(element => {
         this.catego.push(element)

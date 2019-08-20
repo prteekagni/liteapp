@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { GooglePlus } from '@ionic-native/google-plus';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { GooglePlus } from "@ionic-native/google-plus";
 
 /*
   Generated class for the AuthenticateProvider provider.
@@ -10,38 +10,29 @@ import { GooglePlus } from '@ionic-native/google-plus';
 */
 @Injectable()
 export class AuthenticateProvider {
-
-  constructor(
-    public http: HttpClient,
-    public googlePlus: GooglePlus
-  ) {
-    console.log('Hello AuthenticateProvider Provider');
+  constructor(public http: HttpClient, public googlePlus: GooglePlus) {
+    console.log("Hello AuthenticateProvider Provider");
   }
 
-
   checkUserLogin() {
-    if (localStorage.getItem('isLoggedIn') === "true") {
+    if (localStorage.getItem("isLoggedIn") === "true") {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
-    
   }
 
   setUserLogin() {
-    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem("isLoggedIn", "true");
   }
 
   setUserLogout() {
-    this.googlePlus.logout().then(res => {
-  
-    });
-    localStorage.setItem('isLoggedIn', '');
+    this.googlePlus.logout().then(res => {});
+    localStorage.setItem("isLoggedIn", "");
   }
 
- verifyOtp(data){
-    return this.http.post("/VerifyOtp",data);
+  verifyOtp(data) {
+    return this.http.post("/VerifyOtp", data);
   }
 
   sendOtp(data) {
@@ -49,11 +40,10 @@ export class AuthenticateProvider {
   }
 
   // register user
-  registerUser() { }
-  
-  // login user with email
-  loginUser() { }
-  
-  // 
+  registerUser() {}
 
+  // login user with email
+  loginUser() {}
+
+  //
 }

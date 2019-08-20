@@ -5,30 +5,28 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ng-container *ngIf="pCategories?.length > 0; then thenTemplate; else elseTemplate"></ng-container>
+  <ng-container
+    *ngIf="pCategories?.length > 0; then thenTemplate; else elseTemplate"
+  ></ng-container>
   <ng-template #thenTemplate>
-     <ion-row>
-    <ion-col col-6 *ngFor="let item of pCategories">
-      <ion-card class="roundedcorner bg-news" (click)="gotoProducts(item)" >
-        <ion-card-content>
-          <img src="../../assets/imgs/3.png" alt="" class="centered-image" />
-          <p style="
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: black;
-    font-size: 17px;
-">{{item.name}}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col col-6 *ngFor="let item of pCategories">
+        <ion-card class="roundedcorner bg-news" (click)="gotoProducts(item)">
+          <ion-card-content>
+            <img src="../../assets/imgs/3.png" alt="" class="centered-image" />
+            <p class="itemtext">
+              {{ item.name }}
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ng-template>
   <ng-template #elseTemplate>
-    <h4>no products </h4>
+    <h4>no products</h4>
   </ng-template>
-  
- 
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

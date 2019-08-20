@@ -1,9 +1,18 @@
-import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, ItemSliding, Platform, Events } from 'ionic-angular';
-import { AppMinimize } from '@ionic-native/app-minimize';
-import { HttpClient } from '@angular/common/http';
-import { DealsProvider } from '../../providers/deals/deals';
-
+import { Component, ViewChild, ElementRef, Renderer } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Content,
+  ItemSliding,
+  Platform,
+  Events
+} from "ionic-angular";
+import { AppMinimize } from "@ionic-native/app-minimize";
+import { HttpClient } from "@angular/common/http";
+import { DealsProvider } from "../../providers/deals/deals";
+import { map } from "rxjs/operators";
+import { filter } from "rxjs/operators";
 /**
  * Generated class for the DealsPage page.
  *
@@ -13,8 +22,8 @@ import { DealsProvider } from '../../providers/deals/deals';
 
 @IonicPage()
 @Component({
-  selector: 'page-deals',
-  templateUrl: 'deals.html',
+  selector: "page-deals",
+  templateUrl: "deals.html"
 })
 export class DealsPage {
   @ViewChild(Content) content: Content;
@@ -37,43 +46,22 @@ export class DealsPage {
     private events: Events,
     private http: HttpClient,
     private dealsprovider: DealsProvider
-  ) {
-  
-  }
+  ) {}
 
   ionViewWillEnter() {
     // this.mobile = true;
-   
-    
-    // this.dealsprovider.getDealsCategory().subscribe(res => {
-    //   this.deals = res;
-    //   // this.mfashion = this.deals.filter(x => x.Category == "MF");
-    // })
-    console.log('willenter')
 
-    this.deals = [
-      {
-        "id": "1",
-        "category": "Mobile",
-        "view":"slide"
-      },
-      {
-        "id": "2",
-        "category": "MensFashion",
-        "view":"square"
-      },
-      {
-        "id":"3",
-        "category": "WomenFashion",
-        "view":"square"
-      }
-    ]
-    
+    this.dealsprovider
+      .getDealsCategory()
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == "1")))
+      .subscribe((res: any) => {
+        this.deals = res;
+        // console.log(this.deals);
+      });
+    console.log("willenter");
   }
 
-  scrollHandler(event) {
-   
-  }
+  scrollHandler(event) {}
 
   ionViewDidLoad() {
     // let yOffset = document.getElementById("mobile").offsetTop;
@@ -85,8 +73,6 @@ export class DealsPage {
 
     // }, 1000)
 
-
-
     // let data = this.navParams.get('data');
     // if (data) {
 
@@ -95,14 +81,18 @@ export class DealsPage {
     // }
     // console.log(data);
 
-    console.log('ionViewDidLoad DealsPage');
+    console.log("ionViewDidLoad DealsPage");
   }
-  viewMore(data) {
-
-  }
+  viewMore(data) {}
 
   goTo() {
-    this.navCtrl.push('ProductlistPage');
+    this.navCtrl.push("ProductlistPage");
   }
 
+  doInfinite(event) {
+    console.log(event);
+    setTimeout(() => {
+      event.complete();
+    }, 1000);
+  }
 }

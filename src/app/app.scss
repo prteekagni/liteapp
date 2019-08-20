@@ -68,7 +68,7 @@ ion-content {
 
 .transparentBackground {
     background: transparent;
-    color: white;
+    color: orangered;
     transition: background-color 500ms linear;
 }
 
@@ -91,7 +91,7 @@ ion-content {
 }
 
 .addcolortitle {
-    color: orangered;
+    color: orangered !important;
 }
 
 ion-router-outlet>.ion-page {
@@ -127,4 +127,9 @@ ion-router-outlet>.ion-page {
     box-shadow: 0 8px 6px -6px black;
     display: block;
     width: 140px;
+}
+
+
+.toolbar-title-md{
+    color:orangered;
 }

@@ -4,8 +4,8 @@
   </ion-navbar>
 </ion-header>
 
- <ion-content (ionScroll)="scrollHandler($event)">
- <!--<ion-row>
+<ion-content (ionScroll)="scrollHandler($event)">
+  <!--<ion-row>
     <ion-col col-12>
        <slide [items]="deals"></slide>
     </ion-col>
@@ -64,9 +64,8 @@
 </ng-container>
 
 <!-- <square id="accessories" [items]="accessories"></square> -->
- 
 
-<!-- Mobile Accessories
+  <!-- Mobile Accessories
 <ng-container *ngIf="maccessories">
 <h3>Mobile Accessories</h3>
 <square id="mobileacc" [items]="maccesories" ></square>
@@ -82,28 +81,30 @@
 
 
 -->
- <ion-row *ngFor="let item of deals; let i = index" class="mycatego">
-      <ion-col col-12>
-           <ion-row>
-      <ion-col col-12 text-center>
-        <h2>{{item.category}}</h2>
-      </ion-col>
-    </ion-row>
-    <ng-container *ngIf="item.view != 'square'; else elseTemplate">
-      <cardslide [items]=item.category></cardslide>
+  <ion-row *ngFor="let item of deals; let i = index" class="mycatego">
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <h2>{{ item.Name }}</h2>
+        </ion-col>
+      </ion-row>
+      <!-- <ng-container *ngIf="item.view != 'square'; else elseTemplate">
+      <cardslide [items]=item.category [type]="deals"></cardslide>
     </ng-container>
     <ng-template #elseTemplate>
     <square id="womanfashion" [items]=item.category></square>
-    </ng-template>
-    
-    <ng-template #loading>
-      <ion-spinner name="bubbles"></ion-spinner>
-    </ng-template>
-      </ion-col>
-       <singleadd *ngIf="(i % 3) == 0"></singleadd>
-       
-    </ion-row>
- 
+    </ng-template> -->
 
+      <dealsgrid [items]="item.id"></dealsgrid>
 
-</ion-content> 
+      <ng-template #loading>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </ng-template>
+    </ion-col>
+    <singleadd *ngIf="i % 3 == 0"></singleadd>
+  </ion-row>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

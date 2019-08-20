@@ -48,15 +48,9 @@ export class ScrollDirective {
         let scrollTop: number = ev.scrollTop > 0 ? ev.scrollTop : 0;
         let scrolldiff: number = scrollTop - this.lastScrollPosition;
         this.lastScrollPosition = scrollTop;
-        // let newValue = this.lastValue + scrolldiff;
-        // newValue = Math.max(0, Math.min(newValue, this.config.maxValue));
-        // this.renderer.setStyle(this.element.nativeElement, this.config.cssProperty, `-${newValue}px`);
-        // console.log(this.element.nativeElement.children[0].children[0], "background", "white");
-        // this.lastValue = newValue;
         if (scrollTop !== 0) {
           if (scrolldiff < 0) {
             this.co = "orange";
-        
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[2].children[0],
               "notitle"
