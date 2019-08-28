@@ -25,7 +25,9 @@ export class DealsProvider {
   }
 
   getDealSubCategory(data) {
-    return;
+    return this.http.get(
+      "http://localhost:52044/api/category/getsubcategory/" + data
+    );
   }
 
   // get ads data
@@ -35,7 +37,7 @@ export class DealsProvider {
 
   // get Deals Categories
   getDealsCategory() {
-    return this.http.get("http://localhost:3000/dolphins");
+    return this.http.get("http://localhost:52044/api/category");
   }
 
   // get deals for category

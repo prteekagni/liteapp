@@ -94,15 +94,15 @@
       </ion-col>
     </ion-row>
     <cardslide [items]="sjdhfkdsjhf" [type]="'store'"></cardslide>
-    <ion-row *ngFor="let item of catego; let i = index" class="mycatego">
+    <ion-row *ngFor="let item of stores; let i = index" class="mycatego">
       <ion-col col-12>
         <ion-row>
           <ion-col col-12 text-center>
-            <h2>{{ item.first_name }}</h2>
+            <h2>{{ item.Name }}</h2>
           </ion-col>
         </ion-row>
         <ng-container>
-          <cardslide [items]="item.last_name" [type]="'store'"></cardslide>
+          <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid>
         </ng-container>
         <ng-template #loading>
           <ion-spinner name="bubbles"></ion-spinner>

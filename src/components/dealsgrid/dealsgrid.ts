@@ -15,19 +15,18 @@ import { Content } from "ionic-angular";
 export class DealsgridComponent implements OnInit {
   text: string;
   cards: any = [];
-  @Input() items: string;
+  @Input() items: any;
+  copyItem: any;
   @ViewChild(Content) content: Content;
 
-  constructor(private dealService: DealsProvider) {
-    console.log("Hello DealsgridComponent Component");
-    this.text = "Hello World";
-  }
+  constructor(private dealService: DealsProvider) {}
 
   ngOnInit() {
-    console.log(this.items);
-
-    this.dealService.getStoreLinks().subscribe((res: any) => {
-      this.cards = res.data;
+    this.copyItem = this.items;
+    console.log(this.copyItem);
+    this.dealService.getDealSubCategory(this.items.ID).subscribe((res: any) => {
+      this.cards = res;
+      // console.log(this.cards.length);
     });
   }
 }

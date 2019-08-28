@@ -25,7 +25,10 @@
     speed="800"
   >
     <ion-slide>
-      <ion-card style="border-radius: 10px;" *ngFor="let item of pushNotification">
+      <ion-card
+        style="border-radius: 10px;"
+        *ngFor="let item of pushNotification"
+      >
         <ion-card-content style=" padding:5px 10px;">
           <img
             src="../../assets/b.jpg"
@@ -73,48 +76,51 @@
     </ion-slide>
     <ion-slide>
       <ion-list>
-   <ion-card style="border-radius: 10px;" *ngFor="let item of localNotification">
-        <ion-card-content style=" padding:5px 10px;">
-          <img
-            src="../../assets/imgs/logo.png"
-            style="width: 140px;
+        <ion-card
+          style="border-radius: 10px;"
+          *ngFor="let item of localNotification"
+        >
+          <ion-card-content style=" padding:5px 10px;">
+            <img
+              src="../../assets/imgs/logo.png"
+              style="width: 140px;
     margin: 8px auto; -webkit-box-shadow: 0 8px 6px -6px black;
         -moz-box-shadow: 0 8px 6px -6px black;
         box-shadow: 0 8px 6px -6px black;"
-          />
-          <p style="">
-            The most popular industrial group ever, and largely responsible for
-            bringing the music to a mass audience.
-          </p>
-        </ion-card-content>
-        <ion-row no-padding>
-          <ion-col>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="save()"
-            >
-              <ion-icon name="star"></ion-icon>
-              Favorite
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name="musical-notes"></ion-icon>
-              Buy
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name="share-alt"></ion-icon>
-              Share
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
+            />
+            <p style="">
+              The most popular industrial group ever, and largely responsible
+              for bringing the music to a mass audience.
+            </p>
+          </ion-card-content>
+          <ion-row no-padding>
+            <ion-col>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="save()"
+              >
+                <ion-icon name="star"></ion-icon>
+                Favorite
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button clear small color="danger" icon-start>
+                <ion-icon name="musical-notes"></ion-icon>
+                Buy
+              </button>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button clear small color="danger" icon-start>
+                <ion-icon name="share-alt"></ion-icon>
+                Share
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
       </ion-list>
     </ion-slide>
   </ion-slides>

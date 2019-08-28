@@ -5,82 +5,6 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollHandler($event)">
-  <!--<ion-row>
-    <ion-col col-12>
-       <slide [items]="deals"></slide>
-    </ion-col>
-  </ion-row>
-
-<ng-template #loading>
- <ion-spinner name="bubbles"></ion-spinner>
-</ng-template>
-
-<!-- mobile 
- 
-<h3 id="mobiles">Mobiles</h3>
-<ng-container>
-  <cardslide [items]="mfashion"></cardslide>
-</ng-container>
-
-<!-- men's fashion 
-<h3>Men's Fashion</h3>
-<ng-container *ngIf="mfashion">
-<square (clickeve)="goTo()" [items]="mfashion"></square>
-<ng-container *ngTemplateOutlet="loading"></ng-container>
-</ng-container>
-
-<singleadd></singleadd>
-
-<ng-container *ngIf="wfashion">
-<h3>Women's Fashion</h3>
-<square id="womanfashion" [items]="wfashion"></square>
-</ng-container>
-
-
-  
-
-<ng-container *ngIf="gadgets">
-  <h3>Gadget's Zone</h3>
-<square id="gadgets" [items]="gadgets"></square>
-</ng-container>
-
-
-
-<h3>Super Saver Deals</h3>
-
-
-<ng-container *ngIf="dealsforyou">
-
-  <h3>Deals for you</h3>
-<cardslide id="dealsforyou" [items]="dealsforyou"></cardslide>
-</ng-container>
-
-
-
-<ng-container *ngIf="accessories">
-
-<h3>Accessories</h3>
-<cardslide [items]="accessories"></cardslide>
-</ng-container>
-
-<!-- <square id="accessories" [items]="accessories"></square> -->
-
-  <!-- Mobile Accessories
-<ng-container *ngIf="maccessories">
-<h3>Mobile Accessories</h3>
-<square id="mobileacc" [items]="maccesories" ></square>
-</ng-container>
-
-<!-- Flat 50 
-<ng-container *ngIf="flat50">
-<h3>Flat 50%</h3>
-<cardslide id="flat50" [items]="flat50"></cardslide>
-
-</ng-container>
-
-
-
--->
   <ion-row *ngFor="let item of deals; let i = index" class="mycatego">
     <ion-col col-12>
       <ion-row>
@@ -88,22 +12,13 @@
           <h2>{{ item.Name }}</h2>
         </ion-col>
       </ion-row>
-      <!-- <ng-container *ngIf="item.view != 'square'; else elseTemplate">
-      <cardslide [items]=item.category [type]="deals"></cardslide>
-    </ng-container>
-    <ng-template #elseTemplate>
-    <square id="womanfashion" [items]=item.category></square>
-    </ng-template> -->
-
-      <dealsgrid [items]="item.id"></dealsgrid>
-
+      <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid>
       <ng-template #loading>
         <ion-spinner name="bubbles"></ion-spinner>
       </ng-template>
     </ion-col>
     <singleadd *ngIf="i % 3 == 0"></singleadd>
   </ion-row>
-
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

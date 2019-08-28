@@ -55,8 +55,8 @@ export class DealsPage {
       .getDealsCategory()
       .pipe(map((res: any) => res.filter(resp => resp.CatType == "1")))
       .subscribe((res: any) => {
+        console.log(res);
         this.deals = res;
-        // console.log(this.deals);
       });
     console.log("willenter");
   }
@@ -64,25 +64,9 @@ export class DealsPage {
   scrollHandler(event) {}
 
   ionViewDidLoad() {
-    // let yOffset = document.getElementById("mobile").offsetTop;
-    // console.log(yOffset)
-
-    // setTimeout(() => {
-    //   // this.content._scrollContent.nativeElement.scrollTo(0,yOffset
-    //   //                                                      ,6000)
-
-    // }, 1000)
-
-    // let data = this.navParams.get('data');
-    // if (data) {
-
-    //   let yOffset = document.getElementById("mobile").offsetTop;
-
-    // }
-    // console.log(data);
-
     console.log("ionViewDidLoad DealsPage");
   }
+
   viewMore(data) {}
 
   goTo() {
