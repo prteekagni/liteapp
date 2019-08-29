@@ -126,6 +126,6 @@
         <preference name="GoogleAndroidClientId" value="340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com" />
     </platform>
     <platform name="android">
-        <resource-file src="google-services.json" target="google-services.json" />
+        <resource-file src="google-services.json" target="app/google-services.json" />
     </platform>
 </widget>

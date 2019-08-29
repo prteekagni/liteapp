@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list [virtualScroll]="newItem" approxItemHeight="180px">
     <ion-item *virtualItem="let item">
-      <ion-card style="">
+      <ion-card [ngClass]="{ favcolor: item.isMatched }">
         <ion-card-content>
           <ion-row>
             <ion-col col-8>

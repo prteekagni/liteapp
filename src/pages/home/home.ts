@@ -14,11 +14,30 @@ import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
 import { HttpClient } from "@angular/common/http";
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject
+} from "@ionic-native/file-transfer";
+import { File } from "@ionic-native/file";
+import { normalizeURL } from "ionic-angular";
+import { StorageProvider } from "../../providers/storage/storage";
 
 const animationsOptions = {
   animation: "ios-transition",
   duration: 1000
 };
+
+const myimages = [
+  {
+    name: "First",
+    path: "https://appimageselinfinito.s3.us-east-2.amazonaws.com/Ajio.png"
+  },
+  {
+    name: "Second",
+    path: "https://appimageselinfinito.s3.us-east-2.amazonaws.com/facebook.png"
+  }
+];
 
 @IonicPage()
 @Component({
@@ -48,7 +67,9 @@ export class HomePage {
   adsData: any = [];
   mainslide: any = [];
   brands: any = [];
-
+  imgpath: any;
+  counts: any = [];
+  images: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,10 +79,14 @@ export class HomePage {
     private modalController: ModalController,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
     private dealService: DealsProvider,
-    private http: HttpClient
+    private http: HttpClient,
+    private transfer: FileTransfer,
+    private file: File,
+    private storage: StorageProvider
   ) {
     platform.ready().then(() => {
       this.isConnected = this.sharedService.checkNetworkStatus();
+      this.checkDirectory();
     });
 
     platform.resume.subscribe(() => {
@@ -89,10 +114,7 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.dealService.getDealsCategory().subscribe(res => {
-      this.stores = res;
-    });
-
+    this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {
         this.isConnected = true;
@@ -133,4 +155,86 @@ export class HomePage {
       event.complete();
     }, 1000);
   }
+
+  downloadOnMemory(data) {
+    console.log(data);
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    const url = encodeURI(data.path);
+    const targetPath =
+      this.file.externalDataDirectory + "Videos/" + data.name + ".png";
+    fileTransfer.download(url, targetPath, true).then(
+      entry => {
+        // console.log(
+        //   "download complete: " +
+        //     (<any>window).Ionic.WebView.convertFileSrc(entry.toURL())
+        // );
+        var a = (<any>window).Ionic.WebView.convertFileSrc(entry.toURL());
+        localStorage.setItem("key", a);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  checkDirectory() {
+    this.file
+      .checkDir(this.file.externalDataDirectory, "Videos")
+      .then((res: any) => {
+        if (res) {
+          console.log("Directory exists");
+          myimages.forEach(element => {
+            this.downloadOnMemory(element);
+          });
+        } else {
+          this.file
+            .createDir(this.file.externalDataDirectory, "Videos", false)
+            .then(() => {
+              console.log("Directory created successfully");
+              myimages.forEach(element => {
+                this.downloadOnMemory(element);
+              });
+            })
+            .catch(() => {
+              console.log("Failed to create directory");
+            });
+        }
+      })
+      .catch(err => console.log("Directory doesn't exist"));
+  }
+
+  // readFile() {
+  //   this.file
+  //     .listDir(this.file.externalDataDirectory, "Videos")
+  //     .then(data => {
+  //       console.log(data[0]);
+  //       this.counts = data.length;
+  //       const src = data[0].toInternalURL();
+  //       this.file.resolveLocalFilesystemUrl(src).then(
+  //         data => {
+  //           this.imgpath = data.toURL();
+  //           this.imgpath = (<any>window).Ionic.WebView.convertFileSrc(
+  //             this.imgpath
+  //           );
+  //           // this.storage.addImages().then(
+  //           //   res => {
+  //           //     console.log("ho gaya");
+  //           //   },
+  //           //   err => {
+  //           //     console.error("nahi hua");
+  //           //   }
+  //           // );
+  //           console.log(this.imgpath);
+  //         },
+  //         error => {
+  //           console.log("File path error");
+  //         }
+  //       );
+  //     })
+  //     .catch(err => console.log("Directory doesnt exist"));
+  //   this.dealService.getDealsCategory().subscribe(res => {
+  //     this.stores = res;
+  //   });
+  // }
 }

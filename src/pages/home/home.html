@@ -22,6 +22,8 @@
 </ion-header>
 
 <ion-content #pageContent fullscreen>
+  <img [src]="imgpath" alt="" />
+
   <!-- <div class="header-image"></div> -->
   <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
     <ion-slides
@@ -79,15 +81,6 @@
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>
-
-    <!-- Ads -->
-    <!-- <ion-row>
-      <ion-col col-12>
-        <slide [items]="mainslide"></slide>
-      </ion-col>
-    </ion-row> -->
-
-    <!-- Food -->
     <ion-row>
       <ion-col col-12 text-center>
         <h2>Food</h2>

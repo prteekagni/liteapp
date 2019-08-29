@@ -29,6 +29,8 @@ export class ProductlistPage {
   lnotification: any = [];
   items;
   newItem: any = [];
+  saveItem: any = [];
+  updatedList;
 
   constructor(
     public navCtrl: NavController,
@@ -66,91 +68,18 @@ export class ProductlistPage {
       .get("http://dummy.restapiexample.com/api/v1/employees")
       .subscribe(res => {
         this.newItem = res;
+        this.storageService.getDeals().then((res: any) => {
+          this.saveItem = res;
+          var same = this.newItem
+            .filter(f => {
+              return this.saveItem.find(ff => ff.id === f.id);
+            })
+            .map(m => {
+              return (m.isMatched = true);
+            });
+          console.log(this.newItem);
+        });
       });
-
-    //  this.newItem = [
-    //                    {
-    //                      "id": "1",
-    //                      "title": "Avenger Mobile Cover",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "lorem12",
-    //                      "category": "fashion",
-    //                      "subcategory": "mfashion",
-    //                      "coupon?": "AA8756"
-    //                    },
-    //                    {
-    //                      "id": "2",
-    //                      "title": "Perfect Gift",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Addidas Shoes and Accessories",
-    //                      "category": "fashion",
-    //                      "brand": "Addidas",
-    //                      "coupon?": "AA8756"
-    //                    },
-    //                    {
-    //                      "id": "3",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //     },
-    //                     {
-    //                      "id": "4",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //                     }
-    //     ,
-    //                      {
-    //                      "id": "5",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //     },
-    //                       {
-    //                      "id": "6",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //                    },
-    //                     {
-    //                      "id": "7",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //     },
-    //                      {
-    //                      "id": "8",
-    //                      "title": "Super Product",
-    //                      "link": "https://amazon.in",
-    //                      "image": "https://elinfinitoindia.in/images/",
-    //                      "description": "Get 50% off on Nike Shoes and Accessories",
-    //                      "category": "electronic",
-    //                      "brand": "Nike",
-    //                      "coupon?": "AA8756"
-    //                    }
-    //                  ]
   }
 
   ionViewDidLoad() {
@@ -168,6 +97,13 @@ export class ProductlistPage {
     this.storageService.addDeals(element).then(res => {
       if (res == true) {
         this.showToast("Item added!");
+        this.newItem
+          .filter(f => {
+            return f.id == element.id;
+          })
+          .map(m => {
+            m.isMatched = true;
+          });
       } else {
         this.showToast("Already in the list");
       }
