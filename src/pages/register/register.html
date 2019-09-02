@@ -15,11 +15,16 @@
   </ion-row>
   <ion-row text-center>
     <ion-col col-10 offset-1>
-      <form #heroForm="ngForm">
+      <form #heroForm="ngForm" (ngSubmit)="registerUser(herForm.value)">
         <ion-item>
           <ion-icon name="call"></ion-icon>
           <ion-label stacked>Name</ion-label>
-          <ion-input type="text" required name="Name"></ion-input>
+          <ion-input
+            type="text"
+            required
+            name="Name"
+            (ngModel)="(register.Name)"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-icon name="call"></ion-icon>
@@ -27,31 +32,37 @@
           <ion-input
             type="number"
             required
-            name="PhoneNo"
+            name="Mobile"
             minlength="10"
+            (ngModel)="(register.Mobile)"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-icon name="call"></ion-icon>
           <ion-label stacked>Email</ion-label>
-          <ion-input type="email" required name="Email"></ion-input>
+          <ion-input
+            type="email"
+            required
+            name="Email"
+            Mobile
+            (ngModel)="(register.Email)"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Enter Password</ion-label>
-          <ion-input type="password" required name="password"></ion-input>
+          <ion-input
+            type="password"
+            required
+            name="Password"
+            (ngModel)="(register.Password)"
+          ></ion-input>
         </ion-item>
+        <ion-col col-6 offset-3>
+          <button ion-button type="submit" block class="submitbutton">
+            Login
+          </button>
+        </ion-col>
       </form>
-    </ion-col>
-    <ion-col col-6 offset-3>
-      <button
-        ion-button
-        type="submit"
-        block
-        class="submitbutton"
-        (click)="loginWithEmail()"
-      >
-        Login
-      </button>
     </ion-col>
   </ion-row>
 </ion-content>

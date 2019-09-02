@@ -16,7 +16,6 @@
       </ion-col>
     </ion-row>
 
-
     <ion-row text-center>
       <ion-col col-10 offset-1>
         <form #loginForm="ngForm">
@@ -61,12 +60,17 @@
         <span (click)="forgotPassword()">Forgot Password?</span>
       </ion-col>
     </ion-row>
-        <ion-row text-center>
-          <ion-col col-12 text-center>
-            Singin using 
-          </ion-col>
+    <ion-row text-center>
       <ion-col col-12 text-center>
-          <img src="../../assets/google.png" alt="" style="width:30px" />
+        Singin using
+      </ion-col>
+      <ion-col col-12 text-center>
+        <img
+          src="../../assets/google.png"
+          alt=""
+          style="width:30px"
+          (click)="loginWithGoogle()"
+        />
       </ion-col>
     </ion-row>
     <ion-row text-center style="border-top:1px solid lightgrey;">

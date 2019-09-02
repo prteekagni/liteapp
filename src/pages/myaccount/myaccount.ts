@@ -10,7 +10,7 @@ import { AuthenticateProvider } from "../../providers/authenticate/authenticate"
 })
 export class MyaccountPage {
   isLoggedIn: boolean;
-
+  login;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -40,19 +40,19 @@ export class MyaccountPage {
     this.navCtrl.push("RegisterPage");
   }
 
-  loginWithGoogle() {
-    this.googlePlus
-      .login({
-        webClientId:
-          "340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com"
-      })
-      .then(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-  }
+  // loginWithGoogle() {
+  //   this.googlePlus
+  //     .login({
+  //       webClientId:
+  //         "340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com"
+  //     })
+  //     .then(
+  //       res => {
+  //         console.log(res);
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  // }
 }

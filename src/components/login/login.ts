@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
-import { Events, NavController } from 'ionic-angular';
-import { GooglePlus } from '@ionic-native/google-plus';
+import { Component } from "@angular/core";
+import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
+import { Events, NavController } from "ionic-angular";
+import { GooglePlus } from "@ionic-native/google-plus";
 
 /**
  * Generated class for the LoginComponent component.
@@ -10,11 +10,10 @@ import { GooglePlus } from '@ionic-native/google-plus';
  * Components.
  */
 @Component({
-  selector: 'login',
-  templateUrl: 'login.html'
+  selector: "login",
+  templateUrl: "login.html"
 })
 export class LoginComponent {
-
   text: string;
 
   constructor(
@@ -22,40 +21,48 @@ export class LoginComponent {
     private events: Events,
     private navCtrl: NavController,
     private googlePlus: GooglePlus
-   
   ) {
-    console.log('Hello LoginComponent Component');
-    this.text = 'Hello World';
+    console.log("Hello LoginComponent Component");
+    this.text = "Hello World";
   }
-
-
 
   login() {
     this.authService.setUserLogin();
-    this.events.publish('login', true);
-
+    this.events.publish("login", true);
   }
 
   forgotPassword() {
-    this.navCtrl.push('ForgotpassPage');
-  }
-  
-
-  gotoRegister(){
-    this.navCtrl.push('RegisterPage');
-  }
-
-
- loginWithG() {
-    this.googlePlus.login({
-      'webClientId': '340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com'
-    }).then((res) => {
+    this.googlePlus.logout().then(res => {
       console.log(res);
-    }, (err) => {
-      console.log(err);
     });
-    
- }
-  
-  
+
+    // this.navCtrl.push("ForgotpassPage");
+  }
+
+  gotoRegister() {
+    this.navCtrl.push("RegisterPage");
+  }
+
+  loginWithGoogle() {
+    // this.googlePlus
+    //   .login({
+    //     webClientId:
+    //       "340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com"
+    //   })
+    //   .then(
+    //     res => {
+    //       this.authService.setUserLogin();
+    //       this.events.publish("login", true);
+    //       console.log(res);
+    //     },
+    //     err => {
+    //       alert(err);
+    //     }
+    //   );
+
+    this.googlePlus
+      .login({})
+      .then(res => console.log(res))
+      .catch(err => alert(err));
+  }
 }

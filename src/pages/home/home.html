@@ -57,6 +57,9 @@
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
   <ng-template #connected class="main-content">
+    <button (click)="add()">Add</button>
+    <button (click)="remove()">remove</button>
+    <share></share>
     <!-- top shops -->
     <cardgrid></cardgrid>
 

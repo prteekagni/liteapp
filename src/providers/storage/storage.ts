@@ -51,6 +51,14 @@ export class StorageProvider {
     return this.storage.get(DEALS_KEY);
   }
 
+  getImages(): Promise<any[]> {
+    return this.storage.get(I_KEY);
+  }
+
+  removeImages(): Promise<any> {
+    return this.storage.set(I_KEY, []);
+  }
+
   deleteDeals(id: number): Promise<deals> {
     return this.storage.get(DEALS_KEY).then((items: deals[]) => {
       if (!items || items.length === 0) {

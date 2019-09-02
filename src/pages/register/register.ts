@@ -21,6 +21,7 @@ import { SharedProvider } from "../../providers/shared/shared";
   templateUrl: "register.html"
 })
 export class RegisterPage {
+  register;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -51,5 +52,9 @@ export class RegisterPage {
     // var eventMapObject = {}
     // eventMapObject["name"] = "Registration";
     this.sharedService.registerEventTrack();
+  }
+
+  registerUser(data) {
+    console.log(data);
   }
 }
