@@ -6,7 +6,9 @@ import {
   Content,
   ItemSliding,
   Platform,
-  Events
+  Events,
+  Searchbar,
+  Keyboard
 } from "ionic-angular";
 import { AppMinimize } from "@ionic-native/app-minimize";
 import { HttpClient } from "@angular/common/http";
@@ -27,11 +29,13 @@ import { filter } from "rxjs/operators";
 })
 export class DealsPage {
   @ViewChild(Content) content: Content;
+  @ViewChild(Searchbar) searchbar: Searchbar;
   deals;
   items;
   subcategory: any = [];
   mobiless;
   mfashion;
+  copyItem;
 
   public mensf;
   public mobile: boolean;
@@ -45,19 +49,24 @@ export class DealsPage {
     private appMinimize: AppMinimize,
     private events: Events,
     private http: HttpClient,
-    private dealsprovider: DealsProvider
+    private dealsprovider: DealsProvider,
+    public keyboard: Keyboard
   ) {}
 
   ionViewWillEnter() {
     // this.mobile = true;
 
-    this.dealsprovider
-      .getDealsCategory()
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == "1")))
-      .subscribe((res: any) => {
-        console.log(res);
-        this.deals = res;
-      });
+    // this.dealsprovider
+    //   .getDealsCategory()
+    //   .pipe(map((res: any) => res.filter(resp => resp.CatType == "1")))
+    //   .subscribe((res: any) => {
+    //     console.log(res);
+    //     this.deals = res;
+    //   });
+
+    this.http
+      .get("http://dummy.restapiexample.com/api/v1/employees")
+      .subscribe((res: any) => (this.deals = res));
     console.log("willenter");
   }
 
@@ -65,6 +74,30 @@ export class DealsPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad DealsPage");
+  }
+
+  onInput(event) {
+    this.deals = this.copyItem;
+    const val = event.target.value;
+    console.log(val);
+    if (val && val.trim() != "") {
+      this.deals = this.deals.filter(item => {
+        return item.employee_name.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
+    this.content
+      .scrollToTop()
+      .then(res => console.log(res), err => console.warn(err));
+  }
+
+  setFocus() {
+    setTimeout(() => {
+      if (!this.searchbar._isFocus) {
+        this.searchbar.setFocus();
+      } else {
+        this.setFocus();
+      }
+    }, 1000);
   }
 
   viewMore(data) {}

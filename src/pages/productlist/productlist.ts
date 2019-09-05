@@ -9,13 +9,15 @@ import {
   Item,
   AlertController,
   ActionSheetController,
-  ModalController
+  ModalController,
+  Searchbar
 } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
 import { deals } from "../../models/deal";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { SharedProvider } from "../../providers/shared/shared";
 import { HttpClient } from "@angular/common/http";
+import { ElementInstructionMap } from "@angular/animations/browser/src/dsl/element_instruction_map";
 
 @IonicPage()
 @Component({
@@ -24,6 +26,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ProductlistPage {
   @ViewChild(Content) _content: Content;
+  @ViewChild(Searchbar) searchbar: Searchbar;
 
   de: any = [];
   lnotification: any = [];
@@ -31,6 +34,9 @@ export class ProductlistPage {
   newItem: any = [];
   saveItem: any = [];
   updatedList;
+  searchTerm: string;
+  copyItem: any = [];
+  searchBoxOpened: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -68,18 +74,19 @@ export class ProductlistPage {
       .get("http://dummy.restapiexample.com/api/v1/employees")
       .subscribe(res => {
         this.newItem = res;
-        this.storageService.getDeals().then((res: any) => {
-          this.saveItem = res;
-          var same = this.newItem
-            .filter(f => {
-              return this.saveItem.find(ff => ff.id === f.id);
-            })
-            .map(m => {
-              return (m.isMatched = true);
-            });
-          console.log(this.newItem);
-        });
+        this.copyItem = this.newItem;
+        // this.storageService.getDeals().then((res: any) => {
+        //   this.saveItem = res;
+        //   var same = this.newItem
+        //     .filter(f => {
+        //       return this.saveItem.find(ff => ff.id === f.id);
+        //     })
+        //     .map(m => {
+        //       return (m.isMatched = true);
+        //     });
+        console.log(this.newItem);
       });
+    // });
   }
 
   ionViewDidLoad() {
@@ -89,6 +96,30 @@ export class ProductlistPage {
     //     element.time = "";
     //   });
     // });
+  }
+
+  onInput(event) {
+    this.newItem = this.copyItem;
+    const val = event.target.value;
+    console.log(val);
+    if (val && val.trim() != "") {
+      this.newItem = this.newItem.filter(item => {
+        return item.employee_name.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
+    this._content
+      .scrollToTop()
+      .then(res => console.log(res), err => console.warn(err));
+  }
+
+  setFocus() {
+    setTimeout(() => {
+      if (!this.searchbar._isFocus) {
+        this.searchbar.setFocus();
+      } else {
+        this.setFocus();
+      }
+    }, 1000);
   }
 
   ionViewWillEnter() {}
