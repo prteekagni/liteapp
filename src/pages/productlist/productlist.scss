@@ -41,11 +41,17 @@ page-productlist {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: black;
+    color: rgb(75, 67, 67);
     font-size: 17px;
   }
 
-  .favcolor {
-    background-color: black;
+  ion-card :after {
+    background: url(../../assets/bgfav.jpg);
+    opacity: 0.25;
+  }
+
+  .secondclass {
+    background: url(../../assets/bgfav.jpg);
+    background-size: cover;
   }
 }

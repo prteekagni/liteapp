@@ -2,32 +2,30 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { GooglePlus } from "@ionic-native/google-plus";
 
-/*
-  Generated class for the AuthenticateProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthenticateProvider {
-  constructor(public http: HttpClient, public googlePlus: GooglePlus) {
-    console.log("Hello AuthenticateProvider Provider");
-  }
+  user;
+  constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      return true;
-    } else {
-      return false;
-    }
+    console.log(JSON.parse(localStorage.getItem("User")));
+    return (
+      localStorage.getItem("isLoggedIn") === "true" &&
+      JSON.parse(localStorage.getItem("User"))
+    );
+    // return true;
   }
 
   setUserLogin() {
     localStorage.setItem("isLoggedIn", "true");
   }
 
+  setUserDetails(user) {
+    localStorage.setItem("User", JSON.stringify(user));
+  }
+
   setUserLogout() {
-    this.googlePlus.logout().then(res => {});
+    // this.googlePlus.logout().then(res => {});
     localStorage.setItem("isLoggedIn", "");
   }
 

@@ -34,7 +34,7 @@ export class ProfileComponent implements AfterViewInit {
     email: "prateek",
     mobile: "99905"
   };
- 
+
   constructor(
     private authService: AuthenticateProvider,
     private events: Events,
@@ -57,7 +57,6 @@ export class ProfileComponent implements AfterViewInit {
     // );
 
     // this.profileForm.disable();
-
   }
 
   ionViewWillLoad() {}
@@ -116,7 +115,7 @@ export class ProfileComponent implements AfterViewInit {
 
   // }
 
-  updateProfile(data:NgForm) {
+  updateProfile(data: NgForm) {
     //   if (this.profileForm.get["name"] == data.name) {
     //     console.log(data.name);
     //   }
@@ -124,14 +123,12 @@ export class ProfileComponent implements AfterViewInit {
     //     console.log(data.name)
     //   }
     // }
-let formControls = data.controls;
-if (formControls.name.dirty) {
-  console.log("It's dirty");
-  console.log(data.value);
-  
-}
-else {
-  console.log("not dirty");
-}
+    let formControls = data.controls;
+    if (formControls.name.dirty) {
+      console.log("It's dirty");
+      console.log(data.value);
+    } else {
+      console.log("not dirty");
+    }
   }
 }

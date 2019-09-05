@@ -15,18 +15,17 @@ import { GooglePlus } from "@ionic-native/google-plus";
 })
 export class LoginComponent {
   text: string;
+  login: any;
 
   constructor(
     private authService: AuthenticateProvider,
     private events: Events,
     private navCtrl: NavController,
     private googlePlus: GooglePlus
-  ) {
-    console.log("Hello LoginComponent Component");
-    this.text = "Hello World";
-  }
+  ) {}
 
-  login() {
+  onSubmit(data) {
+    console.log(data);
     this.authService.setUserLogin();
     this.events.publish("login", true);
   }
@@ -62,7 +61,10 @@ export class LoginComponent {
 
     this.googlePlus
       .login({})
-      .then(res => console.log(res))
+      .then((res: any) => {
+        console.log(res);
+        this.authService.setUserDetails(res);
+      })
       .catch(err => alert(err));
   }
 }

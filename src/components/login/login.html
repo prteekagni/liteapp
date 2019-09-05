@@ -18,7 +18,7 @@
 
     <ion-row text-center>
       <ion-col col-10 offset-1>
-        <form #loginForm="ngForm">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
           <ion-item>
             <ion-icon name="call"></ion-icon>
             <ion-label stacked>Email</ion-label>
@@ -26,8 +26,7 @@
               type="email"
               required
               name="Username"
-              [(ngModel)]="login.Username"
-              #Username="ngModel"
+              (ngModel)="(login.Username)"
             ></ion-input>
           </ion-item>
           <ion-item>
@@ -35,25 +34,24 @@
             <ion-input
               type="password"
               required
-              name="password"
-              [(ngModel)]="login.Password"
-              #Password="ngModel"
+              name="Password"
+              (ngModel)="(login.Password)"
             ></ion-input>
+          </ion-item>
+          <ion-item>
+            <button
+              ion-button
+              type="submit"
+              block
+              class="submitbutton"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </button>
           </ion-item>
         </form>
       </ion-col>
-      <ion-col col-6 offset-3>
-        <button
-          ion-button
-          type="submit"
-          block
-          class="submitbutton"
-          [disabled]="loginForm.invalid"
-          (click)="loginWithEmail()"
-        >
-          Login
-        </button>
-      </ion-col>
+      <ion-col col-6 offset-3> </ion-col>
     </ion-row>
     <ion-row text-center class="forgotbutton">
       <ion-col>

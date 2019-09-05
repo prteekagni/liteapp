@@ -15,16 +15,16 @@
 // automatically applied to the <body> element in the app.
 
 ion-content {
-    // background: url('../assets/ba.jpg');
-    // background: url(../assets/ba.jpg);
-    // background-repeat: no-repeat;
-    // background-attachment: fixed;
-    // background-position: center;
-    // background-size: cover;
+  // background: url('../assets/ba.jpg');
+  // background: url(../assets/ba.jpg);
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // background-position: center;
+  // background-size: cover;
 }
 
 .header-md::after {
-    background-image: none !important;
+  background-image: none !important;
 }
 
 // .modal-wrapper {
@@ -45,57 +45,58 @@ ion-content {
 // }
 
 .mymodal {
-    position: absolute;
-    overflow: hidden;
-    /* max-width: 282px; */
-    border-radius: 2px;
-    width: 100vw;
-    height: 50vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: 0;
-    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-    background-color: #fafafa;
+  position: absolute;
+  overflow: hidden;
+  /* max-width: 282px; */
+  border-radius: 2px;
+  width: 100vw;
+  height: 50vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 0;
+  -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+  background-color: #fafafa;
 }
 
 .addBackground {
-    background: white;
-    transition: background-color 500ms linear;
+  background: white;
+  transition: background-color 500ms linear;
 }
 
 .transparentBackground {
-    background: transparent;
-    color: orangered;
-    transition: background-color 500ms linear;
+  background: transparent;
+  color: orangered;
+  transition: background-color 500ms linear;
+  opacity: 0.8;
 }
 
 .notitle {
-    opacity: 0;
+  opacity: 0;
 }
 
 .item-md.item-input.item-input-has-focus .item-inner,
 .item-md.item-input.input-has-focus .item-inner {
-    border-bottom-color: orangered;
-    -webkit-box-shadow: inset 0 -1px 0 0 orangered;
-    box-shadow: inset 0 -1px 0 0 orangered;
+  border-bottom-color: orangered;
+  -webkit-box-shadow: inset 0 -1px 0 0 orangered;
+  box-shadow: inset 0 -1px 0 0 orangered;
 }
 
 .list-md .item-input.item-input-has-focus:last-child,
 .list-md .item-input.input-has-focus:last-child {
-    border-bottom-color: orangered;
-    -webkit-box-shadow: inset 0 -1px 0 0 orangered;
-    box-shadow: inset 0 -1px 0 0 orangered;
+  border-bottom-color: orangered;
+  -webkit-box-shadow: inset 0 -1px 0 0 orangered;
+  box-shadow: inset 0 -1px 0 0 orangered;
 }
 
 .addcolortitle {
-    color: orangered !important;
+  color: orangered !important;
 }
 
-ion-router-outlet>.ion-page {
-    animation: fadeIn 0.3s 1 forwards;
+ion-router-outlet > .ion-page {
+  animation: fadeIn 0.3s 1 forwards;
 }
 
 // .tabs-md .tab-button[aria-selected=true] {
@@ -103,33 +104,32 @@ ion-router-outlet>.ion-page {
 // }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translate3d(0, 5vh, 0);
-    }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 5vh, 0);
+  }
 
-    100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .bar-button-default-md,
 .bar-button-clear-md-default,
 .bar-button-md-default {
-    color: orangered;
+  color: orangered;
 }
 
 .centerboximage {
-    margin: 8px auto;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
-    display: block;
-    width: 140px;
+  margin: 8px auto;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+  display: block;
+  width: 140px;
 }
 
-
-.toolbar-title-md{
-    color:orangered;
+.toolbar-title-md {
+  color: white;
 }

@@ -36,11 +36,7 @@
       loop="true"
     >
       <ion-slide *ngFor="let item of mainslide">
-        <img
-          [src]="item.image"
-          alt="../../assets/logo.png"
-          class="header-image"
-        />
+        <img src="../../assets/b.jpg" alt="" class="header-image" />
       </ion-slide>
     </ion-slides>
   </ng-container>
@@ -57,9 +53,6 @@
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
   <ng-template #connected class="main-content">
-    <button (click)="add()">Add</button>
-    <button (click)="remove()">remove</button>
-    <share></share>
     <!-- top shops -->
     <cardgrid></cardgrid>
 
@@ -84,21 +77,28 @@
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-12 text-center>
         <h2>Food</h2>
       </ion-col>
-    </ion-row>
-    <cardslide [items]="sjdhfkdsjhf" [type]="'store'"></cardslide>
-    <ion-row *ngFor="let item of stores; let i = index" class="mycatego">
+    </ion-row> -->
+
+    <ion-row *ngFor="let item of store; let i = index" class="mycatego">
       <ion-col col-12>
+        <ion-col col-12 text-center>
+          <h2>{{ item.Name }}</h2>
+        </ion-col>
         <ion-row>
           <ion-col col-12 text-center>
-            <h2>{{ item.Name }}</h2>
+            <cardslide
+              [items]="item"
+              [type]="'store'"
+              *ngIf="item.ID"
+            ></cardslide>
           </ion-col>
         </ion-row>
         <ng-container>
-          <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid>
+          <!-- <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid> -->
         </ng-container>
         <ng-template #loading>
           <ion-spinner name="bubbles"></ion-spinner>

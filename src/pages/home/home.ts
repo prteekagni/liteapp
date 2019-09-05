@@ -22,6 +22,7 @@ import {
 import { File } from "@ionic-native/file";
 import { normalizeURL } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
+import { map } from "rxjs/operators";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -70,6 +71,7 @@ export class HomePage {
   imgpath: any;
   counts: any = [];
   images: any = [];
+  store: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -104,7 +106,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.slides = [
-      { image: "http://elinfinitoindia.in/images/logo.png" },
+      { image: "assets/bac.png" },
       { image: "http://elinfinitoindia.in/images/logo.png" }
     ];
   }
@@ -114,6 +116,18 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
+    this.dealService
+      .getStoreLinks()
+      .pipe(map((res: any) => res.filter(resp => resp.StoreType == "1")))
+      .subscribe((res: any) => {
+        this.store = res;
+        console.log(res);
+      });
+
+    // this.http.get("http://localhost:52044/api/stores").subscribe((res: any) => {
+    //   this.store = res;
+    // });
+
     this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {

@@ -92,7 +92,8 @@ page-home {
   }
 
   .mainslide {
-    height: 250px;
+    height: 215px;
+    margin-top: -18px;
   }
 
   //  .mytextcolor{
@@ -110,9 +111,7 @@ page-home {
     display: table;
   }
 
-  //  .toolbar-background-md {
-  //      border-color: #b2b2b2;
-  //      background: lightgrey;
-  //      opacity: .3;
-  //  }
+  .toolbar-md {
+    min-height: 50px;
+  }
 }

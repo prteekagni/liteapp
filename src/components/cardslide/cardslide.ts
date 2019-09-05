@@ -66,11 +66,12 @@ export class CardslideComponent implements OnInit {
     console.log(this.items);
     if (this.type == "store") {
       this.dealService.getStoreLinks().subscribe((res: any) => {
-        this.cards = res.data;
+        console.log(res);
+        this.cards = res;
       });
     } else if (this.type == "deals") {
       this.dealService.getStoreLinks().subscribe((res: any) => {
-        this.cards = res.data;
+        this.cards = res;
       });
     }
   }

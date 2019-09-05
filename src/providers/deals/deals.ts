@@ -13,7 +13,7 @@ export class DealsProvider {
 
   // get store links
   getStoreLinks() {
-    return this.http.get("https://reqres.in/api/users?page=" + "1");
+    return this.http.get("http://localhost:52044/api/stores");
   }
 
   getStoreCategory() {
