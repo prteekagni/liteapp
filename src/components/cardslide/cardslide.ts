@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core";
 import { Events, NavController } from "ionic-angular";
 import { DealsProvider } from "../../providers/deals/deals";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "cardslide",
@@ -15,7 +16,8 @@ export class CardslideComponent implements OnInit {
   constructor(
     private event: Events,
     private navCtrl: NavController,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private http: HttpClient
   ) {
     console.log("Hello CardslideComponent Component");
     // this.text = 'Hello World';
@@ -65,7 +67,11 @@ export class CardslideComponent implements OnInit {
     console.log(this.type);
     console.log(this.items);
     if (this.type == "store") {
-      this.dealService.getStoreLinks().subscribe((res: any) => {
+      // this.dealService.getStoreLinks().subscribe((res: any) => {
+      //   console.log(res);
+      //   this.cards = res;
+      // });
+      this.http.get("http://localhost:3000/substores").subscribe((res: any) => {
         console.log(res);
         this.cards = res;
       });

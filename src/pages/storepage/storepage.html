@@ -22,8 +22,6 @@
 </ion-header>
 
 <ion-content #pageContent>
-  <img [src]="imgpath" alt="" />
-
   <!-- <div class="header-image"></div> -->
   <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
     <ion-slides
@@ -54,10 +52,10 @@
   </ng-container>
   <ng-template #connected class="main-content">
     <!-- top shops -->
-    <cardgrid></cardgrid>
+    <!-- <cardgrid></cardgrid> -->
 
     <!-- top brands  -->
-    <h3>Top brands</h3>
+    <h3>Categories</h3>
     <ng-container *ngIf="brands.length > 0; else loading">
       <ion-row>
         <ion-item no-lines class="leftpadding">

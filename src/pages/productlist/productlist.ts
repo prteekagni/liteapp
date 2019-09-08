@@ -117,9 +117,9 @@ export class ProductlistPage {
       if (!this.searchbar._isFocus) {
         this.searchbar.setFocus();
       } else {
-        this.setFocus();
+        console.log("already in focus");
       }
-    }, 1000);
+    }, 500);
   }
 
   ionViewWillEnter() {}

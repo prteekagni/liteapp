@@ -43,7 +43,7 @@
 <ion-content>
   <ion-list [virtualScroll]="newItem" approxItemHeight="180px">
     <ion-item *virtualItem="let item">
-      <ion-card [ngClass]="{ favcolor: item.isMatched }">
+      <ion-card [ngClass]="{ secondclass: true }">
         <ion-card-content>
           <ion-row>
             <ion-col col-8>
@@ -54,7 +54,7 @@
             </ion-col>
             <ion-col col-4>
               <img
-                src="../../assets/imgs/logo.png"
+                src="../../assets/categories/E-Commerce_v2.png"
                 style="width: 180px;"
                 class="dealsimage"
               />

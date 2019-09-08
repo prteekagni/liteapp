@@ -116,17 +116,17 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.dealService
-      .getStoreLinks()
-      .pipe(map((res: any) => res.filter(resp => resp.StoreType == "1")))
-      .subscribe((res: any) => {
-        this.store = res;
-        console.log(res);
-      });
+    // this.dealService
+    //   .getStoreLinks()
+    //   .pipe(map((res: any) => res.filter(resp => resp.StoreType == "1")))
+    //   .subscribe((res: any) => {
+    //     this.store = res;
+    //     console.log(res);
+    //   });
 
-    // this.http.get("http://localhost:52044/api/stores").subscribe((res: any) => {
-    //   this.store = res;
-    // });
+    this.http.get("http://localhost:3000/dolphins").subscribe((res: any) => {
+      this.store = res;
+    });
 
     this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
