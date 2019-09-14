@@ -1,8 +1,8 @@
 <ng-container *ngIf="cards.length > 4; else elseTemplate">
-  <cardslide [items]="copyItem.ID" [type]="'deals'"></cardslide>
+  <cardslide [items]="copyItem" [type]="type"></cardslide>
 </ng-container>
 <ng-template #elseTemplate>
-  <square [data]="copyItem.ID"></square>
+  <square [data]="copyItem.ID" [type]="type"></square>
 </ng-template>
 
 <ng-template #loading>

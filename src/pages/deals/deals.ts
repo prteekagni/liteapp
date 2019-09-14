@@ -30,50 +30,51 @@ import { filter } from "rxjs/operators";
 export class DealsPage {
   @ViewChild(Content) content: Content;
   @ViewChild(Searchbar) searchbar: Searchbar;
-  deals;
-  items;
+  deals: any = [];
   subcategory: any = [];
-  mobiless;
-  mfashion;
+  subdeals: any = [];
+  tempdeals: any = [];
+  tempsubdeals: any = [];
   copyItem;
+  showMore: boolean = false;
+  lastStore: boolean = false;
 
-  public mensf;
-  public mobile: boolean;
-  public mensfashion;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private renderer: Renderer,
-    private elem: ElementRef,
-    private platform: Platform,
-    private appMinimize: AppMinimize,
-    private events: Events,
-    private http: HttpClient,
     private dealsprovider: DealsProvider,
     public keyboard: Keyboard
-  ) {}
+  ) {
+    this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
+      this.tempsubdeals = res;
+      for (let index = 0; index < 3; index++) {
+        this.subdeals.push(this.tempdeals[index]);
+      }
+    });
 
-  ionViewWillEnter() {
-    // this.mobile = true;
-
-    // this.dealsprovider
-    //   .getDealsCategory()
-    //   .pipe(map((res: any) => res.filter(resp => resp.CatType == "1")))
-    //   .subscribe((res: any) => {
-    //     console.log(res);
-    //     this.deals = res;
-    //   });
-
-    this.http
-      .get("http://dummy.restapiexample.com/api/v1/employees")
-      .subscribe((res: any) => (this.deals = res));
-    console.log("willenter");
+    this.dealsprovider.getDealsCategory().subscribe((res: any) => {
+      this.tempdeals = res;
+      for (let index = 0; index < 4; index++) {
+        this.deals.push(this.tempdeals[index]);
+      }
+    });
   }
+
+  ionViewWillEnter() {}
 
   scrollHandler(event) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad DealsPage");
+  }
+
+  toggleDisplay() {
+    if (this.tempsubdeals.length !== this.subdeals.length) {
+      for (var ii = this.subdeals.length; ii < this.tempdeals.length; ii++) {
+        this.subdeals.push(this.tempdeals[ii]);
+      }
+    }
+    this.showMore = !this.showMore;
   }
 
   onInput(event) {
@@ -107,9 +108,25 @@ export class DealsPage {
   }
 
   doInfinite(event) {
-    console.log(event);
+    if (this.deals.length !== this.tempdeals.length) {
+      for (let index = 0; index < this.tempdeals.length - 4; index++) {
+        console.log(this.tempdeals[index + 4]);
+        this.deals.push(this.tempdeals[index + 3]);
+      }
+      // event.complete();
+    } else {
+      // event.enable(false);
+    }
     setTimeout(() => {
       event.complete();
     }, 1000);
+    this.lastStore = true;
+    setTimeout(() => {
+      event.complete();
+    }, 1000);
+  }
+
+  goToPage() {
+    this.navCtrl.push("StorepagePage");
   }
 }

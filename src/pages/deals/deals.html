@@ -42,19 +42,55 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollHandler($event)" #content>
+  <ion-row>
+    <ion-col col-12>
+      <ion-row
+        [ngClass]="{ 'show-less ': showMore }"
+        *ngIf="subdeals.length > 0"
+      >
+        <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
+          <ion-item (click)="goToPage(item)" item-start>
+            <ion-avatar style="width: 106px;">
+              <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
+              <p style="text-align: center">{{ item?.Name }}</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="!showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()" text-center>
+          Show Less
+        </button>
+      </ion-col>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()">
+          Show More
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-row>
   <ion-row *ngFor="let item of deals; let i = index" class="mycatego">
     <ion-col col-12>
       <ion-row>
         <ion-col col-12 text-center>
-          <h2>{{ item.employee_name }}</h2>
+          <h2>{{ item.Name }}</h2>
         </ion-col>
       </ion-row>
-      <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid>
+      <dealsgrid [items]="item.ID" *ngIf="item.ID" type="'deals'"></dealsgrid>
       <ng-template #loading>
         <ion-spinner name="bubbles"></ion-spinner>
       </ng-template>
     </ion-col>
-    <singleadd *ngIf="i % 3 == 0"></singleadd>
+    <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+  </ion-row>
+  <ion-row *ngIf="lastStore">
+    <ion-col col-12>
+      <h1>No more stores</h1>
+    </ion-col>
   </ion-row>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

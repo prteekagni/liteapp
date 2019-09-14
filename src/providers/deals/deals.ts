@@ -1,9 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
+import { map, filter, mergeMap } from "rxjs/operators";
+import { Category } from "../../models/category";
 
-const apiUrl =
-  "https://my-json-server.typicode.com/elinfinitoindia/demoserver/";
+const apiUrl = "http://192.168.225.36:52044/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -12,27 +13,20 @@ export class DealsProvider {
   }
 
   // get store links
-  getStoreLinks() {
-    return this.http.get("http://localhost:52044/api/stores");
+  getStores(data) {
+    return this.http.get(apiUrl + "stores/", data);
   }
 
   getStoreCategory() {
-    return this.http.get("https://api.myjson.com/bins/k5qvb");
+    return this.http
+      .get("http://localhost:52044/api/category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
-  getStoreSubCategory(data) {
-    return;
-  }
-
-  getDealSubCategory(data) {
-    return this.http.get(
-      "http://localhost:52044/api/category/getsubcategory/" + data
-    );
-  }
-
-  // get ads data
-  getAdsData() {
-    return this.http.get(apiUrl + "ads");
+  getStoreSubCategory() {
+    return this.http
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
   // get Deals Categories
@@ -40,11 +34,20 @@ export class DealsProvider {
     return this.http.get("http://localhost:52044/api/category");
   }
 
+  getDealSubCategory() {
+    return this.http.get(apiUrl + "category");
+  }
+
   // get deals for category
   getDealsByCategory(data) {}
 
   // get Deal Details
   getDealDetail() {}
+
+  // get ads data
+  getAdsData() {
+    return this.http.get(apiUrl + "ads");
+  }
 
   //get product category
   getProductCategory() {

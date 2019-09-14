@@ -8,16 +8,7 @@
           (click)="getToDeal(item)"
           *ngFor="let item of cards; index as i"
         >
-          <ion-img
-            src="../../assets/imgs/1.png"
-            class="largecardimg"
-            *ngIf="i % 2 == 0"
-          >
-            <ion-img
-              src="../../assets/imgs/2.jpg"
-              class="largecardimg"
-              *ngIf="i % 2 != 0"
-            ></ion-img>
+          <ion-img src="../../assets/imgs/1.png" class="largecardimg">
           </ion-img>
         </ion-card>
       </ion-scroll>

@@ -72,6 +72,13 @@ export class HomePage {
   counts: any = [];
   images: any = [];
   store: any = [];
+  showMore: any = [];
+  items: any = [];
+  tempStore: any = [];
+  substores: any = [];
+  tempSubStores: any = [];
+  lastStore: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -96,12 +103,47 @@ export class HomePage {
     });
 
     this.showToolbar = false;
+
+    // On Click of dynamic Link
     this.firebaseDynamicLinks
       .onDynamicLink()
       .subscribe(
         (res: any) => console.log(res),
         (error: any) => console.log(error)
       );
+
+    // this.http
+    //   .get("http://192.168.225.36:52044/api/category/getProductCategory")
+    //   .subscribe((res: any) => {
+    //     this.tempStore = res;
+    //     for (var i = 0; i < 3; i++) {
+    //       this.items.push(res[i]);
+    //     }
+    //   });
+    // store category
+    this.dealService.getStoreCategory().subscribe((res: any) => {
+      this.tempStore = res;
+      for (let index = 0; index < 4; index++) {
+        this.store.push(res[index]);
+      }
+    });
+
+    this.dealService.getStoreSubCategory().subscribe((res: any) => {
+      this.tempSubStores = res;
+      for (let index = 0; index < 3; index++) {
+        this.substores.push(this.tempSubStores[index]);
+      }
+      // console.log("Hello  " + res);
+    });
+
+    // this.dealService.getStoreCategory().subscribe(
+    //   (res: any) => {
+    //     console.log("GET store" + res);
+    //   },
+    //   err => {
+    //     console.warn(err);
+    //   }
+    // );
   }
 
   ionViewDidLoad() {
@@ -116,18 +158,6 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    // this.dealService
-    //   .getStoreLinks()
-    //   .pipe(map((res: any) => res.filter(resp => resp.StoreType == "1")))
-    //   .subscribe((res: any) => {
-    //     this.store = res;
-    //     console.log(res);
-    //   });
-
-    this.http.get("http://localhost:3000/dolphins").subscribe((res: any) => {
-      this.store = res;
-    });
-
     this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {
@@ -165,9 +195,40 @@ export class HomePage {
   ionViewWillLeave() {}
 
   doInfinite(event) {
+    if (this.store.length !== this.tempStore.length) {
+      for (let index = 0; index < this.tempStore.length - 4; index++) {
+        console.log(this.tempStore[index + 4]);
+        this.store.push(this.tempStore[index + 3]);
+      }
+      // event.complete();
+    } else {
+      // event.enable(false);
+    }
     setTimeout(() => {
       event.complete();
     }, 1000);
+    this.lastStore = true;
+  }
+
+  toggleDisplay() {
+    if (this.tempSubStores.length !== this.substores.length) {
+      for (
+        var ii = this.substores.length;
+        ii < this.tempSubStores.length;
+        ii++
+      ) {
+        this.substores.push(this.tempSubStores[ii]);
+      }
+    }
+
+    this.showMore = !this.showMore;
+  }
+
+  goToPage(data) {
+    console.log(data);
+    this.navCtrl.push("StorepagePage", {
+      id: data.ID
+    });
   }
 
   downloadOnMemory(data) {

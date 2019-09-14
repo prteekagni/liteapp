@@ -6,4 +6,43 @@ page-deals {
   .toolbar-title-md {
     color: orangered;
   }
+  .storeimage {
+    width: 120px !important;
+    height: 100px !important;
+  }
+
+  ion-item {
+    padding: 0px;
+    margin: 0px;
+  }
+  ion-avatar {
+    margin: 0px;
+  }
+  .item-md ion-avatar[item-left],
+  .item-md ion-thumbnail[item-left],
+  .item-md ion-avatar[item-start],
+  .item-md ion-thumbnail[item-start] {
+    margin: 0px;
+  }
+
+  .storeimage {
+    width: 106px !important;
+    height: 100px !important;
+  }
+  .item-md ion-avatar img {
+    width: 106px;
+    height: 100px;
+  }
+
+  .label-md {
+    margin: 0 !important;
+  }
+
+  .item-md {
+    padding-left: 0px !important;
+  }
+  .item-md.item-block .item-inner {
+    padding-right: 0px !important;
+    padding-bottom: 0px !important;
+  }
 }

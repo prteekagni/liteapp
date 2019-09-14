@@ -15,6 +15,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 export class SquareComponent implements OnInit {
   text: any = [];
   @Input() data;
+  @Input() type;
   @Output() clickeve = new EventEmitter();
 
   constructor(

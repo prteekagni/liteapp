@@ -96,8 +96,10 @@ page-products {
   }
 
   .roundedcorner {
-    height: 25vh;
+    height: 24vh;
     border-radius: 10px;
+    width: 30vw;
+    margin: 10px 0px;
   }
 
   .centered-image {
@@ -129,6 +131,6 @@ page-products {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: black;
-    font-size: 17px;
+    font-size: 13px;
   }
 }

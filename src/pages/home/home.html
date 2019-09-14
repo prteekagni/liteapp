@@ -21,9 +21,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #pageContent>
-  <img [src]="imgpath" alt="" />
-
+<ion-content #pageContent fullscreen>
   <!-- <div class="header-image"></div> -->
   <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
     <ion-slides
@@ -83,36 +81,67 @@
       </ion-col>
     </ion-row> -->
 
-    <ion-row *ngFor="let item of store; let i = index" class="mycatego">
+    <!-- Substores -->
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h2>Stores by Category</h2>
+      </ion-col>
+
       <ion-col col-12>
-        <ion-col col-12 text-center>
-          <h2>{{ item.Name }}</h2>
-        </ion-col>
-        <ion-row>
-          <ion-col col-12 text-center>
-            <cardslide
-              [items]="item"
-              [type]="'store'"
-              *ngIf="item.id"
-            ></cardslide>
+        <ion-row [ngClass]="{ 'show-less ': showMore }">
+          <ion-col col-4 text-center *ngFor="let item of substores; index as i">
+            <ion-item (click)="goToPage(item)" item-start>
+              <ion-avatar style="width: 106px;">
+                <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
+                <p style="text-align: center">{{ item.Name }}</p>
+              </ion-avatar>
+            </ion-item>
           </ion-col>
         </ion-row>
-        <ng-container>
-          <!-- <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid> -->
-        </ng-container>
-        <ng-template #loading>
-          <ion-spinner name="bubbles"></ion-spinner>
-        </ng-template>
       </ion-col>
-      <singleadd *ngIf="i % 3 == 0"></singleadd>
+      <ion-col col-12 text-center *ngIf="!showMore">
+        <ion-col col-3>
+          <button ion-button round (click)="toggleDisplay()" text-center>
+            Show Less
+          </button>
+        </ion-col>
+      </ion-col>
+      <ion-col col-12 text-center *ngIf="showMore">
+        <ion-col col-3>
+          <button ion-button round (click)="toggleDisplay()">
+            Show More
+          </button>
+        </ion-col>
+      </ion-col>
     </ion-row>
 
+    <!-- Store category with store links -->
+    <ion-row *ngFor="let item of store; let i = index" class="mycatego">
+      <ion-col col-12 text-center>
+        <h2>{{ item.Name }}</h2>
+      </ion-col>
+      <ion-col col-12 text-center>
+        <dealsgrid [items]="item" [type]="'store'" *ngIf="item.ID"></dealsgrid>
+      </ion-col>
+      <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+    </ion-row>
+    <ion-row *ngIf="lastStore">
+      <ion-col col-12>
+        <h1>No more stores</h1>
+      </ion-col>
+    </ion-row>
+
+    <ng-template #loading>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ng-template>
+
     <!-- Single Add -->
-    <singleadd></singleadd>
+    <!-- <singleadd></singleadd> -->
   </ng-template>
   <ng-template #notconnected>
     <h3>Please connecet to internet</h3>
   </ng-template>
+
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

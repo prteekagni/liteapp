@@ -29,12 +29,13 @@ page-home {
   }
 
   .item-md ion-avatar img {
-    width: 80px !important;
-    height: 80px !important;
+    width: 80px;
+    height: 80px;
   }
 
   .item-md.item-block .item-inner {
     padding-right: 0px !important;
+    border-bottom: 0px !important;
   }
 
   .leftpadding {
@@ -113,5 +114,27 @@ page-home {
 
   .toolbar-md {
     min-height: 50px;
+  }
+
+  .storeimage {
+    width: 106px !important;
+    height: 100px !important;
+  }
+
+  .label-md {
+    margin: 0 !important;
+  }
+
+  .item-md {
+    padding-left: 0px !important;
+  }
+
+  .storeimage {
+    width: 106px !important;
+    height: 100px !important;
+  }
+  .item-md ion-avatar img {
+    width: 106px;
+    height: 100px;
   }
 }
