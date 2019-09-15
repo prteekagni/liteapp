@@ -23,40 +23,46 @@
 
 <ion-content #pageContent fullscreen>
   <!-- <div class="header-image"></div> -->
-  <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
-    <ion-slides
-      *ngIf="mainslide.length > 0"
-      pager
-      speed="1000"
-      effect="slides"
-      class="mainslide"
-      autoplay="1000"
-      loop="true"
-    >
-      <ion-slide *ngFor="let item of mainslide">
-        <img src="../../assets/b.jpg" alt="" class="header-image" />
-      </ion-slide>
-    </ion-slides>
-  </ng-container>
-  <ng-template #elseTemplate style="height:40vh">
-    <div style="height:40vh">
-      <ion-spinner
-        name="bubbles"
-        style="margin-top: 20vh;
-        margin-left: 49vw;"
-      >
-      </ion-spinner>
-    </div>
-  </ng-template>
+
+  <!-- Sliders -->
+
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
+
   <ng-template #connected class="main-content">
+    <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
+      <ion-slides
+        *ngIf="mainslide.length > 0"
+        pager
+        speed="1000"
+        effect="slides"
+        class="mainslide"
+        autoplay="1000"
+        loop="true"
+      >
+        <ion-slide *ngFor="let item of mainslide">
+          <img src="../../assets/" alt="" class="header-image" />
+        </ion-slide>
+      </ion-slides>
+    </ng-container>
+    <ng-template #elseTemplate style="height:40vh">
+      <div style="height:40vh">
+        <ion-row text-center>
+          <ion-col col-12>
+            <ion-spinner name="bubbles" style="margin-top:20vh"> </ion-spinner>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ng-template>
     <!-- top shops -->
     <cardgrid></cardgrid>
 
+    <!--      style="margin-top: 20vh;
+        margin-left: 49vw;" -->
+
     <!-- top brands  -->
     <h3>Top brands</h3>
-    <ng-container *ngIf="brands.length > 0; else loading">
+    <ng-container *ngIf="store.length > 0; else loading">
       <ion-row>
         <ion-item no-lines class="leftpadding">
           <ion-scroll scrollX="true" scroll-avatar>
@@ -65,7 +71,7 @@
                 src="../../assets/imgs/logo.png"
                 class="scroll-item"
                 style="border: 1px solid grey;"
-                *ngFor="let item of brands"
+                *ngFor="let item of store"
               />
             </ion-avatar>
           </ion-scroll>

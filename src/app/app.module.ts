@@ -26,6 +26,10 @@ import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { Clipboard } from "@ionic-native/clipboard";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+
+import { HttpErrorInterceptor } from "../providers/shared/interceptor";
+
 @NgModule({
   declarations: [MyApp],
   // schemas: [
@@ -47,6 +51,7 @@ import { File } from "@ionic-native/file";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     SharedProvider,
     AuthenticateProvider,
     DealsProvider,

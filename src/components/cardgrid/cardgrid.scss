@@ -1,24 +1,40 @@
 cardgrid {
-    .productgrid ion-col {
-        border-right: 1px solid rgba(0,0,1,.09);
-        border-bottom: 1px solid lightgray;
-        height: 100px;
-    }
+  .productgrid ion-col {
+    border-right: 1px solid rgba(0, 0, 1, 0.09);
+    border-bottom: 1px solid lightgray;
+    height: 100px;
+  }
 
-    .productgrid ion-col:nth-child(3) {
-        border-right: 0px solid;
-    }
+  .productgrid ion-col:nth-child(3) {
+    border-right: 0px solid;
+  }
 
-    .productgrid ion-col:nth-child(-n+3) {
-        border-top: 1px solid lightgrey;
-    }
+  .productgrid ion-col:nth-child(-n + 3) {
+    border-top: 1px solid lightgrey;
+  }
 
-    .productgrid ion-col img {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80px;
-    }
+  .productgrid ion-col img {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+  }
+  .card-content-md {
+    padding: 1px 16px;
+  }
+
+  .roundedcorner {
+    border-radius: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  ion-col {
+    padding: 0px;
+  }
+  .card-md {
+    width: 100%;
+  }
 }

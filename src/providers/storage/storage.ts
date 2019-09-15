@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { deals } from "../../models/deal";
-import { adjustRendered } from "ionic-angular/umd/components/virtual-scroll/virtual-util";
 
 const DEALS_KEY = "deals";
 const N_KEY = "notifications";

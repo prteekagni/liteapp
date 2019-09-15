@@ -33,7 +33,7 @@ export class SquareComponent implements OnInit {
   ionViewDidEnter() {}
 
   ngOnInit(): void {
-    this.dealService.getDealSubCategory(this.data).subscribe((res: any) => {
+    this.dealService.getDealSubCategory().subscribe((res: any) => {
       this.text = res;
     });
   }

@@ -184,4 +184,15 @@ export class SharedProvider {
       }
     );
   }
+
+  handleError(error) {
+    console.log(error);
+    if (error.status == 500) {
+      this.createToast("Error, retrying");
+    } else if (error.status == 404) {
+      this.createToast("Error, Please try again");
+    } else {
+      this.createToast("Can not connect to server ");
+    }
+  }
 }

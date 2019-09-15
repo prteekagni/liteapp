@@ -27,7 +27,7 @@ export class CardslideComponent implements OnInit {
         this.cards = res;
       });
     } else if (this.type == "deals") {
-      this.dealService.getDealSubCategory(this.items).subscribe((res: any) => {
+      this.dealService.getDealSubCategory().subscribe((res: any) => {
         this.cards = res;
       });
     }

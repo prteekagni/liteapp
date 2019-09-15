@@ -48,7 +48,7 @@ export class DealsPage {
     this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
       this.tempsubdeals = res;
       for (let index = 0; index < 3; index++) {
-        this.subdeals.push(this.tempdeals[index]);
+        this.subdeals.push(this.tempsubdeals[index]);
       }
     });
 

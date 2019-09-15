@@ -44,10 +44,7 @@
 <ion-content (ionScroll)="scrollHandler($event)" #content>
   <ion-row>
     <ion-col col-12>
-      <ion-row
-        [ngClass]="{ 'show-less ': showMore }"
-        *ngIf="subdeals.length > 0"
-      >
+      <ion-row [ngClass]="{ 'show-less ': showMore }">
         <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
           <ion-item (click)="goToPage(item)" item-start>
             <ion-avatar style="width: 106px;">

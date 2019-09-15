@@ -19,19 +19,19 @@ export class DealsProvider {
 
   getStoreCategory() {
     return this.http
-      .get("http://localhost:52044/api/category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
-  }
-
-  getStoreSubCategory() {
-    return this.http
       .get(apiUrl + "category")
       .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
+  getStoreSubCategory(): Observable<Category[]> {
+    return this.http
+      .get<Category[]>(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
+  }
+
   // get Deals Categories
-  getDealsCategory() {
-    return this.http.get("http://localhost:52044/api/category");
+  getDealsCategory(): Observable<Category[]> {
+    return this.http.get<Category[]>("http://localhost:52044/api/category");
   }
 
   getDealSubCategory() {

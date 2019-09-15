@@ -1,40 +1,22 @@
-
-
-
 <ion-row>
-<ion-col col-12>
-   <h4>Top Shops</h4>
-  <ion-row>
-    <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-     <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-     <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-     <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-     <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-     <ion-col col-4>
-      <ion-avatar>
-        <img src="../../assets/imgs/4.png">
-      </ion-avatar>
-    </ion-col>
-  </ion-row>
-</ion-col>
+  <ion-col col-12>
+    <h4>Top Shops</h4>
+    <ion-row>
+      <ng-container *ngFor="let item of items; index as i">
+        <ion-col col-4 *ngIf="i < 6">
+          <ion-card class="roundedcorner">
+            <ion-card-content>
+              <img src="../../assets/imgs/4.png" />
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+
+      <!-- <ion-col col-4>
+        <ion-avatar>
+          <img src="../../assets/imgs/4.png" />
+        </ion-avatar>
+      </ion-col> -->
+    </ion-row>
+  </ion-col>
 </ion-row>
