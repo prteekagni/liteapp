@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core";
+import { NavController } from "ionic-angular";
+import { DealsProvider } from "../../providers/deals/deals";
 
 /**
  * Generated class for the SquareComponent component.
@@ -8,58 +9,31 @@ import { NavController } from 'ionic-angular';
  * Components.
  */
 @Component({
-  selector: 'square',
-  templateUrl: 'square.html'
+  selector: "square",
+  templateUrl: "square.html"
 })
-export class SquareComponent {
-
+export class SquareComponent implements OnInit {
   text: any = [];
-  @Input() items;
+  @Input() data;
   @Output() clickeve = new EventEmitter();
 
   constructor(
-    private navCtrl: NavController
-  ) {
-    console.log('Hello SquareComponent Component');
+    private navCtrl: NavController,
+    private dealService: DealsProvider
+  ) {}
 
-
-    this.text = [
-      {
-        "id": "1",
-        "name": "one",
-        "image":"http://elinfinitoindia.in/images/logo.png"
-      },
-      {
-        "id": "2",
-        "name": "one",
-        "image":"http://elinfinitoindia.in/images/logo.png"
-      },
-      {
-        "id": "3",
-        "name": "one",
-        "image":"http://elinfinitoindia.in/images/logo.png"
-      },
-      {
-        "id": "4",
-        "name": "one",
-        "image":"http://elinfinitoindia.in/images/logo.png"
-      },
-    ]
-
-
-
+  getOfferDetail(data) {
+    this.navCtrl.push("ProductlistPage", {
+      cat: data.Category,
+      type: "deals"
+    });
   }
 
+  ionViewDidEnter() {}
 
-  getOfferDetail
-  (data) {
-    this.navCtrl.push(
-      'ProductlistPage',
-      {
-        cat: data.Category,
-        type:"deals"
-      }
-    )
+  ngOnInit(): void {
+    this.dealService.getDealSubCategory(this.data).subscribe((res: any) => {
+      this.text = res;
+    });
   }
-
 }

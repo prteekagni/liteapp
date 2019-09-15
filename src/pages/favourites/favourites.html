@@ -9,7 +9,6 @@
     *ngIf="fav; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    
     <ion-card
       style="margin-top:75px;"
       *ngFor="let item of fav"
@@ -24,8 +23,8 @@
       />
       <ion-card-content>
         <p style="margin-left: 150px; min-height: 100px">
-          {{item.title}} <br>
-        {{item.description}}
+          {{ item.title }} <br />
+          {{ item.description }}
         </p>
       </ion-card-content>
       <ion-row no-padding>
@@ -59,6 +58,5 @@
   </ng-template>
   <ng-template #elseTemplate>
     <h3>Not Fav Yet</h3>
-     
   </ng-template>
 </ion-content>

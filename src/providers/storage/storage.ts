@@ -1,23 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { deals } from '../../models/deal';
-import { adjustRendered } from 'ionic-angular/umd/components/virtual-scroll/virtual-util';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
+import { deals } from "../../models/deal";
+import { adjustRendered } from "ionic-angular/umd/components/virtual-scroll/virtual-util";
 
-const DEALS_KEY = 'deals';
-const N_KEY = 'notifications';
-const P_KEY = 'pushNotifications'
+const DEALS_KEY = "deals";
+const N_KEY = "notifications";
+const P_KEY = "pushNotifications";
+const I_KEY = "images";
 
 @Injectable()
 export class StorageProvider {
-
-  constructor(
-
-    public http: HttpClient,
-    private storage: Storage,
-
-  ) {
-    console.log('Hello StorageProvider Provider');
+  constructor(public http: HttpClient, private storage: Storage) {
+    console.log("Hello StorageProvider Provider");
   }
 
   addDeals(item: deals): Promise<any> {
@@ -25,24 +20,43 @@ export class StorageProvider {
       if (items) {
         if (items.find(x => x.id === item.id)) {
           return false;
-        }
-        else {
+        } else {
           items.push(item);
           this.storage.set(DEALS_KEY, items);
           return true;
         }
+      } else {
       }
-      else {
-        this.storage.set(DEALS_KEY, [item]);
+    });
+  }
+
+  addImages(data: any): Promise<any> {
+    console.log(data);
+    return this.storage.get(I_KEY).then((res: any) => {
+      if (res) {
+        if (res.find(x => x.id === res.id)) {
+          return false;
+        } else {
+          res.push(data);
+          this.storage.set(I_KEY, res);
+        }
+      } else {
+        this.storage.set(DEALS_KEY, [data]);
         return true;
       }
-    }
-    )
-
+    });
   }
   // READ
   getDeals(): Promise<deals[]> {
     return this.storage.get(DEALS_KEY);
+  }
+
+  getImages(): Promise<any[]> {
+    return this.storage.get(I_KEY);
+  }
+
+  removeImages(): Promise<any> {
+    return this.storage.set(I_KEY, []);
   }
 
   deleteDeals(id: number): Promise<deals> {
@@ -66,17 +80,15 @@ export class StorageProvider {
         if (items.find(x => x.id === item.id)) {
           return this.updateNotification(item).then(res => {
             return true;
-           });
-        }
-        else {
+          });
+        } else {
           items.push(item);
           this.storage.set(N_KEY, items);
         }
-      }
-      else {
+      } else {
         this.storage.set(N_KEY, [item]);
       }
-    })
+    });
   }
 
   getNotification(): Promise<any[]> {
@@ -93,30 +105,26 @@ export class StorageProvider {
         if (i.id === item.id) {
           newItems.push(item);
           this.storage.set(N_KEY, newItems);
-        }
-        else {
+        } else {
           newItems.push(i);
           this.storage.set(N_KEY, newItems);
         }
       }
-      return true
+      return true;
     });
   }
 
   savePushNotification(item): Promise<any> {
     return this.storage.get(P_KEY).then((items: deals[]) => {
       if (items) {
-            items.push(item);
-            this.storage.set(P_KEY, items);
-            return true;
-          }
-      
-      else {
+        items.push(item);
+        this.storage.set(P_KEY, items);
+        return true;
+      } else {
         this.storage.set(P_KEY, [item]);
         return true;
       }
     });
-
   }
 
   removePushNotification(id: number): Promise<any> {
@@ -132,7 +140,6 @@ export class StorageProvider {
       }
       return this.storage.set(DEALS_KEY, toKeep);
     });
-
   }
 
   getPushNotification(): Promise<any> {

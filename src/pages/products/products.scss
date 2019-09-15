@@ -1,101 +1,134 @@
 page-products {
+  ion-col ion-col {
+    border-bottom: 2px solid grey;
+  }
 
+  ion-col ion-col:nth-child(1) {
+    border-right: 2px solid grey;
+  }
 
-    ion-col ion-col {
-        border-bottom: 2px solid grey;
+  .bg-gold {
+    background: -webkit-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    background: -o-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    background: -moz-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+  }
 
-    }
+  .bg-news {
+    background: -webkit-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+    background: -o-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+    background: -moz-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+    background: linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  }
 
-    ion-col ion-col:nth-child(1) {
-        border-right: 2px solid grey;
-    }
+  .bg-germany {
+    color: #fff;
+    background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  }
 
+  .bg-aurora {
+    color: #fff;
+    background: -webkit-linear-gradient(
+        -70deg,
+        #fa7c30 30%,
+        rgba(0, 0, 0, 0) 30%
+      ),
+      url("https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg");
+    background: -o-linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%),
+      url("https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg");
+    background: -moz-linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%),
+      url("https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg");
+    background: linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%),
+      url("https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg");
+    background-size: cover;
+    background-position: 50% 21%;
+    text-align: right;
+  }
 
+  .bg-germany {
+    color: #fff;
+    background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+    background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%),
+      linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  }
 
-    .bg-gold {
-        background: -webkit-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
-        background: -o-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
-        background: -moz-linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
-        background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
-    }
+  .bg-purple {
+    color: #fff;
+    background: -webkit-linear-gradient(
+        110deg,
+        #a60af3 40%,
+        rgba(0, 0, 0, 0) 30%
+      ),
+      -webkit-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: -o-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%),
+      -o-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: -moz-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%),
+      -moz-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%),
+      radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+  }
 
-    .bg-news {
-        background: -webkit-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
-        background: -o-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
-        background: -moz-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
-        background: linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
-    }
+  .bg-spring {
+    background: -webkit-linear-gradient(
+        70deg,
+        #fff810 30%,
+        rgba(0, 0, 0, 0) 30%
+      ),
+      -webkit-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: -o-linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%),
+      -o-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: -moz-linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%),
+      -moz-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+    background: linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%),
+      linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+  }
 
-    .bg-germany {
-        color: #fff;
-        background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-    }
+  .roundedcorner {
+    height: 25vh;
+    border-radius: 10px;
+  }
 
-    .bg-aurora {
-        color: #fff;
-        background: -webkit-linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg');
-        background: -o-linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg');
-        background: -moz-linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg');
-        background: linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('https://www.nasa.gov/sites/default/files/thumbnails/image/pia21421-cr.jpg');
-        background-size: cover;
-        background-position: 50% 21%;
-        text-align: right;
-    }
+  .centered-image {
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+  }
 
-    .bg-germany {
-        color: #fff;
-        background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-        background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-    }
+  // .show-background {
+  //     background-color: white;
+  //     transition: background-color 500ms linear;
+  //     color: orangered;
+  // }
 
-    .bg-purple {
-        color: #fff;
-        background: -webkit-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -webkit-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
-        background: -o-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -o-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
-        background: -moz-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -moz-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
-        background: linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
-    }
+  .toolbar-background-md {
+    background: transparent;
+  }
 
-    .bg-spring {
-        background: -webkit-linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), -webkit-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
-        background: -o-linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), -o-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
-        background: -moz-linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), -moz-linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
-        background: linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
-    }
-
-    .roundedcorner {
-        height: 25vh;
-        border-radius: 10px;
-    }
-
-    .centered-image {
-        margin: 0;
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80px;
-    }
-
-    // .show-background {
-    //     background-color: white;
-    //     transition: background-color 500ms linear;
-    //     color: orangered;
-    // }
-
-   
-
-    .toolbar-background-md {
-        background: transparent;
-
-    }
-
-    .toolbar-title-md {
-        color: orangered;
-    }
+  .toolbar-title-md {
+    color: orangered;
+  }
+  .itemtext {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 17px;
+  }
 }

@@ -1,0 +1,26 @@
+Men's Stores 
+1. Categories 
+2.Accessories category (shoes , watches)
+3.best of brands
+4.top clothing 
+5.footwear collection
+6.footwear || brands
+7.top offers
+8.lowest prices 
+9.brand stores
+
+
+women's stores
+1. Categories 
+2.Accessories category (shoes , watches)
+3.best of brands
+4.western wear
+5.indian wear
+6.accessories
+7.footwear collection
+8.footwear || brands
+9.top offers
+10.lowest prices 
+11.brand stores
+12.inner wears
+

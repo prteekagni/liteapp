@@ -1,13 +1,49 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Products</ion-title>
+    <ion-title *ngIf="!searchBoxOpened">Products</ion-title>
+    <ion-searchbar
+      [(ngModel)]="searcTerm"
+      (ionInput)="onInput($event)"
+      (ionCancel)="searchBoxOpened = false"
+      [debounce]="500"
+      [autocomplete]="on"
+      [animated]="true"
+      *ngIf="searchBoxOpened"
+      style="height: 64px;
+    width: 73vw;"
+      #searchbar
+    >
+    </ion-searchbar>
+    <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        end
+        *ngIf="searchBoxOpened"
+        (click)="searchBoxOpened = false"
+        style="font-size:1.8rem;"
+      >
+        <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        end
+        *ngIf="!searchBoxOpened"
+        (click)="searchBoxOpened = true; setFocus()"
+      >
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list [virtualScroll]="newItem" approxItemHeight="180px">
     <ion-item *virtualItem="let item">
-      <ion-card style="">
+      <ion-card [ngClass]="{ secondclass: true }">
         <ion-card-content>
           <ion-row>
             <ion-col col-8>
@@ -18,7 +54,7 @@
             </ion-col>
             <ion-col col-4>
               <img
-                src="../../assets/imgs/logo.png"
+                src="../../assets/categories/E-Commerce_v2.png"
                 style="width: 180px;"
                 class="dealsimage"
               />
@@ -33,7 +69,8 @@
               small
               color="danger"
               icon-start
-              (click)="setDealAsFav(item)">
+              (click)="setDealAsFav(item)"
+            >
               <ion-icon name="star"></ion-icon>
               Favorite
             </button>
@@ -45,7 +82,8 @@
               small
               color="danger"
               icon-start
-              (click)="remindBtn(item)">
+              (click)="remindBtn(item)"
+            >
               <ion-icon name="musical-notes"></ion-icon>
               Remind
             </button>
@@ -61,143 +99,12 @@
               icon-start
               (click)="getDeal()"
             >
-            <ion-icon name="share-alt"></ion-icon>
+              <ion-icon name="share-alt"></ion-icon>
               Buy
             </button>
           </ion-col>
         </ion-row>
-        <!-- <ion-row no-padding>
-    <ion-col>
-      <button ion-button clear small color="danger" icon-start (click)="save()">
-        <ion-icon name='star'></ion-icon>
-        Favorite
-      </button>
-    </ion-col>
-    <ion-col text-center>
-      <button ion-button clear small color="danger" icon-start (click)="save()">
-        <ion-icon name='star'></ion-icon>
-        Set Reminder
-      </button>
-      <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)">
-      </ion-datetime> 
-    </ion-col>
-    <ion-col text-right>
-      <button ion-button clear small color="danger" icon-start>
-        <ion-icon name='share-alt'></ion-icon>
-        Share
-      </button>
-    </ion-col>
-  </ion-row> -->
       </ion-card>
     </ion-item>
   </ion-list>
-
-  <!-- <ion-card style="margin-top:75px;">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star'></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='musical-notes'></ion-icon>
-        Buy
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-</ion-card>
-<ion-card style="margin-top:75px;">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star'></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='musical-notes'></ion-icon>
-        Buy
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-</ion-card>
-<ion-card style="margin-top:75px;">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star'></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='musical-notes'></ion-icon>
-        Buy
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-</ion-card> -->
-
-  <!-- </ion-col> -->
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data..."
-    >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

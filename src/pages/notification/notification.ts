@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
-import { StorageProvider } from '../../providers/storage/storage';
+import { Component, ViewChild } from "@angular/core";
+import { IonicPage, NavController, NavParams, Slides } from "ionic-angular";
+import { StorageProvider } from "../../providers/storage/storage";
 
 /**
  * Generated class for the NotificationPage page.
@@ -11,20 +11,20 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-notification',
-  templateUrl: 'notification.html',
+  selector: "page-notification",
+  templateUrl: "notification.html"
 })
 export class NotificationPage {
-  segments = '0';
-  @ViewChild('pageSlider') pageSlider: Slides;
+  segments = "0";
+  @ViewChild("pageSlider") pageSlider: Slides;
   pushNotification: any;
   localNotification: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public storageService: StorageProvider) {
-  }
+    public storageService: StorageProvider
+  ) {}
 
   ionViewDidLoad() {
     this.storageService.getPushNotification().then(res => {
@@ -33,24 +33,22 @@ export class NotificationPage {
     });
     this.storageService.getNotification().then(res => {
       this.localNotification = res;
-    })
+    });
   }
 
-   selectTab(indx) {
+  selectTab(indx) {
     this.segments = indx;
     // this.tabsindex.emit(indx);
-     this.pageSlider.slideTo(indx);
-
+    this.pageSlider.slideTo(indx);
   }
-   changeWillSlide($event) {
+  changeWillSlide($event) {
     // this.segments = $event._snapIndex.toString();
     //  this.segme.emit($event._snapIndex.toString());
     //  console.log($event._snapIndex.toString())
-     this.segments = $event._snapIndex.toString();
+    this.segments = $event._snapIndex.toString();
   }
 
   slideindexs(index) {
     this.segments = index.toString();
   }
-
 }

@@ -1,0 +1,117 @@
+<ion-header [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+  <ion-navbar [color]="co" id="navbar">
+    <ion-title>
+      <ion-row>
+        <ion-col col-6 text-left>
+          Deals Locker Lite
+        </ion-col>
+        <ion-col col-6 text-right>
+          <ion-icon
+            ios="ios-notifications"
+            md="md-notifications"
+            (click)="goToNotification()"
+            class="iconspace"
+            style="margin-left: 5px;"
+          ></ion-icon>
+          <ion-icon ios="ios-notifications" md="md-star" (click)="goToFav()">
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #pageContent>
+  <!-- <div class="header-image"></div> -->
+  <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
+    <ion-slides
+      *ngIf="mainslide.length > 0"
+      pager
+      speed="1000"
+      effect="slides"
+      class="mainslide"
+      autoplay="1000"
+      loop="true"
+    >
+      <ion-slide *ngFor="let item of mainslide">
+        <img src="../../assets/b.jpg" alt="" class="header-image" />
+      </ion-slide>
+    </ion-slides>
+  </ng-container>
+  <ng-template #elseTemplate style="height:40vh">
+    <div style="height:40vh">
+      <ion-spinner
+        name="bubbles"
+        style="margin-top: 20vh;
+        margin-left: 49vw;"
+      >
+      </ion-spinner>
+    </div>
+  </ng-template>
+  <ng-container *ngIf="isConnected; then connected; else notconnected">
+  </ng-container>
+  <ng-template #connected class="main-content">
+    <!-- top shops -->
+    <!-- <cardgrid></cardgrid> -->
+
+    <!-- top brands  -->
+    <h3>Categories</h3>
+    <ng-container *ngIf="brands.length > 0; else loading">
+      <ion-row>
+        <ion-item no-lines class="leftpadding">
+          <ion-scroll scrollX="true" scroll-avatar>
+            <ion-avatar>
+              <img
+                src="../../assets/imgs/logo.png"
+                class="scroll-item"
+                style="border: 1px solid grey;"
+                *ngFor="let item of brands"
+              />
+            </ion-avatar>
+          </ion-scroll>
+        </ion-item>
+      </ion-row>
+    </ng-container>
+    <ng-template #loading>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ng-template>
+    <!-- <ion-row>
+      <ion-col col-12 text-center>
+        <h2>Food</h2>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row *ngFor="let item of store; let i = index" class="mycatego">
+      <ion-col col-12>
+        <ion-col col-12 text-center>
+          <h2>{{ item.Name }}</h2>
+        </ion-col>
+        <ion-row>
+          <ion-col col-12 text-center>
+            <cardslide
+              [items]="item"
+              [type]="'store'"
+              *ngIf="item.id"
+            ></cardslide>
+          </ion-col>
+        </ion-row>
+        <ng-container>
+          <!-- <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid> -->
+        </ng-container>
+        <ng-template #loading>
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ng-template>
+      </ion-col>
+      <singleadd *ngIf="i % 3 == 0"></singleadd>
+    </ion-row>
+
+    <!-- Single Add -->
+    <singleadd></singleadd>
+  </ng-template>
+  <ng-template #notconnected>
+    <h3>Please connecet to internet</h3>
+  </ng-template>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

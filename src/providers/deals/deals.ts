@@ -1,62 +1,61 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
 
+const apiUrl =
+  "https://my-json-server.typicode.com/elinfinitoindia/demoserver/";
 
-const apiUrl = "https://my-json-server.typicode.com/elinfinitoindia/demoserver/"
 @Injectable()
 export class DealsProvider {
-
   constructor(public http: HttpClient) {
-    console.log('Hello DealsProvider Provider');
+    console.log("Hello DealsProvider Provider");
   }
 
-  // get store links 
-  getStoreLinks(){
-    return this.http.get(apiUrl + "storeLinks");
+  // get store links
+  getStoreLinks() {
+    return this.http.get("http://localhost:52044/api/stores");
   }
 
-  getStoreCategory(){
+  getStoreCategory() {
     return this.http.get("https://api.myjson.com/bins/k5qvb");
   }
-  
-  // get ads data 
+
+  getStoreSubCategory(data) {
+    return;
+  }
+
+  getDealSubCategory(data) {
+    return this.http.get(
+      "http://localhost:52044/api/category/getsubcategory/" + data
+    );
+  }
+
+  // get ads data
   getAdsData() {
     return this.http.get(apiUrl + "ads");
   }
 
   // get Deals Categories
   getDealsCategory() {
-    return this.http.get(apiUrl + 'DealC')
+    return this.http.get("http://localhost:52044/api/category");
   }
 
   // get deals for category
-  getDealsByCategory(data) {
-    
-  }
+  getDealsByCategory(data) {}
 
   // get Deal Details
-  getDealDetail() {
-    
-  }
+  getDealDetail() {}
 
   //get product category
   getProductCategory() {
-    return this.http.get(apiUrl + "productC")
+    return this.http.get(apiUrl + "productC");
   }
 
   // get products by category
-  getProductByCategory() {
-    
-  }
+  getProductByCategory() {}
 
   // get product detail
-  getProductDetail()
-  {
-    return
+  getProductDetail() {
+    return;
   }
-
-  
-
-
 }

@@ -10,6 +10,7 @@ import { SquareComponent } from './square/square';
 import { CardlistComponent } from './cardlist/cardlist';
 import { ActionsheetComponent } from './actionsheet/actionsheet';
 import { CardgridComponent } from './cardgrid/cardgrid';
+import { DealsgridComponent } from './dealsgrid/dealsgrid';
 @NgModule({
 	declarations: [
     SlideComponent,
@@ -21,7 +22,8 @@ import { CardgridComponent } from './cardgrid/cardgrid';
     SquareComponent,
     CardlistComponent,
     ActionsheetComponent,
-    CardgridComponent],
+    CardgridComponent,
+    DealsgridComponent],
 	imports: [IonicModule],
 	exports: [
     SlideComponent,
@@ -33,6 +35,7 @@ import { CardgridComponent } from './cardgrid/cardgrid';
     SquareComponent,
     CardlistComponent,
     ActionsheetComponent,
-    CardgridComponent]
+    CardgridComponent,
+    DealsgridComponent]
 })
 export class ComponentsModule {}

@@ -1,0 +1,10 @@
+<ng-container *ngIf="cards.length > 4; else elseTemplate">
+  <cardslide [items]="copyItem.ID" [type]="'deals'"></cardslide>
+</ng-container>
+<ng-template #elseTemplate>
+  <square [data]="copyItem.ID"></square>
+</ng-template>
+
+<ng-template #loading>
+  <ion-spinner name="bubbles"></ion-spinner>
+</ng-template>

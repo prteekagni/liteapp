@@ -5,15 +5,12 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-
 @import "ionic.globals";
-
 
 // Shared Variables
 // --------------------------------------------------
@@ -21,9 +18,6 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -33,37 +27,36 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (primary: #488aff,
-secondary: #32db64,
-danger: #f53d3d,
-light: #f4f4f4,
-dark: #222,
-theme: orangered);
-
+$colors: (
+  primary: #488aff,
+  secondary: #32db64,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  dark: #222,
+  theme: orangered
+);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-// 
-$toolbar-background:transparent;
-$text-input-highlight-color-valid:#488aff;
-$text-input-md-show-focus-highlight:orangered;
-$alert-md-button-text-color:orangered;
-$segment-button-md-text-color-activated:orangered;
-$segment-button-md-border-color-activated:orangered; // App Windows Variables
+//
+$toolbar-background: transparent;
+$text-input-highlight-color-valid: #488aff;
+$text-input-md-show-focus-highlight: orangered;
+$alert-md-button-text-color: orangered;
+$segment-button-md-text-color-activated: orangered;
+$segment-button-md-border-color-activated: orangered; // App Windows Variables
+
+$searchbar-md-input-search-icon-color: orange;
+$searchbar-md-input-search-icon-size: 25px;
+
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -74,14 +67,12 @@ $segment-button-md-border-color-activated:orangered; // App Windows Variables
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/ionicons/
 
 @import "ionic.ionicons";
-
 
 // Fonts
 // --------------------------------------------------

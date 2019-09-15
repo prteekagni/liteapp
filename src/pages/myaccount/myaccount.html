@@ -5,6 +5,6 @@
 </ion-header>
 
 <ion-content>
-<login *ngIf="!isLoggedIn"></login>
-<profile *ngIf="isLoggedIn"></profile>
+  <login *ngIf="!isLoggedIn" #login></login>
+  <profile *ngIf="isLoggedIn"></profile>
 </ion-content>
