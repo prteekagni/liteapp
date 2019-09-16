@@ -8,7 +8,8 @@ import {
   Platform,
   Events,
   Searchbar,
-  Keyboard
+  Keyboard,
+  Item
 } from "ionic-angular";
 import { AppMinimize } from "@ionic-native/app-minimize";
 import { HttpClient } from "@angular/common/http";
@@ -36,8 +37,9 @@ export class DealsPage {
   tempdeals: any = [];
   tempsubdeals: any = [];
   copyItem;
-  showMore: boolean = false;
+  showMore: boolean = true;
   lastStore: boolean = false;
+  type: string = "deals";
 
   constructor(
     public navCtrl: NavController,
@@ -75,6 +77,7 @@ export class DealsPage {
       }
     }
     this.showMore = !this.showMore;
+    console.log(this.showMore);
   }
 
   onInput(event) {
@@ -121,12 +124,12 @@ export class DealsPage {
       event.complete();
     }, 1000);
     this.lastStore = true;
-    setTimeout(() => {
-      event.complete();
-    }, 1000);
   }
 
-  goToPage() {
-    this.navCtrl.push("StorepagePage");
+  goToPage(data) {
+    this.navCtrl.push("StorepagePage", {
+      id: data.ID,
+      type: "deals"
+    });
   }
 }

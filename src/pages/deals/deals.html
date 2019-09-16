@@ -44,7 +44,7 @@
 <ion-content (ionScroll)="scrollHandler($event)" #content>
   <ion-row>
     <ion-col col-12>
-      <ion-row [ngClass]="{ 'show-less ': showMore }">
+      <ion-row [ngClass]="{ 'show-less': showMore }">
         <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
           <ion-item (click)="goToPage(item)" item-start>
             <ion-avatar style="width: 106px;">
@@ -55,17 +55,17 @@
         </ion-col>
       </ion-row>
     </ion-col>
-    <ion-col col-12 text-center *ngIf="!showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" text-center>
-          Show Less
-        </button>
-      </ion-col>
-    </ion-col>
     <ion-col col-12 text-center *ngIf="showMore">
       <ion-col col-3>
         <button ion-button round (click)="toggleDisplay()">
           Show More
+        </button>
+      </ion-col>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="!showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()" text-center>
+          Show Less
         </button>
       </ion-col>
     </ion-col>
@@ -77,7 +77,7 @@
           <h2>{{ item.Name }}</h2>
         </ion-col>
       </ion-row>
-      <dealsgrid [items]="item.ID" *ngIf="item.ID" type="'deals'"></dealsgrid>
+      <dealsgrid [items]="item.ID" *ngIf="item.ID" type="deals"></dealsgrid>
       <ng-template #loading>
         <ion-spinner name="bubbles"></ion-spinner>
       </ng-template>

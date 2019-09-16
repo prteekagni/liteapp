@@ -21,7 +21,9 @@ export class SquareComponent implements OnInit {
   constructor(
     private navCtrl: NavController,
     private dealService: DealsProvider
-  ) {}
+  ) {
+    console.log("square component");
+  }
 
   getOfferDetail(data) {
     this.navCtrl.push("ProductlistPage", {

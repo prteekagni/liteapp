@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { map, filter, mergeMap } from "rxjs/operators";
 import { Category } from "../../models/category";
+import { ProductsPage } from "../../pages/products/products";
 
 const apiUrl = "http://192.168.225.36:52044/api/";
 
@@ -55,7 +56,9 @@ export class DealsProvider {
   }
 
   // get products by category
-  getProductByCategory() {}
+  getProductByCategory(data) {
+    return this.http.get(apiUrl + "products", data);
+  }
 
   // get product detail
   getProductDetail() {

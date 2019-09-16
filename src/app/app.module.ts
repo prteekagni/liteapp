@@ -29,6 +29,8 @@ import { File } from "@ionic-native/file";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { HttpErrorInterceptor } from "../providers/shared/interceptor";
+import { CacheService } from "../providers/shared/cache";
+import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
 
 @NgModule({
   declarations: [MyApp],
@@ -52,6 +54,7 @@ import { HttpErrorInterceptor } from "../providers/shared/interceptor";
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     SharedProvider,
     AuthenticateProvider,
     DealsProvider,
@@ -69,7 +72,8 @@ import { HttpErrorInterceptor } from "../providers/shared/interceptor";
     Clipboard,
     FileTransfer,
     File,
-    FileTransferObject
+    FileTransferObject,
+    CacheService
   ],
   exports: []
 })

@@ -4,11 +4,8 @@ import {
   NavController,
   NavParams,
   Content,
-  Platform,
   ToastController,
-  Item,
   AlertController,
-  ActionSheetController,
   ModalController,
   Searchbar
 } from "ionic-angular";
@@ -16,8 +13,7 @@ import { StorageProvider } from "../../providers/storage/storage";
 import { deals } from "../../models/deal";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { SharedProvider } from "../../providers/shared/shared";
-import { HttpClient } from "@angular/common/http";
-import { ElementInstructionMap } from "@angular/animations/browser/src/dsl/element_instruction_map";
+import { DealsProvider } from "../../providers/deals/deals";
 
 @IonicPage()
 @Component({
@@ -42,51 +38,43 @@ export class ProductlistPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private storageService: StorageProvider,
-    private plt: Platform,
     private toastController: ToastController,
     private notificationService: NotificationProvider,
     public alertCtrl: AlertController,
     public sharedService: SharedProvider,
-    private actionSheetCtrl: ActionSheetController,
     private modalController: ModalController,
-    private http: HttpClient
+    private dealService: DealsProvider
   ) {
-    //     var cat = this.navParams.get('cat');
-    //     var type = this.navParams.get('type')
-    //     if(type == "deals"){
-    //  this.http.get('http://localhost:3000/deals').subscribe(res => {
-    //       this.items = res;
-    //       this.newItem = this.items.filter(x => x.category == cat
-    //                                                           );
-    //       console.log(this.newItem);
-    //    })
-    //     }
-    //     else if (type == "products") {
-    //       this.http.get('http://localhost:3000/products').subscribe(res => {
-    //         this.items = res;
-    //         this.newItem = this.items.filter(x => x.category == cat);
-    //         console.log(this.newItem);
-    //       })
+    let id = this.navParams.get("id");
+    let type = this.navParams.get("type");
 
-    //     }
-
-    this.http
-      .get("http://dummy.restapiexample.com/api/v1/employees")
-      .subscribe(res => {
+    if (type == "deals") {
+      this.dealService.getDealsByCategory(id).subscribe((res: any) => {
         this.newItem = res;
-        this.copyItem = this.newItem;
-        // this.storageService.getDeals().then((res: any) => {
-        //   this.saveItem = res;
-        //   var same = this.newItem
-        //     .filter(f => {
-        //       return this.saveItem.find(ff => ff.id === f.id);
-        //     })
-        //     .map(m => {
-        //       return (m.isMatched = true);
-        //     });
-        console.log(this.newItem);
       });
-    // });
+    } else {
+      this.dealService.getProductByCategory(id).subscribe((res: any) => {
+        this.newItem = res;
+      });
+    }
+
+    // this.http
+    //   .get("http://dummy.restapiexample.com/api/v1/employees")
+    //   .subscribe(res => {
+    //     this.newItem = res;
+    //     this.copyItem = this.newItem;
+    //     // this.storageService.getDeals().then((res: any) => {
+    //     //   this.saveItem = res;
+    //     //   var same = this.newItem
+    //     //     .filter(f => {
+    //     //       return this.saveItem.find(ff => ff.id === f.id);
+    //     //     })
+    //     //     .map(m => {
+    //     //       return (m.isMatched = true);
+    //     //     });
+    //     console.log(this.newItem);
+    //   });
+    // // });
   }
 
   ionViewDidLoad() {

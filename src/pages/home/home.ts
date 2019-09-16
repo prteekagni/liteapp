@@ -23,6 +23,7 @@ import { File } from "@ionic-native/file";
 import { normalizeURL } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
 import { map } from "rxjs/operators";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -72,7 +73,7 @@ export class HomePage {
   counts: any = [];
   images: any = [];
   store: any = [];
-  showMore: any = [];
+  showMore: boolean = true;
   items: any = [];
   tempStore: any = [];
   substores: any = [];
@@ -123,6 +124,7 @@ export class HomePage {
     // store category
     this.dealService.getStoreCategory().subscribe((res: any) => {
       this.tempStore = res;
+      console.log(" Get Store Category " + this.tempStore);
       for (let index = 0; index < 4; index++) {
         this.store.push(res[index]);
       }
@@ -132,6 +134,7 @@ export class HomePage {
       this.tempSubStores = res;
       for (let index = 0; index < 3; index++) {
         this.substores.push(this.tempSubStores[index]);
+        console.log(this.substores);
       }
       // console.log("Hello  " + res);
     });
@@ -167,17 +170,17 @@ export class HomePage {
       }
     });
 
-    this.dealService.getAdsData().subscribe(
-      res => {
-        this.adsData = res || [];
-        if (this.adsData.length > 0) {
-          this.mainslide = this.adsData.filter(x => x.category == "scroll");
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.dealService.getAdsData().subscribe(
+    //   res => {
+    //     this.adsData = res || [];
+    //     if (this.adsData.length > 0) {
+    //       this.mainslide = this.adsData.filter(x => x.category == "scroll");
+    //     }
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   goToNotification() {
@@ -227,7 +230,8 @@ export class HomePage {
   goToPage(data) {
     console.log(data);
     this.navCtrl.push("StorepagePage", {
-      id: data.ID
+      id: data.ID,
+      type: "store"
     });
   }
 

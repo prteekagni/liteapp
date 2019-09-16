@@ -72,7 +72,8 @@ export class StorepagePage {
       );
 
     this.tempdata = this.navParams.get("id");
-    console.log(this.tempdata);
+    let tempcateg = this.navParams.get("type");
+    console.log(this.tempdata + tempcateg);
 
     this.http
       .get(

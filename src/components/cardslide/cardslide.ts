@@ -15,14 +15,12 @@ export class CardslideComponent implements OnInit {
   storelinks;
 
   constructor(
-    private event: Events,
     private navCtrl: NavController,
-    private dealService: DealsProvider,
-    private http: HttpClient
+    private dealService: DealsProvider
   ) {}
 
   ngOnInit() {
-    if (this.type == "store") {
+    if (this.type == "stores") {
       this.dealService.getStores(this.items).subscribe((res: any) => {
         this.cards = res;
       });
@@ -34,9 +32,12 @@ export class CardslideComponent implements OnInit {
   }
 
   goToDeal(item) {
-    console.log(item);
-    this.navCtrl.push("ProductlistPage", {
-      cat: item.Category
-    });
+    if (this.type == "stores") {
+      alert("dlfkjgfg");
+    } else if (this.type == "deals") {
+      this.navCtrl.push("ProductlistPage", {
+        cat: item.Category
+      });
+    }
   }
 }

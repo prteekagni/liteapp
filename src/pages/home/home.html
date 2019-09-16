@@ -126,8 +126,8 @@
       <ion-col col-12 text-center>
         <h2>{{ item.Name }}</h2>
       </ion-col>
-      <ion-col col-12 text-center>
-        <dealsgrid [items]="item" [type]="'store'" *ngIf="item.ID"></dealsgrid>
+      <ion-col col-12 text-center class="nopadding">
+        <dealsgrid [items]="item" [type]="'stores'" *ngIf="item.ID"></dealsgrid>
       </ion-col>
       <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
     </ion-row>
