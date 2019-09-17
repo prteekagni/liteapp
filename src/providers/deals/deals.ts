@@ -14,8 +14,8 @@ export class DealsProvider {
   }
 
   // get store links
-  getStores(data) {
-    return this.http.get(apiUrl + "stores/", data);
+  getStores(mid, id) {
+    return this.http.get(apiUrl + "stores/getSubStores/" + mid + "/" + id);
   }
 
   getStoreCategory() {
@@ -24,10 +24,14 @@ export class DealsProvider {
       .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
-  getStoreSubCategory(): Observable<Category[]> {
+  getFeatureStore() {
     return this.http
-      .get<Category[]>(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
+  }
+
+  getStoreSubCategory(data) {
+    return this.http.get(apiUrl + "category/GetSubCategory/", data);
   }
 
   // get Deals Categories
@@ -40,7 +44,9 @@ export class DealsProvider {
   }
 
   // get deals for category
-  getDealsByCategory(data) {}
+  getDealsByCategory(data) {
+    return this.http.get(apiUrl + "category");
+  }
 
   // get Deal Details
   getDealDetail() {}

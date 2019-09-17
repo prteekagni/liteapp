@@ -45,9 +45,10 @@
 </ion-header> -->
 
 <ion-content #pageContent>
-  <img [src]="imgpath" alt="" />
-
   <!-- <div class="header-image"></div> -->
+
+  <ng-container *ngIf="true; then connected; else notconnected"> </ng-container>
+
   <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
     <ion-slides
       *ngIf="mainslide.length > 0"
@@ -73,12 +74,15 @@
       </ion-spinner>
     </div>
   </ng-template>
-  <ng-container *ngIf="true; then connected; else notconnected"> </ng-container>
   <ng-template #connected class="main-content">
     <!-- top shops -->
     <!-- <cardgrid></cardgrid> -->
-    <aslidinglist></aslidinglist>
-    <aslidinglist></aslidinglist>
+    <h3>Featured</h3>
+    <aslidinglist
+      [items]="tempdata"
+      [type]="'stores'"
+      [featureid]="'5be3984c-2099-40f8-8d20-491fda5ae4bb'"
+    ></aslidinglist>
 
     <!-- top brands  -->
     <h3>Top brands</h3>
@@ -101,120 +105,20 @@
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>
-    <!-- <ion-row>
-      <ion-col col-12 text-center>
-        <h2>Food</h2>
-      </ion-col>
-    </ion-row> -->
-
     <ion-row *ngFor="let item of store; let i = index" class="mycatego">
       <ion-col col-12>
         <ion-col col-12 text-center>
-          <h2>{{ item.Name }}</h2>
+          <h2 *ngIf="item.Name !== 'Featured'">{{ item.Name }}</h2>
         </ion-col>
         <ion-row>
           <ion-col col-12 text-center>
-            <cardslide
+            <dealsgrid
               [items]="item"
-              [type]="'store'"
-              *ngIf="item.id"
-            ></cardslide>
-          </ion-col>
-          <!-- <ion-col col-4 text-center>
-            <ion-item (click)="goToPage()">
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-                <p style="text-align: center">Men's</p>
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="../../assets/men.jpg" class="storeimage" />
-              </ion-avatar>
-            </ion-item>
-          </ion-col>
-          <ng-container #name *ngIf="showMore == true">
-            <ion-col col-4>
-              <ion-item (click)="goToPage()">
-                <ion-avatar item-start>
-                  <img src="../../assets/men.jpg" class="storeimage" />
-                </ion-avatar>
-              </ion-item>
-            </ion-col>
-            <ion-col col-4>
-              <ion-item>
-                <ion-avatar item-start>
-                  <img src="../../assets/men.jpg" class="storeimage" />
-                </ion-avatar>
-              </ion-item>
-            </ion-col>
-            <ion-col col-4>
-              <ion-item>
-                <ion-avatar item-start>
-                  <img src="../../assets/men.jpg" class="storeimage" />
-                </ion-avatar>
-              </ion-item>
-            </ion-col> -->
-          <!-- </ng-container> -->
-          <ion-col col-12 text-center>
-            <ion-col col-3>
-              <button
-                ion-button
-                round
-                (click)="toggleDisplay()"
-                *ngIf="showMore"
-                text-center
-              >
-                Show Less
-              </button>
-            </ion-col>
-          </ion-col>
-          <ion-col col-12 text-center>
-            <ion-col col-3>
-              <button
-                ion-button
-                round
-                (click)="toggleDisplay()"
-                *ngIf="!showMore"
-              >
-                Show More
-              </button>
-            </ion-col>
+              [type]="'stores'"
+              *ngIf="item.ID"
+            ></dealsgrid>
           </ion-col>
         </ion-row>
-        <ng-container>
-          <!-- <dealsgrid [items]="item" *ngIf="item.ID"></dealsgrid> -->
-        </ng-container>
         <ng-template #loading>
           <ion-spinner name="bubbles"></ion-spinner>
         </ng-template>

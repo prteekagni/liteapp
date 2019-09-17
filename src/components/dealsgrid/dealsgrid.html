@@ -2,9 +2,9 @@
   <cardslide [items]="copyItem" [type]="type"></cardslide>
 </ng-container>
 <ng-template #elseTemplate>
-  <square [data]="copyItem.ID" [type]="type"></square>
+  <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>
 </ng-template>
 
-<ng-template #loading>
-  <ion-spinner name="bubbles"></ion-spinner>
-</ng-template>
+<ng-container>
+  <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>
+</ng-container>

@@ -25,17 +25,17 @@ export class DealsgridComponent implements OnInit {
 
   ngOnInit() {
     this.copyItem = this.items;
-    console.log(this.type);
 
     if (this.type === "deals") {
       this.dealService.getDealSubCategory().subscribe((res: any) => {
         this.cards = res;
-        console.log(this.cards);
       });
     } else if (this.type == "stores") {
-      this.dealService.getStores(this.items).subscribe((res: any) => {
-        this.cards = res;
-      });
+      this.dealService
+        .getStores(this.items.CatPID, this.items.ID)
+        .subscribe((res: any) => {
+          this.cards = res;
+        });
     }
   }
 }

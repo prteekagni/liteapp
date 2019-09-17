@@ -130,11 +130,11 @@ export class HomePage {
       }
     });
 
-    this.dealService.getStoreSubCategory().subscribe((res: any) => {
+    this.dealService.getFeatureStore().subscribe((res: any) => {
       this.tempSubStores = res;
+      console.log(res);
       for (let index = 0; index < 3; index++) {
         this.substores.push(this.tempSubStores[index]);
-        console.log(this.substores);
       }
       // console.log("Hello  " + res);
     });

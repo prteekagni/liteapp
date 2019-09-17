@@ -53,6 +53,7 @@ export class StorepagePage {
   store: any = [];
   showMore: any = [];
   tempdata: any;
+  featureID: string;
 
   constructor(
     public navCtrl: NavController,
@@ -81,64 +82,14 @@ export class StorepagePage {
       )
       .subscribe((res: any) => {
         this.store = res;
-        console.log(res);
+
+        this.store.forEach(element => {
+          if (element.Name == "Featured") {
+            console.log(element);
+            this.featureID = element.ID;
+          }
+        });
       });
-
-    // this.store = [
-    //   {
-    //     Name: "Men's Shopping",
-    //     CatType: "1",
-    //     id: "6BE73FBB-B1BF-48F9-856B-00AD284D0475"
-    //   },
-    //   {
-    //     Name: "Food",
-    //     CatType: "1",
-    //     id: "A35E6898-A7C3-4961-B5D6-071B568498B2"
-    //   },
-    //   {
-    //     Name: "Mobiles",
-    //     CatType: "1",
-    //     id: "A35E6798-A7C3-4961-B5D6-071B568498B2"
-    //   },
-    //   {
-    //     Name: "Electronics",
-    //     CatType: "1",
-    //     id: "A35E6998-A7C3-4961-B5D6-071B568498B2"
-    //   },
-
-    //   {
-    //     Name: "Gadgets",
-    //     CatType: "1",
-    //     id: "A28E6898-A7C3-4961-B5D6-071B568498B2"
-    //   },
-
-    //   {
-    //     Name: "Travel",
-    //     CatType: "1",
-    //     id: "A35E6898-A7C3-4961-B5D6-078B568498B2"
-    //   },
-    //   {
-    //     Name: "Headphones",
-    //     CatType: "2",
-    //     id: "A35E6898-A7C3-3961-B5D6-071B568498B2",
-    //     CatPID: "A28E6898-A7C3-4961-B5D6-071B568498B2",
-    //     Image: "http://elinfinitoindia.in/images/logo.png"
-    //   },
-    //   {
-    //     Name: "Bands",
-    //     CatType: "2",
-    //     id: "A35E6008-A7C3-3961-B5D6-071B568498B2",
-    //     CatPID: "A28E6898-A7C3-4961-B5D6-071B568498B2",
-    //     Image: "http://elinfinitoindia.in/images/logo.png"
-    //   },
-    //   {
-    //     Name: "Health Drinks",
-    //     CatType: "2",
-    //     id: "A35E6898-A7C3-3961-B5D6-071B56849992",
-    //     CatPID: "A35E6898-A7C3-4961-B5D6-071B568498B2",
-    //     Image: "http://elinfinitoindia.in/images/logo.png"
-    //   }
-    // ];
   }
 
   ionViewDidLoad() {
@@ -153,22 +104,6 @@ export class StorepagePage {
   }
 
   ionViewWillEnter() {
-    // this.dealService
-    //   .getStoreLinks()
-    //   .pipe(map((res: any) => res.filter(resp => resp.StoreType == "1")))
-    //   .subscribe((res: any) => {
-    //     this.store = res;
-    //     console.log(res);
-    //   });
-
-    // this.http
-    //   .get("http://localhost:3000/subcat")
-    //   .pipe(map((res: any) => res.filter(resp => resp.StoreType == 1)))
-    //   .subscribe((res: any) => {
-    //     console.log(res);
-    //     this.store = res;
-    //   });
-
     this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {
@@ -178,17 +113,17 @@ export class StorepagePage {
       }
     });
 
-    this.dealService.getAdsData().subscribe(
-      res => {
-        this.adsData = res || [];
-        if (this.adsData.length > 0) {
-          this.mainslide = this.adsData.filter(x => x.category == "scroll");
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.dealService.getAdsData().subscribe(
+    //   res => {
+    //     this.adsData = res || [];
+    //     if (this.adsData.length > 0) {
+    //       this.mainslide = this.adsData.filter(x => x.category == "scroll");
+    //     }
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   goToNotification() {
