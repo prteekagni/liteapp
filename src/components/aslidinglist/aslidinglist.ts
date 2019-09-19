@@ -17,7 +17,7 @@ export class AslidinglistComponent {
     console.log("Adsliding" + this.items);
     console.log("Adsliding" + this.featureid);
     this.dealsService
-      .getStores(this.items, this.featureid)
+      .getSubStores(this.items, this.featureid)
       .subscribe((res: any) => {
         this.store = res;
       });

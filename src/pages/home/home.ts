@@ -124,7 +124,7 @@ export class HomePage {
     // store category
     this.dealService.getStoreCategory().subscribe((res: any) => {
       this.tempStore = res;
-      console.log(" Get Store Category " + this.tempStore);
+      // console.log(" Get Store Category " + this.tempStore);
       for (let index = 0; index < 4; index++) {
         this.store.push(res[index]);
       }
@@ -132,7 +132,7 @@ export class HomePage {
 
     this.dealService.getFeatureStore().subscribe((res: any) => {
       this.tempSubStores = res;
-      console.log(res);
+
       for (let index = 0; index < 3; index++) {
         this.substores.push(this.tempSubStores[index]);
       }
@@ -200,7 +200,7 @@ export class HomePage {
   doInfinite(event) {
     if (this.store.length !== this.tempStore.length) {
       for (let index = 0; index < this.tempStore.length - 4; index++) {
-        console.log(this.tempStore[index + 4]);
+        // console.log(this.tempStore[index + 4]);
         this.store.push(this.tempStore[index + 3]);
       }
       // event.complete();

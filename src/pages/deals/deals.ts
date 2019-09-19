@@ -47,12 +47,12 @@ export class DealsPage {
     private dealsprovider: DealsProvider,
     public keyboard: Keyboard
   ) {
-    this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
-      this.tempsubdeals = res;
-      for (let index = 0; index < 3; index++) {
-        this.subdeals.push(this.tempsubdeals[index]);
-      }
-    });
+    // this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
+    //   this.tempsubdeals = res;
+    //   for (let index = 0; index < 3; index++) {
+    //     this.subdeals.push(this.tempsubdeals[index]);
+    //   }
+    // });
 
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;

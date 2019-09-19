@@ -9,7 +9,7 @@ import { DealsProvider } from "../../providers/deals/deals";
   templateUrl: "products.html"
 })
 export class ProductsPage {
-  pCategories: any = [];
+  products: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -18,33 +18,13 @@ export class ProductsPage {
     private dealsService: DealsProvider
   ) {}
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad ProductsPage");
-  }
+  ionViewDidLoad() {}
 
   ionViewWillEnter() {
-    this.pCategories = [
-      {
-        id: "1",
-        name: "fashion"
-      },
-      {
-        id: "1",
-        name: "typicode"
-      },
-      {
-        id: "2",
-        name: "For you"
-      },
-      {
-        id: "3",
-        name: "Valentine Gift"
-      },
-      {
-        id: "4",
-        name: "Testing "
-      }
-    ];
+    this.dealsService.getProductCategory().subscribe((res: any) => {
+      this.products = res;
+      console.log(this.products);
+    });
   }
 
   gotoProducts(data) {

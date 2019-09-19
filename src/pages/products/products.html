@@ -6,11 +6,11 @@
 
 <ion-content fullscreen>
   <ng-container
-    *ngIf="pCategories?.length > 0; then thenTemplate; else elseTemplate"
+    *ngIf="products?.length > 0; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    <ion-row>
-      <ion-col col-4 *ngFor="let item of pCategories">
+    <!-- <ion-row>
+      <ion-col col-4 *ngFor="let item of products">
         <ion-card class="roundedcorner" (click)="gotoProducts(item)">
           <ion-card-content>
             <img
@@ -19,11 +19,24 @@
               class="centered-image"
             />
             <p class="itemtext" style="white-space: nowrap">
-              {{ item.name }}
+              {{ item.Name }}
             </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
+    </ion-row> -->
+    <ion-row *ngFor="let item of products; let i = index" class="mycatego">
+      <ion-col col-12 text-center>
+        <h2>{{ item.Name }}</h2>
+      </ion-col>
+      <ion-col col-12 text-center class="nopadding">
+        <dealsgrid
+          [items]="item"
+          [type]="'products'"
+          *ngIf="item.ID"
+        ></dealsgrid>
+      </ion-col>
+      <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
     </ion-row>
   </ng-template>
   <ng-template #elseTemplate>

@@ -27,15 +27,25 @@ export class DealsgridComponent implements OnInit {
     this.copyItem = this.items;
 
     if (this.type === "deals") {
-      this.dealService.getDealSubCategory().subscribe((res: any) => {
+      this.dealService.getDealSubCategory(this.items).subscribe((res: any) => {
         this.cards = res;
+        console.log(res);
       });
-    } else if (this.type == "stores") {
+    } else if (this.type == "substores") {
       this.dealService
-        .getStores(this.items.CatPID, this.items.ID)
+        .getSubStores(this.items.CatPID, this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
         });
+    } else if (this.type == "stores") {
+      this.dealService.getStores(this.items.ID).subscribe((res: any) => {
+        this.cards = res;
+      });
+    } else if (this.type == "products") {
+      this.dealService.getProductCategory().subscribe((res: any) => {
+        this.cards = res;
+        console.log("fromdealsgrid " + this.cards);
+      });
     }
   }
 }

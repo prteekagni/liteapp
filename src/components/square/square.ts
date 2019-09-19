@@ -13,7 +13,7 @@ import { DealsProvider } from "../../providers/deals/deals";
   templateUrl: "square.html"
 })
 export class SquareComponent implements OnInit {
-  text: any = [];
+  items: any = [];
   @Input() data;
   @Input() type;
   @Output() clickeve = new EventEmitter();
@@ -33,11 +33,25 @@ export class SquareComponent implements OnInit {
   ionViewDidEnter() {}
 
   ngOnInit(): void {
-    console.log(this.data);
-    this.dealService
-      .getStores(this.data.CatPID, this.data.ID)
-      .subscribe((res: any) => {
-        this.text = res;
+    console.log(this.type);
+    if (this.type === "deals") {
+      this.dealService.getDealSubCategory(this.data).subscribe((res: any) => {
+        this.items = res;
       });
+    } else if (this.type == "substores") {
+      this.dealService
+        .getSubStores(this.items.CatPID, this.items.ID)
+        .subscribe((res: any) => {
+          this.items = res;
+        });
+    } else if (this.type == "stores") {
+      this.dealService.getStores(this.data.ID).subscribe((res: any) => {
+        this.items = res;
+      });
+    } else if (this.type == "products") {
+      this.dealService.getProductCategory().subscribe((res: any) => {
+        this.items = res;
+      });
+    }
   }
 }
