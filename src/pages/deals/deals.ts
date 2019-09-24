@@ -47,19 +47,20 @@ export class DealsPage {
     private dealsprovider: DealsProvider,
     public keyboard: Keyboard
   ) {
-    // this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
-    //   this.tempsubdeals = res;
-    //   for (let index = 0; index < 3; index++) {
-    //     this.subdeals.push(this.tempsubdeals[index]);
-    //   }
-    // });
-
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;
       for (let index = 0; index < 4; index++) {
         this.deals.push(this.tempdeals[index]);
       }
     });
+    this.dealsprovider
+      .getDealSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
+      .subscribe((res: any) => {
+        this.tempsubdeals = res;
+        for (let index = 0; index < 3; index++) {
+          this.subdeals.push(this.tempsubdeals[index]);
+        }
+      });
   }
 
   ionViewWillEnter() {}

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { map, filter, mergeMap } from "rxjs/operators";
+import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 
@@ -34,7 +34,7 @@ export class DealsProvider {
   }
 
   getStoreSubCategory(data) {
-    return this.http.get(apiUrl + "category/GetSubCategory/", data);
+    return this.http.get(apiUrl + "category/GetSubCategory/" + data);
   }
 
   // get Deals Categories
@@ -44,8 +44,13 @@ export class DealsProvider {
       .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
-  getDealSubCategory(id) {
+  getDealBySubCategory(id) {
     return this.http.get(apiUrl + "category/getDealsSubCategory/" + id);
+  }
+
+  getDealSubCategory(data) {
+    return this.http.get(apiUrl + "category/GetSubCategory/" + data);
+    // .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
   }
 
   // get deals for category

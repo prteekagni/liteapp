@@ -54,6 +54,7 @@ export class StorepagePage {
   showMore: any = [];
   tempdata: any;
   featureID: string;
+  title: string;
 
   constructor(
     public navCtrl: NavController,
@@ -74,11 +75,12 @@ export class StorepagePage {
 
     this.tempdata = this.navParams.get("id");
     let tempcateg = this.navParams.get("type");
+    this.title = this.navParams.get("title");
     console.log(this.tempdata + tempcateg);
 
     this.http
       .get(
-        "http://localhost:52044/api/category/GetSubCategory/" + this.tempdata
+        "http://192.168.225.36:52044/api/category/GetSubCategory/162c2826-afed-4f7e-a8cc-f38b24bb4e0b"
       )
       .subscribe((res: any) => {
         this.store = res;

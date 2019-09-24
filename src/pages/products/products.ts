@@ -10,6 +10,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 })
 export class ProductsPage {
   products: any = [];
+  tempproducts: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -22,7 +23,10 @@ export class ProductsPage {
 
   ionViewWillEnter() {
     this.dealsService.getProductCategory().subscribe((res: any) => {
-      this.products = res;
+      this.tempproducts = res;
+      for (let index = 0; index < 2; index++) {
+        this.products.push(this.tempproducts[index]);
+      }
       console.log(this.products);
     });
   }
@@ -33,5 +37,19 @@ export class ProductsPage {
       id: data.id,
       type: "fashion"
     });
+  }
+  doInfinite(event) {
+    if (this.tempproducts.length != this.products.length) {
+      for (
+        let index = this.products.length;
+        index < this.tempproducts.length;
+        index++
+      ) {
+        this.products.push(this.tempproducts[index]);
+      }
+    }
+    setTimeout(() => {
+      event.complete();
+    }, 1000);
   }
 }

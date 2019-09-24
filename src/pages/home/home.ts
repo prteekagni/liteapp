@@ -22,7 +22,7 @@ import {
 import { File } from "@ionic-native/file";
 import { normalizeURL } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 const animationsOptions = {
@@ -79,7 +79,7 @@ export class HomePage {
   substores: any = [];
   tempSubStores: any = [];
   lastStore: boolean = false;
-
+  fileTransfer;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -96,7 +96,7 @@ export class HomePage {
   ) {
     platform.ready().then(() => {
       this.isConnected = this.sharedService.checkNetworkStatus();
-      this.checkDirectory();
+      // this.checkDirectory();
     });
 
     platform.resume.subscribe(() => {
@@ -122,22 +122,42 @@ export class HomePage {
     //     }
     //   });
     // store category
-    this.dealService.getStoreCategory().subscribe((res: any) => {
-      this.tempStore = res;
-      // console.log(" Get Store Category " + this.tempStore);
-      for (let index = 0; index < 4; index++) {
-        this.store.push(res[index]);
-      }
-    });
+    this.dealService
+      .getStoreCategory()
+      .pipe(take(5))
+      .subscribe((res: any) => {
+        this.tempStore = res;
+        // console.log(" Get Store Category " + this.tempStore);
+        for (let index = 0; index < 4; index++) {
+          this.store.push(res[index]);
+        }
+      });
 
-    this.dealService.getFeatureStore().subscribe((res: any) => {
-      this.tempSubStores = res;
-
-      for (let index = 0; index < 3; index++) {
-        this.substores.push(this.tempSubStores[index]);
-      }
-      // console.log("Hello  " + res);
-    });
+    this.dealService
+      .getStoreSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
+      .subscribe((res: any) => {
+        this.tempSubStores = res;
+        for (let index = 0; index < 3; index++) {
+          this.substores.push(this.tempSubStores[index]);
+        }
+        //   for (let index = 0; index < this.tempSubStores.length; ) {
+        //     if (this.tempSubStores[index].Logo) {
+        //       this.download(
+        //         this.tempSubStores[index].Name,
+        //         "http://elinfinitoindia.in/images/logo.png"
+        //       ).then(
+        //         (res: any) => {
+        //           console.log(res);
+        //         },
+        //         err => {
+        //           console.log(JSON.stringify(err));
+        //           index++;
+        //         }
+        //       );
+        //     }
+        //   }
+      });
+    // console.log("Hello  " + res);
 
     // this.dealService.getStoreCategory().subscribe(
     //   (res: any) => {
@@ -156,6 +176,35 @@ export class HomePage {
     ];
   }
 
+  download(fileName, filePath): Promise<any> {
+    //here encoding path as encodeURI() format.
+    fileName = fileName + ".png";
+    filePath =
+      "https://appimageselinfinito.s3.us-east-2.amazonaws.com/" + filePath;
+    let url = encodeURI(filePath);
+    //here initializing object.
+    this.fileTransfer = this.transfer.create();
+    // here iam mentioned this line this.file.externalRootDirectory is a native pre-defined file path storage. You can change a file path whatever pre-defined method.
+    return this.fileTransfer.download(
+      url,
+      this.file.externalDataDirectory + fileName,
+      true
+    );
+    // .then(
+    //   entry => {
+    //     //here logging our success downloaded file path in mobile.
+    //     // console.log("download completed: " + entry.toURL());
+    //     // return entry.toUrl();
+    //     var a = (<any>window).Ionic.WebView.convertFileSrc(entry.toURL());
+    //     // return a;
+    //   },
+    //   error => {
+    //     //here logging our error its easier to find out what type of error occured.
+    //     // console.log("download failed: " + error);
+    //     // return error;
+    //   }
+    // );
+  }
   nav11() {
     this.navCtrl.push("ProductlistPage");
   }
@@ -213,18 +262,40 @@ export class HomePage {
     this.lastStore = true;
   }
 
-  toggleDisplay() {
-    if (this.tempSubStores.length !== this.substores.length) {
-      for (
-        var ii = this.substores.length;
-        ii < this.tempSubStores.length;
-        ii++
-      ) {
-        this.substores.push(this.tempSubStores[ii]);
-      }
-    }
+  async toggleDisplay() {
+    // if (this.tempSubStores.length !== this.substores.length) {
+    //   for (
+    //     var ii = this.substores.length;
+    //     ii < this.tempSubStores.length;
+    //     ii++
+    //   ) {
+    //     this.substores.push(this.tempSubStores[ii]);
+    //   }
+    // }
 
-    this.showMore = !this.showMore;
+    let data = {
+      Name: "Praetek",
+      Links: [
+        {
+          Name: "Amazon",
+          Logo: "Img",
+          Linlk: "fldkjhglkjfhdgj"
+        }
+      ]
+    };
+
+    // this.showMore = !this.showMore;
+    let dealmodal = this.modalController.create(
+      "LinkmodalPage",
+      { data: data },
+      {
+        cssClass: "mymodal",
+        showBackdrop: true,
+        enableBackdropDismiss: true
+      }
+    );
+
+    return await dealmodal.present();
   }
 
   goToPage(data) {

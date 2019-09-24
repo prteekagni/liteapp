@@ -40,7 +40,15 @@ import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
-      tabsHideOnSubPages: true
+      tabsHideOnSubPages: true,
+      backButtonText: "Go Back",
+      iconMode: "ios",
+      modalEnter: "modal-slide-in",
+      modalLeave: "modal-slide-out",
+      tabsPlacement: "bottom",
+      pageTransition: "ios-transition",
+      menuType: "reveal",
+      spinner: "ios"
     }),
     HttpClientModule,
     ReactiveFormsModule,

@@ -27,10 +27,12 @@ export class DealsgridComponent implements OnInit {
     this.copyItem = this.items;
 
     if (this.type === "deals") {
-      this.dealService.getDealSubCategory(this.items).subscribe((res: any) => {
-        this.cards = res;
-        console.log(res);
-      });
+      this.dealService
+        .getDealBySubCategory(this.items)
+        .subscribe((res: any) => {
+          this.cards = res;
+          console.log(res);
+        });
     } else if (this.type == "substores") {
       this.dealService
         .getSubStores(this.items.CatPID, this.items.ID)

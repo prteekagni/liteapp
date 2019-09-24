@@ -55,32 +55,44 @@
       </div>
     </ng-template>
     <!-- top shops -->
-    <cardgrid></cardgrid>
+
+    <ion-row>
+      <ion-col col-12>
+        <h2>Top Shops</h2>
+        <cardgrid></cardgrid>
+      </ion-col>
+    </ion-row>
 
     <!--      style="margin-top: 20vh;
         margin-left: 49vw;" -->
 
     <!-- top brands  -->
-    <h3>Top brands</h3>
-    <ng-container *ngIf="store.length > 0; else loading">
-      <ion-row>
-        <ion-item no-lines class="leftpadding">
-          <ion-scroll scrollX="true" scroll-avatar>
-            <ion-avatar>
-              <img
-                src="../../assets/imgs/logo.png"
-                class="scroll-item"
-                style="border: 1px solid grey;"
-                *ngFor="let item of store"
-              />
-            </ion-avatar>
-          </ion-scroll>
-        </ion-item>
-      </ion-row>
-    </ng-container>
-    <ng-template #loading>
-      <ion-spinner name="bubbles"></ion-spinner>
-    </ng-template>
+
+    <ion-row>
+      <ion-col col-12>
+        <h2>Top brands</h2>
+        <ng-container *ngIf="store.length > 0; else loading">
+          <ion-row>
+            <ion-item no-lines class="leftpadding">
+              <ion-scroll scrollX="true" scroll-avatar>
+                <ion-avatar>
+                  <img
+                    src="../../assets/imgs/logo.png"
+                    class="scroll-item"
+                    style="border: 1px solid grey;"
+                    *ngFor="let item of store"
+                  />
+                </ion-avatar>
+              </ion-scroll>
+            </ion-item>
+          </ion-row>
+        </ng-container>
+        <ng-template #loading>
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+
     <!-- <ion-row>
       <ion-col col-12 text-center>
         <h2>Food</h2>
@@ -99,7 +111,7 @@
             <ion-item (click)="goToPage(item)" item-start>
               <ion-avatar style="width: 106px;">
                 <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
-                <p style="text-align: center">{{ item.Name }}</p>
+                <p style="text-align: center">{{ item.Name | titlecase }}</p>
               </ion-avatar>
             </ion-item>
           </ion-col>

@@ -40,7 +40,7 @@ export class StorageProvider {
           this.storage.set(I_KEY, res);
         }
       } else {
-        this.storage.set(DEALS_KEY, [data]);
+        this.storage.set(I_KEY, [data]);
         return true;
       }
     });
