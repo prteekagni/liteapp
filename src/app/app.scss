@@ -27,35 +27,7 @@ ion-content {
   background-image: none !important;
 }
 
-// .modal-wrapper {
-//     position: absolute;
-//     overflow: hidden;
-//     /* max-width: 282px; */
-//     border-radius: 2px;
-//     width: 100vw;
-//     height: 50vh;
-//     top: 50vh;
-//     left: 0;
-//     right: 0;
-//     margin: auto;
-//     border: 0;
-//     -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-//     box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-//     background-color: #fafafa;
-// }
-
 .mymodal {
-  // position: absolute;
-  // overflow: hidden;
-  // /* max-width: 282px; */
-  // border-radius: 2px;
-  // width: 100vw;
-  // height: 50vh;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // margin: auto;
-  // border: 0;
   -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
   box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
   background-color: #fafafa;
@@ -64,7 +36,7 @@ ion-content {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 45vh;
+  height: 35vh;
   width: 90%;
   border-radius: 10px;
 }
@@ -149,4 +121,8 @@ h2 {
 .show-less {
   height: 19vh;
   overflow: hidden;
+}
+ion-img {
+  background: white !important;
+  min-height: 130px;
 }

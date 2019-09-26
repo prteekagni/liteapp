@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title style="color:orangered;">
-      Available Stores for Men's Fashion
+      Available Stores for {{ title }}
     </ion-title>
     <ion-buttons start color="theme">
       <button ion-button (click)="dismiss()" color="theme">
@@ -16,33 +16,10 @@
   <ion-row>
     <ion-col col-12>
       <ion-row>
-        <ion-col col-4 style="margin:auto">
-          <ion-row text-center>
-            <ion-col col-12>
-              <img src="../../assets/imgs/Ajio.png" />
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-4>
-          <ion-row text-center>
-            <ion-col col-12>
-              <img src="../../assets/imgs/4.png" />
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-4>
-          <ion-row text-center>
-            <ion-col col-12>
-              <img src="../../assets/imgs/4.png" />
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-4>
-          <ion-row text-center>
-            <ion-col col-12>
-              <img src="../../assets/imgs/4.png" />
-            </ion-col>
-          </ion-row>
+        <ion-col col-4 *ngFor="let item of items" (click)="goToUrl(item.Url)">
+          <ion-card>
+            <img src="../../assets/{{ item.Logo }}" />
+          </ion-card>
         </ion-col>
       </ion-row>
     </ion-col>

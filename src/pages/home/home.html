@@ -74,7 +74,7 @@
         <ng-container *ngIf="store.length > 0; else loading">
           <ion-row>
             <ion-item no-lines class="leftpadding">
-              <ion-scroll scrollX="true" scroll-avatar>
+              <ion-scroll scrollX="true" scroll-avatar style="height:150px;">
                 <ion-avatar>
                   <img
                     src="../../assets/imgs/logo.png"
@@ -110,7 +110,10 @@
           <ion-col col-4 text-center *ngFor="let item of substores; index as i">
             <ion-item (click)="goToPage(item)" item-start>
               <ion-avatar style="width: 106px;">
-                <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
+                <ion-img
+                  src="assets/{{ item.Logo }}"
+                  class="storeimage"
+                ></ion-img>
                 <p style="text-align: center">{{ item.Name | titlecase }}</p>
               </ion-avatar>
             </ion-item>
@@ -134,21 +137,26 @@
     </ion-row>
 
     <!-- Store category with store links -->
-    <ion-row *ngFor="let item of store; let i = index" class="mycatego">
-      <ion-col col-12 text-center>
-        <h2>{{ item.Name }}</h2>
-      </ion-col>
-      <ion-col col-12 text-center class="nopadding">
-        <dealsgrid [items]="item" [type]="'stores'" *ngIf="item.ID"></dealsgrid>
-      </ion-col>
-      <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
-    </ion-row>
+    <ng-container *ngFor="let item of store; let i = index">
+      <ion-row *ngIf="item.Name != 'New Mobiles'" class="mycatego">
+        <ion-col col-12 text-center>
+          <h2>{{ item.Name }}</h2>
+        </ion-col>
+        <ion-col col-12 text-center class="nopadding">
+          <dealsgrid
+            [items]="item"
+            [type]="'stores'"
+            *ngIf="item.ID"
+          ></dealsgrid>
+        </ion-col>
+        <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+      </ion-row>
+    </ng-container>
     <ion-row *ngIf="lastStore">
       <ion-col col-12>
         <h1>No more stores</h1>
       </ion-col>
     </ion-row>
-
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>

@@ -127,6 +127,11 @@ export class HomePage {
       .pipe(take(5))
       .subscribe((res: any) => {
         this.tempStore = res;
+        this.tempStore.forEach(element => {
+          if (element.Name == "Top Brands") {
+            console.log(element);
+          }
+        });
         // console.log(" Get Store Category " + this.tempStore);
         for (let index = 0; index < 4; index++) {
           this.store.push(res[index]);
@@ -263,39 +268,41 @@ export class HomePage {
   }
 
   async toggleDisplay() {
-    // if (this.tempSubStores.length !== this.substores.length) {
-    //   for (
-    //     var ii = this.substores.length;
-    //     ii < this.tempSubStores.length;
-    //     ii++
-    //   ) {
-    //     this.substores.push(this.tempSubStores[ii]);
-    //   }
-    // }
-
-    let data = {
-      Name: "Praetek",
-      Links: [
-        {
-          Name: "Amazon",
-          Logo: "Img",
-          Linlk: "fldkjhglkjfhdgj"
-        }
-      ]
-    };
-
-    // this.showMore = !this.showMore;
-    let dealmodal = this.modalController.create(
-      "LinkmodalPage",
-      { data: data },
-      {
-        cssClass: "mymodal",
-        showBackdrop: true,
-        enableBackdropDismiss: true
+    if (this.tempSubStores.length !== this.substores.length) {
+      for (
+        var ii = this.substores.length;
+        ii < this.tempSubStores.length;
+        ii++
+      ) {
+        this.substores.push(this.tempSubStores[ii]);
       }
-    );
+    }
 
-    return await dealmodal.present();
+    this.showMore = !this.showMore;
+
+    // let data = {
+    //   Name: "Praetek",
+    //   Links: [
+    //     {
+    //       Name: "Amazon",
+    //       Logo: "Img",
+    //       Linlk: "fldkjhglkjfhdgj"
+    //     }
+    //   ]
+    // };
+
+    // // this.showMore = !this.showMore;
+    // let dealmodal = this.modalController.create(
+    //   "LinkmodalPage",
+    //   { data: data },
+    //   {
+    //     cssClass: "mymodal",
+    //     showBackdrop: true,
+    //     enableBackdropDismiss: true
+    //   }
+    // );
+
+    // return await dealmodal.present();
   }
 
   goToPage(data) {

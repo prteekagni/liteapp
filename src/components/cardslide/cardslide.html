@@ -1,15 +1,31 @@
 <ion-row>
   <ion-col col-12>
     <ion-item no-lines class="paddingleft">
-      <ion-scroll scrollX="true" scroll-avatar id="largecardcontainer">
+      <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
         <ion-card
-          class="scroll-item"
-          id="largecard"
+          class="scroll-item largecard"
           (click)="getToDeal(item)"
           *ngFor="let item of cards; index as i"
         >
-          <ion-img src="../../assets/imgs/1.png" class="largecardimg">
+          <ion-img
+            *ngIf="item.Logo != null"
+            src="../../assets/{{ item.Logo }}"
+            class="largecardimg"
+          >
           </ion-img>
+          <div class="overlay-effect h-100 w-100"></div>
+          <h1
+            style="font-family: 'Mansalva', cursive; white-space:normal;    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+        word-break: break-all;
+    color: white;font-size:3rem;
+  "
+          >
+            {{ item.Name }}
+          </h1>
         </ion-card>
       </ion-scroll>
       <ng-template #loading>
