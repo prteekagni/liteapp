@@ -20,10 +20,8 @@ import {
   FileTransferObject
 } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
-import { normalizeURL } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
 import { map, take } from "rxjs/operators";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -127,24 +125,35 @@ export class HomePage {
       .pipe(take(5))
       .subscribe((res: any) => {
         this.tempStore = res;
-        this.tempStore.forEach(element => {
-          if (element.Name == "Top Brands") {
-            console.log(element);
-          }
-        });
-        // console.log(" Get Store Category " + this.tempStore);
-        for (let index = 0; index < 4; index++) {
-          this.store.push(res[index]);
+        if (this.tempStore) {
+          this.tempStore.forEach(element => {
+            if (element.Name == "Top Brands") {
+              console.log(element);
+            }
+            for (let index = 0; index < 4; index++) {
+              this.store.push(res[index]);
+            }
+          });
         }
+
+        // console.log(" Get Store Category " + this.tempStore);
+      });
+
+    this.http
+      .get("http://192.168.225.36:52044/api/brand")
+      .subscribe((res: any) => {
+        this.brands = res;
+        console.log(this.brands);
       });
 
     this.dealService
-      .getStoreSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
+      .getStoreSubCategory("ef6d1ac9-acb2-484a-88a3-d2f24b8371aa")
       .subscribe((res: any) => {
-        this.tempSubStores = res;
-        for (let index = 0; index < 3; index++) {
-          this.substores.push(this.tempSubStores[index]);
-        }
+        this.substores = res;
+
+        // for (let index = 0; index < 4; index++) {
+        //   this.substores.push(this.tempSubStores[index]);
+        // }
         //   for (let index = 0; index < this.tempSubStores.length; ) {
         //     if (this.tempSubStores[index].Logo) {
         //       this.download(
@@ -215,7 +224,11 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.imgpath = localStorage.getItem("key") || "";
+    // this.navCtrl.push("StorepagePage", {
+    //   id: "162c2826-afed-4f7e-a8cc-f38b24bb4e0",
+    //   type: "store"
+    // });
+    // this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {
         this.isConnected = true;

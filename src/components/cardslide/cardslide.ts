@@ -22,10 +22,10 @@ export class CardslideComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.items);
     if (this.type == "stores") {
       this.dealService.getStores(this.items.ID).subscribe((res: any) => {
         this.cards = res;
-        console.log(this.cards);
       });
     } else if (this.type == "deals") {
       this.dealService

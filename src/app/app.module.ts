@@ -31,7 +31,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpErrorInterceptor } from "../providers/shared/interceptor";
 import { CacheService } from "../providers/shared/cache";
 import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
-
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 @NgModule({
   declarations: [MyApp],
   // schemas: [
@@ -81,7 +81,8 @@ import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
     FileTransfer,
     File,
     FileTransferObject,
-    CacheService
+    CacheService,
+    InAppBrowser
   ],
   exports: []
 })

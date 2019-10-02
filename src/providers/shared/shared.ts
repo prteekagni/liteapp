@@ -13,6 +13,7 @@ import {
   NativePageTransitions,
   NativeTransitionOptions
 } from "@ionic-native/native-page-transitions";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -38,7 +39,8 @@ export class SharedProvider {
     private network: Network,
     private events: Events,
     private nativeTrasnitions: NativePageTransitions,
-    private alertCtrl: AlertController
+
+    private inappBrowser: InAppBrowser
   ) {
     this.network.onConnect().subscribe(() => {
       console.log("network connected!");
@@ -186,7 +188,17 @@ export class SharedProvider {
   }
 
   handleError(error) {
-    console.log(error);
-    this.createToast("");
+    this.createToast("Error");
+  }
+
+  // createBrowserLink
+
+  openBrowser(data) {
+    const url = "http://" + data.Url;
+    console.log(url);
+    const browser = this.inappBrowser.create(url);
+    // browser.on("loadstop").subscribe(event => {
+    //   browser.insertCSS({ code: "body{color: red;" });
+    // });
   }
 }

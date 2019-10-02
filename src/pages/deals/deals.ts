@@ -4,18 +4,12 @@ import {
   NavController,
   NavParams,
   Content,
-  ItemSliding,
-  Platform,
-  Events,
   Searchbar,
   Keyboard,
   Item
 } from "ionic-angular";
-import { AppMinimize } from "@ionic-native/app-minimize";
-import { HttpClient } from "@angular/common/http";
 import { DealsProvider } from "../../providers/deals/deals";
-import { map } from "rxjs/operators";
-import { filter } from "rxjs/operators";
+
 /**
  * Generated class for the DealsPage page.
  *
@@ -49,16 +43,22 @@ export class DealsPage {
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;
-      for (let index = 0; index < 4; index++) {
-        this.deals.push(this.tempdeals[index]);
+      if (this.tempdeals.lenght >= 1) {
+        for (let index = 0; index < 4; index++) {
+          this.deals.push(this.tempdeals[index]);
+        }
       }
     });
     this.dealsprovider
       .getDealSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
       .subscribe((res: any) => {
         this.tempsubdeals = res;
-        for (let index = 0; index < 3; index++) {
-          this.subdeals.push(this.tempsubdeals[index]);
+        console.log(this.tempsubdeals);
+        if (this.tempsubdeals.length >= 1) {
+          for (let index = 0; index < 3; index++) {
+            this.subdeals.push(this.tempsubdeals[index]);
+            console.log(this.subdeals);
+          }
         }
       });
   }

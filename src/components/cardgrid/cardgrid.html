@@ -1,4 +1,6 @@
 <ion-row>
+  <h2 *ngIf="items.length >= 1">Top Shops</h2>
+
   <ion-col col-12>
     <ion-row>
       <ng-container *ngFor="let item of items; index as i">

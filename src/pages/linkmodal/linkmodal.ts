@@ -3,12 +3,13 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ViewController
+  ViewController,
+  ModalController
 } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { SharedProvider } from "../../providers/shared/shared";
-
+import { AlertController } from "ionic-angular";
 /**
  * Generated class for the LinkmodalPage page.
  *
@@ -24,14 +25,20 @@ import { SharedProvider } from "../../providers/shared/shared";
 export class LinkmodalPage implements OnInit {
   items: any = [];
   title: string;
+  Url: any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private viewController: ViewController,
     private http: HttpClient,
-    private sharedService: SharedProvider
+    private sharedService: SharedProvider,
+    private modalController: ModalController
   ) {
-    console.log(this.navParams.get("data"));
+    this.items = this.navParams.get("data");
+    this.Url = this.items.Url;
+    console.log(this.Url);
+
     this.title = this.navParams.get("data").Name;
   }
 
@@ -44,18 +51,31 @@ export class LinkmodalPage implements OnInit {
     //Add 'implements OnInit' to the class.
     this.http
       .get("http://192.168.225.36:52044/api/stores")
-      .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
+      // .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
       .subscribe((res: any) => {
         this.items = res;
         console.log(this.items);
       });
   }
 
-  dismiss() {
-    this.viewController.dismiss();
+  goToUrl(data) {
+    // const url = "http://" + data;
+    // this.sharedService.createToast("launching Website");
+    // this.sharedService.openBrowser(data);
+    let modal = this.modalController.create(
+      "WaitmodalPage",
+      {
+        data: data
+      },
+      {
+        cssClass: "mymodal"
+      }
+    );
+    modal.present();
+    this.dismiss();
   }
 
-  goToUrl(data) {
-    this.sharedService.createToast("launching Website");
+  dismiss() {
+    this.viewController.dismiss();
   }
 }

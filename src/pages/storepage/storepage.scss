@@ -28,10 +28,10 @@ page-storepage {
     display: none;
   }
 
-  .item-md ion-avatar img {
-    width: 80px;
-    height: 80px;
-  }
+  // .item-md ion-avatar img {
+  //   width: 80px;
+  //   height: 80px;
+  // }
 
   .item-md.item-block .item-inner {
     padding-right: 0px !important;
@@ -144,11 +144,35 @@ page-storepage {
 
   //
   ion-scroll[scroll-avatar] {
-    height: 58px; // height: 140px;
+    height: 200px; // height: 140px;
+  }
+  /*this is used as a container to show largecards */
+  .largecardcontainer {
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 90px;
+    margin-top: 0px;
+  }
+  .brandcard {
+    position: relative;
+    text-align: center;
+    height: 80px;
+    width: 120px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    -webkit-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
   }
 
-  /* Hide ion-content scrollbar */
-  ::-webkit-scrollbar {
-    display: none;
+  .brandcardcontainer {
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 110px !important;
+    margin-top: 0px;
   }
 }

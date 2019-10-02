@@ -24,7 +24,7 @@ export class DealsProvider {
   getStoreCategory() {
     return this.http
       .get(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
   }
 
   getFeatureStore() {

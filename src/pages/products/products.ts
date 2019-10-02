@@ -24,10 +24,11 @@ export class ProductsPage {
   ionViewWillEnter() {
     this.dealsService.getProductCategory().subscribe((res: any) => {
       this.tempproducts = res;
-      for (let index = 0; index < 2; index++) {
-        this.products.push(this.tempproducts[index]);
+      if (this.tempproducts.length >= 1) {
+        for (let index = 0; index < 2; index++) {
+          this.products.push(this.tempproducts[index]);
+        }
       }
-      console.log(this.products);
     });
   }
 

@@ -45,10 +45,17 @@
   <ion-row>
     <ion-col col-12>
       <ion-row [ngClass]="{ 'show-less': showMore }">
-        <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
+        <ion-col
+          col-4
+          text-center
+          *ngFor="let item of tempsubdeals; index as i"
+        >
           <ion-item (click)="goToPage(item)" item-start>
             <ion-avatar style="width: 106px;">
-              <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
+              <ion-img
+                src="../../assets/{{ item.Logo }}"
+                class="storeimage"
+              ></ion-img>
               <p style="text-align: center">{{ item?.Name }}</p>
             </ion-avatar>
           </ion-item>
