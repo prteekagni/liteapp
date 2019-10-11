@@ -10,21 +10,12 @@
           <ng-container>
             <ion-img
               *ngIf="item.Logo != null"
-              src="../../assets/{{ item.Logo }}"
+              src="{{ item.Logo }}"
               class="largecardimg"
             >
             </ion-img>
             <div class="overlay-effect h-100 w-100"></div>
-            <h1
-              style="font-family: 'Mansalva', cursive; white-space:normal;    position: absolute;
-    top: 80%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-        word-break: break-all;
-    color: white;font-size:1.5rem;
-  "
-            >
+            <h1 class="textstyle">
               {{ item.Name }}
             </h1>
           </ng-container>

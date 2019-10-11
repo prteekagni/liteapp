@@ -76,29 +76,31 @@ export class StorepagePage {
     this.title = this.navParams.get("title");
     console.log(this.tempdata + tempcateg);
 
-    this.http
-      .get(
-        "http://192.168.225.36:52044/api/category/GetSubCategory/" +
-          this.tempdata
-      )
+    // this.http
+    //   .get(
+    //     "http://192.168.225.36:52044/api/category/GetSubCategory/" +
+    //       this.tempdata
+    //   )
+    //   .subscribe((res: any) => {
+    //     this.store = res;
+    //     console.log(this.store);
+
+    //     // this.store.forEach(element => {
+    //     //   if (element.Name == "Featured") {
+    //     //     console.log(element);
+    //     //     this.featureID = element.ID;
+    //     //   }
+    //     // });
+    //   });
+
+    this.dealService
+      .getStoreSubCategory(this.tempdata)
       .subscribe((res: any) => {
         this.store = res;
-        console.log(this.store);
-
-        // this.store.forEach(element => {
-        //   if (element.Name == "Featured") {
-        //     console.log(element);
-        //     this.featureID = element.ID;
-        //   }
-        // });
       });
-
-    this.http
-      .get("http://192.168.225.36:52044/api/brand")
-      .subscribe((res: any) => {
-        this.brands = res;
-        console.log(this.brands);
-      });
+    this.dealService.getTopBrands().subscribe((res: any) => {
+      this.brands = res;
+    });
   }
 
   ionViewDidLoad() {

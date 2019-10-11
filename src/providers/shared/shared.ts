@@ -1,19 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {
-  LoadingController,
-  ToastController,
-  Events,
-  AlertController
-} from "ionic-angular";
+import { LoadingController, ToastController, Events } from "ionic-angular";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { Network } from "@ionic-native/network";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import {
   NativePageTransitions,
   NativeTransitionOptions
 } from "@ionic-native/native-page-transitions";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { File } from "@ionic-native/file";
+import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -39,7 +35,8 @@ export class SharedProvider {
     private network: Network,
     private events: Events,
     private nativeTrasnitions: NativePageTransitions,
-
+    private file: File,
+    private transfer: FileTransfer,
     private inappBrowser: InAppBrowser
   ) {
     this.network.onConnect().subscribe(() => {
@@ -188,7 +185,8 @@ export class SharedProvider {
   }
 
   handleError(error) {
-    this.createToast("Error");
+    console.log(error);
+    this.createToast(error.statusText);
   }
 
   // createBrowserLink
@@ -200,5 +198,39 @@ export class SharedProvider {
     // browser.on("loadstop").subscribe(event => {
     //   browser.insertCSS({ code: "body{color: red;" });
     // });
+  }
+
+  downloadOnMemory(data) {
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    const url = encodeURI(data.Logo);
+    const targetPath =
+      this.file.externalDataDirectory + "images/" + data.Name + ".png";
+    return fileTransfer.download(url, targetPath, true);
+  }
+
+  checkDownloadedImage(data): Promise<string> {
+    return this.file
+      .checkFile(
+        this.file.externalDataDirectory + "images/",
+        data.Name + ".png"
+      )
+      .then(
+        resolve => {
+          if (resolve == true) {
+            console.log("file found");
+            return this.file.checkFile(
+              this.file.externalDataDirectory + "images/",
+              data.Name + ".png"
+            );
+          } else {
+            console.log("file not found");
+            return false;
+          }
+        },
+        reject => {
+          console.log("file not found");
+          return null;
+        }
+      );
   }
 }

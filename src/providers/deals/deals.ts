@@ -5,7 +5,7 @@ import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 
-const apiUrl = "http://192.168.225.36:52044/api/";
+const apiUrl = "http://192.168.225.45:5000/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -79,5 +79,9 @@ export class DealsProvider {
   // get product detail
   getProductDetail() {
     return;
+  }
+
+  getTopBrands() {
+    return this.http.get(apiUrl + "brand");
   }
 }

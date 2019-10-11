@@ -7,8 +7,7 @@
         (click)="getOfferDetail(item)"
         *ngFor="let item of items"
       >
-        <ion-img src="../../assets/{{ item.Logo }}" alt="" class="squareimage">
-        </ion-img>
+        <ion-img src="{{ item.Logo }}" alt="" class="squareimage"> </ion-img>
         <p>item.Name</p>
       </ion-col>
     </ion-row>

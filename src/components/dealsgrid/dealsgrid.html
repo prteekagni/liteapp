@@ -1,5 +1,9 @@
 <ng-container>
-  <cardslide [items]="copyItem" [type]="type"></cardslide>
+  <cardslide
+    [items]="copyItem"
+    [type]="type"
+    *ngIf="cards.length !== 0"
+  ></cardslide>
 </ng-container>
 <ng-template #elseTemplate>
   <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>

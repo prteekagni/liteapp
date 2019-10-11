@@ -14,12 +14,6 @@ import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
 import { HttpClient } from "@angular/common/http";
-import {
-  FileTransfer,
-  FileUploadOptions,
-  FileTransferObject
-} from "@ionic-native/file-transfer";
-import { File } from "@ionic-native/file";
 import { StorageProvider } from "../../providers/storage/storage";
 import { map, take } from "rxjs/operators";
 
@@ -27,17 +21,6 @@ const animationsOptions = {
   animation: "ios-transition",
   duration: 1000
 };
-
-const myimages = [
-  {
-    name: "First",
-    path: "https://appimageselinfinito.s3.us-east-2.amazonaws.com/Ajio.png"
-  },
-  {
-    name: "Second",
-    path: "https://appimageselinfinito.s3.us-east-2.amazonaws.com/facebook.png"
-  }
-];
 
 @IonicPage()
 @Component({
@@ -84,13 +67,8 @@ export class HomePage {
     private events: Events,
     private platform: Platform,
     private sharedService: SharedProvider,
-    private modalController: ModalController,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
-    private dealService: DealsProvider,
-    private http: HttpClient,
-    private transfer: FileTransfer,
-    private file: File,
-    private storage: StorageProvider
+    private dealService: DealsProvider
   ) {
     platform.ready().then(() => {
       this.isConnected = this.sharedService.checkNetworkStatus();
@@ -111,124 +89,54 @@ export class HomePage {
         (error: any) => console.log(error)
       );
 
-    // this.http
-    //   .get("http://192.168.225.36:52044/api/category/getProductCategory")
-    //   .subscribe((res: any) => {
-    //     this.tempStore = res;
-    //     for (var i = 0; i < 3; i++) {
-    //       this.items.push(res[i]);
-    //     }
-    //   });
-    // store category
-    this.dealService
-      .getStoreCategory()
-      .pipe(take(5))
-      .subscribe((res: any) => {
-        this.tempStore = res;
-        if (this.tempStore) {
-          this.tempStore.forEach(element => {
-            if (element.Name == "Top Brands") {
-              console.log(element);
-            }
-            for (let index = 0; index < 4; index++) {
-              this.store.push(res[index]);
-            }
-          });
-        }
-
-        // console.log(" Get Store Category " + this.tempStore);
-      });
-
-    this.http
-      .get("http://192.168.225.36:52044/api/brand")
-      .subscribe((res: any) => {
+    this.dealService.getStoreCategory().subscribe((res: any) => {
+      this.tempStore = res;
+      if (this.tempStore) {
+        this.tempStore.forEach(element => {
+          if (element.Name == "Top Brands") {
+            console.log(element);
+          }
+          for (let index = 0; index < 4; index++) {
+            this.store.push(res[index]);
+          }
+        });
+      }
+    });
+    this.dealService.getTopBrands().subscribe(
+      (res: any) => {
         this.brands = res;
-        console.log(this.brands);
-      });
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
     this.dealService
       .getStoreSubCategory("ef6d1ac9-acb2-484a-88a3-d2f24b8371aa")
       .subscribe((res: any) => {
         this.substores = res;
-
-        // for (let index = 0; index < 4; index++) {
-        //   this.substores.push(this.tempSubStores[index]);
-        // }
-        //   for (let index = 0; index < this.tempSubStores.length; ) {
-        //     if (this.tempSubStores[index].Logo) {
-        //       this.download(
-        //         this.tempSubStores[index].Name,
-        //         "http://elinfinitoindia.in/images/logo.png"
-        //       ).then(
-        //         (res: any) => {
-        //           console.log(res);
-        //         },
-        //         err => {
-        //           console.log(JSON.stringify(err));
-        //           index++;
-        //         }
-        //       );
-        //     }
-        //   }
+        for (let index = 0; index < 4; index++) {
+          this.substores.push(this.tempSubStores[index]);
+        }
       });
-    // console.log("Hello  " + res);
 
-    // this.dealService.getStoreCategory().subscribe(
-    //   (res: any) => {
-    //     console.log("GET store" + res);
-    //   },
-    //   err => {
-    //     console.warn(err);
-    //   }
-    // );
-  }
-
-  ionViewDidLoad() {
-    this.slides = [
-      { image: "assets/bac.png" },
-      { image: "http://elinfinitoindia.in/images/logo.png" }
-    ];
-  }
-
-  download(fileName, filePath): Promise<any> {
-    //here encoding path as encodeURI() format.
-    fileName = fileName + ".png";
-    filePath =
-      "https://appimageselinfinito.s3.us-east-2.amazonaws.com/" + filePath;
-    let url = encodeURI(filePath);
-    //here initializing object.
-    this.fileTransfer = this.transfer.create();
-    // here iam mentioned this line this.file.externalRootDirectory is a native pre-defined file path storage. You can change a file path whatever pre-defined method.
-    return this.fileTransfer.download(
-      url,
-      this.file.externalDataDirectory + fileName,
-      true
+    this.dealService.getAdsData().subscribe(
+      (res: any) => {
+        this.adsData = res;
+      },
+      err => {
+        console.log(err);
+      }
     );
-    // .then(
-    //   entry => {
-    //     //here logging our success downloaded file path in mobile.
-    //     // console.log("download completed: " + entry.toURL());
-    //     // return entry.toUrl();
-    //     var a = (<any>window).Ionic.WebView.convertFileSrc(entry.toURL());
-    //     // return a;
-    //   },
-    //   error => {
-    //     //here logging our error its easier to find out what type of error occured.
-    //     // console.log("download failed: " + error);
-    //     // return error;
-    //   }
-    // );
   }
+
+  ionViewDidLoad() {}
+
   nav11() {
     this.navCtrl.push("ProductlistPage");
   }
 
   ionViewWillEnter() {
-    // this.navCtrl.push("StorepagePage", {
-    //   id: "162c2826-afed-4f7e-a8cc-f38b24bb4e0",
-    //   type: "store"
-    // });
-    // this.imgpath = localStorage.getItem("key") || "";
     this.events.subscribe("nstatus", res => {
       if (res == true) {
         this.isConnected = true;
@@ -236,18 +144,6 @@ export class HomePage {
         this.isConnected = false;
       }
     });
-
-    // this.dealService.getAdsData().subscribe(
-    //   res => {
-    //     this.adsData = res || [];
-    //     if (this.adsData.length > 0) {
-    //       this.mainslide = this.adsData.filter(x => x.category == "scroll");
-    //     }
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   goToNotification() {
@@ -267,55 +163,15 @@ export class HomePage {
   doInfinite(event) {
     if (this.store.length !== this.tempStore.length) {
       for (let index = 0; index < this.tempStore.length - 4; index++) {
-        // console.log(this.tempStore[index + 4]);
         this.store.push(this.tempStore[index + 3]);
       }
-      // event.complete();
     } else {
-      // event.enable(false);
+      event.enable(false);
     }
     setTimeout(() => {
       event.complete();
-    }, 1000);
+    }, 500);
     this.lastStore = true;
-  }
-
-  async toggleDisplay() {
-    if (this.tempSubStores.length !== this.substores.length) {
-      for (
-        var ii = this.substores.length;
-        ii < this.tempSubStores.length;
-        ii++
-      ) {
-        this.substores.push(this.tempSubStores[ii]);
-      }
-    }
-
-    this.showMore = !this.showMore;
-
-    // let data = {
-    //   Name: "Praetek",
-    //   Links: [
-    //     {
-    //       Name: "Amazon",
-    //       Logo: "Img",
-    //       Linlk: "fldkjhglkjfhdgj"
-    //     }
-    //   ]
-    // };
-
-    // // this.showMore = !this.showMore;
-    // let dealmodal = this.modalController.create(
-    //   "LinkmodalPage",
-    //   { data: data },
-    //   {
-    //     cssClass: "mymodal",
-    //     showBackdrop: true,
-    //     enableBackdropDismiss: true
-    //   }
-    // );
-
-    // return await dealmodal.present();
   }
 
   goToPage(data) {
@@ -325,86 +181,4 @@ export class HomePage {
       type: "store"
     });
   }
-
-  downloadOnMemory(data) {
-    console.log(data);
-    const fileTransfer: FileTransferObject = this.transfer.create();
-
-    const url = encodeURI(data.path);
-    const targetPath =
-      this.file.externalDataDirectory + "Videos/" + data.name + ".png";
-    fileTransfer.download(url, targetPath, true).then(
-      entry => {
-        // console.log(
-        //   "download complete: " +
-        //     (<any>window).Ionic.WebView.convertFileSrc(entry.toURL())
-        // );
-        var a = (<any>window).Ionic.WebView.convertFileSrc(entry.toURL());
-        localStorage.setItem("key", a);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
-  checkDirectory() {
-    this.file
-      .checkDir(this.file.externalDataDirectory, "Videos")
-      .then((res: any) => {
-        if (res) {
-          console.log("Directory exists");
-          myimages.forEach(element => {
-            this.downloadOnMemory(element);
-          });
-        } else {
-          this.file
-            .createDir(this.file.externalDataDirectory, "Videos", false)
-            .then(() => {
-              console.log("Directory created successfully");
-              myimages.forEach(element => {
-                this.downloadOnMemory(element);
-              });
-            })
-            .catch(() => {
-              console.log("Failed to create directory");
-            });
-        }
-      })
-      .catch(err => console.log("Directory doesn't exist"));
-  }
-
-  // readFile() {
-  //   this.file
-  //     .listDir(this.file.externalDataDirectory, "Videos")
-  //     .then(data => {
-  //       console.log(data[0]);
-  //       this.counts = data.length;
-  //       const src = data[0].toInternalURL();
-  //       this.file.resolveLocalFilesystemUrl(src).then(
-  //         data => {
-  //           this.imgpath = data.toURL();
-  //           this.imgpath = (<any>window).Ionic.WebView.convertFileSrc(
-  //             this.imgpath
-  //           );
-  //           // this.storage.addImages().then(
-  //           //   res => {
-  //           //     console.log("ho gaya");
-  //           //   },
-  //           //   err => {
-  //           //     console.error("nahi hua");
-  //           //   }
-  //           // );
-  //           console.log(this.imgpath);
-  //         },
-  //         error => {
-  //           console.log("File path error");
-  //         }
-  //       );
-  //     })
-  //     .catch(err => console.log("Directory doesnt exist"));
-  //   this.dealService.getDealsCategory().subscribe(res => {
-  //     this.stores = res;
-  //   });
-  // }
 }

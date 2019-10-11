@@ -44,7 +44,10 @@ export class SquareComponent implements OnInit {
   ionViewDidEnter() {}
 
   ngOnInit(): void {
+
+
     console.log(this.type);
+    console.log("froms square " + this.data)
     if (this.type === "deals") {
       this.dealService.getDealBySubCategory(this.data).subscribe((res: any) => {
         this.items = res;

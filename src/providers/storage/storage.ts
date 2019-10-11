@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { deals } from "../../models/deal";
+import { File } from "@ionic-native/file";
 
 const DEALS_KEY = "deals";
 const N_KEY = "notifications";
@@ -10,7 +11,11 @@ const I_KEY = "images";
 
 @Injectable()
 export class StorageProvider {
-  constructor(public http: HttpClient, private storage: Storage) {
+  constructor(
+    public http: HttpClient,
+    private storage: Storage,
+    private file: File
+  ) {
     console.log("Hello StorageProvider Provider");
   }
 
@@ -30,18 +35,18 @@ export class StorageProvider {
   }
 
   addImages(data: any): Promise<any> {
-    console.log(data);
+    console.log(data.ID);
     return this.storage.get(I_KEY).then((res: any) => {
       if (res) {
-        if (res.find(x => x.id === res.id)) {
-          return false;
+        if (res.find(x => x.ID === data.ID)) {
+          return data;
         } else {
           res.push(data);
           this.storage.set(I_KEY, res);
         }
       } else {
         this.storage.set(I_KEY, [data]);
-        return true;
+        return data;
       }
     });
   }
@@ -143,5 +148,23 @@ export class StorageProvider {
 
   getPushNotification(): Promise<any> {
     return this.storage.get(P_KEY);
+  }
+
+  checkDirectory() {
+    return this.file.checkDir(this.file.externalDataDirectory, "images").then(
+      (res: any) => {
+        console.log("directory already present");
+      },
+      err => {
+        this.file
+          .createDir(this.file.externalDataDirectory, "images", false)
+          .then(res => {
+            console.log("Directory created successfully" + res);
+          })
+          .catch(err => {
+            console.log("Failed to create directory" + JSON.stringify(err));
+          });
+      }
+    );
   }
 }

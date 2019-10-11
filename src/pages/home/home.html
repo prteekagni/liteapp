@@ -21,8 +21,6 @@
 </ion-header>
 
 <ion-content #pageContent fullscreen>
-  <!-- <div class="header-image"></div> -->
-
   <!-- Sliders -->
 
   <ng-container *ngIf="isConnected; then connected; else notconnected">
@@ -40,7 +38,7 @@
         loop="true"
       >
         <ion-slide *ngFor="let item of mainslide">
-          <img src="../../assets/" alt="" class="header-image" />
+          <img src="{{ item.Logo }}" alt="" class="header-image" />
         </ion-slide>
       </ion-slides>
     </ng-container>
@@ -60,11 +58,6 @@
         <cardgrid></cardgrid>
       </ion-col>
     </ion-row>
-
-    <!--      style="margin-top: 20vh;
-        margin-left: 49vw;" -->
-
-    <!-- top brands  -->
 
     <ion-row>
       <ion-col col-12>
@@ -91,12 +84,6 @@
       </ion-col>
     </ion-row>
 
-    <!-- <ion-row>
-      <ion-col col-12 text-center>
-        <h2>Food</h2>
-      </ion-col>
-    </ion-row> -->
-
     <!-- Substores -->
     <ion-row>
       <ion-col col-12 text-center>
@@ -104,37 +91,15 @@
       </ion-col>
 
       <ion-col col-12 *ngIf="substores.length > 0">
-        <!-- <ion-row [ngClass]="{ 'show-less ': showMore }"> -->
         <ion-row>
           <ion-col col-3 text-center *ngFor="let item of substores; index as i">
             <ion-item (click)="goToPage(item)" item-start>
-              <!-- <ion-avatar style="width: 80px;"> -->
-              <!-- <ion-img
-                src="assets/{{ item.Logo }}"
-                class="storeimage"
-              ></ion-img> -->
               <img src="assets/{{ item?.Logo }}" alt="" />
               <p style="text-align: center">{{ item?.Name | titlecase }}</p>
-              <!-- </ion-avatar>  -->
-              <!-- <img src="assets/{{ item.Logo }}" alt="" srcset="" /> -->
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-col>
-      <!-- <ion-col col-12 text-center *ngIf="!showMore">
-        <ion-col col-3>
-          <button ion-button round (click)="toggleDisplay()" text-center>
-            Show Less
-          </button>
-        </ion-col>
-      </ion-col>
-      <ion-col col-12 text-center *ngIf="showMore">
-        <ion-col col-3>
-          <button ion-button round (click)="toggleDisplay()">
-            Show More
-          </button>
-        </ion-col>
-      </ion-col> -->
     </ion-row>
 
     <!-- Store category with store links -->

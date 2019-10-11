@@ -56,6 +56,13 @@ export class MyApp {
       // });
       // this.initializeOneSignal();
       // this.initializeTracker();
+      storageService
+        .checkDirectory()
+        .then(res =>
+          console.log(JSON.stringify(res), err =>
+            console.log(JSON.stringify(err))
+          )
+        );
     });
   }
 
