@@ -1,4 +1,10 @@
-<ng-container>
+<ng-container *ngIf="cards.length !== 0">
+  <ion-row>
+    <ion-col col-12 text-center>
+      <h2>{{ copyItem?.Name }}</h2>
+    </ion-col>
+  </ion-row>
+
   <cardslide
     [items]="copyItem"
     [type]="type"
@@ -9,6 +15,6 @@
   <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>
 </ng-template>
 
-<ng-container>
+<!-- <ng-container>
   <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>
-</ng-container>
+</ng-container> -->

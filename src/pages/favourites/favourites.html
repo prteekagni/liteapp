@@ -6,55 +6,71 @@
 
 <ion-content>
   <ng-container
-    *ngIf="fav; then thenTemplate; else elseTemplate"
+    *ngIf="newItem; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    <ion-card
-      style="margin-top:75px;"
-      *ngFor="let item of fav"
-      (swipe)="swipeEvent($event)"
-    >
-      <img
-        [src]="item.image"
-        style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;"
-      />
-      <ion-card-content>
-        <p style="margin-left: 150px; min-height: 100px">
-          {{ item.title }} <br />
-          {{ item.description }}
-        </p>
-      </ion-card-content>
-      <ion-row no-padding>
-        <ion-col>
-          <button
-            ion-button
-            clear
-            small
-            color="danger"
-            icon-start
-            (click)="remove(item.id)"
-          >
-            <ion-icon name="star"></ion-icon>
-            Remove
-          </button>
-        </ion-col>
-        <ion-col text-center>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name="musical-notes"></ion-icon>
-            Buy
-          </button>
-        </ion-col>
-        <ion-col text-right>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name="share-alt"></ion-icon>
-            Share
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+    <ion-list [virtualScroll]="newItem" approxItemHeight="217px">
+      <ion-item *virtualItem="let item">
+        <ion-card [ngClass]="{ secondclass: true }">
+          <ion-card-content style="padding:7px 16px;">
+            <ion-row>
+              <ion-col col-8>
+                <h4>{{ item.Name }}</h4>
+                <p>
+                  {{ item.Description }}
+                </p>
+              </ion-col>
+              <ion-col col-4>
+                <img src="../../assets/arrow.jpg" class="dealsimage" />
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+          <ion-row no-padding>
+            <ion-col>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="setDealAsFav(item)"
+              >
+                <ion-icon name="star"></ion-icon>
+                Remove
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="remindBtn(item)"
+              >
+                <ion-icon name="musical-notes"></ion-icon>
+                Set Reminder
+              </button>
+              <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+      </ion-datetime>  -->
+            </ion-col>
+            <ion-col text-right>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="getDeal()"
+              >
+                <ion-icon name="share-alt"></ion-icon>
+                Buy
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item>
+    </ion-list>
   </ng-template>
   <ng-template #elseTemplate>
     <h3>Not Fav Yet</h3>

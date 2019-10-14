@@ -41,23 +41,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-list [virtualScroll]="newItem" approxItemHeight="180px">
+  <ion-list [virtualScroll]="newItem" approxItemHeight="217px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: true }">
-        <ion-card-content>
+        <ion-card-content style="padding:7px 16px;">
           <ion-row>
             <ion-col col-8>
-              <h4>Bkjfhgkjdfhjkghdkjfg</h4>
+              <h4>{{ item.Name }}</h4>
               <p>
-                {{ item.employee_name }}
+                {{ item.Description }}
               </p>
             </ion-col>
             <ion-col col-4>
-              <img
-                src="../../assets/categories/E-Commerce_v2.png"
-                style="width: 180px;"
-                class="dealsimage"
-              />
+              <img src="../../assets/arrow.jpg" class="dealsimage" />
             </ion-col>
           </ion-row>
         </ion-card-content>

@@ -14,7 +14,7 @@ const animationsOptions = {
   templateUrl: "favourites.html"
 })
 export class FavouritesPage {
-  fav: any = [];
+  newItem: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -26,9 +26,9 @@ export class FavouritesPage {
   ionViewDidLoad() {
     this.sharedService.createLoader();
     this.storageService.getDeals().then(res => {
-      this.fav = res || [];
+      this.newItem = res || [];
 
-      this.fav.forEach(element => {
+      this.newItem.forEach(element => {
         element.time = "";
       });
       this.sharedService.dismissLoader();
@@ -37,8 +37,8 @@ export class FavouritesPage {
 
   remove(data) {
     this.storageService.deleteDeals(data).then(res => {
-      this.fav = res;
-      this.fav.forEach(element => {
+      this.newItem = res;
+      this.newItem.forEach(element => {
         element.time = "";
       });
     });

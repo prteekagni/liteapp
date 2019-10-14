@@ -112,7 +112,7 @@ export class CardslideComponent implements OnInit, AfterViewInit {
       });
     } else if (this.type == "deals") {
       this.dealService
-        .getSubStores(this.items.CatPID, this.items.ID)
+        .getDealBySubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
         });
@@ -135,7 +135,8 @@ export class CardslideComponent implements OnInit, AfterViewInit {
       modal.present();
     } else if (this.type == "deals") {
       this.navCtrl.push("ProductlistPage", {
-        cat: item.Category
+        type: this.type,
+        id: item
       });
     }
   }

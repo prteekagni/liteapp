@@ -1,15 +1,15 @@
 <ion-header class="show-background">
   <ion-navbar>
-    <ion-title>Selected Products</ion-title>
+    <ion-title>Products & Services</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ng-container
-    *ngIf="products?.length > 0; then thenTemplate; else elseTemplate"
-  ></ng-container>
-  <ng-template #thenTemplate>
-    <!-- <ion-row>
+  <!-- <ng-container
+    *ngIf="noproducts; then thenTemplate; else elseTemplate"
+  ></ng-container> -->
+
+  <!-- <ion-row>
       <ion-col col-4 *ngFor="let item of products">
         <ion-card class="roundedcorner" (click)="gotoProducts(item)">
           <ion-card-content>
@@ -25,22 +25,34 @@
         </ion-card>
       </ion-col>
     </ion-row> -->
-    <ion-row *ngFor="let item of products; let i = index" class="mycatego">
-      <ion-col col-12 text-center>
-        <h2>{{ item.Name }}</h2>
-      </ion-col>
-      <ion-col col-12 text-center class="nopadding">
-        <dealsgrid
-          [items]="item"
-          [type]="'products'"
-          *ngIf="item.ID"
-        ></dealsgrid>
-      </ion-col>
-      <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
-    </ion-row>
-  </ng-template>
+  <ion-row *ngFor="let item of products; let i = index" class="mycatego">
+    <ion-col col-12 text-center>
+      <h2>{{ item.Name }}</h2>
+    </ion-col>
+    <ion-col col-12 text-center class="nopadding">
+      <!-- <dealsgrid [items]="item" [type]="'products'" *ngIf="item.ID"></dealsgrid> -->
+
+      <ion-slides
+        slidesPerView="1.2"
+        spaceBetween="10"
+        centeredSlides="true"
+        loop="true"
+      >
+        <ion-slide style="">
+          <img src="../../assets/b.jpg" alt="" />
+        </ion-slide>
+        <ion-slide>
+          <img src="../../assets/banner2.jpg" alt="" />
+        </ion-slide>
+
+        <ion-slide> </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+  </ion-row>
+
   <ng-template #elseTemplate>
-    <h4>no products</h4>
+    <h3>no producys</h3>
   </ng-template>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

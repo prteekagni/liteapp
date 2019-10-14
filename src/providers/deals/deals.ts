@@ -5,7 +5,7 @@ import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 
-const apiUrl = "http://192.168.225.45:5000/api/";
+const apiUrl = "http://192.168.225.45:52044/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -24,13 +24,12 @@ export class DealsProvider {
   getStoreCategory() {
     return this.http
       .get(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
   getFeatureStore() {
-    return this.http
-      .get(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
+    return this.http.get(apiUrl + "category");
+    // .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
   }
 
   getStoreSubCategory(data) {
@@ -38,10 +37,10 @@ export class DealsProvider {
   }
 
   // get Deals Categories
-  getDealsCategory(): Observable<Category[]> {
+  getDealsCategory() {
     return this.http
-      .get<Category[]>(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 3)));
   }
 
   getDealBySubCategory(id) {
@@ -55,7 +54,8 @@ export class DealsProvider {
 
   // get deals for category
   getDealsByCategory(data) {
-    return this.http.get(apiUrl + "category");
+    console.log(data);
+    return this.http.post(apiUrl + "deals/getDealsByCategory/" + data, "");
   }
 
   // get Deal Details
@@ -68,7 +68,9 @@ export class DealsProvider {
 
   //get product category
   getProductCategory() {
-    return this.http.get(apiUrl + "category/getProductCategory");
+    return this.http
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 8)));
   }
 
   // get products by category

@@ -47,9 +47,10 @@ export class ProductlistPage {
   ) {
     let id = this.navParams.get("id");
     let type = this.navParams.get("type");
+    console.log("From Product List page " + id.ID);
 
     if (type == "deals") {
-      this.dealService.getDealsByCategory(id).subscribe((res: any) => {
+      this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
         this.newItem = res;
       });
     } else {

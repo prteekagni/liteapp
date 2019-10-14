@@ -43,22 +43,17 @@ export class HomePage {
   visibility: boolean = true;
   counter: any = 0;
   stores: any = [];
-  storelinks;
+
   defaultImage = "../../assets/images/logo.png";
-  page: number = 1;
-  catego: any = [];
+
   adsData: any = [];
   mainslide: any = [];
   brands: any = [];
-  imgpath: any;
-  counts: any = [];
-  images: any = [];
   store: any = [];
-  showMore: boolean = true;
   items: any = [];
   tempStore: any = [];
   substores: any = [];
-  tempSubStores: any = [];
+  shopbyID: any;
   lastStore: boolean = false;
   fileTransfer;
   constructor(
@@ -93,14 +88,23 @@ export class HomePage {
       this.tempStore = res;
       if (this.tempStore) {
         this.tempStore.forEach(element => {
-          if (element.Name == "Top Brands") {
-            console.log(element);
-          }
-          for (let index = 0; index < 4; index++) {
-            this.store.push(res[index]);
+          if (element.Name == "Shop By Category") {
+            this.shopbyID = element.ID;
           }
         });
+        for (
+          let index = 0;
+          index < 4 && index < this.tempStore.length;
+          index++
+        ) {
+          this.store.push(this.tempStore[index]);
+        }
       }
+      this.dealService
+        .getStoreSubCategory(this.shopbyID)
+        .subscribe((res: any) => {
+          this.substores = res;
+        });
     });
     this.dealService.getTopBrands().subscribe(
       (res: any) => {
@@ -111,23 +115,14 @@ export class HomePage {
       }
     );
 
-    this.dealService
-      .getStoreSubCategory("ef6d1ac9-acb2-484a-88a3-d2f24b8371aa")
-      .subscribe((res: any) => {
-        this.substores = res;
-        for (let index = 0; index < 4; index++) {
-          this.substores.push(this.tempSubStores[index]);
-        }
-      });
-
-    this.dealService.getAdsData().subscribe(
-      (res: any) => {
-        this.adsData = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.dealService.getAdsData().subscribe(
+    //   (res: any) => {
+    //     this.adsData = res;
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   ionViewDidLoad() {}

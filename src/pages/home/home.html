@@ -85,7 +85,7 @@
     </ion-row>
 
     <!-- Substores -->
-    <ion-row>
+    <!-- <ion-row>
       <ion-col col-12 text-center>
         <h2 *ngIf="substores.length >= 1">Stores by Category</h2>
       </ion-col>
@@ -100,15 +100,21 @@
           </ion-col>
         </ion-row>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
+    <ion-row>
+      <ion-col col-3 *ngFor="let item of store">
+        <img src="../../assets/amazon-logo.png" alt="" />
+        <p style="text-align: center;">{{ item.Name }}</p>
+      </ion-col>
+    </ion-row>
     <!-- Store category with store links -->
     <ng-container *ngIf="store.length > 0">
       <ng-container *ngFor="let item of store; let i = index">
         <ion-row *ngIf="item?.Name != 'New Mobiles'" class="mycatego">
-          <ion-col col-12 text-center>
+          <!-- <ion-col col-12 text-center>
             <h2>{{ item?.Name }}</h2>
-          </ion-col>
+          </ion-col> -->
           <ion-col col-12 text-center class="nopadding">
             <dealsgrid
               [items]="item"
@@ -128,7 +134,6 @@
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>
-
     <!-- Single Add -->
     <!-- <singleadd></singleadd> -->
   </ng-template>

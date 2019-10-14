@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Output,
+  EventEmitter
+} from "@angular/core";
 import { DealsProvider } from "../../providers/deals/deals";
 import { Content } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
-
+import { Events } from "ionic-angular";
 /**
  * Generated class for the DealsgridComponent component.
  *
@@ -18,20 +25,24 @@ export class DealsgridComponent implements OnInit {
   cards: any = [];
   @Input() items: any;
   @Input() type: any;
+  @Output() data = new EventEmitter();
   copyItem: any;
   @ViewChild(Content) content: Content;
 
-  constructor(private dealService: DealsProvider, private http: HttpClient) {}
+  constructor(
+    private dealService: DealsProvider,
+    private http: HttpClient,
+    private event: Events
+  ) {}
 
   ngOnInit() {
     this.copyItem = this.items;
 
     if (this.type === "deals") {
       this.dealService
-        .getDealBySubCategory(this.items)
+        .getDealBySubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
-          console.log(res);
         });
     } else if (this.type == "substores") {
       this.dealService
@@ -46,7 +57,6 @@ export class DealsgridComponent implements OnInit {
     } else if (this.type == "products") {
       this.dealService.getProductCategory().subscribe((res: any) => {
         this.cards = res;
-        console.log("fromdealsgrid " + this.cards);
       });
     }
   }

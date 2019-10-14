@@ -11,24 +11,34 @@ import { DealsProvider } from "../../providers/deals/deals";
 export class ProductsPage {
   products: any = [];
   tempproducts: any = [];
-
+  noproducts: boolean = true;
+  services;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private sharedService: SharedProvider,
     private dealsService: DealsProvider
-  ) {}
+  ) {
+    // this.DealsProvider.getStores(this.items.ID).subscribe((res: any) => {
+    //   this.cards = res;
+    // });
+    this.dealsService.getProductCategory().subscribe((res: any) => {
+      this.products = res;
+      console.log(this.products);
+    });
+    this.dealsService.getProductCategory().subscribe((res: any) => {
+      this.services = res;
+    });
+  }
 
   ionViewDidLoad() {}
 
   ionViewWillEnter() {
     this.dealsService.getProductCategory().subscribe((res: any) => {
-      this.tempproducts = res;
-      if (this.tempproducts.length >= 1) {
-        for (let index = 0; index < 2; index++) {
-          this.products.push(this.tempproducts[index]);
-        }
-      }
+      this.products = res;
+    });
+    this.dealsService.getProductCategory().subscribe((res: any) => {
+      this.services = res;
     });
   }
 

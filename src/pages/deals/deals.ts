@@ -1,4 +1,10 @@
-import { Component, ViewChild, ElementRef, Renderer } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  Renderer,
+  Input
+} from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -6,7 +12,8 @@ import {
   Content,
   Searchbar,
   Keyboard,
-  Item
+  Item,
+  Events
 } from "ionic-angular";
 import { DealsProvider } from "../../providers/deals/deals";
 
@@ -25,6 +32,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 export class DealsPage {
   @ViewChild(Content) content: Content;
   @ViewChild(Searchbar) searchbar: Searchbar;
+  @Input() data;
   deals: any = [];
   subcategory: any = [];
   subdeals: any = [];
@@ -39,27 +47,27 @@ export class DealsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private dealsprovider: DealsProvider,
-    public keyboard: Keyboard
+    public keyboard: Keyboard,
+    private events: Events
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;
-      if (this.tempdeals.lenght >= 1) {
-        for (let index = 0; index < 4; index++) {
+
+      if (this.tempdeals.length >= 1) {
+        for (
+          let index = 0;
+          index < 4 && index < this.tempdeals.length;
+          index++
+        ) {
           this.deals.push(this.tempdeals[index]);
         }
+        console.log(this.deals);
       }
     });
     this.dealsprovider
       .getDealSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
       .subscribe((res: any) => {
-        this.tempsubdeals = res;
-        console.log(this.tempsubdeals);
-        if (this.tempsubdeals.length >= 1) {
-          for (let index = 0; index < 3; index++) {
-            this.subdeals.push(this.tempsubdeals[index]);
-            console.log(this.subdeals);
-          }
-        }
+        this.subdeals = res;
       });
   }
 

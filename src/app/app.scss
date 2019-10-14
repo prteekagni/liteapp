@@ -126,3 +126,7 @@ ion-img {
   background: white !important;
   min-height: 130px;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
