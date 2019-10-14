@@ -27,6 +27,7 @@ export class DealsgridComponent implements OnInit {
   @Input() type: any;
   @Output() data = new EventEmitter();
   copyItem: any;
+  directLinks: boolean = false;
   @ViewChild(Content) content: Content;
 
   constructor(
@@ -36,6 +37,7 @@ export class DealsgridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.items + " &" + this.type);
     this.copyItem = this.items;
 
     if (this.type === "deals") {
@@ -53,6 +55,9 @@ export class DealsgridComponent implements OnInit {
     } else if (this.type == "stores") {
       this.dealService.getStores(this.items.ID).subscribe((res: any) => {
         this.cards = res;
+        if (this.cards.length > 1 && this.cards[0].StoreType == 1) {
+          this.directLinks = true;
+        }
       });
     } else if (this.type == "products") {
       this.dealService.getProductCategory().subscribe((res: any) => {

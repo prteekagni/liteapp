@@ -22,7 +22,7 @@ export class ProductsPage {
     // this.DealsProvider.getStores(this.items.ID).subscribe((res: any) => {
     //   this.cards = res;
     // });
-    this.dealsService.getProductCategory().subscribe((res: any) => {
+    this.dealsService.getStoreCategory().subscribe((res: any) => {
       this.products = res;
       console.log(this.products);
     });
@@ -34,12 +34,12 @@ export class ProductsPage {
   ionViewDidLoad() {}
 
   ionViewWillEnter() {
-    this.dealsService.getProductCategory().subscribe((res: any) => {
-      this.products = res;
-    });
-    this.dealsService.getProductCategory().subscribe((res: any) => {
-      this.services = res;
-    });
+    // this.dealsService.getProductCategory().subscribe((res: any) => {
+    //   this.products = res;
+    // });
+    // this.dealsService.getProductCategory().subscribe((res: any) => {
+    //   this.services = res;
+    // });
   }
 
   gotoProducts(data) {

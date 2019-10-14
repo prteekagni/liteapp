@@ -1,19 +1,44 @@
-<ng-container *ngIf="cards.length !== 0">
+<ng-container *ngIf="!directLinks">
+  <ng-container *ngIf="cards.length > 4; else elseTemplate">
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
+      </ion-col>
+    </ion-row>
+    <cardslide
+      [items]="copyItem"
+      [type]="type"
+      *ngIf="cards.length !== 0"
+    ></cardslide>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
+      </ion-col>
+    </ion-row>
+    <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>
+  </ng-template>
+</ng-container>
+
+<ng-container *ngIf="directLinks">
   <ion-row>
     <ion-col col-12 text-center>
       <h2>{{ copyItem?.Name }}</h2>
     </ion-col>
   </ion-row>
-
-  <cardslide
-    [items]="copyItem"
-    [type]="type"
-    *ngIf="cards.length !== 0"
-  ></cardslide>
+  <ion-row>
+    <ion-col col-3 *ngFor="let item of cards">
+      <img src="../../assets/amazon-logo.png" alt="" />
+      <p
+        style="text-align: center;margin-top: 0px;
+    margin-bottom: 0px;"
+      >
+        {{ item.Name }}
+      </p>
+    </ion-col>
+  </ion-row>
 </ng-container>
-<ng-template #elseTemplate>
-  <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>
-</ng-template>
 
 <!-- <ng-container>
   <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>

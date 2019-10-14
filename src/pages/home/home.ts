@@ -99,6 +99,8 @@ export class HomePage {
         ) {
           this.store.push(this.tempStore[index]);
         }
+
+        console.log(this.store);
       }
       this.dealService
         .getStoreSubCategory(this.shopbyID)

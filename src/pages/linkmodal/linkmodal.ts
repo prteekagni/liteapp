@@ -49,13 +49,13 @@ export class LinkmodalPage implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.http
-      .get("http://192.168.225.36:52044/api/stores")
-      // .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
-      .subscribe((res: any) => {
-        this.items = res;
-        console.log(this.items);
-      });
+    // this.http
+    //   .get("http://192.168.225.36:52044/api/stores")
+    //   // .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
+    //   .subscribe((res: any) => {
+    //     this.items = res;
+    //     console.log(this.items);
+    //   });
   }
 
   goToUrl(data) {
