@@ -41,10 +41,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list [virtualScroll]="newItem" approxItemHeight="217px">
+  <ion-list [virtualScroll]="newItem" approxItemHeight="230px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: true }">
-        <ion-card-content style="padding:7px 16px;">
+        <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
           <ion-row>
             <ion-col col-8>
               <h4>{{ item.Name }}</h4>

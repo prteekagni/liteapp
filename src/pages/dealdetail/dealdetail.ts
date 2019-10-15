@@ -9,7 +9,7 @@ import { Clipboard } from "@ionic-native/clipboard";
 import { SharedProvider } from "../../providers/shared/shared";
 
 @IonicPage({
-  defaultHistory: ["ProductsPage"]
+  defaultHistory: ["DealsPage"]
 })
 @Component({
   selector: "page-dealdetail",
@@ -33,6 +33,8 @@ export class DealdetailPage {
         }
       );
     }
+    let a = this.navParams.get("id");
+    console.log(a);
   }
 
   ionViewDidLoad() {

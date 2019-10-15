@@ -1,10 +1,9 @@
 square {
-  ion-col {
-    padding: 0px;
-  }
-
   .squareimage {
     width: 120px;
     height: 150px;
+  }
+  .nopaddingbtm {
+    padding-bottom: 0;
   }
 }

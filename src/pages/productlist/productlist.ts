@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -20,7 +20,7 @@ import { DealsProvider } from "../../providers/deals/deals";
   selector: "page-productlist",
   templateUrl: "productlist.html"
 })
-export class ProductlistPage {
+export class ProductlistPage implements OnInit {
   @ViewChild(Content) _content: Content;
   @ViewChild(Searchbar) searchbar: Searchbar;
 
@@ -35,7 +35,6 @@ export class ProductlistPage {
   searchBoxOpened: boolean = false;
 
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,
     private storageService: StorageProvider,
     private toastController: ToastController,
@@ -45,20 +44,9 @@ export class ProductlistPage {
     private modalController: ModalController,
     private dealService: DealsProvider
   ) {
-    let id = this.navParams.get("id");
-    let type = this.navParams.get("type");
-    console.log("From Product List page " + id.ID);
-
-    if (type == "deals") {
-      this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
-        this.newItem = res;
-      });
-    } else {
-      this.dealService.getProductByCategory(id).subscribe((res: any) => {
-        this.newItem = res;
-      });
-    }
-
+    // let id = this.navParams.get("id");
+    // let type = this.navParams.get("type");
+    // console.log("From Product List page " + id.ID);
     // this.http
     //   .get("http://dummy.restapiexample.com/api/v1/employees")
     //   .subscribe(res => {
@@ -78,6 +66,22 @@ export class ProductlistPage {
     // // });
   }
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    let id = this.navParams.get("id");
+    let type = this.navParams.get("type");
+    console.log("From Product List page " + id.ID);
+    if (type == "deals") {
+      this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
+        this.newItem = res;
+      });
+    } else {
+      this.dealService.getProductByCategory(id).subscribe((res: any) => {
+        this.newItem = res;
+      });
+    }
+  }
   ionViewDidLoad() {
     // this.storageService.getDeals().then(res => {
     //   this.de = res;

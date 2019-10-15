@@ -33,6 +33,7 @@ export class NotificationPage {
     });
     this.storageService.getNotification().then(res => {
       this.localNotification = res;
+      console.log(this.localNotification);
     });
   }
 

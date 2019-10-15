@@ -26,21 +26,21 @@
   >
     <ion-slide>
       <ion-card
-        style="border-radius: 10px;"
+        [ngClass]="{ secondclass: true }"
         *ngFor="let item of pushNotification"
       >
-        <ion-card-content style=" padding:5px 10px;">
-          <img
-            src="../../assets/b.jpg"
-            style="
-    margin: 8px auto; -webkit-box-shadow: 0 8px 6px -6px black;
-        -moz-box-shadow: 0 8px 6px -6px black;
-        box-shadow: 0 8px 6px -6px black;"
-          />
-          <p style="">
-            The most popular industrial group ever, and largely responsible for
-            bringing the music to a mass audience.
-          </p>
+        <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
+          <ion-row>
+            <ion-col col-8>
+              <h4>{{ item.Name }}</h4>
+              <p>
+                {{ item.Description }}
+              </p>
+            </ion-col>
+            <ion-col col-4>
+              <img src="../../assets/arrow.jpg" class="dealsimage" />
+            </ion-col>
+          </ion-row>
         </ion-card-content>
         <ion-row no-padding>
           <ion-col>
@@ -50,22 +50,38 @@
               small
               color="danger"
               icon-start
-              (click)="save()"
+              (click)="setDealAsFav(item)"
             >
               <ion-icon name="star"></ion-icon>
               Favorite
             </button>
           </ion-col>
           <ion-col text-center>
-            <button ion-button clear small color="danger" icon-start>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="remindBtn(item)"
+            >
               <ion-icon name="musical-notes"></ion-icon>
-              Buy
+              Remind
             </button>
+            <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+      </ion-datetime>  -->
           </ion-col>
           <ion-col text-right>
-            <button ion-button clear small color="danger" icon-start>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="getDeal()"
+            >
               <ion-icon name="share-alt"></ion-icon>
-              Share
+              Buy
             </button>
           </ion-col>
         </ion-row>
@@ -77,21 +93,21 @@
     <ion-slide>
       <ion-list>
         <ion-card
-          style="border-radius: 10px;"
+          [ngClass]="{ secondclass: true }"
           *ngFor="let item of localNotification"
         >
-          <ion-card-content style=" padding:5px 10px;">
-            <img
-              src="../../assets/imgs/logo.png"
-              style="width: 140px;
-    margin: 8px auto; -webkit-box-shadow: 0 8px 6px -6px black;
-        -moz-box-shadow: 0 8px 6px -6px black;
-        box-shadow: 0 8px 6px -6px black;"
-            />
-            <p style="">
-              The most popular industrial group ever, and largely responsible
-              for bringing the music to a mass audience.
-            </p>
+          <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
+            <ion-row>
+              <ion-col col-8>
+                <h4>{{ item.data.Name }}</h4>
+                <p>
+                  {{ item.data.Description }}
+                </p>
+              </ion-col>
+              <ion-col col-4>
+                <img src="../../assets/arrow.jpg" class="dealsimage" />
+              </ion-col>
+            </ion-row>
           </ion-card-content>
           <ion-row no-padding>
             <ion-col>
@@ -101,22 +117,38 @@
                 small
                 color="danger"
                 icon-start
-                (click)="save()"
+                (click)="setDealAsFav(item)"
               >
                 <ion-icon name="star"></ion-icon>
                 Favorite
               </button>
             </ion-col>
             <ion-col text-center>
-              <button ion-button clear small color="danger" icon-start>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="remindBtn(item)"
+              >
                 <ion-icon name="musical-notes"></ion-icon>
-                Buy
+                Remind
               </button>
+              <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+      </ion-datetime>  -->
             </ion-col>
             <ion-col text-right>
-              <button ion-button clear small color="danger" icon-start>
+              <button
+                ion-button
+                clear
+                small
+                color="danger"
+                icon-start
+                (click)="getDeal()"
+              >
                 <ion-icon name="share-alt"></ion-icon>
-                Share
+                Buy
               </button>
             </ion-col>
           </ion-row>

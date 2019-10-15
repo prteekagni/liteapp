@@ -7,6 +7,8 @@ import { SharedProvider } from "../providers/shared/shared";
 import { OneSignal } from "@ionic-native/onesignal";
 import { StorageProvider } from "../providers/storage/storage";
 import { Deeplinks } from "@ionic-native/deeplinks";
+import { NotificationProvider } from "../providers/notification/notification";
+import { LocalNotifications } from "@ionic-native/local-notifications";
 
 declare var window: { KochavaTracker };
 
@@ -25,37 +27,50 @@ export class MyApp {
     private sharedService: SharedProvider,
     private oneSignal: OneSignal,
     private storageService: StorageProvider,
-    private deeplinks: Deeplinks
+    private deeplinks: Deeplinks,
+    localNotification: LocalNotifications
   ) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      // statusBar.styleLightContent();
-      // statusBar.overlaysWebView(true);
-      // statusBar.backgroundColorByHexString('#ffffff');
-      // splashScreen.hide();
-      // this.deeplinks.route({
-      //   '/': 'TabsPage',
-      //   '/products': 'ProductsPage',
-      //   '/productlist/:id': 'ProductlistPage',
-      //   '/todays-event': 'EventPage',
-      //   '/Dealdetail/:id':'DealdetailPage'
-      // }).subscribe(match => {
-      // match.$route - the route we matched, which is the matched entry from the arguments to route()
-      // match.$args - the args passed in the link
-      // match.$link - the full link data
-      //   this.nav.push(match.$route, match.$args).then(res => {
-      //     console.log('push successful')
-      //   }, err => {
-      //     this.nav.push('HomePage');
-      //     console.log('unsuccesful')
-      //   });
-      // }, nomatch => {
-      //   // nomatch.$link - the full link data
-      //   alert(JSON.stringify(nomatch))
-      // });
-      // this.initializeOneSignal();
-      // this.initializeTracker();
+      statusBar.styleLightContent();
+      statusBar.overlaysWebView(false);
+      statusBar.backgroundColorByHexString("#ff4500");
+      splashScreen.hide();
+      this.storageService.removelAll();
+      this.deeplinks
+        .route({
+          "/": "TabsPage",
+          "/products": "ProductsPage",
+          "/productlist/:id": "ProductlistPage",
+          "/todays-event": "EventPage",
+          "/Dealdetail/:id": "DealdetailPage"
+        })
+        .subscribe(
+          match => {
+            // match.$route - the route we matched, which is the matched entry from the arguments to route()
+            // match.$args - the args passed in the link
+            // match.$link - the full link data
+            this.nav.push(match.$route, match.$args).then(
+              res => {
+                console.log("push successful");
+              },
+              err => {
+                this.nav.push("HomePage");
+                console.log("unsuccesful");
+              }
+            );
+          },
+          nomatch => {
+            // nomatch.$link - the full link data
+            alert(JSON.stringify(nomatch));
+          }
+        );
+      this.initializeOneSignal();
+      this.initializeTracker();
+      localNotification.on("click").subscribe((res: any) => {
+        this.nav.push("DealdetailPage", {
+          id: res.data.ID
+        });
+      });
       storageService
         .checkDirectory()
         .then(res =>

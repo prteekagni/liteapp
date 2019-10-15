@@ -42,7 +42,7 @@ export class DealsgridComponent implements OnInit {
 
     if (this.type === "deals") {
       this.dealService
-        .getDealBySubCategory(this.items.ID)
+        .getDealSubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
         });

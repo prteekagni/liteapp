@@ -115,6 +115,75 @@ export class CardslideComponent implements OnInit, AfterViewInit {
         .getDealBySubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
+          for (let index = 0; index < this.cards.length; index++) {
+            this.sharedService.checkDownloadedImage(this.cards[index]).then(
+              res => {
+                if (res) {
+                  var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                    this.file.externalDataDirectory +
+                      "images/" +
+                      this.cards[index].Name +
+                      ".png"
+                  );
+                  console.log(nativeUrl);
+                  if (nativeUrl.length > 0) {
+                    this.cards[index].Logo = nativeUrl;
+                  }
+                } else {
+                  this.sharedService.downloadOnMemory(this.cards[index]).then(
+                    (res: any) => {
+                      console.log(res);
+                      var a = (<any>window).Ionic.WebView.convertFileSrc(
+                        res.toURL()
+                      );
+                      this.cards[index].Logo = a;
+
+                      this.storage.get("images").then((res: any) => {
+                        if (res) {
+                          if (
+                            res.find(x => x.ID === this.copiedData[index].ID)
+                          ) {
+                          } else {
+                            res.push(this.copiedData[index]);
+                            this.storage.set("images", res);
+                          }
+                        } else {
+                          this.storage.set("images", this.copiedData[index]);
+                        }
+                      });
+                    },
+                    error => {
+                      index++;
+                      console.log(JSON.stringify(error));
+                    }
+                  );
+                }
+              },
+              error => {
+                this.sharedService
+                  .downloadOnMemory(this.copiedData[index])
+                  .then((res: any) => {
+                    console.log(res);
+                    var a = (<any>window).Ionic.WebView.convertFileSrc(
+                      res.toURL()
+                    );
+                    this.copiedData[index].Logo = a;
+
+                    this.storage.get("images").then((res: any) => {
+                      if (res) {
+                        if (res.find(x => x.ID === this.copiedData[index].ID)) {
+                        } else {
+                          res.push(this.copiedData[index]);
+                          this.storage.set("images", res);
+                        }
+                      } else {
+                        this.storage.set("images", this.copiedData[index]);
+                      }
+                    });
+                  });
+              }
+            );
+          }
         });
     }
   }

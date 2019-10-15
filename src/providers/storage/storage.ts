@@ -19,10 +19,10 @@ export class StorageProvider {
     console.log("Hello StorageProvider Provider");
   }
 
-  addDeals(item: deals): Promise<any> {
-    return this.storage.get(DEALS_KEY).then((items: deals[]) => {
+  addDeals(item: any): Promise<any> {
+    return this.storage.get(DEALS_KEY).then((items: any[]) => {
       if (items) {
-        if (items.find(x => x.id === item.id)) {
+        if (items.find(x => x.ID === item.ID)) {
           return false;
         } else {
           items.push(item);
@@ -30,6 +30,7 @@ export class StorageProvider {
           return true;
         }
       } else {
+        this.storage.set(DEALS_KEY, [item]);
       }
     });
   }
@@ -116,6 +117,24 @@ export class StorageProvider {
       }
       return true;
     });
+  }
+  removeNotification(id: number): Promise<any> {
+    return this.storage.get(N_KEY).then((items: deals[]) => {
+      if (!items || items.length === 0) {
+        return null;
+      }
+      let toKeep: deals[] = [];
+      for (let i of items) {
+        if (i.id !== id) {
+          toKeep.push(i);
+        }
+      }
+      return this.storage.set(N_KEY, toKeep);
+    });
+  }
+
+  removelAll() {
+    this.storage.set(N_KEY, "");
   }
 
   savePushNotification(item): Promise<any> {

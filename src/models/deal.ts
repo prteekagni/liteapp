@@ -1,19 +1,15 @@
-export interface deals{
-    id: number;
-    title: string;
-    link: string;
-    image: string;
-    description: string;
-    reminder?: string;
-    category: string;
-    subcategory: string;
-    brand: string;
-    coupon?: string;
+export interface deals {
+  id: number;
+  title: string;
+  link: string;
+  image: string;
+  description: string;
+  reminder?: string;
+  category: string;
+  subcategory: string;
+  brand: string;
+  coupon?: string;
 }
-
-
-
-
 
 // [
 //     {
@@ -25,10 +21,10 @@ export interface deals{
 //         "category": "fashion",
 //         "subcategory": "mfashion",
 //         "brand":"Puma",
-            // "coupon":"AA8756"
+// "coupon":"AA8756"
 
 //     },
-    
+
 //     {
 //         "id": "2",
 //         "title": "50% off on Addidas",
@@ -49,5 +45,5 @@ export interface deals{
 //         "subcategory": "accessories",
 //         "brand":"Nike"
 //     },
-    
+
 // ]
