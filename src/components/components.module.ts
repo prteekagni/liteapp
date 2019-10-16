@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { IonicModule } from 'ionic-angular';
-import { SlideComponent } from './slide/slide';
-import { CardslideComponent } from './cardslide/cardslide';
-import { ShareComponent } from './share/share';
-import { SingleaddComponent } from './singleadd/singleadd';
-import { LoginComponent } from './login/login';
-import { ProfileComponent } from './profile/profile';
-import { SquareComponent } from './square/square';
-import { CardlistComponent } from './cardlist/cardlist';
-import { ActionsheetComponent } from './actionsheet/actionsheet';
-import { CardgridComponent } from './cardgrid/cardgrid';
-import { DealsgridComponent } from './dealsgrid/dealsgrid';
-import { AslidinglistComponent } from './aslidinglist/aslidinglist';
+import { NgModule } from "@angular/core";
+import { IonicModule } from "ionic-angular";
+import { SlideComponent } from "./slide/slide";
+import { CardslideComponent } from "./cardslide/cardslide";
+import { ShareComponent } from "./share/share";
+import { SingleaddComponent } from "./singleadd/singleadd";
+import { LoginComponent } from "./login/login";
+import { ProfileComponent } from "./profile/profile";
+import { SquareComponent } from "./square/square";
+import { CardlistComponent } from "./cardlist/cardlist";
+import { ActionsheetComponent } from "./actionsheet/actionsheet";
+import { CardgridComponent } from "./cardgrid/cardgrid";
+import { DealsgridComponent } from "./dealsgrid/dealsgrid";
+import { AslidinglistComponent } from "./aslidinglist/aslidinglist";
 @NgModule({
-	declarations: [
+  declarations: [
     SlideComponent,
     CardslideComponent,
     ShareComponent,
@@ -25,9 +25,10 @@ import { AslidinglistComponent } from './aslidinglist/aslidinglist';
     ActionsheetComponent,
     CardgridComponent,
     DealsgridComponent,
-    AslidinglistComponent],
-	imports: [IonicModule],
-	exports: [
+    AslidinglistComponent
+  ],
+  imports: [IonicModule],
+  exports: [
     SlideComponent,
     CardslideComponent,
     ShareComponent,
@@ -39,6 +40,7 @@ import { AslidinglistComponent } from './aslidinglist/aslidinglist';
     ActionsheetComponent,
     CardgridComponent,
     DealsgridComponent,
-    AslidinglistComponent]
+    AslidinglistComponent
+  ]
 })
 export class ComponentsModule {}

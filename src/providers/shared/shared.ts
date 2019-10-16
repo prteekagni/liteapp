@@ -10,6 +10,7 @@ import {
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
+import { Subject } from "rxjs";
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -27,6 +28,8 @@ declare var window: { KochavaTracker };
 @Injectable()
 export class SharedProvider {
   loading;
+
+  browserOpenSubject = new Subject<boolean>();
 
   constructor(
     private loadingCtrl: LoadingController,
@@ -100,7 +103,7 @@ export class SharedProvider {
     return localStorage.getItem("Token");
   }
 
-  shareApp(data) {
+  shareapplication(data) {
     this.socialSharing
       .share(data.message, data.subject, data.image, data.link)
       .then(() => {
@@ -192,11 +195,16 @@ export class SharedProvider {
   // createBrowserLink
 
   openBrowser(data) {
-    const url = "http://" + data.Url;
-    console.log(url);
-    const browser = this.inappBrowser.create(url);
-    // browser.on("loadstop").subscribe(event => {
-    //   browser.insertCSS({ code: "body{color: red;" });
+    var url;
+    if (data.Url.length <= 1) {
+      url = data.Url[0].Url;
+      console.log(url);
+    }
+
+    const browser = this.inappBrowser.create(url, "_system");
+    // browser.on("loadstart").subscribe(event => {
+    //   console.log(event);
+    //   this.browserOpenSubject.next(true);
     // });
   }
 

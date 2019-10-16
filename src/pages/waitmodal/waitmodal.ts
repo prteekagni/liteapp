@@ -6,6 +6,7 @@ import {
   ViewController
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
+import { Subject } from "rxjs";
 
 /**
  * Generated class for the WaitmodalPage page.
@@ -31,11 +32,17 @@ export class WaitmodalPage {
   ) {
     this.data = this.navParams.get("data");
     this.logo = this.data.Name;
-    console.log(this.logo);
+    console.log(this.data);
+
+    // this.sharedService.browserOpenSubject.subscribe(res => {
+    //   if (res) {
+    //     this.dismiss();
+    //   }
+    // });
     setTimeout(() => {
       this.dismiss();
       this.sharedService.openBrowser(this.data);
-    }, 2000);
+    }, 3000);
   }
 
   ionViewDidLoad() {

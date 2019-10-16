@@ -14,6 +14,7 @@ import { deals } from "../../models/deal";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { SharedProvider } from "../../providers/shared/shared";
 import { DealsProvider } from "../../providers/deals/deals";
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 @IonicPage()
 @Component({
@@ -42,7 +43,8 @@ export class ProductlistPage implements OnInit {
     public alertCtrl: AlertController,
     public sharedService: SharedProvider,
     private modalController: ModalController,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private shareapp: SocialSharing
   ) {
     // let id = this.navParams.get("id");
     // let type = this.navParams.get("type");
@@ -75,6 +77,13 @@ export class ProductlistPage implements OnInit {
     if (type == "deals") {
       this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
         this.newItem = res;
+        this.storageService.getDeals().then((res: any) => {
+          this.newItem.forEach(element => {
+            if (res.ID == element.ID) {
+              this.newItem.itemfav = true;
+            }
+          });
+        });
       });
     } else {
       this.dealService.getProductByCategory(id).subscribe((res: any) => {
@@ -178,5 +187,19 @@ export class ProductlistPage implements OnInit {
     );
 
     dealmodal.present();
+  }
+
+  shareApp() {
+    var data = {
+      message: `  *Now lock great deals, use dealslocker*    `,
+      Url:
+        "https://play.google.com/store/apps/details?id=io.palianews.app&hl=en",
+      subject: "jgdl;dlkfgdfl;khgdhg",
+      image:
+        "https://appimageselinfinito.s3.us-east-2.amazonaws.com/tatacliq.jpg"
+    };
+    this.shareapp
+      .share(data.message, data.subject, data.image, data.Url)
+      .then(res => console.log(res));
   }
 }

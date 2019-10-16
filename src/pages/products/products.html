@@ -33,18 +33,20 @@
       <!-- <dealsgrid [items]="item" [type]="'products'" *ngIf="item.ID"></dealsgrid> -->
 
       <ion-slides
-        slidesPerView="1.2"
-        spaceBetween="10"
-        centeredSlides="true"
-        loop="true"
+        slidesPerView=1
+        spaceBetween=0
+        centeredSlides=true
+        loop=true
+        initialSlide=0
+        parallax=true
+        
       >
-        <ion-slide style="">
-          <img src="../../assets/b.jpg" alt="" />
+        <ion-slide>
+          <img src="../../assets/banner2.jpg" alt="" />
         </ion-slide>
         <ion-slide>
           <img src="../../assets/banner2.jpg" alt="" />
         </ion-slide>
-
         <ion-slide> </ion-slide>
       </ion-slides>
     </ion-col>

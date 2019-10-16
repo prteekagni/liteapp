@@ -28,12 +28,9 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col-3 *ngFor="let item of cards">
-      <img src="../../assets/amazon-logo.png" alt="" />
-      <p
-        style="text-align: center;margin-top: 0px;
-    margin-bottom: 0px;"
-      >
+    <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)">
+      <img src="assets/amazon-logo.png" alt="" />
+      <p style="text-align: center;margin-top: 0px;margin-bottom: 0px;">
         {{ item.Name }}
       </p>
     </ion-col>

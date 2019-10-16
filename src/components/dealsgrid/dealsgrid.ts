@@ -7,7 +7,7 @@ import {
   EventEmitter
 } from "@angular/core";
 import { DealsProvider } from "../../providers/deals/deals";
-import { Content } from "ionic-angular";
+import { Content, ModalController, ViewController } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { Events } from "ionic-angular";
 /**
@@ -33,7 +33,9 @@ export class DealsgridComponent implements OnInit {
   constructor(
     private dealService: DealsProvider,
     private http: HttpClient,
-    private event: Events
+    private event: Events,
+    private modalController: ModalController,
+    private viewController: ViewController
   ) {}
 
   ngOnInit() {
@@ -55,6 +57,8 @@ export class DealsgridComponent implements OnInit {
     } else if (this.type == "stores") {
       this.dealService.getStores(this.items.ID).subscribe((res: any) => {
         this.cards = res;
+        console.log(this.cards[0]);
+
         if (this.cards.length > 1 && this.cards[0].StoreType == 1) {
           this.directLinks = true;
         }
@@ -64,5 +68,22 @@ export class DealsgridComponent implements OnInit {
         this.cards = res;
       });
     }
+  }
+
+  goToStore(item) {
+    let modal = this.modalController.create(
+      "WaitmodalPage",
+      {
+        data: item
+      },
+      {
+        cssClass: "mymodal"
+      }
+    );
+    modal.present();
+  }
+
+  dismiss() {
+    this.viewController.dismiss();
   }
 }
