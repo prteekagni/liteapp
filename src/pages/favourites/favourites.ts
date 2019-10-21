@@ -24,23 +24,27 @@ export class FavouritesPage {
   ) {}
 
   ionViewDidLoad() {
-    this.sharedService.createLoader();
-    this.storageService.getDeals().then(res => {
-      this.newItem = res || [];
+    
+    this.getData();
+  }
 
-      this.newItem.forEach(element => {
-        element.time = "";
-      });
-      this.sharedService.dismissLoader();
-    });
+  getData(){
+    this.sharedService.createLoader();
+       this.storageService.getDeals().then(res => {
+         this.newItem = res || [];
+
+         this.newItem.forEach(element => {
+           element.time = "";
+         });
+         this.sharedService.dismissLoader();
+       });
   }
 
   remove(data) {
     this.storageService.deleteDeals(data).then(res => {
-      this.newItem = res;
-      this.newItem.forEach(element => {
-        element.time = "";
-      });
+      this.getData();
+    },err=>{
+      console.log("Error in removing data");
     });
   }
 

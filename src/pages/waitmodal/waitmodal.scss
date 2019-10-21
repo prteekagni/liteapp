@@ -41,4 +41,44 @@ page-waitmodal {
     display: table-cell;
     vertical-align: middle;
   }
+
+  .loader {
+    width: 100px;
+    /* height: 100px; */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* -webkit-box-pack: center; */
+    /* -webkit-justify-content: center; */
+    -ms-flex-pack: center;
+    justify-content: center;
+    /* -webkit-box-align: center; */
+    /* -webkit-align-items: center; */
+    -ms-flex-align: center;
+    align-items: center;
+    margin: -5px -1px;
+  }
+
+  @keyframes load10 {
+    50% {
+      transform: rotatez(180deg);
+      border-style: dashed;
+      border-color: red maroon indianred orangered;
+    }
+    100% {
+      transform: rotatez(360deg);
+    }
+  }
+  .loader10::before {
+    content: "";
+    color: white;
+    height: 35px;
+    width: 35px;
+    background: transparent;
+    border-radius: 50%;
+    border: 11px solid red;
+    -webkit-animation: load10 1s infinite;
+    animation: load10 1s infinite;
+  }
 }

@@ -5,11 +5,33 @@
         <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
       </ion-col>
     </ion-row>
-    <cardslide
-      [items]="copyItem"
-      [type]="type"
-      *ngIf="cards.length !== 0"
-    ></cardslide>
+    <ion-col col-12>
+      <ion-item no-lines class="paddingleft">
+        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
+          <ion-card
+            class="scroll-item largecard"
+            (click)="getToDeal(item)"
+            *ngFor="let item of cards; index as i"
+          >
+            <ng-container>
+              <ion-img
+                *ngIf="item.Logo != null"
+                src="{{ item.Logo }}"
+                class="largecardimg"
+              >
+              </ion-img>
+              <div class="overlay-effect h-100 w-100"></div>
+              <h1 class="textstyle">
+                {{ item.Name }}
+              </h1>
+            </ng-container>
+          </ion-card>
+        </ion-scroll>
+        <ng-template #loading>
+          dfjghfjkdghjkh
+        </ng-template>
+      </ion-item>
+    </ion-col>
   </ng-container>
   <ng-template #elseTemplate>
     <ion-row>
@@ -17,7 +39,28 @@
         <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
       </ion-col>
     </ion-row>
-    <square [data]="copyItem" [type]="type" *ngIf="cards.length !== 0"></square>
+    <ion-row>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col
+            col-6
+            class="nopaddingbtm"
+            (click)="getOfferDetail(item)"
+            *ngFor="let item of cards"
+            text-center
+          >
+            <ion-img src="{{item.Logo}}" alt="" class="squareimage">
+            </ion-img>
+            <p
+              style="text-align: center;margin-top: 0px;
+    margin-bottom: 0px;"
+            >
+              {{ item.Name }}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
   </ng-template>
 </ng-container>
 
@@ -29,7 +72,7 @@
   </ion-row>
   <ion-row>
     <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)">
-      <img src="assets/amazon-logo.png" alt="" />
+      <img src="{{ item.Logo }}" alt="" />
       <p style="text-align: center;margin-top: 0px;margin-bottom: 0px;">
         {{ item.Name }}
       </p>

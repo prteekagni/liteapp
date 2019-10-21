@@ -32,6 +32,8 @@ import { HttpErrorInterceptor } from "../providers/shared/interceptor";
 import { CacheService } from "../providers/shared/cache";
 import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+
+import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
 @NgModule({
   declarations: [MyApp],
   // schemas: [
@@ -82,7 +84,8 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     File,
     FileTransferObject,
     CacheService,
-    InAppBrowser
+    InAppBrowser,
+    FirebaseAnalytics
   ],
   exports: []
 })

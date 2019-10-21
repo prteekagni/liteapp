@@ -11,6 +11,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Subject } from "rxjs";
+import { of } from "rxjs/observable/of";
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -42,23 +43,7 @@ export class SharedProvider {
     private transfer: FileTransfer,
     private inappBrowser: InAppBrowser
   ) {
-    this.network.onConnect().subscribe(() => {
-      console.log("network connected!");
-      // We just got a connection but we need to wait briefly
-      // before we determine the connection type. Might need to wait.
-      // prior to doing any api requests as well.
-
-      this.events.publish("nstatus", true);
-    });
-
-    this.network.onDisconnect().subscribe(() => {
-      console.log("network disconnected!");
-      // We just got a connection but we need to wait briefly
-      // before we determine the connection type. Might need to wait.
-      // prior to doing any api requests as well.
-      this.events.publish("nstatus", false);
-    });
-    console.log("Hello SharedProvider Provider");
+    this.checkNetworkStatusOnPage();
   }
 
   createToast(message) {
@@ -120,9 +105,9 @@ export class SharedProvider {
     let conntype = this.network.type;
 
     if (conntype === "NONE" || conntype === "none") {
-      return false;
+      return of(false);
     } else {
-      return true;
+      return of(true);
     }
   }
 
@@ -196,12 +181,16 @@ export class SharedProvider {
 
   openBrowser(data) {
     var url;
-    if (data.Url.length <= 1) {
+    if (data.Url.length <= 1 && data.Url.length !==0) {
       url = data.Url[0].Url;
       console.log(url);
+      const browser = this.inappBrowser.create(url, "_system");
     }
+    else if(data.Url.length ==0){
+      this.createToast("Error");
+    }
+    
 
-    const browser = this.inappBrowser.create(url, "_system");
     // browser.on("loadstart").subscribe(event => {
     //   console.log(event);
     //   this.browserOpenSubject.next(true);
@@ -240,5 +229,15 @@ export class SharedProvider {
           return null;
         }
       );
+  }
+
+  checkNetworkStatusOnPage(){
+        this.network.onConnect().subscribe(res => {
+          this.events.publish("nstatus", true);
+        });
+
+        this.network.onDisconnect().subscribe(res => {
+          this.events.publish("nstatus", false);
+        });
   }
 }

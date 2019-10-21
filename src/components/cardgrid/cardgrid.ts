@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { DealsProvider } from "../../providers/deals/deals";
 import { take, tap, map } from "rxjs/operators";
+import { SharedProvider } from "../../providers/shared/shared";
 
 /**
  * Generated class for the CardgridComponent component.
@@ -17,7 +18,7 @@ export class CardgridComponent {
   text: string;
   items: any = [];
 
-  constructor(private dealsProvider: DealsProvider, private http: HttpClient) {
+  constructor(private dealsProvider: DealsProvider, private sharedProvider: SharedProvider) {
     // this.dealsProvider
     //   .getStoreCategory()
     //   .pipe(take(1))
@@ -25,12 +26,14 @@ export class CardgridComponent {
     //     this.items = res;
     //     console.log(this.items);
     //   });
-    this.http
-      .get("http://192.168.225.36:52044/api/stores")
-      .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
-      .subscribe((res: any) => {
+    this.dealsProvider
+      .getTopStores()
+        .subscribe((res: any) => {
         this.items = res;
-        console.log(this.items);
-      });
+        console.log(this.items);})
+  }
+
+  goToStore(data){
+  this.sharedProvider.openBrowser(data);
   }
 }

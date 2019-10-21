@@ -2,4 +2,130 @@ dealsgrid {
   ion-spinner {
     display: none;
   }
+   .largecardcontainer {
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 195px;
+    margin-top: 0px;
+  }
+
+  // this is used for cards used to display stores and brands
+  .largecard {
+    position: relative;
+    text-align: center;
+    height: 150px;
+    width: 120px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    -webkit-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+  }
+
+  // to reduce the padding on right side for better UI while scrolling
+  .item-md.item-block .item-inner {
+    padding-right: 0px;
+  }
+
+  // this class is used for logo display on cards
+  .largecardimg {
+    // width: 100% !important;
+    // margin: 5px auto !important;
+    // height: 165px !important;
+    // margin-top: 0px !important;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    width: 120px;
+    opacity: 0.9;
+    background-color: rgba(259, 67, 95, 0.7);
+  }
+
+  // the title of cards displaying title of cards
+  .cartcard-title {
+    position: absolute;
+    top: 20%;
+    font-size: 1.7em;
+    width: 100%;
+    font-weight: bold;
+    color: white;
+  }
+
+  .label-md {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-right: 0px !important;
+  }
+
+  background-color: white;
+
+  .item[no-lines],
+  .item.item[no-lines] .item-inner {
+    background-color: transparent;
+  }
+  ion-scroll {
+    white-space: nowrap;
+    height: 200px;
+  }
+  ion-img {
+    height: 150px;
+  }
+
+  #largecardmobile {
+    position: relative;
+    text-align: center;
+    height: 198px;
+    width: 135px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    -webkit-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 12px -4px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+  }
+
+  .largecard:nth-child(odd) {
+    background-image: url("../../assets/orange.png");
+  }
+
+  .largecard:nth-child(even) {
+    background-image: url("../../assets/pink.png");
+  }
+  .overlay-effect {
+  position: absolute;
+    top: 78%;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    opacity: 0.6;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+  }
+
+  .textstyle {
+    font-family: "Mansalva", cursive;
+    white-space: normal;
+    position: absolute;
+    top: 88%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    word-break: break-all;
+    color: white;
+    font-size: 1.5rem;
+  }
+   .squareimage {
+    width: 120px;
+    height: 150px;
+  }
+  .nopaddingbtm {
+    padding-bottom: 0;
+  }
 }

@@ -85,7 +85,7 @@
     </ion-row>
 
     <!-- Substores -->
-    <!-- <ion-row>
+    <ion-row>
       <ion-col col-12 text-center>
         <h2 *ngIf="substores.length >= 1">Stores by Category</h2>
       </ion-col>
@@ -94,13 +94,13 @@
         <ion-row>
           <ion-col col-3 text-center *ngFor="let item of substores; index as i">
             <ion-item (click)="goToPage(item)" item-start>
-              <img src="assets/{{ item?.Logo }}" alt="" />
+              <img src="assets/mens.jpg" alt="" />
               <p style="text-align: center">{{ item?.Name | titlecase }}</p>
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-col>
-    </ion-row> -->
+    </ion-row>
 
     <!-- <ion-row>
       <ion-col col-3 *ngFor="let item of store">
@@ -111,7 +111,7 @@
     <!-- Store category with store links -->
     <ng-container *ngIf="store.length > 0">
       <ng-container *ngFor="let item of store; let i = index">
-        <ion-row *ngIf="item?.Name != 'New Mobiles'" class="mycatego">
+        <ion-row *ngIf="item?.Name != 'Shop By Category'" class="mycatego">
           <!-- <ion-col col-12 text-center>
             <h2>{{ item?.Name }}</h2>
           </ion-col> -->
@@ -122,8 +122,9 @@
               *ngIf="item?.ID"
             ></dealsgrid>
           </ion-col>
-          <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+         
         </ion-row>
+         <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length"></singleadd>
       </ng-container>
     </ng-container>
     <ion-row *ngIf="lastStore">

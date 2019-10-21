@@ -42,7 +42,7 @@ export class WaitmodalPage {
     setTimeout(() => {
       this.dismiss();
       this.sharedService.openBrowser(this.data);
-    }, 3000);
+    }, 300);
   }
 
   ionViewDidLoad() {

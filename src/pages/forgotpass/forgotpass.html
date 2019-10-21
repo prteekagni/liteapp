@@ -6,34 +6,43 @@
 
 <ion-content>
   <ng-container
-    *ngIf="expression; then thenTemplate; else elseTemplate"
+    *ngIf="status; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
     <ion-row text-center>
-      <form #sendEmail="ngForm">
-        <ion-col col-10 offset-1>
+      <ion-col col-10 offset-1>
+        <ion-card>
+          <ion-card-header>
+            Forgot Password
+          </ion-card-header>
+          <ion-card-content>
+              <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value.Username)">
           <ion-item>
-            <ion-label stacked>Enter Email</ion-label>
+            <ion-icon name="call"></ion-icon>
+            <ion-label stacked>Email</ion-label>
             <ion-input
               type="email"
-              [(ngModel)]="email"
-              name="email"
+              required
+              name="Username"
+              (ngModel)="(login.Username)"
             ></ion-input>
           </ion-item>
-        </ion-col>
-        <ion-col col-6 offset-3>
-          <button
-            ion-button
-            type="submit"
-            block
-            class="submitbutton"
-            (click)="sendOtp()"
-            [disabled]="sendEmail.invalid"
-          >
-            Send OTP
-          </button>
-        </ion-col>
-      </form>
+          <ion-item>
+            <button
+              ion-button
+              type="submit"
+              block
+              class="submitbutton"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </button>
+          </ion-item>
+        </form>
+          </ion-card-content>
+        </ion-card>
+      
+      </ion-col>
     </ion-row>
   </ng-template>
   <ng-template #elseTemplate>

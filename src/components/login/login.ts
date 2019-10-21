@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
 import { Events, NavController } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
+import { LOCATION_INITIALIZED } from "@angular/common";
 
 /**
  * Generated class for the LoginComponent component.
@@ -31,8 +32,12 @@ export class LoginComponent {
   }
 
   forgotPassword() {
-    this.googlePlus.logout().then(res => {
-      console.log(res);
+    // this.googlePlus.logout().then(res => {
+    //   console.log(res);
+    // });
+
+    this.navCtrl.push("ForgotpassPage",{
+      data:"prateek@elinfinitoindia.in"
     });
 
     // this.navCtrl.push("ForgotpassPage");

@@ -1,11 +1,10 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, NgZone } from "@angular/core";
 import {
   IonicPage,
   NavController,
   NavParams,
   Events,
   Platform,
-  ModalController,
   Content,
   Slides
 } from "ionic-angular";
@@ -13,9 +12,9 @@ import { SharedProvider } from "../../providers/shared/shared";
 import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
-import { HttpClient } from "@angular/common/http";
-import { StorageProvider } from "../../providers/storage/storage";
-import { map, take } from "rxjs/operators";
+import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
+import { Subject } from "rxjs";
+import { locateHostElement } from "@angular/core/src/render3/instructions";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -38,11 +37,12 @@ export class HomePage {
   slides;
   isLoggedIn: boolean = false;
   lnotification: any = [];
-  isConnected: boolean;
+  isConnected: boolean = true;
   showToolbar: boolean;
   visibility: boolean = true;
   counter: any = 0;
   stores: any = [];
+  count;
 
   defaultImage = "../../assets/images/logo.png";
 
@@ -56,6 +56,9 @@ export class HomePage {
   shopbyID: any;
   lastStore: boolean = false;
   fileTransfer;
+  mobile;
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -63,44 +66,81 @@ export class HomePage {
     private platform: Platform,
     private sharedService: SharedProvider,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private firebaseAnalytics: FirebaseAnalytics,
+    private ngZone: NgZone
   ) {
-    platform.ready().then(() => {
-      this.isConnected = this.sharedService.checkNetworkStatus();
-      // this.checkDirectory();
-    });
+    // platform.ready().then(() => {
+    //   this.firebaseAnalytics
+    //     .logEvent("page_view", { page: "dashboard" })
+    //     .then((res: any) => console.log(res))
+    //     .catch((error: any) => console.error(error));
+    //   // this.checkDirectory();
+    //   this.sharedService.checkNetworkStatus().subscribe(
+    //     res => {
+    //       if (res) {
+    //         this.ngZone.run(() => {
+    //           this.isConnected = true;
+    //         });
+
+    //         console.log("Internet COnnected");
+    //       } else {
+    //         this.ngZone.run(() => {
+    //           this.isConnected = false;
+    //         });
+    //         this.sharedService.createToast("No Internet Avaiable");
+    //         console.log("Internet npot connected");
+    //       }
+    //     },
+    //     err => {
+    //       alert("Error in checking network statua");
+    //     }
+    //   );
+    // });
 
     platform.resume.subscribe(() => {
-      this.isConnected = this.sharedService.checkNetworkStatus();
+      this.sharedService.checkNetworkStatus().subscribe(
+        res => {
+          if (res) {
+            this.isConnected = true;
+            console.log("Internet COnnected");
+          } else {
+            this.isConnected = false;
+            this.sharedService.createToast("No Internet Avaiable");
+            console.log("Internet npot connected");
+          }
+        },
+        err => {
+          alert("Error in checking network statua");
+        }
+      );
     });
 
     this.showToolbar = false;
 
     // On Click of dynamic Link
-    this.firebaseDynamicLinks
-      .onDynamicLink()
-      .subscribe(
-        (res: any) => console.log(res),
-        (error: any) => console.log(error)
-      );
+    // this.firebaseDynamicLinks
+    //   .onDynamicLink()
+    //   .subscribe(
+    //     (res: any) => console.log(res),
+    //     (error: any) => console.log(error)
+    //   );
 
     this.dealService.getStoreCategory().subscribe((res: any) => {
-      this.tempStore = res;
-      if (this.tempStore) {
-        this.tempStore.forEach(element => {
+      if (res) {
+        res.forEach(element => {
+          this.tempStore.push(element);
           if (element.Name == "Shop By Category") {
             this.shopbyID = element.ID;
           }
         });
         for (
-          let index = 0;
-          index < 4 && index < this.tempStore.length;
-          index++
+          this.count = 0;
+          this.count < 3 && this.count < this.tempStore.length;
+          this.count++
         ) {
-          this.store.push(this.tempStore[index]);
+          this.store.push(this.tempStore[this.count]);
         }
-
-        console.log(this.store);
       }
       this.dealService
         .getStoreSubCategory(this.shopbyID)
@@ -117,6 +157,8 @@ export class HomePage {
       }
     );
 
+    this.dealService.getAllStores();
+
     // this.dealService.getAdsData().subscribe(
     //   (res: any) => {
     //     this.adsData = res;
@@ -125,25 +167,44 @@ export class HomePage {
     //     console.log(err);
     //   }
     // );
+    // this.events.subscribe("nstatus", res => {
+    //   if (res) {
+    //     console.log("Home PAge:" + res);
+    //     this.ngZone.run(() => {
+    //       this.isConnected = true;
+    //     });
+    //   } else {
+    //     console.log("From Home Page " + res);
+    //     this.ngZone.run(() => {
+    //       this.isConnected = false;
+    //     });
+    //   }
+    // });
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    // this.events.subscribe("nstatus", res => {
+    //   if (res) {
+    //     console.log("Home PAge:" + res);
+    //   } else {
+    //     console.log("From Home Page " + res);
+    //     this.isConnected = false;
+    //   }
+    // });
+  }
 
   nav11() {
     this.navCtrl.push("ProductlistPage");
   }
 
-  ionViewWillEnter() {
-    this.events.subscribe("nstatus", res => {
-      if (res == true) {
-        this.isConnected = true;
-      } else {
-        this.isConnected = false;
-      }
-    });
-  }
+  ionViewWillEnter() {}
 
   goToNotification() {
+    this.firebaseAnalytics
+      .logEvent("share", { name: "notification" })
+      .then((res: any) => alert(res))
+      .catch((error: any) => console.error(error));
+    // this.checkDirectory();
     this.navCtrl.push("NotificationPage", {}, animationsOptions);
   }
 
@@ -151,24 +212,30 @@ export class HomePage {
     this.navCtrl.push("FavouritesPage", {}, animationsOptions);
   }
 
-  toggle() {
-    this.isConnected = !this.isConnected;
-  }
-
   ionViewWillLeave() {}
 
   doInfinite(event) {
-    if (this.store.length !== this.tempStore.length) {
-      for (let index = 0; index < this.tempStore.length - 4; index++) {
-        this.store.push(this.tempStore[index + 3]);
+      this.dealService.storesdata.subscribe((res: any) => {
+        console.log(res);
+      });
+    if (this.store.length <= this.tempStore.length) {
+      console.log(this.store.length);
+      console.log(this.tempStore.length);
+      for (let cindex = 0; cindex < 4;   cindex++) {
+        this.store.push(this.tempStore[this.count]);
+        this.count++;
       }
+       setTimeout(() => {
+         event.complete();
+       }, 500);
     } else {
-      event.enable(false);
+     
+     
+        this.lastStore = true;
+         event.enable(false);
     }
-    setTimeout(() => {
-      event.complete();
-    }, 500);
-    this.lastStore = true;
+   
+  
   }
 
   goToPage(data) {

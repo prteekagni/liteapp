@@ -1,3 +1,15 @@
-<ion-card class="addheight" (click)="getDetail($event)">
+
+<ng-container *ngIf="show <= singleLength ; then thenTemplate; else elseTemplate"></ng-container>
+<ng-template #thenTemplate>
+    <ion-card class="addheight" (click)="getDetail($event)">
     <img src="../../assets/b.jpg" alt="" class="addimage">
 </ion-card>
+</ng-template>
+<ng-template #elseTemplate>
+    
+</ng-template>
+
+
+
+
+

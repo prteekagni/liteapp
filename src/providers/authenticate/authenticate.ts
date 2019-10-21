@@ -1,10 +1,11 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { GooglePlus } from "@ionic-native/google-plus";
 
 @Injectable()
 export class AuthenticateProvider {
   user;
+  apiUrl = "http://192.168.225.45:52044/api/";
   constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {
@@ -30,11 +31,13 @@ export class AuthenticateProvider {
   }
 
   verifyOtp(data) {
-    return this.http.post("/VerifyOtp", data);
+    return this.http.post(this.apiUrl+ "VerifyOtp", JSON.stringify(data));
   }
 
   sendOtp(data) {
-    return this.http.post("/users/ForgetPassword", data);
+    return this.http.post(this.apiUrl + "users/ForgetPassword", JSON.stringify(data), {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
+    });
   }
 
   // register user

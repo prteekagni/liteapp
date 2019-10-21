@@ -42,7 +42,7 @@ export class DealsPage {
   showMore: boolean = true;
   lastStore: boolean = false;
   type: string = "deals";
-
+  shopByCateory;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,6 +52,11 @@ export class DealsPage {
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;
+      this.tempdeals.forEach(element => {
+        if (element.Name == "Deals By Category") {
+          this.shopByCateory = element.ID;
+        }
+      });
 
       if (this.tempdeals.length >= 1) {
         for (
@@ -65,7 +70,7 @@ export class DealsPage {
       }
     });
     this.dealsprovider
-      .getDealSubCategory("59378531-62f7-4cdd-af59-cfcfbb0d91f0")
+      .getDealSubCategory(this.shopByCateory)
       .subscribe((res: any) => {
         this.subdeals = res;
       });

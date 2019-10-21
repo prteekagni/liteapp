@@ -4,18 +4,37 @@ import { Observable } from "rxjs/Observable";
 import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
+import { Subject, ReplaySubject } from "rxjs";
 
 const apiUrl = "http://192.168.225.45:52044/api/";
 
 @Injectable()
 export class DealsProvider {
+  storesdata: ReplaySubject<any> = new ReplaySubject(1);
+
   constructor(public http: HttpClient) {
     console.log("Hello DealsProvider Provider");
+  }
+
+  getAllCategory() {
+    return this.http.get(apiUrl + "category");
   }
 
   getStores(id) {
     return this.http.get(apiUrl + "stores/getStores/" + id);
   }
+
+  getTopStores(){
+    return this.http
+      .get(apiUrl + "stores")
+      .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
+  }
+  getAllStores() {
+    return this.http.get(apiUrl + "stores").subscribe((res: any) => {
+      this.storesdata.next(res);
+    });
+  }
+
   // get store links
   getSubStores(mid, id) {
     return this.http.get(apiUrl + "stores/getSubStores/" + mid + "/" + id);

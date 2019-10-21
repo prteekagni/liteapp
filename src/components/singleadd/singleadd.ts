@@ -7,5 +7,9 @@ import { Component } from "@angular/core";
 export class SingleaddComponent {
   text: string;
 
-  constructor() {}
+  singleLength: number = 5;
+  show:number = 2;
+  constructor() {
+   
+  }
 }

@@ -18,14 +18,20 @@ import { AuthenticateProvider } from "../../providers/authenticate/authenticate"
 export class ForgotpassPage {
   public email;
   public otp;
-  public status;
+  public status: boolean = true;
+  expression: boolean = true;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public sharedService: SharedProvider,
     public authService: AuthenticateProvider
-  ) {}
+  ) {
+    let id = this.navParams.get("data");
+    // this.authService.sendOtp(id).subscribe((res: any) => {
+    //   console.log(res);
+    // });
+  }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ForgotpassPage");
@@ -49,11 +55,14 @@ export class ForgotpassPage {
     );
   }
 
-  sendOtp() {
-    this.authService.sendOtp(this.email).subscribe(
+  onSubmit(email) {
+    this.authService.sendOtp(email).subscribe(
       res => {
-        console.log(res);
-        this.status = false;
+        if (res == "Inavalid Email") {
+          this.sharedService.createToast("Invalid Email");
+        } else {
+          this.status = false;
+        }
       },
       err => {
         this.sharedService.createToast("Unable to send otp");

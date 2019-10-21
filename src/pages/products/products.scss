@@ -137,4 +137,8 @@ page-products {
   .nopadding {
     padding: 0px !important;
   }
+
+  .swiper-slide.swiper-slide-active.slide-zoom.swiper-slide img {
+    transform: scale(1.2);
+  }
 }

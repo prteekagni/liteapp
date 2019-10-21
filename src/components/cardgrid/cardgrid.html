@@ -4,10 +4,10 @@
   <ion-col col-12>
     <ion-row>
       <ng-container *ngFor="let item of items; index as i">
-        <ion-col col-4 *ngIf="i < 6">
+        <ion-col col-4 *ngIf="i < 6" (click)="goToStore(item)">
           <ion-card class="roundedcorner">
             <ion-card-content>
-              <img src="../../assets/{{ item.Logo }}" />
+              <img src="{{ item.Logo }}" />
             </ion-card-content>
           </ion-card>
         </ion-col>
