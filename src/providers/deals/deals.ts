@@ -47,8 +47,8 @@ export class DealsProvider {
   }
 
   getFeatureStore() {
-    return this.http.get(apiUrl + "category");
-    // .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
+    return this.http.get(apiUrl + "category")
+    .pipe(map((res: any) => res.filter(resp => resp.CatType == 11)));
   }
 
   getStoreSubCategory(data) {
@@ -82,7 +82,8 @@ export class DealsProvider {
 
   // get ads data
   getAdsData() {
-    return this.http.get(apiUrl + "ads");
+    return this.http.get(apiUrl + "stores")
+    .pipe(map((res:any)=> res.filter((resp:any)=> resp.StoreType == 15)));
   }
 
   //get product category

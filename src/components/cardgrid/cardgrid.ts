@@ -17,8 +17,12 @@ import { SharedProvider } from "../../providers/shared/shared";
 export class CardgridComponent {
   text: string;
   items: any = [];
-
-  constructor(private dealsProvider: DealsProvider, private sharedProvider: SharedProvider) {
+  showMore: boolean = false;
+  tempsubdeals:any = [];
+  constructor(
+    private dealsProvider: DealsProvider,
+    private sharedProvider: SharedProvider
+  ) {
     // this.dealsProvider
     //   .getStoreCategory()
     //   .pipe(take(1))
@@ -26,14 +30,25 @@ export class CardgridComponent {
     //     this.items = res;
     //     console.log(this.items);
     //   });
-    this.dealsProvider
-      .getTopStores()
-        .subscribe((res: any) => {
-        this.items = res;
-        console.log(this.items);})
+    this.dealsProvider.getTopStores().subscribe((res: any) => {
+      this.items =res;
+      for (let index = 0; index < 6; index++) {
+      this.tempsubdeals.push(this.items[index]);
+      }
+      console.log(this.items);
+    });
   }
 
-  goToStore(data){
-  this.sharedProvider.openBrowser(data);
+  goToStore(data) {
+    this.sharedProvider.openBrowser(data);
+  }
+
+  toggleDisplay() {
+    if (this.tempsubdeals.length !== this.items.length) {
+      for (var ii = this.tempsubdeals.length; ii < this.items.length; ii++) {
+        this.tempsubdeals.push(this.items[ii]);
+      }
+    }
+    this.showMore = !this.showMore;
   }
 }

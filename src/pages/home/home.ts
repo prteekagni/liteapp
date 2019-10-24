@@ -15,6 +15,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
 import { Subject } from "rxjs";
 import { locateHostElement } from "@angular/core/src/render3/instructions";
+import { map } from "rxjs/operators";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -57,7 +58,6 @@ export class HomePage {
   lastStore: boolean = false;
   fileTransfer;
   mobile;
-
 
   constructor(
     public navCtrl: NavController,
@@ -127,6 +127,8 @@ export class HomePage {
     //   );
 
     this.dealService.getStoreCategory().subscribe((res: any) => {
+      console.log(res);
+      
       if (res) {
         res.forEach(element => {
           this.tempStore.push(element);
@@ -142,31 +144,45 @@ export class HomePage {
           this.store.push(this.tempStore[this.count]);
         }
       }
-      this.dealService
-        .getStoreSubCategory(this.shopbyID)
-        .subscribe((res: any) => {
-          this.substores = res;
-        });
+      // this.dealService
+      //   .getStoreSubCategory(this.shopbyID)
+      //   .subscribe((res: any) => {
+      //     this.substores = res;
+      //   });
+      this.dealService.getFeatureStore()
+      .subscribe((res:any)=>{ 
+        this.substores = res
+        console.log(this.substores);
+      });
     });
-    this.dealService.getTopBrands().subscribe(
+    this.dealService
+      .getTopBrands()
+      .pipe(
+        map((res: any) =>
+          res.filter(resp  => 
+            resp.BrandType == "M"
+          )))
+      .subscribe(
+        (res: any) => {
+          this.brands = res;
+          console.log(this.brands);
+          
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+    this.dealService.getAllStores();
+
+    this.dealService.getAdsData().subscribe(
       (res: any) => {
-        this.brands = res;
+        this.mainslide = res;
       },
       err => {
         console.log(err);
       }
     );
-
-    this.dealService.getAllStores();
-
-    // this.dealService.getAdsData().subscribe(
-    //   (res: any) => {
-    //     this.adsData = res;
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
     // this.events.subscribe("nstatus", res => {
     //   if (res) {
     //     console.log("Home PAge:" + res);
@@ -215,27 +231,23 @@ export class HomePage {
   ionViewWillLeave() {}
 
   doInfinite(event) {
-      this.dealService.storesdata.subscribe((res: any) => {
-        console.log(res);
-      });
+    this.dealService.storesdata.subscribe((res: any) => {
+      console.log(res);
+    });
     if (this.store.length <= this.tempStore.length) {
       console.log(this.store.length);
       console.log(this.tempStore.length);
-      for (let cindex = 0; cindex < 4;   cindex++) {
+      for (let cindex = 0; cindex < 4; cindex++) {
         this.store.push(this.tempStore[this.count]);
         this.count++;
       }
-       setTimeout(() => {
-         event.complete();
-       }, 500);
+      setTimeout(() => {
+        event.complete();
+      }, 500);
     } else {
-     
-     
-        this.lastStore = true;
-         event.enable(false);
+      this.lastStore = true;
+      event.enable(false);
     }
-   
-  
   }
 
   goToPage(data) {

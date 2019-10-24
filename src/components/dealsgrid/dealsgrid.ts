@@ -57,7 +57,6 @@ export class DealsgridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
     this.copyItem = this.items;
 
     if (this.type === "deals") {
@@ -79,16 +78,17 @@ export class DealsgridComponent implements OnInit {
           if (element.CategoryID == this.items.ID) {
             this.cards.push(element);
           }
-         
         });
-         if (
-           (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
-           this.cards[0].StoreType == 6
-         ) {
-           this.directLinks = true;
-         }
-         this.copiedData = this.cards;
-      });
+        if(this.cards.length !== 0) {
+        if (
+          (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
+          this.cards[0].StoreType == 6
+        ) {
+          this.directLinks = true;
+        }
+        this.copiedData = this.cards;
+      }});
+    
 
       // this.dealService.getStores(this.items.ID).subscribe((res: any) => {
       //   this.cards = res;

@@ -61,14 +61,15 @@
 
     <ion-row>
       <ion-col col-12>
-        <h2 *ngIf="brands.length > 0">Top brands</h2>
+       
         <ng-container *ngIf="brands.length > 0">
+           <h2>Top brands</h2>
           <ion-row>
             <ion-item no-lines class="leftpadding">
               <ion-scroll scrollX="true" scroll-avatar style="height:150px;">
                 <ion-avatar>
                   <img
-                    src="../../assets/{{ item?.Logo }}"
+                    src="{{ item?.Logo }}"
                     class="scroll-item"
                     style="border: 1px solid grey;"
                     *ngFor="let item of brands"
@@ -92,7 +93,7 @@
 
       <ion-col col-12 *ngIf="substores.length > 0">
         <ion-row>
-          <ion-col col-3 text-center *ngFor="let item of substores; index as i">
+          <ion-col col-4 text-center *ngFor="let item of substores; index as i">
             <ion-item (click)="goToPage(item)" item-start>
               <img src="assets/mens.jpg" alt="" />
               <p style="text-align: center">{{ item?.Name | titlecase }}</p>

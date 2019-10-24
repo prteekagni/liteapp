@@ -2,9 +2,9 @@
   <h2 *ngIf="items.length >= 1">Top Shops</h2>
 
   <ion-col col-12>
-    <ion-row>
-      <ng-container *ngFor="let item of items; index as i">
-        <ion-col col-4 *ngIf="i < 6" (click)="goToStore(item)">
+    <ion-row [ngClass]="{ 'show-less ': !showMore }">
+      <ng-container *ngFor="let item of tempsubdeals; index as i">
+        <ion-col col-4 (click)="goToStore(item)">
           <ion-card class="roundedcorner">
             <ion-card-content>
               <img src="{{ item.Logo }}" />
@@ -12,12 +12,55 @@
           </ion-card>
         </ion-col>
       </ng-container>
-
-      <!-- <ion-col col-4>
-        <ion-avatar>
-          <img src="../../assets/imgs/4.png" />
-        </ion-avatar>
-      </ion-col> -->
     </ion-row>
+    <ng-container *ngIf="items.length > 6">
+      <ion-row text-center>
+        <ion-col col-12 text-center *ngIf="showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()" text-center>
+          Show Less
+        </button>
+      </ion-col>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="!showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()">
+          Show More
+        </button>
+      </ion-col>
+    </ion-col>
+      </ion-row>
+         
+      </ng-container>
   </ion-col>
 </ion-row>
+
+<!--  <ion-row
+        [ngClass]="{ 'show-less ': showMore }"
+        *ngIf="subdeals.length > 0"
+      >
+        <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
+          <ion-item (click)="goToPage(item)" item-start>
+            <ion-avatar style="width: 106px;">
+              <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
+              <p style="text-align: center">{{ item?.Name }}</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="!showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()" text-center>
+          Show Less
+        </button>
+      </ion-col>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="showMore">
+      <ion-col col-3>
+        <button ion-button round (click)="toggleDisplay()">
+          Show More
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-row> -->
