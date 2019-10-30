@@ -31,7 +31,8 @@ export class ProductsPage {
       this.services = res;
       console.log(res);
       this.noproducts = true;
-      for (let index = 0; index < 3 && this.services.length; index++) {
+      for (let index = 0; index < this.services.length && 3 ; index++) {
+        console.log(index);
         this.tempproducts.push(this.services[index]);
       }
     });

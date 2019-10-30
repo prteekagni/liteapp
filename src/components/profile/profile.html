@@ -10,7 +10,7 @@
     </div>
   </ion-col>
   <ion-col col-12>
-    <h3>Prateek Agnihotri</h3>
+    <h3>{{profile.Name}}</h3>
   </ion-col>
 </ion-row>
 <ion-row>
@@ -18,28 +18,28 @@
     <form #profileForm="ngForm">
       <ion-list>
         <ion-item>
-          <ion-label floating>Name</ion-label>
+          <ion-label floating>Username</ion-label>
           <ion-input
             type="text"
-            [(ngModel)]="profile.name"
+            [(ngModel)]="profile.Username"
             color="theme"
-            name="name"
+            name="Name"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Email</ion-label>
           <ion-input
             type="email"
-            [(ngModel)]="profile.email"
-            name="email"
+            [(ngModel)]="profile.Email"
+            name="Email"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Mobile Number</ion-label>
           <ion-input
             type="number"
-            [(ngModel)]="profile.mobile"
-            name="mobile"
+            [(ngModel)]="profile.PhoneNo"
+            name="PhoneNo"
           ></ion-input>
         </ion-item>
       </ion-list>
@@ -48,9 +48,13 @@
       <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
         Others
       </ion-list-header>
-      <ion-item (click)="updateProfile(profileForm)">
+      <ion-item (click)="updateProfile(profileForm)" *ngIf="!editForm">
         <ion-icon name="leaf" item-start></ion-icon>
         Edit Profile
+      </ion-item>
+      <ion-item (click)="updateProfile(profileForm)" *ngIf="editForm">
+        <ion-icon name="leaf" item-start></ion-icon>
+        Save Profile
       </ion-item>
       <ion-item (click)="changePassword()">
         <ion-icon name="leaf" item-start></ion-icon>

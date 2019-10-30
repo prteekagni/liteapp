@@ -48,7 +48,7 @@ export class SquareComponent implements OnInit {
     console.log("froms square " + this.data);
     if (this.type === "deals") {
       this.dealService
-        .getDealSubCategory(this.data.ID)
+        .getDealSubCategory()
         .subscribe((res: any) => {
           this.items = res;
           console.log(this.items);

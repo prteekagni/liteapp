@@ -7,7 +7,7 @@ import {
   NativePageTransitions,
   NativeTransitionOptions
 } from "@ionic-native/native-page-transitions";
-import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Subject } from "rxjs";
@@ -22,6 +22,10 @@ let options: NativeTransitionOptions = {
   androiddelay: 150,
   fixedPixelsTop: 0,
   fixedPixelsBottom: 60
+};
+
+let browserOptions: InAppBrowserOptions = {
+  location: "no"
 };
 
 declare var window: { KochavaTracker };
@@ -180,11 +184,15 @@ export class SharedProvider {
   // createBrowserLink
 
   openBrowser(data) {
+  
     var url;
     if (data.Url.length <= 1 && data.Url.length !==0) {
       url = data.Url[0].Url;
       console.log(url);
-      const browser = this.inappBrowser.create(url, "_system");
+      const browser = this.inappBrowser.create(url, "_blank", {
+        location:"no",
+        
+      });
     }
     else if(data.Url.length ==0){
       this.createToast("Error");

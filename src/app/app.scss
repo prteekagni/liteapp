@@ -143,3 +143,21 @@ ion-img {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon {
+  color:orangered;
+}
+
+.tabs-md .tab-button[aria-selected=true]{
+  color:orangered;
+}
+
+.button-md{
+  color:orangered;
+  background: white;
+}
+
+.fab-md{
+  color:white;
+  background: orangered;
+}

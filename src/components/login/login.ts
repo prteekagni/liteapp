@@ -3,6 +3,7 @@ import { AuthenticateProvider } from "../../providers/authenticate/authenticate"
 import { Events, NavController } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
 import { LOCATION_INITIALIZED } from "@angular/common";
+import { SharedProvider } from "../../providers/shared/shared";
 
 /**
  * Generated class for the LoginComponent component.
@@ -22,13 +23,22 @@ export class LoginComponent {
     private authService: AuthenticateProvider,
     private events: Events,
     private navCtrl: NavController,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
+    private sharedService: SharedProvider
   ) {}
 
   onSubmit(data) {
-    console.log(data);
-    this.authService.setUserLogin();
-    this.events.publish("login", true);
+    this.authService.loginUser(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.Token.Value) {
+        this.authService.setUserLogin();
+        this.authService.setUserDetails(res);
+        this.events.publish("login", true);
+        this.authService.setToken(res.Token);
+      } else {
+        this.sharedService.createToast("Wrong Password");
+      }
+    });
   }
 
   forgotPassword() {
@@ -36,8 +46,8 @@ export class LoginComponent {
     //   console.log(res);
     // });
 
-    this.navCtrl.push("ForgotpassPage",{
-      data:"prateek@elinfinitoindia.in"
+    this.navCtrl.push("ForgotpassPage", {
+      data: "prateek@elinfinitoindia.in"
     });
 
     // this.navCtrl.push("ForgotpassPage");
@@ -69,7 +79,11 @@ export class LoginComponent {
       .then((res: any) => {
         console.log(res);
         this.authService.setUserDetails(res);
+        this.authService.setUserLogin();
+        this.authService.setloginStatus();
+        this.events.publish("login", true);
+
       })
-      .catch(err => alert(err));
+      .catch(err => console.log(JSON.stringify(err)));
   }
 }

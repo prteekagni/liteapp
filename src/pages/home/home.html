@@ -66,12 +66,13 @@
            <h2>Top brands</h2>
           <ion-row>
             <ion-item no-lines class="leftpadding">
-              <ion-scroll scrollX="true" scroll-avatar style="height:150px;">
+              <ion-scroll scrollX="true" scroll-avatar style="height:85px;">
                 <ion-avatar>
                   <img
                     src="{{ item?.Logo }}"
                     class="scroll-item"
-                    style="border: 1px solid grey;"
+                    style="border: 1px solid grey;width: 70px;
+    height: 70px;padding:0px;"
                     *ngFor="let item of brands"
                   />
                 </ion-avatar>

@@ -43,13 +43,15 @@
 
 <ion-content (ionScroll)="scrollHandler($event)" #content>
   <ion-row>
+        <h3>Deals By Category</h3>
+
     <ion-col col-12>
       <ion-row>
         <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
           <ion-item (click)="goToPage(item)" item-start>
             <ion-avatar style="width: 106px;">
               <ion-img
-                src="../../assets/{{ item.Logo }}"
+                src="{{ item.Logo }}"
                 class="storeimage"
               ></ion-img>
               <p style="text-align: center">{{ item?.Name }}</p>

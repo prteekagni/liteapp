@@ -11,6 +11,7 @@ import { Events, AlertController } from "ionic-angular";
 import { ModalController, ViewController } from "ionic-angular";
 import { FormBuilder, Validators, NgForm } from "@angular/forms";
 import { DISABLED } from "@angular/forms/src/model";
+import { GooglePlus } from "@ionic-native/google-plus";
 
 /**
  * Generated class for the ProfileComponent component.
@@ -27,13 +28,10 @@ export class ProfileComponent implements AfterViewInit {
   text: string;
   changepassword: boolean = false;
   profileForm;
+  profile;
   editForm: boolean = false;
+
   @ViewChild("name") nameField: ElementRef;
-  profile = {
-    name: "Prateek",
-    email: "prateek",
-    mobile: "99905"
-  };
 
   constructor(
     private authService: AuthenticateProvider,
@@ -41,22 +39,12 @@ export class ProfileComponent implements AfterViewInit {
     private alertCtrl: AlertController,
     public modalCtrl: ModalController,
     private viewCtrl: ViewController,
-    private formBuilder: FormBuilder,
-    private renderer: Renderer2
+    private googlePlus: GooglePlus
   ) {
     console.log("Hello ProfileComponent Component");
     this.text = "Hello World";
-
-    // this.profileForm = this.formBuilder.group(
-    //   {
-    //     name: ['fgdfgfg'],
-    //     mobile: ['99990590944'],
-    //     email: ['eln@gmail.com']
-    //   },
-
-    // );
-
-    // this.profileForm.disable();
+    this.profile = JSON.parse(this.authService.getUserDetail());
+    console.log(this.profile);
   }
 
   ionViewWillLoad() {}
@@ -80,7 +68,10 @@ export class ProfileComponent implements AfterViewInit {
         {
           text: "Logout",
           handler: () => {
-            this.authService.setUserLogout();
+            if (this.authService.getloginStatus() == "true") {
+              this.googlePlus.logout().then(res=> console.log(res),err=> console.log(err));
+            }
+            this.authService.logoutUser();
             this.events.publish("logout", "false");
           }
         }
@@ -116,19 +107,11 @@ export class ProfileComponent implements AfterViewInit {
   // }
 
   updateProfile(data: NgForm) {
-    //   if (this.profileForm.get["name"] == data.name) {
-    //     console.log(data.name);
-    //   }
-    //   else {
-    //     console.log(data.name)
-    //   }
-    // }
+    this.editForm = !this.editForm;
     let formControls = data.controls;
-    if (formControls.name.dirty) {
-      console.log("It's dirty");
-      console.log(data.value);
+    if (formControls.Name.dirty) {
+      // update priofile requests
     } else {
-      console.log("not dirty");
     }
   }
 }

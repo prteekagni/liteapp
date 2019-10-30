@@ -83,14 +83,14 @@
               class="scroll-item brandcard"
             >
               <img
-                src="../../assets/{{ avatar.Logo }}"
+                src="{{ avatar.Logo }}"
                 style=" 
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
+    width: 80%;
   "
               />
             </ion-card>
@@ -115,7 +115,7 @@
           <ion-col col-12 text-center>
             <dealsgrid
               [items]="item"
-              [type]="'stores'"
+              [type]="'substores'"
               *ngIf="item.ID"
             ></dealsgrid>
           </ion-col>

@@ -29,7 +29,8 @@ export class MyaccountPage {
       this.isLoggedIn = false;
       console.log(this.isLoggedIn);
     });
-    this.isLoggedIn = this.authService.checkUserLogin();
+   console.log(this.authService.checkUserLogin());
+   this.isLoggedIn = this.authService.checkUserLogin();
   }
 
   ionViewDidLoad() {

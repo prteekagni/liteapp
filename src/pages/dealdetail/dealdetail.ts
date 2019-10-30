@@ -8,6 +8,7 @@ import {
 import { Clipboard } from "@ionic-native/clipboard";
 import { SharedProvider } from "../../providers/shared/shared";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { DealsProvider } from "../../providers/deals/deals";
 declare var cordova;
 @IonicPage({
   defaultHistory: ["DealsPage"]
@@ -24,6 +25,7 @@ export class DealdetailPage {
     public viewController: ViewController,
     private clipboard: Clipboard,
     private sharedService: SharedProvider,
+    private dealService: DealsProvider,
     private socialSharing: SocialSharing
   ) {
     if ("couponcode") {
@@ -36,7 +38,8 @@ export class DealdetailPage {
         }
       );
     }
-    let a = this.navParams.get("id");
+    let a = this.navParams.get("data");
+    this.deal = this.navParams.get("data");
     console.log(a);
   }
 
@@ -78,5 +81,9 @@ export class DealdetailPage {
           );
         }
       );
+  }
+
+  getDeal(){
+    this.sharedService.openBrowser(this.deal.Url)
   }
 }

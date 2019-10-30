@@ -34,7 +34,8 @@ export class ProductlistPage implements OnInit {
   searchTerm: string;
   copyItem: any = [];
   searchBoxOpened: boolean = false;
-
+  type;
+  clickoncard: boolean = false;
   constructor(
     public navParams: NavParams,
     private storageService: StorageProvider,
@@ -72,18 +73,12 @@ export class ProductlistPage implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     let id = this.navParams.get("id");
-    let type = this.navParams.get("type");
+    this.type = this.navParams.get("type");
     console.log("From Product List page " + id.ID);
-    if (type == "deals") {
+    if (this.type == "deals") {
       this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
         this.newItem = res;
-        this.storageService.getDeals().then((res: any) => {
-          this.newItem.forEach(element => {
-            if (res.ID == element.ID) {
-              this.newItem.itemfav = true;
-            }
-          });
-        });
+        this.checkForFavourite(this.newItem);
       });
     } else {
       this.dealService.getProductByCategory(id).subscribe((res: any) => {
@@ -175,10 +170,10 @@ export class ProductlistPage implements OnInit {
     toast.present();
   }
 
-  getDeal() {
+  getDeal(data) {
     let dealmodal = this.modalController.create(
       "DealdetailPage",
-      {},
+      { data: data },
       {
         // cssClass: 'mymodal',
         showBackdrop: true,
@@ -201,5 +196,21 @@ export class ProductlistPage implements OnInit {
     this.shareapp
       .share(data.message, data.subject, data.image, data.Url)
       .then(res => console.log(res));
+  }
+
+  checkForFavourite(data) {
+    this.storageService.getDeals().then((res: any) => {
+      if (res) {
+        this.newItem.forEach(element => {
+          if (res.ID == element.ID) {
+            this.newItem.itemfav = true;
+          }
+        });
+      }
+    });
+  }
+
+  cardClick(item){
+    this.clickoncard = !this.clickoncard;
   }
 }

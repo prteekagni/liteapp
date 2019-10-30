@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.dealslocker.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.dealslocker.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Deals Locker</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="prateek@elinfinitoindia.in" href="http://elinfinitoindia.in/">El Infinito</author>
@@ -21,6 +21,9 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="KeyboardResize" value="false" />
     <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
@@ -122,5 +125,6 @@
     <platform name="android">
         <preference name="AndroidLaunchMode" value="singleInstance" />
     </platform>
-    <allow-navigation href="http://localhost:8100" sessionid="d04e21bf" />
+    <allow-navigation href="*" />
+    <allow-navigation href="http://localhost:8100" sessionid="3a653d4b" />
 </widget>

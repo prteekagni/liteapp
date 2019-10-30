@@ -8,6 +8,7 @@ import { StorageProvider } from "../providers/storage/storage";
 import { Deeplinks } from "@ionic-native/deeplinks";
 import { NotificationProvider } from "../providers/notification/notification";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { GooglePlus } from "@ionic-native/google-plus";
 
 declare var window: { KochavaTracker };
 
@@ -27,7 +28,8 @@ export class MyApp {
     private oneSignal: OneSignal,
     private storageService: StorageProvider,
     private deeplinks: Deeplinks,
-    localNotification: LocalNotifications
+    localNotification: LocalNotifications,
+    private googlePlus: GooglePlus
   ) {
     platform.ready().then(() => {
                                   //   statusBar.styleLightContent();
@@ -74,6 +76,9 @@ export class MyApp {
                                   //         console.log(JSON.stringify(err))
                                   //       )
                                   //     );
+
+
+                                  // this.googlePlus.trySilentLogin({}).then(res=>console.log(res),err=>console.log(err));
                                 });
   }
 

@@ -52,16 +52,17 @@ export class DealsgridComponent implements OnInit {
     private navCtrl: NavController,
     private storage: Storage,
     private sharedService: SharedProvider,
-    private file: File,
-    private alertController: AlertController
+    private file: File
   ) {}
 
   ngOnInit() {
     this.copyItem = this.items;
+    console.log("From Dealsgrdid" + this.items);
 
-    if (this.type === "deals") {
+    if (this.type === "deals" && this.items.ID) {
+      
       this.dealService
-        .getDealSubCategory(this.items.ID)
+        .getDealSubCategory()
         .subscribe((res: any) => {
           this.cards = res;
         });
@@ -219,13 +220,19 @@ export class DealsgridComponent implements OnInit {
     }
   }
   getOfferDetail(data) {
+    console.log(this.type)
     if (this.type == "stores") {
-      const alert = this.alertController.create({
-        title: "Redirecting",
-        subTitle: "Redirecting to the store website!",
-        buttons: ["OK"]
-      });
-      alert.present();
+      console.log(data)
+      let modal = this.modalController.create(
+        "LinkmodalPage",
+        {
+          data: data
+        },
+        {
+          cssClass: "mymodal"
+        }
+      );
+       modal.present();
     } else {
       this.navCtrl.push("ProductlistPage", {
         id: data,

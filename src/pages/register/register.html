@@ -15,7 +15,7 @@
   </ion-row>
   <ion-row text-center>
     <ion-col col-10 offset-1>
-      <form #heroForm="ngForm" (ngSubmit)="registerUser(herForm.value)">
+      <form #registerForm="ngForm" (ngSubmit)="registerUser(registerForm.value)">
         <ion-item>
           <ion-icon name="call"></ion-icon>
           <ion-label stacked>Name</ion-label>
@@ -32,9 +32,9 @@
           <ion-input
             type="number"
             required
-            name="Mobile"
+            name="PhoneNo"
             minlength="10"
-            (ngModel)="(register.Mobile)"
+            (ngModel)="(register.PhoneNo)"
           ></ion-input>
         </ion-item>
         <ion-item>

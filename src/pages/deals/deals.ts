@@ -52,12 +52,6 @@ export class DealsPage {
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.tempdeals = res;
-      this.tempdeals.forEach(element => {
-        if (element.Name == "Deals By Category") {
-          this.shopByCateory = element.ID;
-        }
-      });
-
       if (this.tempdeals.length >= 1) {
         for (
           let index = 0;
@@ -66,14 +60,11 @@ export class DealsPage {
         ) {
           this.deals.push(this.tempdeals[index]);
         }
-        console.log(this.deals);
       }
     });
-    this.dealsprovider
-      .getDealSubCategory(this.shopByCateory)
-      .subscribe((res: any) => {
-        this.subdeals = res;
-      });
+    this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
+      this.subdeals = res;
+    });
   }
 
   ionViewWillEnter() {}
@@ -142,7 +133,7 @@ export class DealsPage {
 
   goToPage(data) {
     this.navCtrl.push("StorepagePage", {
-      id: data.ID,
+      data: data,
       type: "deals"
     });
   }

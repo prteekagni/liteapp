@@ -7,6 +7,7 @@ import {
   Events
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
+import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
 
 /**
  * Generated class for the RegisterPage page.
@@ -27,14 +28,18 @@ export class RegisterPage {
     public navParams: NavParams,
     private platform: Platform,
     private events: Events,
-    private sharedService: SharedProvider
+    private sharedService: SharedProvider,
+    private authService: AuthenticateProvider
   ) {
     let backAction = this.platform.registerBackButtonAction(() => {
       console.log("second");
       this.events.publish("change-tab", 0);
       backAction();
     }, 2);
+    this.navCtrl.popToRoot();
+       this.events.publish("change-tab", 0);
   }
+
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad RegisterPage");
@@ -55,6 +60,12 @@ export class RegisterPage {
   }
 
   registerUser(data) {
-    console.log(data);
+    this.authService.registerUser(data).subscribe((res:any)=>{
+      console.log(res);
+      this.navCtrl.push("HomePage");
+      this.authService.setUserDetails(res);
+      this.authService.setUserLogin();
+   
+    })
   }
 }

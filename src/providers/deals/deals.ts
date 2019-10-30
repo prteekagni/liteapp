@@ -24,10 +24,10 @@ export class DealsProvider {
     return this.http.get(apiUrl + "stores/getStores/" + id);
   }
 
-  getTopStores(){
+  getTopStores() {
     return this.http
       .get(apiUrl + "stores")
-      .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)))
+      .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)));
   }
   getAllStores() {
     return this.http.get(apiUrl + "stores").subscribe((res: any) => {
@@ -47,8 +47,9 @@ export class DealsProvider {
   }
 
   getFeatureStore() {
-    return this.http.get(apiUrl + "category")
-    .pipe(map((res: any) => res.filter(resp => resp.CatType == 11)));
+    return this.http
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 11)));
   }
 
   getStoreSubCategory(data) {
@@ -66,15 +67,16 @@ export class DealsProvider {
     return this.http.get(apiUrl + "category/getDealsSubCategory/" + id);
   }
 
-  getDealSubCategory(data) {
-    return this.http.get(apiUrl + "category/GetSubCategory/" + data);
+  getDealSubCategory() {
+    return this.http
+      .get(apiUrl + "category")
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 11)));
     // .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
   }
 
   // get deals for category
   getDealsByCategory(data) {
-    console.log(data);
-    return this.http.post(apiUrl + "deals/getDealsByCategory/" + data, "");
+    return this.http.get(apiUrl + "deals/getDealsByCategory/" + data);
   }
 
   // get Deal Details
@@ -82,8 +84,9 @@ export class DealsProvider {
 
   // get ads data
   getAdsData() {
-    return this.http.get(apiUrl + "stores")
-    .pipe(map((res:any)=> res.filter((resp:any)=> resp.StoreType == 15)));
+    return this.http
+      .get(apiUrl + "stores")
+      .pipe(map((res: any) => res.filter((resp: any) => resp.StoreType == 15)));
   }
 
   //get product category
@@ -106,4 +109,5 @@ export class DealsProvider {
   getTopBrands() {
     return this.http.get(apiUrl + "brand");
   }
+
 }

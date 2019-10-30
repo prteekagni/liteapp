@@ -53,15 +53,14 @@ export class StorepagePage {
   tempdata: any;
   featureID: string;
   title: string;
-
+  tempcateg;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
     private sharedService: SharedProvider,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
-    private dealService: DealsProvider,
-    private http: HttpClient
+    private dealService: DealsProvider
   ) {
     this.showToolbar = false;
     this.firebaseDynamicLinks
@@ -71,33 +70,19 @@ export class StorepagePage {
         (error: any) => console.log(error)
       );
 
-    this.tempdata = this.navParams.get("id");
-    let tempcateg = this.navParams.get("type");
+    this.tempdata = this.navParams.get("data");
+    this.tempcateg = this.navParams.get("type");
     this.title = this.navParams.get("title");
-    console.log(this.tempdata + tempcateg);
 
-    // this.http
-    //   .get(
-    //     "http://192.168.225.36:52044/api/category/GetSubCategory/" +
-    //       this.tempdata
-    //   )
-    //   .subscribe((res: any) => {
-    //     this.store = res;
-    //     console.log(this.store);
-
-    //     // this.store.forEach(element => {
-    //     //   if (element.Name == "Featured") {
-    //     //     console.log(element);
-    //     //     this.featureID = element.ID;
-    //     //   }
-    //     // });
-    //   });
+    console.log(this.tempcateg);
+    
 
     this.dealService
-      .getStoreSubCategory(this.tempdata)
+      .getStoreSubCategory(this.tempdata.ID)
       .subscribe((res: any) => {
         this.store = res;
       });
+
     this.dealService.getTopBrands().subscribe((res: any) => {
       this.brands = res;
     });

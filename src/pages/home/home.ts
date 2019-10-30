@@ -252,9 +252,16 @@ export class HomePage {
 
   goToPage(data) {
     console.log(data);
+    var type;
+    if(data.CatType == 11){
+      type = "substores"
+    }
+    else{
+       type = "stores";
+    }
     this.navCtrl.push("StorepagePage", {
-      id: data.ID,
-      type: "store"
+      data: data,
+      type: type,
     });
   }
 }
