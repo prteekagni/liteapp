@@ -37,8 +37,8 @@ export class LinkmodalPage implements OnInit {
   ) {
     this.items = this.navParams.get("data");
     this.Url = this.items.Url;
-    console.log(this.Url);
-
+    console.log("From Link modal" + this.Url);
+    
     this.title = this.navParams.get("data").Name;
   }
 
@@ -59,9 +59,8 @@ export class LinkmodalPage implements OnInit {
   }
 
   goToUrl(data) {
-    // const url = "http://" + data;
-    // this.sharedService.createToast("launching Website");
-    // this.sharedService.openBrowser(data);
+   console.log(data);
+   
     let modal = this.modalController.create(
       "WaitmodalPage",
       {

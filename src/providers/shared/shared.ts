@@ -12,6 +12,8 @@ import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Subject } from "rxjs";
 import { of } from "rxjs/observable/of";
+import { StatusBar } from "@ionic-native/status-bar";
+
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -45,7 +47,8 @@ export class SharedProvider {
     private nativeTrasnitions: NativePageTransitions,
     private file: File,
     private transfer: FileTransfer,
-    private inappBrowser: InAppBrowser
+    private inappBrowser: InAppBrowser,
+    private statusBar: StatusBar
   ) {
     this.checkNetworkStatusOnPage();
   }
@@ -177,15 +180,16 @@ export class SharedProvider {
   }
 
   handleError(error) {
-    console.log(error);
+    alert(JSON.stringify(error));
     this.createToast(error.statusText);
   }
 
   // createBrowserLink
 
   openBrowser(data) {
-  
     var url;
+    var temp = Array.isArray(data) ?true : false;
+    if( temp){
     if (data.Url.length <= 1 && data.Url.length !==0) {
       url = data.Url[0].Url;
       console.log(url);
@@ -197,6 +201,17 @@ export class SharedProvider {
     else if(data.Url.length ==0){
       this.createToast("Error");
     }
+  }
+  else{
+     const browser = this.inappBrowser.create("https://myntra.com", "_blank", {
+       location: "no"
+     });
+     browser.on("loadstart").subscribe(event=>{
+ this.statusBar.styleLightContent();
+ this.statusBar.overlaysWebView(false);
+ this.statusBar.backgroundColorByHexString("#ff4500");
+     })
+  }
     
 
     // browser.on("loadstart").subscribe(event => {

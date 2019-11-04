@@ -32,10 +32,10 @@ export class MyApp {
     private googlePlus: GooglePlus
   ) {
     platform.ready().then(() => {
-                                  //   statusBar.styleLightContent();
-                                  //   statusBar.overlaysWebView(false);
-                                  //   statusBar.backgroundColorByHexString("#ff4500");
-                                  //   splashScreen.hide();
+                                    statusBar.styleLightContent();
+                                    statusBar.overlaysWebView(false);
+                                    statusBar.backgroundColorByHexString("#ff4500");
+                                    splashScreen.hide();
                                   //   this.storageService.removelAll();
                                   //   this.deeplinks
                                   //     .route({
