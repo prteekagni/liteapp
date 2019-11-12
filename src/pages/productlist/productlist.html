@@ -41,37 +41,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-list [virtualScroll]="newItem" approxItemHeight="265px">
+  <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
     <ion-item *virtualItem="let item">
-      <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)">
-        <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
+      <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
+        <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
           <ion-row>
-              <ion-col col-3 text-left>
-              <img src="../../assets/zomato-logo.jpg" class="dealsimage" />
+              <ion-col col-4 text-left>
+              <ion-img src="{{item.Logo}}" class="dealsimage"></ion-img>
             </ion-col>
-            <ion-col col-9>
+            <ion-col col-8>
               <h4>{{ item.Name }}</h4>
+                    <h3>Coupon</h3>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-12>
-              <ion-row *ngIf="type !== 'deals'">
-                <ion-col col-8>
-                   <p style="white-space: normal;">
-                {{ item.Description }}
-              </p>
-                </ion-col>
-                <ion-col col-4>
-                  
-                  <div style="border:1px solid blue">
-                    <h3>Coupon</h3>
-                    Tap to copy
-                  </div>
-                </ion-col>
-              </ion-row>
-               <ion-row *ngIf=" type == 'deals'">
+              <ion-row>
                 <ion-col col-12>
-                   <p style="white-space: normal;">
+                   <p class="overflowtext">
                 {{ item.Description }}
               </p>
                 </ion-col>

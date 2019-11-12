@@ -42,9 +42,10 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollHandler($event)" #content>
-  <ion-row>
-        <h3>Deals By Category</h3>
-
+  <ion-row text-center>
+    <ion-col col-12>
+      <h4 >Deals By Category</h4>
+    </ion-col>
     <ion-col col-12>
       <ion-row>
         <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
@@ -60,7 +61,6 @@
         </ion-col>
       </ion-row>
     </ion-col>
-
     <ion-col col-12 text-center *ngIf="!showMore">
       <ion-col col-3>
         <button ion-button round (click)="toggleDisplay()" text-center>
@@ -85,7 +85,7 @@
   </ion-row>
   <ion-row *ngIf="lastStore">
     <ion-col col-12>
-      <h1>No more stores</h1>
+      <h6>No more stores</h6>
     </ion-col>
   </ion-row>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

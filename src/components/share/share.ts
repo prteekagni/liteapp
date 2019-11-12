@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { SocialSharing } from "@ionic-native/social-sharing";
 
 declare var cordova;
 
@@ -10,7 +9,7 @@ declare var cordova;
 export class ShareComponent {
   text: string;
 
-  constructor(private shareapp: SocialSharing) {
+  constructor() {
     console.log("sociualkshareing");
     var data = {
       message: "Now get great deals on one click",
@@ -18,9 +17,7 @@ export class ShareComponent {
       subject: "",
       image: ""
     };
-    this.shareapp
-      .share(data.message, data.subject, data.image, data.Url)
-      .then(res => console.log(res));
+   
   }
 
   shareApp() {
@@ -41,8 +38,6 @@ export class ShareComponent {
   }
 
   shareApplication(data) {
-    this.shareapp
-      .share(data.message, data.subject, data.image, data.Url)
-      .then(res => console.log(res));
+ 
   }
 }

@@ -43,7 +43,8 @@ export class ProfileComponent implements AfterViewInit {
   ) {
     console.log("Hello ProfileComponent Component");
     this.text = "Hello World";
-    this.profile = JSON.parse(this.authService.getUserDetail());
+    var tempdata = JSON.parse(this.authService.getUserDetail());
+    this.profile = tempdata.Result;
     console.log(this.profile);
   }
 
@@ -107,11 +108,17 @@ export class ProfileComponent implements AfterViewInit {
   // }
 
   updateProfile(data: NgForm) {
+    console.log(data);
     this.editForm = !this.editForm;
     let formControls = data.controls;
-    if (formControls.Name.dirty) {
+    console.log(formControls);
+    
+    if (formControls.PhoneNo.dirty) {
+      console.log("Need to call update api");
+
       // update priofile requests
     } else {
+      console.log("donot call api ");
     }
   }
 }

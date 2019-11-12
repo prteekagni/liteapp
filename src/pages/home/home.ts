@@ -12,7 +12,7 @@ import { SharedProvider } from "../../providers/shared/shared";
 import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
-import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
+
 import { Subject } from "rxjs";
 import { locateHostElement } from "@angular/core/src/render3/instructions";
 import { map } from "rxjs/operators";
@@ -67,7 +67,6 @@ export class HomePage {
     private sharedService: SharedProvider,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
     private dealService: DealsProvider,
-    private firebaseAnalytics: FirebaseAnalytics,
     private ngZone: NgZone
   ) {
     // platform.ready().then(() => {
@@ -216,10 +215,10 @@ export class HomePage {
   ionViewWillEnter() {}
 
   goToNotification() {
-    this.firebaseAnalytics
-      .logEvent("share", { name: "notification" })
-      .then((res: any) => alert(res))
-      .catch((error: any) => console.error(error));
+    // this.firebaseAnalytics
+    //   .logEvent("share", { name: "notification" })
+    //   .then((res: any) => alert(res))
+    //   .catch((error: any) => console.error(error));
     // this.checkDirectory();
     this.navCtrl.push("NotificationPage", {}, animationsOptions);
   }

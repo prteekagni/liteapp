@@ -2,7 +2,7 @@
   <ng-container *ngIf="cards.length > 4; else elseTemplate">
     <ion-row>
       <ion-col col-12 text-center>
-        <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
+        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;">{{ copyItem?.Name }}</h4>
       </ion-col>
     </ion-row>
     <ion-col col-12>
@@ -36,7 +36,7 @@
   <ng-template #elseTemplate>
     <ion-row>
       <ion-col col-12 text-center>
-        <h2 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h2>
+        <h4 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h4>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -67,7 +67,7 @@
 <ng-container *ngIf="directLinks">
   <ion-row>
     <ion-col col-12 text-center>
-      <h2>{{ copyItem?.Name }}</h2>
+      <h4>{{ copyItem?.Name }}</h4>
     </ion-col>
   </ion-row>
   <ion-row>

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LoadingController, ToastController, Events } from "ionic-angular";
-import { SocialSharing } from "@ionic-native/social-sharing";
+
 import { Network } from "@ionic-native/network";
 import {
   NativePageTransitions,
@@ -40,7 +40,7 @@ export class SharedProvider {
 
   constructor(
     private loadingCtrl: LoadingController,
-    private socialSharing: SocialSharing,
+
     private toastCtrl: ToastController,
     private network: Network,
     private events: Events,
@@ -63,20 +63,22 @@ export class SharedProvider {
   }
 
   createLoader() {
+    if(!this.loading){
     this.loading = this.loadingCtrl.create({
       spinner: "hide",
       content: `<img src="../../assets/loader_icon.svg"/>
       `,
-      dismissOnPageChange: true
+      // dismissOnPageChange: true
     });
     this.loading.present();
   }
+  }
 
   dismissLoader() {
+    if(this.loading){
     this.loading.dismiss();
-    this.loading.onDidDismiss(() => {
-      console.log("Dismissed loading");
-    });
+       this.loading = null;
+    }
   }
 
   saveUser(user) {
@@ -96,11 +98,6 @@ export class SharedProvider {
   }
 
   shareapplication(data) {
-    this.socialSharing
-      .share(data.message, data.subject, data.image, data.link)
-      .then(() => {
-        console.log("share succesfull");
-      });
   }
 
   isConnected() {
@@ -188,14 +185,13 @@ export class SharedProvider {
 
   openBrowser(data) {
     var url;
-    var temp = Array.isArray(data) ?true : false;
-    if( temp){
+    var temp = Array.isArray(data.Url) ?true : false;
+    if(temp){
     if (data.Url.length <= 1 && data.Url.length !==0) {
       url = data.Url[0].Url;
       console.log(url);
       const browser = this.inappBrowser.create(url, "_blank", {
         location:"no",
-        
       });
     }
     else if(data.Url.length ==0){
@@ -203,18 +199,16 @@ export class SharedProvider {
     }
   }
   else{
-     const browser = this.inappBrowser.create("https://myntra.com", "_blank", {
+     const browser = this.inappBrowser.create("", "_blank", {
        location: "no"
      });
-     browser.on("loadstart").subscribe(event=>{
- this.statusBar.styleLightContent();
- this.statusBar.overlaysWebView(false);
- this.statusBar.backgroundColorByHexString("#ff4500");
-     })
+//      browser.on("loadstart").subscribe(event=>{
+//  this.statusBar.styleLightContent();
+//  this.statusBar.overlaysWebView(false);
+//  this.statusBar.backgroundColorByHexString("#ff4500");
+//      })
   }
-    
-
-    // browser.on("loadstart").subscribe(event => {
+  // browser.on("loadstart").subscribe(event => {
     //   console.log(event);
     //   this.browserOpenSubject.next(true);
     // });

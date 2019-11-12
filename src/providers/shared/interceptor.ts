@@ -9,7 +9,7 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { _throw as throwError } from "rxjs/observable/throw";
-import { catchError } from "rxjs/operators";
+import { catchError, finalize } from "rxjs/operators";
 import { SharedProvider } from "./shared";
 import { Injectable } from "@angular/core";
 
@@ -24,6 +24,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
+    this.SharedProvider.createLoader();
     // request = request.clone({
     //   headers: headers
     // });
@@ -46,11 +48,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     // });
 
     return next.handle(request).pipe(
+       finalize(() => this.SharedProvider.dismissLoader()),
       catchError((error: HttpErrorResponse) => {
         // alert(data);
         this.SharedProvider.handleError(error);
         return throwError(error);
       })
     );
+
   }
 }

@@ -65,13 +65,18 @@ export class ScrollDirective {
              ,
               "addcolortitle"
             );
+             this.renderer.removeClass(
+               this.element.nativeElement.children[0].children[0],
+               "transparentBackground"
+             );
           }
           if (scrolldiff > 0) {
   
-            this.renderer.removeClass(
+            this.renderer.addClass(
               this.element.nativeElement.children[0].children[0],
-              "addBackground"
+              "transparentBackground"
             );
+
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[2].children[0]
                 .children[0].children[0],

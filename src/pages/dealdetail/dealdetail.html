@@ -16,19 +16,37 @@
   <ion-row style="margin-top:12px">
     <ion-col col-12>
       <img
-        src="../../assets/imgs/logo.png"
+        src="{{deal.Logo}}"
         alt=""
         srcset=""
         class="centerimage"
       />
     </ion-col>
     <ion-col col-12 style="margin-top: 15px;">
-      <h3>Description</h3>
+      <h4>Description</h4>
       <p>
        {{deal.Description}}
       </p>
-      <p>
-      {{deal?.Description}}
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
+      </p>
+       <p>
+       {{deal.Description}}
       </p>
     </ion-col>
   </ion-row>
@@ -49,7 +67,17 @@
       <ion-icon name="arrow-dropleft"></ion-icon>
     </button>
   </ion-fab>
+  <!-- <button ion-button block style="margin:0px; height:4rem;" (click)="getDeal(deal)">Get Deal</button> -->
+<!-- <ion-row>
+  <ion-col col-12>
+  <button ion-button color="danger" round full (click)="getDeal(deal)">Get Deal</button>
+  </ion-col>
+</ion-row> -->
+
+
 </ion-content>
+
 <ion-footer>
-  <button ion-button block style="margin:0px; height:4rem;" (click)="getDeal(deal)">Get Deal</button>
+   <button ion-button color="danger" round full (click)="getDeal(deal)">Get Deal</button>
+
 </ion-footer>

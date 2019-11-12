@@ -10,7 +10,6 @@ import { AuthenticateProvider } from "../providers/authenticate/authenticate";
 import { DealsProvider } from "../providers/deals/deals";
 import { GooglePlus } from "@ionic-native/google-plus";
 import { AppMinimize } from "@ionic-native/app-minimize";
-import { SocialSharing } from "@ionic-native/social-sharing";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { HttpClientModule } from "@angular/common/http";
 import { Network } from "@ionic-native/network";
@@ -33,7 +32,6 @@ import { CacheService } from "../providers/shared/cache";
 import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 
-import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
 @NgModule({
   declarations: [MyApp],
   // schemas: [
@@ -70,7 +68,6 @@ import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
     DealsProvider,
     GooglePlus,
     AppMinimize,
-    SocialSharing,
     LocalNotifications,
     Network,
     OneSignal,
@@ -85,7 +82,7 @@ import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
     FileTransferObject,
     CacheService,
     InAppBrowser,
-    FirebaseAnalytics
+    // FirebaseAnalytics
   ],
   exports: []
 })

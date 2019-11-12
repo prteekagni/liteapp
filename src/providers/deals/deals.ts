@@ -6,7 +6,7 @@ import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 import { Subject, ReplaySubject } from "rxjs";
 
-const apiUrl = "http://192.168.225.45:52044/api/";
+const apiUrl = "http://192.168.225.44:52044/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -110,4 +110,18 @@ export class DealsProvider {
     return this.http.get(apiUrl + "brand");
   }
 
+  createDynamicLinks() {
+    var key = "AIzaSyDVbIsviInWkIsGkS1o2RL6WTDLkT0o3bc"
+    this.http
+      .post(
+        "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=" + key,
+        {
+          longDynamicLink:
+            "https://dealslocker.page.link/?link=http://palianews.com/archives/15709&apn=io.dealslocker.app&d=1"
+        }
+      )
+      .subscribe((res: any) => {
+        console.log(res);
+      });
+  }
 }

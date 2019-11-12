@@ -6,7 +6,7 @@ import { getAllDebugNodes } from "@angular/core/src/debug/debug_node";
 @Injectable()
 export class AuthenticateProvider {
   user;
-  apiUrl = "http://192.168.225.45:52044/api/";
+  apiUrl = "http://192.168.225.44:52044/api/";
   constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {
@@ -33,10 +33,12 @@ export class AuthenticateProvider {
   }
 
   setUserDetails(user) {
+    console.log(user.Result);
     localStorage.setItem("User", JSON.stringify(user));
   }
 
   getUserDetail() {
+    
     return localStorage.getItem("User");
   }
 
@@ -78,7 +80,7 @@ export class AuthenticateProvider {
   // register user
   registerUser(registerdata) {
     return this.http.post(
-      "http://192.168.225.45:52044/api/users",
+      "http://192.168.225.44:52044/api/users",
       registerdata
     );
   }

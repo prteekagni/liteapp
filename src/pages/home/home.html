@@ -43,13 +43,25 @@
       </ion-slides>
     </ng-container>
     <ng-template #elseTemplate style="height:40vh">
-      <div style="height:40vh">
+      <!-- <div style="height:200px">
         <ion-row text-center>
           <ion-col col-12>
-            <ion-spinner name="bubbles" style="margin-top:20vh"> </ion-spinner>
+              <img src="../../assets/banner2.jpg" alt="" class="header-image" />
           </ion-col>
         </ion-row>
-      </div>
+      </div> -->
+        <ion-slides
+        pager
+        speed="1000"
+        effect="slides"
+        class="mainslide"
+        autoplay="1000"
+        loop="true"
+      >
+        <ion-slide >
+          <img src="../../assets/banner2.jpg" alt="" class="header-image" />
+        </ion-slide>
+      </ion-slides>
     </ng-template>
     <!-- top shops -->
 
@@ -89,15 +101,15 @@
     <!-- Substores -->
     <ion-row>
       <ion-col col-12 text-center>
-        <h2 *ngIf="substores.length >= 1">Stores by Category</h2>
+        <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">Stores by Category</h4>
       </ion-col>
 
       <ion-col col-12 *ngIf="substores.length > 0">
         <ion-row>
           <ion-col col-4 text-center *ngFor="let item of substores; index as i">
             <ion-item (click)="goToPage(item)" item-start>
-              <img src="assets/mens.jpg" alt="" />
-              <p style="text-align: center">{{ item?.Name | titlecase }}</p>
+              <img src="{{item.Logo}}" alt="" />
+              <p style="text-align: center">{{ item?.Name }}</p>
             </ion-item>
           </ion-col>
         </ion-row>

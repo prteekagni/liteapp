@@ -14,7 +14,7 @@ import { deals } from "../../models/deal";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { SharedProvider } from "../../providers/shared/shared";
 import { DealsProvider } from "../../providers/deals/deals";
-import { SocialSharing } from "@ionic-native/social-sharing";
+
 
 @IonicPage()
 @Component({
@@ -45,7 +45,7 @@ export class ProductlistPage implements OnInit {
     public sharedService: SharedProvider,
     private modalController: ModalController,
     private dealService: DealsProvider,
-    private shareapp: SocialSharing
+    
   ) {
     // let id = this.navParams.get("id");
     // let type = this.navParams.get("type");
@@ -193,9 +193,7 @@ export class ProductlistPage implements OnInit {
       image:
         "https://appimageselinfinito.s3.us-east-2.amazonaws.com/tatacliq.jpg"
     };
-    this.shareapp
-      .share(data.message, data.subject, data.image, data.Url)
-      .then(res => console.log(res));
+   
   }
 
   checkForFavourite(data) {

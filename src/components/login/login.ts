@@ -30,11 +30,13 @@ export class LoginComponent {
   onSubmit(data) {
     this.authService.loginUser(data).subscribe((res: any) => {
       console.log(res);
-      if (res.Token.Value) {
-        this.authService.setUserLogin();
-        this.authService.setUserDetails(res);
         this.events.publish("login", true);
-        this.authService.setToken(res.Token);
+
+      if (res.Result.Token.Value) {
+        this.authService.setUserLogin();
+        this.authService.setUserDetails(res.Result);
+        this.events.publish("login", true);
+        this.authService.setToken(res.Result.Token);
       } else {
         this.sharedService.createToast("Wrong Password");
       }

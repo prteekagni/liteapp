@@ -5,87 +5,50 @@
         <img src="assets/imgs/logo.png" alt="" width="80px;" />
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col col-12 text-center>
-        <h2 class="welcomecolor">Welcome Back</h2>
-      </ion-col>
-    </ion-row>
-    <ion-row text-center>
-      <ion-col col-12>
-        <span>Login to continue</span>
-      </ion-col>
-    </ion-row>
-
+    
     <ion-row text-center>
       <ion-col col-10 offset-1>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
           <ion-item>
             <ion-icon name="call"></ion-icon>
             <ion-label stacked>Email</ion-label>
-            <ion-input
-              type="email"
-              required
-              name="Username"
-              (ngModel)="(login.Username)"
-            ></ion-input>
+            <ion-input type="email" required name="Username" (ngModel)="(login.Username)"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Enter Password</ion-label>
-            <ion-input
-              type="password"
-              required
-              name="Password"
-              (ngModel)="(login.Password)"
-            ></ion-input>
+            <ion-input type="password" required name="Password" (ngModel)="(login.Password)"></ion-input>
           </ion-item>
           <ion-item>
-            <button
-              ion-button
-              type="submit"
-              block
-              class="submitbutton"
-              [disabled]="loginForm.invalid"
-            >
+            <ion-row text-right class="forgotbutton">
+              <ion-col>
+                <span (click)="forgotPassword()" style="font-size:1.25rem;color:gray">Forgot Password?</span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          
+            <button ion-button type="submit" block class="submitbutton" color="theme">
               Login
             </button>
-          </ion-item>
+          
         </form>
       </ion-col>
-      <ion-col col-6 offset-3> </ion-col>
     </ion-row>
-    <ion-row text-center class="forgotbutton">
-      <ion-col>
-        <span (click)="forgotPassword()">Forgot Password?</span>
+      <ion-row text-left>
+           <ion-col col-10 offset-1>
+           
+        <span style="padding-left:15px;font-size:1.25rem" (click)="gotoRegister()">Create Account</span>
+
+         
       </ion-col>
-    </ion-row>
+      </ion-row>
     <ion-row text-center>
       <ion-col col-12 text-center>
-        Singin using
+        Other ways to sign in 
       </ion-col>
       <ion-col col-12 text-center>
-        <img
-          src="../../assets/google.png"
-          alt=""
-          style="width:30px"
-          (click)="loginWithGoogle()"
-        />
+        <img src="../../assets/google.png" alt="" style="width:30px" (click)="loginWithGoogle()" />
       </ion-col>
     </ion-row>
-    <ion-row text-center style="border-top:1px solid lightgrey;">
-      <ion-col col-12 class="registermargin">
-        <span>Register and Enjoy Benefits</span>
-      </ion-col>
-      <ion-col>
-        <button
-          ion-button
-          clear
-          small
-          class="forgotbutton"
-          (click)="gotoRegister()"
-        >
-          Register
-        </button>
-      </ion-col>
-    </ion-row>
+  
   </ion-grid>
 </div>

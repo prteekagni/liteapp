@@ -7,7 +7,7 @@ import {
 } from "ionic-angular";
 import { Clipboard } from "@ionic-native/clipboard";
 import { SharedProvider } from "../../providers/shared/shared";
-import { SocialSharing } from "@ionic-native/social-sharing";
+
 import { DealsProvider } from "../../providers/deals/deals";
 declare var cordova;
 @IonicPage({
@@ -26,7 +26,7 @@ export class DealdetailPage {
     private clipboard: Clipboard,
     private sharedService: SharedProvider,
     private dealService: DealsProvider,
-    private socialSharing: SocialSharing
+    
   ) {
     if ("couponcode") {
       this.clipboard.copy("couponcode").then(
@@ -51,36 +51,39 @@ export class DealdetailPage {
     this.viewController.dismiss();
   }
   shareApp() {
-    cordova.plugins.firebase.dynamiclinks
-      .createShortDynamicLink({
-        link: this.deal.Url
-      })
-      .then(
-        function(url) {
-          console.log("Dynamic link was created:", url);
 
-          this.socialSharing
-            .share(this.deal.Name, "", this.deal.Logo, url)
-            .then(
-              res => {
-                console.log(res);
-              },
-              err => {
-                console.log(err);
-              }
-            );
-        },
-        err => {
-          this.socialSharing.share(this.deal.Name, "", this.deal.Logo).then(
-            res => {
-              console.log(res);
-            },
-            err => {
-              console.log(err);
-            }
-          );
-        }
-      );
+    this.dealService.createDynamicLinks();
+    // cordova.plugins.firebase.dynamiclinks
+    //   .createShortDynamicLink({
+    //     link: this.deal.Url
+    //   })
+    //   .then(
+    //     function(url) {
+    //       console.log("Dynamic link was created:", url);
+
+    //       this.socialSharing
+    //         .share(this.deal.Name, "", this.deal.Logo, url)
+    //         .then(
+    //           res => {
+    //             console.log(res);
+    //           },
+    //           err => {
+    //             console.log(err);
+    //           }
+    //         );
+    //     },
+    //     err => {
+    //       this.socialSharing.share(this.deal.Name, "", this.deal.Logo).then(
+    //         res => {
+    //           console.log(res);
+    //         },
+    //         err => {
+    //           console.log(err);
+    //         }
+    //       );
+    //     }
+    //   );
+  
   }
 
   getDeal(){

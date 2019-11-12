@@ -8,13 +8,6 @@ import {
 import { SharedProvider } from "../../providers/shared/shared";
 import { Subject } from "rxjs";
 
-/**
- * Generated class for the WaitmodalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: "page-waitmodal",
