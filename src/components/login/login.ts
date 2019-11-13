@@ -4,6 +4,7 @@ import { Events, NavController } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
 import { LOCATION_INITIALIZED } from "@angular/common";
 import { SharedProvider } from "../../providers/shared/shared";
+import { NgForm } from "@angular/forms";
 
 /**
  * Generated class for the LoginComponent component.
@@ -18,7 +19,6 @@ import { SharedProvider } from "../../providers/shared/shared";
 export class LoginComponent {
   text: string;
   login: any;
-
   constructor(
     private authService: AuthenticateProvider,
     private events: Events,
@@ -27,20 +27,20 @@ export class LoginComponent {
     private sharedService: SharedProvider
   ) {}
 
-  onSubmit(data) {
-    this.authService.loginUser(data).subscribe((res: any) => {
-      console.log(res);
-        this.events.publish("login", true);
-
-      if (res.Result.Token.Value) {
-        this.authService.setUserLogin();
-        this.authService.setUserDetails(res.Result);
-        this.events.publish("login", true);
-        this.authService.setToken(res.Result.Token);
-      } else {
-        this.sharedService.createToast("Wrong Password");
-      }
-    });
+  onSubmit(data:NgForm) {
+   
+                    this.authService.loginUser(data.value).subscribe((res: any) => {
+                      console.log(res);
+                        this.events.publish("login", true);
+                      if (res.Token.Value) {
+                        this.authService.setUserLogin();
+                        this.authService.setUserDetails(res);
+                        this.events.publish("login", true);
+                        this.authService.setToken(res.Token);
+                      } else {
+                        this.sharedService.createToast("Wrong Password");
+                      }
+                    });
   }
 
   forgotPassword() {

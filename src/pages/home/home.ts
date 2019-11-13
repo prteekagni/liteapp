@@ -17,6 +17,7 @@ import { Subject } from "rxjs";
 import { locateHostElement } from "@angular/core/src/render3/instructions";
 import { map } from "rxjs/operators";
 
+
 const animationsOptions = {
   animation: "ios-transition",
   duration: 1000
@@ -262,5 +263,9 @@ export class HomePage {
       data: data,
       type: type,
     });
+  }
+
+  generate(){
+
   }
 }

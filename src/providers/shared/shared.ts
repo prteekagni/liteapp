@@ -7,13 +7,15 @@ import {
   NativePageTransitions,
   NativeTransitionOptions
 } from "@ionic-native/native-page-transitions";
-import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
+import {
+  InAppBrowser,
+  InAppBrowserOptions
+} from "@ionic-native/in-app-browser";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { Subject } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { StatusBar } from "@ionic-native/status-bar";
-
 
 let options: NativeTransitionOptions = {
   direction: "up",
@@ -63,21 +65,21 @@ export class SharedProvider {
   }
 
   createLoader() {
-    if(!this.loading){
-    this.loading = this.loadingCtrl.create({
-      spinner: "hide",
-      content: `<img src="../../assets/loader_icon.svg"/>
-      `,
-      // dismissOnPageChange: true
-    });
-    this.loading.present();
-  }
+    if (!this.loading) {
+      this.loading = this.loadingCtrl.create({
+        spinner: "hide",
+        content: `<img src="../../assets/loader_icon.svg"/>
+      `
+        // dismissOnPageChange: true
+      });
+      this.loading.present();
+    }
   }
 
   dismissLoader() {
-    if(this.loading){
-    this.loading.dismiss();
-       this.loading = null;
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
     }
   }
 
@@ -97,8 +99,7 @@ export class SharedProvider {
     return localStorage.getItem("Token");
   }
 
-  shareapplication(data) {
-  }
+  shareapplication(data) {}
 
   isConnected() {
     let conntype = this.network.type;
@@ -185,40 +186,43 @@ export class SharedProvider {
 
   openBrowser(data) {
     var url;
-    var temp = Array.isArray(data.Url) ?true : false;
-    if(temp){
-    if (data.Url.length <= 1 && data.Url.length !==0) {
-      url = data.Url[0].Url;
-      console.log(url);
-      const browser = this.inappBrowser.create(url, "_blank", {
-        location:"no",
+    var temp = Array.isArray(data.Url) ? true : false;
+    if (temp) {
+      if (data.Url.length <= 1 && data.Url.length !== 0) {
+        url = data.Url[0].Url;
+        console.log(url);
+        const browser = this.inappBrowser.create(url, "_blank", {
+          location: "no"
+        });
+      } else if (data.Url.length == 0) {
+        this.createToast("Error");
+      }
+    } else {
+      const browser = this.inappBrowser.create("", "_blank", {
+        location: "no"
       });
+      //      browser.on("loadstart").subscribe(event=>{
+      //  this.statusBar.styleLightContent();
+      //  this.statusBar.overlaysWebView(false);
+      //  this.statusBar.backgroundColorByHexString("#ff4500");
+      //      })
     }
-    else if(data.Url.length ==0){
-      this.createToast("Error");
-    }
-  }
-  else{
-     const browser = this.inappBrowser.create("", "_blank", {
-       location: "no"
-     });
-//      browser.on("loadstart").subscribe(event=>{
-//  this.statusBar.styleLightContent();
-//  this.statusBar.overlaysWebView(false);
-//  this.statusBar.backgroundColorByHexString("#ff4500");
-//      })
-  }
-  // browser.on("loadstart").subscribe(event => {
+    // browser.on("loadstart").subscribe(event => {
     //   console.log(event);
     //   this.browserOpenSubject.next(true);
     // });
   }
 
-  downloadOnMemory(data) {
+  downloadOnMemory(data, type) {
     const fileTransfer: FileTransferObject = this.transfer.create();
     const url = encodeURI(data.Logo);
+    if (type == "deals") {
+      var imagePath = data.Name + data.ID.substring(0, 5);
+    } else {
+      var imagePath = data.Name;
+    }
     const targetPath =
-      this.file.externalDataDirectory + "images/" + data.Name + ".png";
+      this.file.externalDataDirectory + "images/" + imagePath + ".png";
     return fileTransfer.download(url, targetPath, true);
   }
 
@@ -248,13 +252,13 @@ export class SharedProvider {
       );
   }
 
-  checkNetworkStatusOnPage(){
-        this.network.onConnect().subscribe(res => {
-          this.events.publish("nstatus", true);
-        });
+  checkNetworkStatusOnPage() {
+    this.network.onConnect().subscribe(res => {
+      this.events.publish("nstatus", true);
+    });
 
-        this.network.onDisconnect().subscribe(res => {
-          this.events.publish("nstatus", false);
-        });
+    this.network.onDisconnect().subscribe(res => {
+      this.events.publish("nstatus", false);
+    });
   }
 }

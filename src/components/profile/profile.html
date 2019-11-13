@@ -17,7 +17,7 @@
   <ion-col col-12>
     <form #profileForm="ngForm">
       <ion-list>
-        <ion-item>
+        <ion-item [ngClass]="{'disabled':!editForm}">
           <ion-label floating>Username</ion-label>
           <ion-input
             type="text"
@@ -26,7 +26,7 @@
             name="Name"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [ngClass]="{'disabled':!editForm}">
           <ion-label floating>Email</ion-label>
           <ion-input
             type="email"
@@ -34,7 +34,7 @@
             name="Email"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [ngClass]="{'disabled':!editForm}">
           <ion-label floating>Mobile Number</ion-label>
           <ion-input
             type="number"

@@ -77,4 +77,6 @@ export class LinkmodalPage implements OnInit {
   dismiss() {
     this.viewController.dismiss();
   }
+
+  
 }

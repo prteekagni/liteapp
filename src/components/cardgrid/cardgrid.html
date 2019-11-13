@@ -1,5 +1,5 @@
 <ion-row>
-  <h4 *ngIf="items.length >= 1">Top Shops</h4>
+  <h5 *ngIf="items.length >= 1">Top Shops</h5>
 
   <ion-col col-12>
     <ion-row [ngClass]="{ 'show-less ': !showMore }">
@@ -17,14 +17,14 @@
       <ion-row text-center>
         <ion-col col-12 text-center *ngIf="showMore">
       <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" text-center>
+        <button ion-button round (click)="toggleDisplay()" text-center color="theme">
           Show Less
         </button>
       </ion-col>
     </ion-col>
     <ion-col col-12 text-center *ngIf="!showMore">
       <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()">
+        <button ion-button round (click)="toggleDisplay()" color="theme">
           Show More
         </button>
       </ion-col>

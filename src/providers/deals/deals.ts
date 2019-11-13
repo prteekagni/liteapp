@@ -7,6 +7,7 @@ import { ProductsPage } from "../../pages/products/products";
 import { Subject, ReplaySubject } from "rxjs";
 
 const apiUrl = "http://192.168.225.44:52044/api/";
+declare var cordova: any;
 
 @Injectable()
 export class DealsProvider {
@@ -111,17 +112,12 @@ export class DealsProvider {
   }
 
   createDynamicLinks() {
-    var key = "AIzaSyDVbIsviInWkIsGkS1o2RL6WTDLkT0o3bc"
-    this.http
-      .post(
-        "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=" + key,
-        {
-          longDynamicLink:
-            "https://dealslocker.page.link/?link=http://palianews.com/archives/15709&apn=io.dealslocker.app&d=1"
-        }
-      )
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+cordova.plugins.firebase.dynamiclinks
+  .createShortDynamicLink({
+    link: "https://google.com"
+  })
+  .then(function(url) {
+    console.log("Dynamic link was created:", url);
+  });
   }
 }

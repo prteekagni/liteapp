@@ -18,7 +18,7 @@ export class CardgridComponent {
   text: string;
   items: any = [];
   showMore: boolean = false;
-  tempsubdeals:any = [];
+  tempsubdeals: any = [];
   constructor(
     private dealsProvider: DealsProvider,
     private sharedProvider: SharedProvider
@@ -31,9 +31,16 @@ export class CardgridComponent {
     //     console.log(this.items);
     //   });
     this.dealsProvider.getTopStores().subscribe((res: any) => {
-      this.items =res;
+      this.items = res;
       for (let index = 0; index < 6; index++) {
-      this.tempsubdeals.push(this.items[index]);
+        this.tempsubdeals.push(this.items[index]);
+        this.sharedProvider
+          .downloadOnMemory(this.items[index] ,"stores")
+          .then((res: any) => {
+            console.log(res);
+            var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
+            this.tempsubdeals[index].Logo = a;
+          });
       }
       console.log(this.items);
     });
@@ -47,6 +54,13 @@ export class CardgridComponent {
     if (this.tempsubdeals.length !== this.items.length) {
       for (var ii = this.tempsubdeals.length; ii < this.items.length; ii++) {
         this.tempsubdeals.push(this.items[ii]);
+          this.sharedProvider
+            .downloadOnMemory(this.items[ii], "stores")
+            .then((res: any) => {
+              console.log(res);
+              var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
+              this.tempsubdeals[ii].Logo = a;
+            });
       }
     }
     this.showMore = !this.showMore;

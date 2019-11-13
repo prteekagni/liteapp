@@ -60,11 +60,61 @@ export class DealsgridComponent implements OnInit {
     console.log("From Dealsgrdid" + this.items);
 
     if (this.type === "deals" && this.items.ID) {
-      
       this.dealService
         .getDealBySubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
+          console.log(this.cards);
+
+          for (let index = 0; index < this.cards.length; index++) {
+            console.log("Index is " + this.cards[index]);
+
+            this.sharedService.checkDownloadedImage(this.cards[index]).then(
+              res => {
+                if (res) {
+                  console.log("Response:" + res);
+
+                  var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                    this.file.externalDataDirectory +
+                      "images/" +
+                      this.cards[index].Name +
+                      ".png"
+                  );
+                  console.log(nativeUrl);
+                  if (nativeUrl.length > 0) {
+                    this.cards[index].Logo = nativeUrl;
+                  }
+                } else {
+                  this.sharedService
+                    .downloadOnMemory(this.cards[index] , this.type)
+                    .then((res: any) => {
+                      console.log(res);
+                      var a = (<any>window).Ionic.WebView.convertFileSrc(
+                        res.toURL()
+                      );
+                      this.cards[index].Logo = a;
+                    });
+                }
+              },
+              err => {
+                this.sharedService
+                  .downloadOnMemory(this.cards[index], this.type)
+                  .then(
+                    (res: any) => {
+                      console.log(res);
+                      var a = (<any>window).Ionic.WebView.convertFileSrc(
+                        res.toURL()
+                      );
+                      this.cards[index].Logo = a;
+                    },
+                    error => {
+                      index++;
+                      console.log(JSON.stringify(error));
+                    }
+                  );
+              }
+            );
+          }
         });
     } else if (this.type == "substores") {
       this.dealService
@@ -89,6 +139,51 @@ export class DealsgridComponent implements OnInit {
         }
         this.copiedData = this.cards;
       }});
+       for (let index = 0; index < this.copiedData.length; index++) {
+          this.sharedService.checkDownloadedImage(this.copiedData[index]).then(
+            res => {
+              if (res) {
+                var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                  this.file.externalDataDirectory +
+                    "images/" +
+                    this.copiedData[index].Name +
+                    ".png"
+                );
+                console.log(nativeUrl);
+                if (nativeUrl.length > 0) {
+                  this.copiedData[index].Logo = nativeUrl;
+                }
+              }
+                else {
+                this.sharedService
+                  .downloadOnMemory(this.copiedData[index], this.type)
+                  .then((res: any) => {
+                    console.log(res);
+                    var a = (<any>window).Ionic.WebView.convertFileSrc(
+                      res.toURL()
+                    );
+                    this.copiedData[index].Logo = a;
+                  });
+          }
+        },err=>{
+           this.sharedService
+             .downloadOnMemory(this.copiedData[index], this.type)
+             .then(
+               (res: any) => {
+                 console.log(res);
+                 var a = (<any>window).Ionic.WebView.convertFileSrc(
+                   res.toURL()
+                 );
+                 this.copiedData[index].Logo = a;
+               },
+               error => {
+                 index++;
+                 console.log(JSON.stringify(error));
+               }
+             );
+              })
+            }
+          }
     
 
       // this.dealService.getStores(this.items.ID).subscribe((res: any) => {
@@ -177,7 +272,7 @@ export class DealsgridComponent implements OnInit {
       //     );
       //   }
       // });
-    } else if (this.type == "products") {
+     else if (this.type == "products") {
       this.dealService.getProductCategory().subscribe((res: any) => {
         this.cards = res;
       });

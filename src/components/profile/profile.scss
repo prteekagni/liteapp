@@ -1,19 +1,23 @@
 profile {
-    .profileimage {
-        width: 120px;
-        margin-top: 20px;
-    }
+  .profileimage {
+    width: 120px;
+    margin-top: 20px;
+  }
 
-    .list-md .item-input:last-child {
-        border-bottom: 0px;
-    }
+  .list-md .item-input:last-child {
+    border-bottom: 0px;
+  }
 
-    .ion-input {
-        border-bottom: none !important;
-        box-shadow: none;
-    }
+  .ion-input {
+    border-bottom: none !important;
+    box-shadow: none;
+  }
+  .disabled {
+    pointer-events: none; //This makes it not clickable
+    opacity: 0.8; //This grays it out to look disabled
+  }
 
-    // .lastchildnoborder .item-inner {
-    //     border-bottom: 0px !important;
-    // }
+  // .lastchildnoborder .item-inner {
+  //     border-bottom: 0px !important;
+  // }
 }

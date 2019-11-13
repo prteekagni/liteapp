@@ -26,9 +26,9 @@ page-productlist {
     background: transparent;
   }
 
-  .toolbar-title-md {
-    color: orangered;
-  }
+.toolbar-title-md{
+  color:orangered !important;
+}
 
   .bar-button-default-md,
   .bar-button-clear-md-default,
@@ -64,4 +64,8 @@ page-productlist {
 ion-img{
   min-height: 75px;
 }
+
+.toolbar-background-md {
+    background: transparent;
+  }
 }

@@ -32,11 +32,13 @@ export class MyApp {
     private googlePlus: GooglePlus
   ) {
     platform.ready().then(() => {
-                                    statusBar.styleLightContent();
-                                    statusBar.overlaysWebView(false);
-                                    statusBar.backgroundColorByHexString("#ff4500");
-                                    splashScreen.hide();
-                                  //   this.storageService.removelAll();
+      console.log("console.log");
+      
+                                  //   statusBar.styleLightContent();
+                                  //   statusBar.overlaysWebView(false);
+                                  //   statusBar.backgroundColorByHexString("#ff4500");
+                                  //   splashScreen.hide();
+                                  // //   this.storageService.removelAll();
                                   //   this.deeplinks
                                   //     .route({
                                   //       "/": "TabsPage",
@@ -48,6 +50,11 @@ export class MyApp {
                                   //     })
                                   //     .subscribe(
                                   //       match => {
+                                  //         if(match.$route == "ProductsPage" || match.$route == "DealsPage"){
+                                  //           this.nav.setRoot(match.$route).then(res=>{ console.log("Root Set");
+                                  //           })
+                                  //         }
+                                  //         else{
                                   //         this.nav.push(match.$route, match.$args).then(
                                   //           res => {
                                   //             console.log("push successful");
@@ -57,6 +64,7 @@ export class MyApp {
                                   //             console.log("unsuccesful");
                                   //           }
                                   //         );
+                                  //         }
                                   //       },
                                   //       nomatch => {
                                   //         alert(JSON.stringify(nomatch));

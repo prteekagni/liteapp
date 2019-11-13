@@ -44,7 +44,7 @@ export class ProfileComponent implements AfterViewInit {
     console.log("Hello ProfileComponent Component");
     this.text = "Hello World";
     var tempdata = JSON.parse(this.authService.getUserDetail());
-    this.profile = tempdata.Result;
+    this.profile = tempdata;
     console.log(this.profile);
   }
 
@@ -111,8 +111,7 @@ export class ProfileComponent implements AfterViewInit {
     console.log(data);
     this.editForm = !this.editForm;
     let formControls = data.controls;
-    console.log(formControls);
-    
+    console.log(formControls);    
     if (formControls.PhoneNo.dirty) {
       console.log("Need to call update api");
 
