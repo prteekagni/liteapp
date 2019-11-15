@@ -108,9 +108,9 @@ ion-content {
   opacity: 0.8;
 }
 
-.toolbar-background-md{
-  background-color: rgba(0, 0, 0, 0.3);
-}
+// .toolbar-background-md{
+//   background-color: rgba(0, 0, 0, 0.3);
+// }
 
 .notitle {
   opacity: 0;
@@ -205,4 +205,18 @@ ion-img {
 .fab-md{
   color:white;
   background: orangered;
+}
+
+// three classes for top brands outer image and inner image
+  div.image.even {
+    content: url(../../assets/a3.png);
+  }
+  div.image.odd {
+    content: url(../../assets/a2.png);
+  }
+    .inner-image {
+    position: absolute;
+    top: 40%;
+    left: 7%;
+    width: 100px;
 }

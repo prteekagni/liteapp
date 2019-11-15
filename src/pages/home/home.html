@@ -6,13 +6,8 @@
           Deals Locker Lite
         </ion-col>
         <ion-col col-6 text-right>
-          <ion-icon
-            ios="ios-notifications"
-            md="md-notifications"
-            (click)="goToNotification()"
-            class="iconspace"
-            style="margin-left: 5px;"
-          ></ion-icon>
+          <ion-icon ios="ios-notifications" md="md-notifications" (click)="goToNotification()" class="iconspace"
+            style="margin-left: 5px;"></ion-icon>
           <ion-icon ios="ios-star" md="md-star" (click)="goToFav()"> </ion-icon>
         </ion-col>
       </ion-row>
@@ -28,15 +23,8 @@
 
   <ng-template #connected class="main-content">
     <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
-      <ion-slides
-        *ngIf="mainslide.length > 0"
-        pager
-        speed="1000"
-        effect="slides"
-        class="mainslide"
-        autoplay="1000"
-        loop="true"
-      >
+      <ion-slides *ngIf="mainslide.length > 0" pager speed="1000" effect="slides" class="mainslide" autoplay="1000"
+        loop="true">
         <ion-slide *ngFor="let item of mainslide">
           <img src="{{ item.Logo }}" alt="" class="header-image" />
         </ion-slide>
@@ -50,15 +38,8 @@
           </ion-col>
         </ion-row>
       </div> -->
-        <ion-slides
-        pager
-        speed="1000"
-        effect="slides"
-        class="mainslide"
-        autoplay="1000"
-        loop="true"
-      >
-        <ion-slide >
+      <ion-slides pager speed="1000" effect="slides" class="mainslide" autoplay="1000" loop="true">
+        <ion-slide>
           <img src="../../assets/banner2.jpg" alt="" class="header-image" />
         </ion-slide>
       </ion-slides>
@@ -70,15 +51,15 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row text-center>
       <ion-col col-12>
-       
+
         <ng-container *ngIf="brands.length > 0">
-           <h2>Top brands</h2>
+          <h4>Top brands</h4>
           <ion-row>
             <ion-item no-lines class="leftpadding">
-              <ion-scroll scrollX="true" scroll-avatar style="height:85px;">
-                <ion-avatar>
+              <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
+                <!-- <ion-avatar>
                   <img
                     src="{{ item?.Logo }}"
                     class="scroll-item"
@@ -86,7 +67,12 @@
     height: 70px;padding:0px;"
                     *ngFor="let item of brands"
                   />
-                </ion-avatar>
+                </ion-avatar> -->
+                <div class="container" class="scroll-item" *ngFor="let item of testdemo;let i = index" >
+       <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
+                <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
+                <img src="../../assets/amazon-logo.png" alt="" class="inner-image" />
+                </div>
               </ion-scroll>
             </ion-item>
           </ion-row>
@@ -129,15 +115,11 @@
             <h2>{{ item?.Name }}</h2>
           </ion-col> -->
           <ion-col col-12 text-center class="nopadding">
-            <dealsgrid
-              [items]="item"
-              [type]="'stores'"
-              *ngIf="item?.ID"
-            ></dealsgrid>
+            <dealsgrid [items]="item" [type]="'stores'" *ngIf="item?.ID"></dealsgrid>
           </ion-col>
-         
+
         </ion-row>
-         <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length"></singleadd>
+        <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length" [in]="i"></singleadd>
       </ng-container>
     </ng-container>
     <ion-row *ngIf="lastStore">

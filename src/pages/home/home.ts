@@ -45,7 +45,7 @@ export class HomePage {
   counter: any = 0;
   stores: any = [];
   count;
-
+  testdemo;
   defaultImage = "../../assets/images/logo.png";
 
   adsData: any = [];
@@ -116,6 +116,9 @@ export class HomePage {
       );
     });
 
+    
+      
+
     this.showToolbar = false;
 
     // On Click of dynamic Link
@@ -127,8 +130,6 @@ export class HomePage {
     //   );
 
     this.dealService.getStoreCategory().subscribe((res: any) => {
-      console.log(res);
-      
       if (res) {
         res.forEach(element => {
           this.tempStore.push(element);
@@ -144,29 +145,20 @@ export class HomePage {
           this.store.push(this.tempStore[this.count]);
         }
       }
-      // this.dealService
-      //   .getStoreSubCategory(this.shopbyID)
-      //   .subscribe((res: any) => {
-      //     this.substores = res;
-      //   });
-      this.dealService.getFeatureStore()
-      .subscribe((res:any)=>{ 
-        this.substores = res
+
+      this.dealService.getFeatureStore().subscribe((res: any) => {
+        this.substores = res;
         console.log(this.substores);
       });
     });
+    
     this.dealService
       .getTopBrands()
-      .pipe(
-        map((res: any) =>
-          res.filter(resp  => 
-            resp.BrandType == "M"
-          )))
+      .pipe(map((res: any) => res.filter(resp => resp.BrandType == "M")))
       .subscribe(
         (res: any) => {
           this.brands = res;
           console.log(this.brands);
-          
         },
         err => {
           console.log(err);
@@ -196,6 +188,14 @@ export class HomePage {
     //     });
     //   }
     // });
+
+    // this.dealService
+    //   .getDealBySubCategory("d5b257c2-165b-4b7b-9bc6-57bee17e4f58")
+    //   .subscribe((res: any) => {
+    //     this.testdemo = res;
+    //     console.log(this.testdemo);
+        
+    //   });
   }
 
   ionViewDidLoad() {
@@ -213,7 +213,14 @@ export class HomePage {
     this.navCtrl.push("ProductlistPage");
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+     this.dealService.getTopStores().subscribe((res: any) => {
+       this.testdemo = res;
+       console.log("Will View Enter " + this.testdemo);
+       
+     });
+
+  }
 
   goToNotification() {
     // this.firebaseAnalytics
@@ -253,19 +260,16 @@ export class HomePage {
   goToPage(data) {
     console.log(data);
     var type;
-    if(data.CatType == 11){
-      type = "substores"
-    }
-    else{
-       type = "stores";
+    if (data.CatType == 11) {
+      type = "substores";
+    } else {
+      type = "stores";
     }
     this.navCtrl.push("StorepagePage", {
       data: data,
-      type: type,
+      type: type
     });
   }
 
-  generate(){
-
-  }
+  generate() {}
 }

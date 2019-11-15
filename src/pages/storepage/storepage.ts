@@ -81,6 +81,8 @@ export class StorepagePage {
       .getStoreSubCategory(this.tempdata.ID)
       .subscribe((res: any) => {
         this.store = res;
+        console.log(this.store);
+        
       });
 
     this.dealService.getTopBrands().subscribe((res: any) => {

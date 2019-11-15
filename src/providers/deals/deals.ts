@@ -120,4 +120,8 @@ cordova.plugins.firebase.dynamiclinks
     console.log("Dynamic link was created:", url);
   });
   }
+
+  getBrandsByCategory(data){
+    return this.http.get(apiUrl + "brand/" + data);
+  }
 }

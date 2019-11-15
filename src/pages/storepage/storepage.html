@@ -62,7 +62,7 @@
     ></aslidinglist> -->
 
     <!-- top brands  -->
-    <h3>Top brands</h3>
+    <!-- <h3>Top brands</h3>
     <ng-container *ngIf="brands.length > 0; else loading">
       <ion-row>
         <!-- <ion-item no-lines class="leftpadding">
@@ -75,7 +75,7 @@
               />
             </ion-avatar>
           </ion-scroll>
-        </ion-item> -->
+        </ion-item> 
         <ion-item no-lines>
           <ion-scroll scrollX="true" scroll-avatar class="brandcardcontainer">
             <ion-card
@@ -97,12 +97,35 @@
           </ion-scroll>
         </ion-item>
       </ion-row>
-    </ng-container>
+    </ng-container> -->
     <!-- <aslidinglist
       [items]="tempdata"
       [type]="'stores'"
       [featureid]="'5be3984c-2099-40f8-8d20-491fda5ae4bb'"
     ></aslidinglist> -->
+            <ng-container *ngIf="brands.length > 0">
+          <h4>Top brands</h4>
+          <ion-row>
+            <ion-item no-lines class="leftpadding">
+              <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
+                <!-- <ion-avatar>
+                  <img
+                    src="{{ item?.Logo }}"
+                    class="scroll-item"
+                    style="border: 1px solid grey;width: 70px;
+    height: 70px;padding:0px;"
+                    *ngFor="let item of brands"
+                  />
+                </ion-avatar> -->
+                <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index" >
+       <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
+                <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
+                <img src="../../assets/amazon-logo.png" alt="" class="inner-image" />
+                </div>
+              </ion-scroll>
+            </ion-item>
+          </ion-row>
+        </ng-container>
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>

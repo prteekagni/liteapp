@@ -37,12 +37,12 @@ export class CardgridComponent {
         this.sharedProvider
           .downloadOnMemory(this.items[index] ,"stores")
           .then((res: any) => {
-            console.log(res);
+            // console.log(res);
             var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
             this.tempsubdeals[index].Logo = a;
           });
       }
-      console.log(this.items);
+      // console.log(this.items);
     });
   }
 
@@ -57,7 +57,7 @@ export class CardgridComponent {
           this.sharedProvider
             .downloadOnMemory(this.items[ii], "stores")
             .then((res: any) => {
-              console.log(res);
+              // console.log(res);
               var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
               this.tempsubdeals[ii].Logo = a;
             });

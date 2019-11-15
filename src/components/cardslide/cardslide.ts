@@ -50,7 +50,7 @@ export class CardslideComponent implements OnInit, AfterViewInit {
                 }
               } else {
                 this.sharedService
-                  .downloadOnMemory(this.copiedData[index])
+                  .downloadOnMemory(this.copiedData[index],"stores")
                   .then(
                     (res: any) => {
                       console.log(res);
@@ -81,7 +81,7 @@ export class CardslideComponent implements OnInit, AfterViewInit {
               }
             },
             err => {
-              this.sharedService.downloadOnMemory(this.copiedData[index]).then(
+              this.sharedService.downloadOnMemory(this.copiedData[index] , "stores").then(
                 (res: any) => {
                   console.log(res);
                   var a = (<any>window).Ionic.WebView.convertFileSrc(
@@ -130,38 +130,40 @@ export class CardslideComponent implements OnInit, AfterViewInit {
                     this.cards[index].Logo = nativeUrl;
                   }
                 } else {
-                  this.sharedService.downloadOnMemory(this.cards[index]).then(
-                    (res: any) => {
-                      console.log(res);
-                      var a = (<any>window).Ionic.WebView.convertFileSrc(
-                        res.toURL()
-                      );
-                      this.cards[index].Logo = a;
+                  this.sharedService
+                    .downloadOnMemory(this.cards[index], "deals")
+                    .then(
+                      (res: any) => {
+                        console.log(res);
+                        var a = (<any>window).Ionic.WebView.convertFileSrc(
+                          res.toURL()
+                        );
+                        this.cards[index].Logo = a;
 
-                      this.storage.get("images").then((res: any) => {
-                        if (res) {
-                          if (
-                            res.find(x => x.ID === this.copiedData[index].ID)
-                          ) {
+                        this.storage.get("images").then((res: any) => {
+                          if (res) {
+                            if (
+                              res.find(x => x.ID === this.copiedData[index].ID)
+                            ) {
+                            } else {
+                              res.push(this.copiedData[index]);
+                              this.storage.set("images", res);
+                            }
                           } else {
-                            res.push(this.copiedData[index]);
-                            this.storage.set("images", res);
+                            this.storage.set("images", this.copiedData[index]);
                           }
-                        } else {
-                          this.storage.set("images", this.copiedData[index]);
-                        }
-                      });
-                    },
-                    error => {
-                      index++;
-                      console.log(JSON.stringify(error));
-                    }
-                  );
+                        });
+                      },
+                      error => {
+                        index++;
+                        console.log(JSON.stringify(error));
+                      }
+                    );
                 }
               },
               error => {
                 this.sharedService
-                  .downloadOnMemory(this.copiedData[index])
+                  .downloadOnMemory(this.copiedData[index] ,"deals")
                   .then((res: any) => {
                     console.log(res);
                     var a = (<any>window).Ionic.WebView.convertFileSrc(
