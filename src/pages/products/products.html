@@ -1,6 +1,6 @@
 <ion-header class="show-background">
   <ion-navbar>
-    <ion-title>Products & Services</ion-title>
+    <ion-title><span class="titlecolormargin">Products & Services</span></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -26,13 +26,13 @@
       </ion-col>
     </ion-row> -->
   <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego">
-    <ion-col col-12 text-center>
-      <h2 style="margin-bottom:0px;">{{ item.Name }}</h2>
+    <ion-col col-12 text-left>
+      <h2 style="margin-bottom:0px;margin-left:10px">{{ item.Name }}</h2>
     </ion-col>
-    <ion-col col-12 text-right style="margin-top:0px">
-<!-- <span style="margin-bottom:10px;padding-right: 10px;" (click)> View All</span> -->
+    <!-- <ion-col col-12 text-right style="margin-top:0px">
+ <span style="margin-bottom:10px;padding-right: 10px;" (click)> View All</span>
 <button ion-button clear (click)="goToServices(item)" color="theme"> View All</button>
-    </ion-col>
+    </ion-col> -->
     <ion-col col-12 text-center class="nopadding">
       <!-- <dealsgrid [items]="item" [type]="'products'" *ngIf="item.ID"></dealsgrid> -->
 

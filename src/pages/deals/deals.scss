@@ -4,7 +4,7 @@ page-deals {
   }
 
   .toolbar-title-md {
-    color: orangered;
+    color: black;
   }
   .storeimage {
     width: 120px !important;
@@ -56,5 +56,8 @@ page-deals {
   // }
   ion-scroll[scroll-avatar] {
     height: 175px !important; // height: 140px;
+  }
+  ion-img{
+    min-height: 100px;
   }
 }

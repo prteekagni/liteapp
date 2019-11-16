@@ -33,7 +33,7 @@ $colors: (
   danger: #f53d3d,
   light: #f4f4f4,
   dark: #222,
-  theme: orangered
+  theme: #FF6700
 );
 
 // App iOS Variables
@@ -47,9 +47,9 @@ $colors: (
 //
 $toolbar-background: transparent;
 $text-input-highlight-color-valid: #488aff;
-$text-input-md-show-focus-highlight: #ff4500;
-$alert-md-button-text-color: orangered;
-$segment-button-md-text-color-activated: orangered;
+$text-input-md-show-focus-highlight: #FF6700;
+$alert-md-button-text-color: black;
+// $segment-button-md-text-color-activated: orangered;
 $segment-button-md-border-color-activated: orangered; // App Windows Variables
 
 $searchbar-md-input-search-icon-color: orange;
@@ -65,6 +65,38 @@ $text-input-md-highlight-color:black;
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
+
+.platform-android5 {
+ion-header {
+margin-top: 20px;
+}
+}
+
+.platform-android6 {
+ion-header {
+margin-top: 20px;
+}
+}
+
+.platform-android7 {
+ion-header {
+margin-top: 20px;
+}
+}
+
+// .segment-ios-theme .segment-button {
+//   border-color: orangered;
+//   color: black;
+// }
+
+.segment-md .segment-button{
+   border-color: orangered;
+  color: black;
+}
+
+.fab-md{
+  background:#FF6700 !important;
+}
 
 @import "ionic.theme.default";
 

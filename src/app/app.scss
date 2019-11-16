@@ -42,13 +42,41 @@
    font-style: normal;
  }
 
+ 
+   @font-face {
+   font-family: 'CarterOne-Regular';
+   src: url('../assets/fonts/CarterOne-Regular.ttf');
+   font-weight: 200;
+   font-style: normal;
+ }
+
+  
+   @font-face {
+   font-family: 'Ubuntu-Medium';
+   src: url('../assets/fonts/Ubuntu-Medium.ttf');
+   font-weight: 200;
+   font-style: normal;
+ }
+
+    @font-face {
+   font-family: 'Literata', serif;
+   src: url('../assets/fonts/BLiterata-Italic-VariableFont_wght.ttf');
+   font-weight: 200;
+   font-style: normal;
+ }
 // span {
 //    font-family: 'Source Code Pro';
 //  }
 
  p,h1,h2,h3,h4,h5,h6,ion-item{
-    font-family: 'PlayfairDisplay-Regular';
+   
+  font-family: 'Literata', serif;
     color:black
+ }
+
+
+ h4,h5,h6{
+   margin-left:10px;
  }
 
   .item-md p{
@@ -131,7 +159,7 @@ ion-content {
 }
 
 .addcolortitle {
-  color: orangered !important;
+  color: black !important;
 }
 
 ion-router-outlet > .ion-page {
@@ -171,8 +199,13 @@ ion-router-outlet > .ion-page {
 
 .toolbar-title-md {
   color: white;
-  font-family: 'Neucha';
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'CarterOne-Regular';
+  padding:0px 0px !important;
+  // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.toolbar-md {
+  min-height: 60px;
 }
 
 
@@ -220,3 +253,15 @@ ion-img {
     left: 7%;
     width: 100px;
 }
+
+.titlecolormargin{
+ padding-left: 9px;
+  color:black;
+}
+
+
+// .back-button-icon-md{
+//   margin-bottom:24px;
+// }
+
+

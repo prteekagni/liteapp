@@ -6,6 +6,7 @@ import {
   Renderer2,
   SimpleChanges
 } from "@angular/core";
+import { StatusBar } from "@ionic-native/status-bar";
 
 @Directive({
   selector: "[scrollHide]"
@@ -20,7 +21,7 @@ export class ScrollDirective {
   lastValue: number = 0;
   co;
 
-  constructor(private element: ElementRef, private renderer: Renderer2) {
+  constructor(private element: ElementRef, private renderer: Renderer2 , private statusBar : StatusBar) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -59,6 +60,13 @@ export class ScrollDirective {
               this.element.nativeElement.children[0].children[0],
               "addBackground"
             );
+              this.renderer.setStyle(
+                this.element.nativeElement,
+                "margin-top",
+                "24px"
+              );
+
+              this.statusBar.backgroundColorByHexString("#FFFFF")
             this.renderer.addClass(
               this.element.nativeElement.children[0].children[2].children[0]
                 .children[0].children[0]
@@ -76,6 +84,13 @@ export class ScrollDirective {
               this.element.nativeElement.children[0].children[0],
               "transparentBackground"
             );
+
+            
+              this.renderer.setStyle(
+                this.element.nativeElement,
+                "margin-top",
+                "0px"
+              );
 
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[2].children[0]

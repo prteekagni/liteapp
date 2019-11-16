@@ -5,7 +5,7 @@ page-notification {
     }
 
     .toolbar-title-md {
-        color: orangered;
+        color: black;
     }
 
     .slide-zoom {
@@ -14,16 +14,25 @@ page-notification {
         overflow-x: hidden;
     }
 
-    .bar-button-default-md,
-    .bar-button-clear-md-default,
-    .bar-button-md-default {
-        color: orangered;
-    }
+    // .bar-button-default-md,
+    // .bar-button-clear-md-default,
+    // .bar-button-md-default {
+    //     color: black;
+    // }
 
     .toolbardnp{
         padding:0px;
     }
     .toolbar-background-md {
     background: transparent;
+  }
+
+  .segment-md .segment-button{
+      color:black !important;
+  }
+
+  .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+      color:orangered !important;
+      border-bottom:3px solid orangered;
   }
 }

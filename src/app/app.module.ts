@@ -41,7 +41,6 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
-      backButtonText: "Go Back",
       iconMode: "ios",
       modalEnter: "modal-slide-in",
       modalLeave: "modal-slide-out",

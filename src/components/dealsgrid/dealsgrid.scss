@@ -89,13 +89,23 @@ dealsgrid {
     border-radius: 10px;
   }
 
-  .largecard:nth-child(odd) {
-    background-image: url("../../assets/orange.png");
+  .largecard:nth-child(odd)  ion-img {
+    background-image: url("../../assets/orange.png")  !important;
+    min-height:115px
   }
 
-  .largecard:nth-child(even) {
-    background-image: url("../../assets/pink.png");
+  .largecard:nth-child(even)  ion-img{
+    background-image: url("../../assets/pink.png")  !important;
+    min-height:115px
   }
+
+
+//  {
+//     background-image: url("../../assets/pink.png") !important;
+    
+//   }
+
+
   .overlay-effect {
   position: absolute;
     top: 78%;
@@ -105,7 +115,7 @@ dealsgrid {
     opacity: 0.6;
     -webkit-transition: 0.5s ease;
     transition: 0.5s ease;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0,1);
     overflow: hidden;
   }
 

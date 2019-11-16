@@ -3,12 +3,12 @@
     <ion-title>
       <ion-row>
         <ion-col col-6 text-left>
-          Deals Locker Lite
+          <span class=""> Deals Locker</span>
         </ion-col>
         <ion-col col-6 text-right>
-          <ion-icon ios="ios-notifications" md="md-notifications" (click)="goToNotification()" class="iconspace"
+          <ion-icon ios="ios-notifications-outline" md="ios-notifications-outline" (click)="goToNotification()" class="iconspace"
             style="margin-left: 5px;"></ion-icon>
-          <ion-icon ios="ios-star" md="md-star" (click)="goToFav()"> </ion-icon>
+          <ion-icon ios="ios-star-outline" md="ios-star-outline" (click)="goToFav()" style="    margin-right: 15px;"> </ion-icon>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -40,7 +40,7 @@
       </div> -->
       <ion-slides pager speed="1000" effect="slides" class="mainslide" autoplay="1000" loop="true">
         <ion-slide>
-          <img src="../../assets/banner2.jpg" alt="" class="header-image" />
+          <img src="../../assets/b.jpg" alt="" class="header-image" />
         </ion-slide>
       </ion-slides>
     </ng-template>
@@ -51,7 +51,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row text-center>
+    <ion-row text-left>
       <ion-col col-12>
 
         <ng-container *ngIf="brands.length > 0">
@@ -85,7 +85,7 @@
 
     <!-- Substores -->
     <ion-row>
-      <ion-col col-12 text-center>
+      <ion-col col-12 text-left>
         <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">Stores by Category</h4>
       </ion-col>
 
