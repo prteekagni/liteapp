@@ -44,89 +44,88 @@ export class MyApp {
         }
         // statusBar.backgroundColorByHexString("#ff4500");
         splashScreen.hide();
-        //   this.storageService.removelAll();
-      //   this.deeplinks
-      //     .route({
-      //       "/": "TabsPage",
-      //       "/products": "ProductsPage",
-      //       "/productlist/:id": "ProductlistPage",
-      //       "/todays-event": "EventPage",
-      //       "/Dealdetail/:id": "DealdetailPage",
-      //       "forgotpassword/:id": "ForgotpassPage"
-      //     })
-      //     .subscribe(
-      //       match => {
-      //         if (
-      //           match.$route == "ProductsPage" ||
-      //           match.$route == "DealsPage"
-      //         ) {
-      //           this.nav.setRoot(match.$route).then(res => {
-      //             console.log("Root Set");
-      //           });
-      //         } else {
-      //           this.nav.push(match.$route, match.$args).then(
-      //             res => {
-      //               console.log("push successful");
-      //             },
-      //             err => {
-      //               this.nav.push("HomePage");
-      //               console.log("unsuccesful");
-      //             }
-      //           );
-      //         }
-      //       },
-      //       nomatch => {
-      //         alert(JSON.stringify(nomatch));
-      //       }
-      //     );
-      //   this.initializeOneSignal();
-      //   this.initializeTracker();
-      //   localNotification.on("click").subscribe((res: any) => {
-      //     this.nav.push("DealdetailPage", {
-      //       id: res.data.ID
-      //     });
-      //   });
-      //   storageService
-      //     .checkDirectory()
-      //     .then(res =>
-      //       console.log(JSON.stringify(res), err =>
-      //         console.log(JSON.stringify(err))
-      //       )
-      //     );
-      //   this.googlePlus.trySilentLogin({}).then(
-      //     res => console.log(res),
-      //     err => console.log(err)
-      //   );
-      //    platform.registerBackButtonAction(() => {
-      //      var lastTimeBackPress = 0;
-      //      var timePeriodToExit = 2000;
-      //      // get current active page
-      //      let nav = app.getActiveNavs()[0];
-      //      let activeView = nav.getActive();
-      //      if (activeView.component.name == "HomePage") {
-      //        //Double check to exit app
-      //        if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-      //          platform.exitApp(); //Exit from app
-      //        } else {
-      //          let toast = this.sharedService.createToast(
-      //            "Press back again to exit App?"
-      //          );
-      //          lastTimeBackPress = new Date().getTime();
-      //        }
-      //        // go to previous page
-      //      } else if (
-      //        activeView.component.name == "DealsPage" ||
-      //        activeView.component.name == "ProductsPage" ||
-      //        activeView.component.name == "MyaccountPage"
-      //      ) {
-      //        // go to previous page
-      //        this.nav.setRoot("TabsPage");
-      //      } else {
-      //        this.nav.pop({});
-      //      }
-      //    });
-      // });
-      })
+          // this.storageService.removelAll();
+        this.deeplinks
+          .route({
+            "/": "TabsPage",
+            "/products": "ProductsPage",
+            "/productlist/:id": "ProductlistPage",
+            "/todays-event": "EventPage",
+            "/Dealdetail/:id": "DealdetailPage",
+            "forgotpassword/:id": "ForgotpassPage"
+          })
+          .subscribe(
+            match => {
+              if (
+                match.$route == "ProductsPage" ||
+                match.$route == "DealsPage"
+              ) {
+                this.nav.setRoot(match.$route).then(res => {
+                  console.log("Root Set");
+                });
+              } else {
+                this.nav.push(match.$route, match.$args).then(
+                  res => {
+                    console.log("push successful");
+                  },
+                  err => {
+                    this.nav.push("HomePage");
+                    console.log("unsuccesful");
+                  }
+                );
+              }
+            },
+            nomatch => {
+              alert(JSON.stringify(nomatch));
+            }
+          );
+                  this.initializeOneSignal();
+                  this.initializeTracker();
+        localNotification.on("click").subscribe((res: any) => {
+          this.nav.push("DealdetailPage", {
+            id: res.data.ID
+          });
+        });
+        storageService
+          .checkDirectory()
+          .then(res =>
+            console.log(JSON.stringify(res), err =>
+              console.log(JSON.stringify(err))
+            )
+          );
+        this.googlePlus.trySilentLogin({}).then(
+          res => console.log(res),
+          err => console.log(err)
+        );
+         platform.registerBackButtonAction(() => {
+           var lastTimeBackPress = 0;
+           var timePeriodToExit = 2000;
+           // get current active page
+           let nav = app.getActiveNavs()[0];
+           let activeView = nav.getActive();
+           if (activeView.component.name == "HomePage") {
+             //Double check to exit app
+             if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+               platform.exitApp(); //Exit from app
+             } else {
+               let toast = this.sharedService.createToast(
+                 "Press back again to exit App?"
+               );
+               lastTimeBackPress = new Date().getTime();
+             }
+             // go to previous page
+           } else if (
+             activeView.component.name == "DealsPage" ||
+             activeView.component.name == "ProductsPage" ||
+             activeView.component.name == "MyaccountPage"
+           ) {
+             // go to previous page
+             this.nav.setRoot("TabsPage");
+           } else {
+             this.nav.pop({});
+           }
+         });
+      });
     }
 
   initializeOneSignal() {

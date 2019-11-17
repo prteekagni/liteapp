@@ -2,7 +2,7 @@
   <ng-container *ngIf="cards.length > 4; else elseTemplate">
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;">{{ copyItem?.Name }}</h4>
+        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;margin-bottom: 0px;">{{ copyItem?.Name }}</h4>
       </ion-col>
     </ion-row>
     <ion-col col-12>
@@ -72,7 +72,7 @@
   </ion-row>
   <ion-row>
     <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)">
-      <img src="{{ item.Logo }}" alt="" />
+      <img src="{{ item.Logo }}" alt=""  [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"/>
       <p style="text-align: center;margin-top: 0px;margin-bottom: 0px;">
         {{ item.Name }}
       </p>

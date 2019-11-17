@@ -1,7 +1,7 @@
 
 <ng-container *ngIf="show <= singleLength ; then thenTemplate; else elseTemplate"></ng-container>
 <ng-template #thenTemplate>
-    <ion-card class="addheight" (click)="getDetail($event)">
+    <ion-card class="addheight" (click)="addClicked(item)">
     <img src="{{item?.Logo}}" alt="" class="addimage">
 </ion-card>
 </ng-template>

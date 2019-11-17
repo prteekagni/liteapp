@@ -62,10 +62,17 @@ export class RegisterPage {
   registerUser(data) {
     this.authService.registerUser(data).subscribe((res:any)=>{
       console.log(res);
-      this.navCtrl.push("TabsPage");
-      this.authService.setUserDetails(res);
-      this.authService.setUserLogin();
+      if(res.HasError == true){
+        this.sharedService.createToast(res.ErrorMessage)
+      }
+      else{
+        this.authService.setUserDetails(res);
+        this.authService.setUserLogin();
+this.navCtrl.push("TabsPage");
+
    
+      }
+      
     })
   }
 }

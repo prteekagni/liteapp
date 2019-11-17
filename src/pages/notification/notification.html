@@ -28,22 +28,26 @@
       <ion-card
         [ngClass]="{ secondclass: true }"
         *ngFor="let item of pushNotification"
+         (click)="getDeal(item)"
       >
         <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
           <ion-row>
+            <ion-col col-4>
+              <img src="{{item.largeIcon}}" alt="">
+            </ion-col>
             <ion-col col-8>
-              <h4>{{ item.Name }}</h4>
+              <h4>{{ item.title }}</h4>
               <p>
-                {{ item.Description }}
+                {{ item.body }}
               </p>
             </ion-col>
-            <ion-col col-4>
-              <img src="../../assets/arrow.jpg" class="dealsimage" />
+            <ion-col col-12>
+              <img src="{{item.bigPicture}}" class="dealsimage" />
             </ion-col>
           </ion-row>
         </ion-card-content>
         <ion-row no-padding>
-          <ion-col>
+          <!-- <ion-col>
             <button
               ion-button
               clear
@@ -55,8 +59,8 @@
               <ion-icon name="star"></ion-icon>
               Favorite
             </button>
-          </ion-col>
-          <ion-col text-center>
+          </ion-col> -->
+          <!-- <ion-col text-center>
             <button
               ion-button
               clear
@@ -68,22 +72,22 @@
               <ion-icon name="musical-notes"></ion-icon>
               Remind
             </button>
-            <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
-      </ion-datetime>  -->
-          </ion-col>
-          <ion-col text-right>
+             <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
+      </ion-datetime>  
+          </ion-col> 
+                    <ion-col text-right>
             <button
               ion-button
               clear
               small
               color="danger"
               icon-start
-              (click)="getDeal()"
+              (click)="getDeal(item)"
             >
               <ion-icon name="share-alt"></ion-icon>
               Buy
             </button>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-card>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -98,6 +102,9 @@
         >
           <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
             <ion-row>
+              <ion-col col-4>
+                
+              </ion-col>
               <ion-col col-8>
                 <h4>{{ item.data.Name }}</h4>
                 <p>

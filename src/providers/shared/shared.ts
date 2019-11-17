@@ -198,7 +198,7 @@ export class SharedProvider {
         this.createToast("Error");
       }
     } else {
-      const browser = this.inappBrowser.create("", "_blank", {
+      const browser = this.inappBrowser.create(data.Url, "_blank", {
         location: "no"
       });
       //      browser.on("loadstart").subscribe(event=>{

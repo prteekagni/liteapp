@@ -1,6 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, Slides } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Slides, ModalController } from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
+import { SharedProvider } from "../../providers/shared/shared";
 
 /**
  * Generated class for the NotificationPage page.
@@ -23,7 +24,9 @@ export class NotificationPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public storageService: StorageProvider
+    public storageService: StorageProvider,
+    private modalController: ModalController,
+    private sharedService: SharedProvider
   ) {}
 
   ionViewDidLoad() {
@@ -52,4 +55,20 @@ export class NotificationPage {
   slideindexs(index) {
     this.segments = index.toString();
   }
+
+  getDeal(data){
+
+    this.sharedService.openBrowser(data.additionalData)
+  // let dealmodal = this.modalController.create(
+  //     "DealdetailPage",
+  //     { data: data },
+  //     {
+  //       // cssClass: 'mymodal',
+  //       showBackdrop: true,
+  //       enableBackdropDismiss: true
+  //     }
+  //   );
+  //   dealmodal.present();
+  }
+  
 }

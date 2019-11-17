@@ -141,6 +141,7 @@ export class StorageProvider {
     return this.storage.get(P_KEY).then((items: deals[]) => {
       if (items) {
         items.push(item);
+        console.log(items);
         this.storage.set(P_KEY, items);
         return true;
       } else {

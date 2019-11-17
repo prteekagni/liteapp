@@ -1,7 +1,7 @@
 page-home {
   ion-scroll[scrollX] {
     white-space: nowrap;
-    height: 200px;
+    height: 177px;
     overflow: hidden;
 
     .scroll-item {
@@ -20,7 +20,7 @@ page-home {
   }
 
   ion-scroll[scroll-avatar] {
-    height: 200px;
+    height: 177px;
   }
 
   /* Hide ion-content scrollbar */
@@ -158,9 +158,9 @@ page-home {
 
   .inner-image {
     position: absolute;
-    top: 40%;
-    left: 7%;
-    width: 100px;
+    top: 43%;
+    left: 20%;
+    width: 65px;
 }
   .container {
     position: relative;
@@ -169,8 +169,11 @@ page-home {
     content: url(../../assets/a3.png);
   }
   div.image.odd {
-    content: url(../../assets/a2.png);
+    content: url(../../assets/a3.png);
   }
 
+  .toolbar-title-md{
+    font-family: 'CarterOne-Regular' !important;
+  }
 
 }

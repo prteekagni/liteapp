@@ -71,7 +71,7 @@
                 <div class="container" class="scroll-item" *ngFor="let item of testdemo;let i = index" >
        <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
                 <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
-                <img src="../../assets/amazon-logo.png" alt="" class="inner-image" />
+                <img src="{{item.Logo}}" alt="" class="inner-image" />
                 </div>
               </ion-scroll>
             </ion-item>

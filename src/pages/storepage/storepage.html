@@ -104,8 +104,12 @@
       [featureid]="'5be3984c-2099-40f8-8d20-491fda5ae4bb'"
     ></aslidinglist> -->
             <ng-container *ngIf="brands.length > 0">
-          <h4>Top brands</h4>
-          <ion-row>
+              <ion-row>
+                   <ion-col col-12 text-left>
+        <h4 *ngIf="brands.length !== 0">Top Brands</h4>
+      </ion-col>
+                  
+                    <ion-col col-12>
             <ion-item no-lines class="leftpadding">
               <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
                 <!-- <ion-avatar>
@@ -120,11 +124,12 @@
                 <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index" >
        <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
                 <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
-                <img src="../../assets/amazon-logo.png" alt="" class="inner-image" />
+                <img src="{{item.Logo}}" alt="" class="inner-image" />
                 </div>
               </ion-scroll>
             </ion-item>
-          </ion-row>
+          </ion-col>
+              </ion-row>
         </ng-container>
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>

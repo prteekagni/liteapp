@@ -80,7 +80,7 @@ export class AuthenticateProvider {
   // register user
   registerUser(registerdata) {
     return this.http.post(
-      "http://192.168.225.44:52044/api/users",
+      this.apiUrl+"users",
       registerdata
     );
   }

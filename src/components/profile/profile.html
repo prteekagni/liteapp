@@ -21,7 +21,7 @@
           <ion-label floating>Username</ion-label>
           <ion-input
             type="text"
-            [(ngModel)]="profile.Username"
+            [(ngModel)]="profile.Result.Username"
             color="theme"
             name="Name"
           ></ion-input>
@@ -30,7 +30,7 @@
           <ion-label floating>Email</ion-label>
           <ion-input
             type="email"
-            [(ngModel)]="profile.Email"
+            [(ngModel)]="profile.Result.Email"
             name="Email"
           ></ion-input>
         </ion-item>
@@ -38,7 +38,7 @@
           <ion-label floating>Mobile Number</ion-label>
           <ion-input
             type="number"
-            [(ngModel)]="profile.PhoneNo"
+            [(ngModel)]="profile.Result.PhoneNo"
             name="PhoneNo"
           ></ion-input>
         </ion-item>
@@ -49,19 +49,19 @@
         Others
       </ion-list-header>
       <ion-item (click)="updateProfile(profileForm)" *ngIf="!editForm">
-        <ion-icon name="leaf" item-start></ion-icon>
+        <ion-icon name="md-settings" item-start></ion-icon>
         Edit Profile
       </ion-item>
       <ion-item (click)="updateProfile(profileForm)" *ngIf="editForm">
-        <ion-icon name="leaf" item-start></ion-icon>
+        <ion-icon name="md-settings" item-start></ion-icon>
         Save Profile
       </ion-item>
       <ion-item (click)="changePassword()">
-        <ion-icon name="leaf" item-start></ion-icon>
+        <ion-icon name="md-phone-portrait" item-start></ion-icon>
         Change Password
       </ion-item>
       <ion-item (click)="logOut()">
-        <ion-icon name="leaf" item-start></ion-icon>
+        <ion-icon name="md-log-out" item-start></ion-icon>
         Sign out
       </ion-item>
     </ion-list>
