@@ -185,14 +185,7 @@ export class ProductlistPage implements OnInit {
   }
 
   shareApp() {
-    var data = {
-      message: `  *Now lock great deals, use dealslocker*    `,
-      Url:
-        "https://play.google.com/store/apps/details?id=io.palianews.app&hl=en",
-      subject: "jgdl;dlkfgdfl;khgdhg",
-      image:
-        "https://appimageselinfinito.s3.us-east-2.amazonaws.com/tatacliq.jpg"
-    };
+this.sharedService.shareapplication();
    
   }
 

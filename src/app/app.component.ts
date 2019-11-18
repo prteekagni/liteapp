@@ -32,7 +32,7 @@ export class MyApp {
     private googlePlus: GooglePlus
   ) {
       platform.ready().then(() => {
-        console.log("console.log");
+        
 
         // statusBar.styleDefault();
         statusBar.overlaysWebView(true);
@@ -61,7 +61,7 @@ export class MyApp {
                 match.$route == "DealsPage"
               ) {
                 this.nav.setRoot(match.$route).then(res => {
-                  console.log("Root Set");
+                  
                 });
               } else {
                 this.nav.push(match.$route, match.$args).then(
@@ -102,7 +102,7 @@ export class MyApp {
            var timePeriodToExit = 2000;
            // get current active page
            let navstring = app.getActiveNavs()[0];
-           console.log(navstring);
+           
            let activeView = navstring.getActive();
                let ismodalopened=this.app._appRoot._modalPortal.getActive();
                 if(ismodalopened){
@@ -160,12 +160,12 @@ export class MyApp {
 
   onNotificationRecieved(data) {
     // alert(JSON.stringify(data));
-    console.log(JSON.stringify(data));
+    
     this.storageService.savePushNotification(data);
   }
 
   onNotificationOpened(payloaddata) {
-    console.log(payloaddata);
+    
     if (payloaddata.additionalData.page == "Deals") {
       this.nav.push("DealdetailPage", {
         id: payloaddata.additionalData.id

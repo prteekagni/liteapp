@@ -196,6 +196,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+
+    // this.sharedService.createToast("Testing Toaster")
     // this.events.subscribe("nstatus", res => {
     //   if (res) {
     //     console.log("Home PAge:" + res);

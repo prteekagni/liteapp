@@ -58,37 +58,7 @@ export class DealdetailPage {
     this.viewController.dismiss();
   }
   shareApp() {
-    this.dealService.createDynamicLinks();
-    // cordova.plugins.firebase.dynamiclinks
-    //   .createShortDynamicLink({
-    //     link: this.deal.Url
-    //   })
-    //   .then(
-    //     function(url) {
-    //       console.log("Dynamic link was created:", url);
-
-    //       this.socialSharing
-    //         .share(this.deal.Name, "", this.deal.Logo, url)
-    //         .then(
-    //           res => {
-    //             console.log(res);
-    //           },
-    //           err => {
-    //             console.log(err);
-    //           }
-    //         );
-    //     },
-    //     err => {
-    //       this.socialSharing.share(this.deal.Name, "", this.deal.Logo).then(
-    //         res => {
-    //           console.log(res);
-    //         },
-    //         err => {
-    //           console.log(err);
-    //         }
-    //       );
-    //     }
-    //   );
+   this.sharedService.shareDeals(this.deal);
   }
 
   getDeal() {

@@ -26,7 +26,7 @@ import { Clipboard } from "@ionic-native/clipboard";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-
+import { SocialSharing } from "@ionic-native/social-sharing";
 import { HttpErrorInterceptor } from "../providers/shared/interceptor";
 import { CacheService } from "../providers/shared/cache";
 import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
@@ -80,7 +80,8 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     File,
     FileTransferObject,
     CacheService,
-    InAppBrowser
+    InAppBrowser,
+    SocialSharing
     // FirebaseAnalytics
   ],
   exports: []

@@ -7,7 +7,6 @@ import { ProductsPage } from "../../pages/products/products";
 import { Subject, ReplaySubject } from "rxjs";
 
 const apiUrl = "http://192.168.225.44:52044/api/";
-declare var cordova: any;
 
 @Injectable()
 export class DealsProvider {
@@ -117,15 +116,6 @@ export class DealsProvider {
     return this.http.get(apiUrl + "brand");
   }
 
-  createDynamicLinks() {
-    cordova.plugins.firebase.dynamiclinks
-      .createShortDynamicLink({
-        link: "https://google.com"
-      })
-      .then(function(url) {
-        console.log("Dynamic link was created:", url);
-      });
-  }
 
   getBrandsByCategory(data) {
     return this.http.get(apiUrl + "brand/" + data);

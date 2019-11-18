@@ -69,15 +69,15 @@ export class DealsgridComponent implements OnInit {
           for (let index = 0; index < this.cards.length; index++) {
             console.log("Index is " + this.cards[index]);
 
-            this.sharedService.checkDownloadedImage(this.cards[index]).then(
+            this.sharedService.checkDownloadedImage(this.cards[index] , this.type).then(
               res => {
                 if (res) {
                   console.log("Response:" + res);
-
+var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
                   var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
                     this.file.externalDataDirectory +
                       "images/" +
-                      this.cards[index].Name +
+                      dataName +
                       ".png"
                   );
                   console.log(nativeUrl);
@@ -140,8 +140,10 @@ export class DealsgridComponent implements OnInit {
         this.copiedData = this.cards;
       }});
        for (let index = 0; index < this.copiedData.length; index++) {
-          this.sharedService.checkDownloadedImage(this.copiedData[index]).then(
+          this.sharedService.checkDownloadedImage(this.copiedData[index] ,this.type).then(
             res => {
+              console.log(res);
+              
               if (res) {
                 var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
                   this.file.externalDataDirectory +
