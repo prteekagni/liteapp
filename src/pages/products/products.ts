@@ -31,7 +31,7 @@ export class ProductsPage {
       this.services = res;
       console.log(res);
       this.noproducts = true;
-      for (let index = 0; index < this.services.length && 3 ; index++) {
+      for (let index = 0; index <= this.services.length && 3; index++) {
         console.log(index);
         this.tempproducts.push(this.services[index]);
       }
@@ -57,7 +57,7 @@ export class ProductsPage {
     });
   }
   doInfinite(event) {
-   this.dealsService.storesdata.subscribe((res: any) => {
+    this.dealsService.storesdata.subscribe((res: any) => {
       console.log(res);
     });
     if (this.tempproducts.length != this.services.length) {
@@ -78,5 +78,11 @@ export class ProductsPage {
         type: "deals"
       });
     }
+  }
+
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete;
+    }, 2000);
   }
 }

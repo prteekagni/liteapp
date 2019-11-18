@@ -116,9 +116,6 @@ export class HomePage {
       );
     });
 
-    
-      
-
     this.showToolbar = false;
 
     // On Click of dynamic Link
@@ -151,10 +148,10 @@ export class HomePage {
         console.log(this.substores);
       });
     });
-    
+
     this.dealService
       .getTopBrands()
-      .pipe(map((res: any) => res.filter(resp => resp.BrandType == "M")))
+      .pipe(map((res: any) => res.filter(resp => resp.BrandType == 3)))
       .subscribe(
         (res: any) => {
           this.brands = res;
@@ -194,7 +191,7 @@ export class HomePage {
     //   .subscribe((res: any) => {
     //     this.testdemo = res;
     //     console.log(this.testdemo);
-        
+
     //   });
   }
 
@@ -214,12 +211,10 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-     this.dealService.getTopStores().subscribe((res: any) => {
-       this.testdemo = res;
-       console.log("Will View Enter " + this.testdemo);
-       
-     });
-
+    // this.dealService.getTopStores().subscribe((res: any) => {
+    //   this.testdemo = res;
+    //   console.log("Will View Enter " + this.testdemo);
+    // });
   }
 
   goToNotification() {
@@ -272,4 +267,48 @@ export class HomePage {
   }
 
   generate() {}
+
+  doRefresh(refresher) {
+    console.log("Begin async operation", refresher);
+     this.dealService.getStoreCategory().subscribe((res: any) => {
+       if (res) {
+         res.forEach(element => {
+           this.tempStore.push(element);
+           if (element.Name == "Shop By Category") {
+             this.shopbyID = element.ID;
+           }
+         });
+         for (
+           this.count = 0;
+           this.count < 3 && this.count < this.tempStore.length;
+           this.count++
+         ) {
+           this.store.push(this.tempStore[this.count]);
+         }
+       }
+
+       this.dealService.getFeatureStore().subscribe((res: any) => {
+         this.substores = res;
+         console.log(this.substores);
+       });
+     });
+
+     this.dealService
+       .getTopBrands()
+       .pipe(map((res: any) => res.filter(resp => resp.BrandType == "M")))
+       .subscribe(
+         (res: any) => {
+           this.brands = res;
+           console.log(this.brands);
+         },
+         err => {
+           console.log(err);
+         }
+       );
+
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      refresher.complete();
+    }, 2000);
+  }
 }

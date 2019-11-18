@@ -57,7 +57,7 @@ export class DealsgridComponent implements OnInit {
 
   ngOnInit() {
     this.copyItem = this.items;
-    console.log("From Dealsgrdid" + this.items);
+    console.log("From Dealsgrdid" + this.type);
 
     if (this.type === "deals" && this.items.ID) {
       this.dealService
@@ -273,10 +273,14 @@ export class DealsgridComponent implements OnInit {
       //   }
       // });
      else if (this.type == "products") {
-      this.dealService.getProductCategory().subscribe((res: any) => {
-        this.cards = res;
-      });
-    }
+       console.log("In Products Section");
+       
+            this.dealService
+              .getProductSubCategory(this.items.ID)
+              .subscribe((res: any) => {
+                this.cards = res;
+              });
+          }
   }
 
   goToStore(item) {

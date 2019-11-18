@@ -60,11 +60,11 @@ export class ScrollDirective {
               this.element.nativeElement.children[0].children[0],
               "addBackground"
             );
-              this.renderer.setStyle(
-                this.element.nativeElement,
-                "margin-top",
-                "24px"
-              );
+              // this.renderer.setStyle(
+              //   this.element.nativeElement,
+              //   "margin-top",
+              //   "24px"
+              // );
 
               this.statusBar.backgroundColorByHexString("#FFFFF")
             this.renderer.addClass(
@@ -86,11 +86,11 @@ export class ScrollDirective {
             );
 
             
-              this.renderer.setStyle(
-                this.element.nativeElement,
-                "margin-top",
-                "0px"
-              );
+              // this.renderer.setStyle(
+              //   this.element.nativeElement,
+              //   "margin-top",
+              //   "0px"
+              // );
 
             this.renderer.removeClass(
               this.element.nativeElement.children[0].children[2].children[0]

@@ -192,14 +192,16 @@ export class SharedProvider {
         url = data.Url[0].Url;
         console.log(url);
         const browser = this.inappBrowser.create(url, "_blank", {
-          location: "no"
+          location: "yes",
+          fullscreen:"yes"
         });
       } else if (data.Url.length == 0) {
         this.createToast("Error");
       }
     } else {
       const browser = this.inappBrowser.create(data.Url, "_blank", {
-        location: "no"
+        location: "yes",
+        fullscreen: "yes"
       });
       //      browser.on("loadstart").subscribe(event=>{
       //  this.statusBar.styleLightContent();

@@ -15,75 +15,78 @@
 // automatically applied to the <body> element in the app.
 
 @font-face {
-   font-family: 'Source Code Pro';
-   src: url('../assets/fonts/SourceCodePro-Regular.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+  font-family: "Source Code Pro";
+  src: url("../assets/fonts/SourceCodePro-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
- @font-face {
-   font-family: 'PlayfairDisplay-Regular';
-   src: url('../assets/fonts/PlayfairDisplay-Regular.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "PlayfairDisplay-Regular";
+  src: url("../assets/fonts/PlayfairDisplay-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
-  @font-face {
-   font-family: 'McLaren-Regular';
-   src: url('../assets/fonts/McLaren-Regular.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "McLaren-Regular";
+  src: url("../assets/fonts/McLaren-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
-   @font-face {
-   font-family: 'Neucha';
-   src: url('../assets/fonts/McLaren-Regular.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "Neucha";
+  src: url("../assets/fonts/McLaren-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
- 
-   @font-face {
-   font-family: 'CarterOne-Regular';
-   src: url('../assets/fonts/CarterOne-Regular.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "CarterOne-Regular";
+  src: url("../assets/fonts/CarterOne-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
-  
-   @font-face {
-   font-family: 'Ubuntu-Medium';
-   src: url('../assets/fonts/Ubuntu-Medium.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "Ubuntu-Medium";
+  src: url("../assets/fonts/Ubuntu-Medium.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
-    @font-face {
-   font-family: 'Literata', serif;
-   src: url('../assets/fonts/BLiterata-Italic-VariableFont_wght.ttf');
-   font-weight: 200;
-   font-style: normal;
- }
+@font-face {
+  font-family: "Literata", serif;
+  src: url("../assets/fonts/BLiterata-Italic-VariableFont_wght.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 // span {
 //    font-family: 'Source Code Pro';
 //  }
 
- p,h1,h2,h3,h4,h5,h6,ion-item{
-   
-  font-family: 'Literata', serif;
-    color:black
- }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ion-item {
+  font-family: "Literata", serif;
+  color: black;
+}
 
+h4,
+h5,
+h6 {
+  margin-left: 10px;
+}
 
- h4,h5,h6{
-   margin-left:10px;
- }
-
-  .item-md p{
-  
-    color:black
-  }
-
+.item-md p {
+  color: black;
+}
 
 ion-content {
   // background: url('../assets/ba.jpg');
@@ -111,7 +114,7 @@ ion-content {
   border-radius: 10px;
 }
 
-.linkmodal{
+.linkmodal {
   -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
   box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
   background-color: #fafafa;
@@ -199,19 +202,16 @@ ion-router-outlet > .ion-page {
 
 .toolbar-title-md {
   color: white;
-  
-   
-        font-family:Georgia, 'Times New Roman', Times, serif;
-    
 
-  padding:0px 0px !important;
+  font-family: Georgia, "Times New Roman", Times, serif;
+
+  padding: 0px 0px !important;
   // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .toolbar-md {
   min-height: 60px;
 }
-
 
 .show-less {
   height: 19vh;
@@ -226,12 +226,12 @@ ion-img {
   display: none;
 }
 
-.tabs-md .tab-button[aria-selected=true] .tab-button-icon {
-  color:orangered;
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon {
+  color: orangered;
 }
 
-.tabs-md .tab-button[aria-selected=true]{
-  color:orangered;
+.tabs-md .tab-button[aria-selected="true"] {
+  color: orangered;
 }
 
 // .button-md{
@@ -239,33 +239,36 @@ ion-img {
 //   color: white;
 // }
 
-.fab-md{
-  color:white;
+.fab-md {
+  color: white;
   background: orangered;
 }
 
 // three classes for top brands outer image and inner image
-  div.image.even {
-    content: url(../../assets/a3.png);
-  }
-  div.image.odd {
-    content: url(../../assets/a2.png);
-  }
-    .inner-image {
-    position: absolute;
-    top: 40%;
-    left: 7%;
-    width: 100px;
+div.image.even {
+  content: url(../../assets/a3.png);
+}
+div.image.odd {
+  content: url(../../assets/a2.png);
+}
+.inner-image {
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  width: 100px;
 }
 
-.titlecolormargin{
- padding-left: 9px;
-  color:black;
+.titlecolormargin {
+  padding-left: 9px;
+  color: black;
 }
 
-
+.refresher-active {
+  top: 0px !important;
+}
+ .has-refresher > .scroll-content {
+    border-top: 0px !important;
+  }
 // .back-button-icon-md{
 //   margin-bottom:24px;
 // }
-
-

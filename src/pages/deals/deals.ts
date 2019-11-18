@@ -94,9 +94,10 @@ export class DealsPage {
         return item.employee_name.toLowerCase().indexOf(val.toLowerCase()) > -1;
       });
     }
-    this.content
-      .scrollToTop()
-      .then(res => console.log(res), err => console.warn(err));
+    this.content.scrollToTop().then(
+      res => console.log(res),
+      err => console.warn(err)
+    );
   }
 
   setFocus() {
@@ -136,5 +137,14 @@ export class DealsPage {
       data: data,
       type: "deals"
     });
+  }
+
+  doRefresh(refresher) {
+    console.log("Begin async operation", refresher);
+
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      // refresher.complete();
+    }, 2000);
   }
 }

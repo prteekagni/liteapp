@@ -100,24 +100,32 @@
           [ngClass]="{ secondclass: true }"
           *ngFor="let item of localNotification"
         >
-          <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
-            <ion-row>
-              <ion-col col-4>
-                
-              </ion-col>
-              <ion-col col-8>
-                <h4>{{ item.data.Name }}</h4>
-                <p>
-                  {{ item.data.Description }}
-                </p>
-              </ion-col>
-              <ion-col col-4>
-                <img src="../../assets/arrow.jpg" class="dealsimage" />
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
+             
+               <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+          <ion-row>
+              <ion-col col-4 text-left>
+              <ion-img src="{{item.data.Logo}}" class="dealsimage"></ion-img>
+            </ion-col>
+            <ion-col col-8>
+              <h4>{{ item.data.Name }}</h4>
+                    <!-- <p ngif>{{item.data.Coupon}}</p> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-12>
+                   <p class="overflowtext">
+                {{ item.data.Description }}
+              </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            
+          </ion-row>
+        </ion-card-content>
           <ion-row no-padding>
-            <ion-col>
+            <ion-col col-4>
               <button
                 ion-button
                 clear
@@ -127,10 +135,10 @@
                 (click)="setDealAsFav(item)"
               >
                 <ion-icon name="star"></ion-icon>
-                Favorite
+                Remove
               </button>
             </ion-col>
-            <ion-col text-center>
+            <ion-col text-center col-4>
               <button
                 ion-button
                 clear
@@ -140,25 +148,26 @@
                 (click)="remindBtn(item)"
               >
                 <ion-icon name="musical-notes"></ion-icon>
-                Remind
+                Set Reminder
               </button>
               <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
       </ion-datetime>  -->
             </ion-col>
-            <ion-col text-right>
+            <ion-col text-center col-4>
               <button
                 ion-button
                 clear
                 small
                 color="danger"
                 icon-start
-                (click)="getDeal()"
+                (click)="getLocalDeal(item)"
               >
                 <ion-icon name="share-alt"></ion-icon>
                 Buy
               </button>
             </ion-col>
           </ion-row>
+       
         </ion-card>
       </ion-list>
     </ion-slide>

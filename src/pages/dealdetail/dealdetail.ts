@@ -3,12 +3,14 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ViewController
+  ViewController,
+  Platform
 } from "ionic-angular";
 import { Clipboard } from "@ionic-native/clipboard";
 import { SharedProvider } from "../../providers/shared/shared";
 
 import { DealsProvider } from "../../providers/deals/deals";
+import { platformBrowser } from "@angular/platform-browser";
 declare var cordova;
 @IonicPage({
   defaultHistory: ["DealsPage"]
@@ -19,6 +21,7 @@ declare var cordova;
 })
 export class DealdetailPage {
   deal: any;
+  backbtn;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,7 +29,7 @@ export class DealdetailPage {
     private clipboard: Clipboard,
     private sharedService: SharedProvider,
     private dealService: DealsProvider,
-    
+    private platform: Platform
   ) {
     if ("couponcode") {
       this.clipboard.copy("couponcode").then(
@@ -41,6 +44,10 @@ export class DealdetailPage {
     let a = this.navParams.get("data");
     this.deal = this.navParams.get("data");
     console.log(a);
+
+    // this.backbtn = platform.registerBackButtonAction(() => {
+    //   this.viewController.dismiss();
+    // }, 100);
   }
 
   ionViewDidLoad() {
@@ -51,7 +58,6 @@ export class DealdetailPage {
     this.viewController.dismiss();
   }
   shareApp() {
-
     this.dealService.createDynamicLinks();
     // cordova.plugins.firebase.dynamiclinks
     //   .createShortDynamicLink({
@@ -83,10 +89,12 @@ export class DealdetailPage {
     //       );
     //     }
     //   );
-  
   }
 
-  getDeal(){
-    this.sharedService.openBrowser(this.deal.Url)
+  getDeal() {
+    this.sharedService.openBrowser(this.deal.Url);
+  }
+
+  ionViewWillLeave() {
   }
 }

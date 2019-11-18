@@ -5,6 +5,14 @@
 </ion-header>
 
 <ion-content fullscreen>
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ng-container
     *ngIf="noproducts; then thenTemplate; else elseTemplate"
   ></ng-container>
@@ -26,30 +34,10 @@
       </ion-col>
     </ion-row> -->
   <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego">
-    <ion-col col-12 text-left>
-      <h2 style="margin-bottom:0px;margin-left:10px">{{ item.Name }}</h2>
-    </ion-col>
-    <!-- <ion-col col-12 text-right style="margin-top:0px">
- <span style="margin-bottom:10px;padding-right: 10px;" (click)> View All</span>
-<button ion-button clear (click)="goToServices(item)" color="theme"> View All</button>
-    </ion-col> -->
     <ion-col col-12 text-center class="nopadding">
-      <!-- <dealsgrid [items]="item" [type]="'products'" *ngIf="item.ID"></dealsgrid> -->
-
-      <ion-slides
-        slidesPerView=1.4
-        spaceBetween=40
-        centeredSlides=true
-        loop=true
-        parallax=true
-        effect="coverflow"
-      >
-        <ion-slide> 
-          <img src="../../assets/banner2.jpg" alt="" />
-        </ion-slide>
-      </ion-slides>
+      <dealsgrid [items]="item" [type]="'products'" *ngIf="item?.ID"></dealsgrid>
     </ion-col>
-    <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd>
+    <!-- <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd> -->
   </ion-row>
 
   <ng-template #elseTemplate>

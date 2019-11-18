@@ -101,8 +101,13 @@ export class MyApp {
            var lastTimeBackPress = 0;
            var timePeriodToExit = 2000;
            // get current active page
-           let nav = app.getActiveNavs()[0];
-           let activeView = nav.getActive();
+           let navstring = app.getActiveNavs()[0];
+           console.log(navstring);
+           let activeView = navstring.getActive();
+               let ismodalopened=this.app._appRoot._modalPortal.getActive();
+                if(ismodalopened){
+                  app.navPop();
+                }
            if (activeView.component.name == "HomePage") {
              //Double check to exit app
              if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
@@ -121,10 +126,10 @@ export class MyApp {
            ) {
              // go to previous page
              this.nav.setRoot("TabsPage");
-           } else {
-             this.nav.pop({});
+           } else if(navstring.canGoBack()){
+                navstring.pop();
            }
-         });
+         },10);
       });
     }
 

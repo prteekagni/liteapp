@@ -138,10 +138,19 @@ page-products {
     padding: 0px !important;
   }
 
-  .swiper-slide.swiper-slide-active.slide-zoom.swiper-slide img {
-    transform: scale(1.2);
-  }
+
   .toolbar-background-md {
     background: transparent;
   }
+
+   ion-scroll[scrollX] {
+    white-space: nowrap;
+    height: 177px;
+    overflow: hidden;
+
+    .scroll-item {
+      display: inline-block;
+    }
+  }    
+
 }

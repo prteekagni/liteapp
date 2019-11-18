@@ -21,5 +21,20 @@ page-favourites {
   .toolbar-title-md {
     color: black;
   }
- 
+    .dealsimage {
+    z-index: 91554;
+    // -webkit-box-shadow: 0 8px 6px -6px black;
+    // -moz-box-shadow: 0 8px 6px -6px black;
+    // box-shadow: 0 8px 6px -6px black;
+    width:60px;
+  }
+ .overflowtext{
+      white-space: nowrap;
+    /* width: 50px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+ion-img{
+  min-height: 75px;
+}
 }

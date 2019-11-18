@@ -41,6 +41,14 @@
 </ion-header>
 
 <ion-content>
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">

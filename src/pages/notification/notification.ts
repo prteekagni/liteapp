@@ -56,19 +56,30 @@ export class NotificationPage {
     this.segments = index.toString();
   }
 
-  getDeal(data){
-
-    this.sharedService.openBrowser(data.additionalData)
-  // let dealmodal = this.modalController.create(
-  //     "DealdetailPage",
-  //     { data: data },
-  //     {
-  //       // cssClass: 'mymodal',
-  //       showBackdrop: true,
-  //       enableBackdropDismiss: true
-  //     }
-  //   );
-  //   dealmodal.present();
+  getDeal(data) {
+    this.sharedService.openBrowser(data.additionalData);
+    // let dealmodal = this.modalController.create(
+    //     "DealdetailPage",
+    //     { data: data },
+    //     {
+    //       // cssClass: 'mymodal',
+    //       showBackdrop: true,
+    //       enableBackdropDismiss: true
+    //     }
+    //   );
+    //   dealmodal.present();
   }
-  
+
+  getLocalDeal(item) {
+    let dealmodal = this.modalController.create(
+      "DealdetailPage",
+      { data: item.data },
+      {
+        // cssClass: 'mymodal',
+        showBackdrop: true,
+        enableBackdropDismiss: true
+      }
+    );
+    dealmodal.present();
+  }
 }

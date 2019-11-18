@@ -44,7 +44,13 @@ export class ProfileComponent implements AfterViewInit {
     console.log("Hello ProfileComponent Component");
     this.text = "Hello World";
     var tempdata = JSON.parse(this.authService.getUserDetail());
+    if(tempdata.hasOwnProperty("Result")){
+                                           this.profile = tempdata.Result;
+                                         }
+                                         else{
     this.profile = tempdata;
+
+                                         }
     console.log(this.profile);
   }
 

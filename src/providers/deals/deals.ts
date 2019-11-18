@@ -97,6 +97,12 @@ export class DealsProvider {
       .pipe(map((res: any) => res.filter(resp => resp.CatType == 8)));
   }
 
+  getProductSubCategory(data) {
+    console.log("From Deals grid " + data);
+    
+    return this.http.get(apiUrl + "category/GetSubCategory/" + data);
+  }
+
   // get products by category
   getProductByCategory(data) {
     return this.http.get(apiUrl + "products", data);
@@ -112,16 +118,16 @@ export class DealsProvider {
   }
 
   createDynamicLinks() {
-cordova.plugins.firebase.dynamiclinks
-  .createShortDynamicLink({
-    link: "https://google.com"
-  })
-  .then(function(url) {
-    console.log("Dynamic link was created:", url);
-  });
+    cordova.plugins.firebase.dynamiclinks
+      .createShortDynamicLink({
+        link: "https://google.com"
+      })
+      .then(function(url) {
+        console.log("Dynamic link was created:", url);
+      });
   }
 
-  getBrandsByCategory(data){
+  getBrandsByCategory(data) {
     return this.http.get(apiUrl + "brand/" + data);
   }
 }

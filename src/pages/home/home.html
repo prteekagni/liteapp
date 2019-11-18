@@ -16,6 +16,16 @@
 </ion-header>
 
 <ion-content #pageContent fullscreen>
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <!-- Sliders -->
 
   <ng-container *ngIf="isConnected; then connected; else notconnected">
@@ -68,7 +78,7 @@
                     *ngFor="let item of brands"
                   />
                 </ion-avatar> -->
-                <div class="container" class="scroll-item" *ngFor="let item of testdemo;let i = index" >
+                <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index" >
        <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
                 <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
                 <img src="{{item.Logo}}" alt="" class="inner-image" />

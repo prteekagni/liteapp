@@ -9,22 +9,32 @@
     *ngIf="newItem; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    <ion-list [virtualScroll]="newItem" approxItemHeight="217px">
+    <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
       <ion-item *virtualItem="let item">
-        <ion-card [ngClass]="{ secondclass: true }">
-          <ion-card-content style="padding:7px 16px;">
-            <ion-row>
-              <ion-col col-8>
-                <h4>{{ item.Name }}</h4>
-                <p>
-                  {{ item.Description }}
-                </p>
-              </ion-col>
-              <ion-col col-4>
-                <img src="../../assets/arrow.jpg" class="dealsimage" />
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
+        <ion-card [ngClass]="{ secondclass: true }"  (click)="getDeal()">
+               <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+          <ion-row>
+              <ion-col col-4 text-left>
+              <ion-img src="{{item.Logo}}" class="dealsimage"></ion-img>
+            </ion-col>
+            <ion-col col-8>
+              <h4>{{ item.Name }}</h4>
+                    <h3>Coupon</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-12>
+                   <p class="overflowtext">
+                {{ item.Description }}
+              </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            
+          </ion-row>
+        </ion-card-content>
           <ion-row no-padding>
             <ion-col>
               <button
