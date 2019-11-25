@@ -35,7 +35,7 @@ export class CardslideComponent implements OnInit, AfterViewInit {
         this.copiedData = this.cards;
 
         for (let index = 0; index < this.copiedData.length; index++) {
-          this.sharedService.checkDownloadedImage(this.copiedData[index]).then(
+          this.sharedService.checkDownloadedImage(this.copiedData[index] , this.type).then(
             res => {
               if (res) {
                 var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
@@ -116,7 +116,7 @@ export class CardslideComponent implements OnInit, AfterViewInit {
         .subscribe((res: any) => {
           this.cards = res;
           for (let index = 0; index < this.cards.length; index++) {
-            this.sharedService.checkDownloadedImage(this.cards[index]).then(
+            this.sharedService.checkDownloadedImage(this.cards[index] , this.type).then(
               res => {
                 if (res) {
                   var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(

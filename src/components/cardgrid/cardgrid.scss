@@ -14,13 +14,15 @@ cardgrid {
   }
 
   img {
-    margin: 0;
+  margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 60%;
-  }
+    width: 80px;
+}
+  
   .card-content-md {
     padding: 1px 16px;
   }

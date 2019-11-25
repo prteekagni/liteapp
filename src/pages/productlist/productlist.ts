@@ -141,9 +141,9 @@ export class ProductlistPage implements OnInit {
     this.notificationService.remindBtn(time => {
       this.notificationService.setNotification(item, time).then(res => {
         if (res == true) {
-          this.showToast("Reminder Updated");
+          this.sharedService.createToast("Reminder Updated");
         } else {
-          this.showToast("Reminder Scheduled");
+          this.sharedService.createToast("Reminder Scheduled");
         }
       });
     });
@@ -154,9 +154,9 @@ export class ProductlistPage implements OnInit {
 
     this.storageService.addDeals(data).then(res => {
       if (res == true) {
-        this.showToast("Deal added to favourite");
+        this.sharedService.createToast("Deal added to favourite");
       } else {
-        this.showToast("Deal already present");
+        this.sharedService.createToast("Deal already present");
       }
     });
   }

@@ -6,7 +6,9 @@ import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 import { Subject, ReplaySubject } from "rxjs";
 
-const apiUrl = "http://192.168.225.44:52044/api/";
+// const apiUrl = "http://13.235.82.211/api/";
+
+const apiUrl = "http://localhost:5000/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -30,7 +32,9 @@ export class DealsProvider {
       .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)));
   }
   getAllStores() {
-    return this.http.get(apiUrl + "stores").subscribe((res: any) => {
+    return this.http.get(apiUrl + "stores")
+    .pipe(map((res: any) => res.filter(resp => resp.StoreType !== 0)))
+    .subscribe((res: any) => {
       this.storesdata.next(res);
     });
   }
@@ -113,7 +117,7 @@ export class DealsProvider {
   }
 
   getTopBrands() {
-    return this.http.get(apiUrl + "brand");
+    return this.http.get(apiUrl + "stores").pipe(map((res:any)=> res.filter((resp:any)=> resp.StoreType == 20)));
   }
 
 

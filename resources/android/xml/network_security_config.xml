@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain>localhost</domain>
         <domain>192.168.225.44</domain>
+        <domain>13.235.82.211</domain>
     </domain-config>
 </network-security-config>

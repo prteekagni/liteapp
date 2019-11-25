@@ -4,7 +4,8 @@ import {
   NavController,
   NavParams,
   ViewController,
-  ModalController
+  ModalController,
+  App
 } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -33,13 +34,15 @@ export class LinkmodalPage implements OnInit {
     private viewController: ViewController,
     private http: HttpClient,
     private sharedService: SharedProvider,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private app:App
   ) {
     this.items = this.navParams.get("data");
     this.Url = this.items.Url;
     console.log("From Link modal" + this.Url);
     
     this.title = this.navParams.get("data").Name;
+      
   }
 
   ionViewDidLoad() {
@@ -78,5 +81,12 @@ export class LinkmodalPage implements OnInit {
     this.viewController.dismiss();
   }
 
+  // ngAfterViewInit(){
+  //    let ismodalopened = this.app._appRoot._modalPortal.getActive();
+  //    if (ismodalopened) {
+  //      this.app.navPop();
+  //    }
+  }
+
   
-}
+

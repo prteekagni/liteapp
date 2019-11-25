@@ -62,7 +62,8 @@ export class SharedProvider {
   createToast(message) {
     const toast = this.toastCtrl.create({
       message: message,
-      position: "top"
+      position: "top",
+      duration: 3000
     });
     toast.present();
   }
@@ -194,7 +195,7 @@ this.socialSharing.share(
   }
 
   handleError(error) {
-    alert(JSON.stringify(error));
+    // alert(JSON.stringify(error));
     this.createToast(error.statusText);
   }
 
@@ -207,7 +208,7 @@ this.socialSharing.share(
       if (data.Url.length <= 1 && data.Url.length !== 0) {
         url = data.Url[0].Url;
         console.log(url);
-        const browser = this.inappBrowser.create(url, "_blank", {
+        const browser = this.inappBrowser.create(url, "_system", {
           location: "yes",
           fullscreen: "yes"
         });
@@ -215,7 +216,7 @@ this.socialSharing.share(
         this.createToast("Error");
       }
     } else {
-      const browser = this.inappBrowser.create(data.Url, "_blank", {
+      const browser = this.inappBrowser.create(data.Url, "_system", {
         location: "yes",
         fullscreen: "yes"
       });

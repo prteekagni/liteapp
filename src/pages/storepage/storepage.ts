@@ -54,6 +54,8 @@ export class StorepagePage {
   featureID: string;
   title: string;
   tempcateg;
+  count;
+  tempStore:any =[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -63,26 +65,29 @@ export class StorepagePage {
     private dealService: DealsProvider
   ) {
     this.showToolbar = false;
-    this.firebaseDynamicLinks
-      .onDynamicLink()
-      .subscribe(
-        (res: any) => console.log(res),
-        (error: any) => console.log(error)
-      );
+    this.firebaseDynamicLinks.onDynamicLink().subscribe(
+      (res: any) => console.log(res),
+      (error: any) => console.log(error)
+    );
 
     this.tempdata = this.navParams.get("data");
     this.tempcateg = this.navParams.get("type");
     this.title = this.navParams.get("title");
 
     console.log(this.tempcateg);
-    
 
     this.dealService
       .getStoreSubCategory(this.tempdata.ID)
       .subscribe((res: any) => {
         this.store = res;
+        for (
+          this.count = 0;
+          this.count < 3 && this.count < this.tempStore.length;
+          this.count++
+        ) {
+          this.store.push(this.tempStore[this.count]);
+        }
         console.log(this.store);
-        
       });
 
     this.dealService.getTopBrands().subscribe((res: any) => {

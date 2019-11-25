@@ -23,7 +23,7 @@ export class NotificationProvider {
     alertBtn.addInput({
       type: "radio",
       label: "30 Mins",
-      value: "30",
+      value: "1",
       checked: true
     });
     alertBtn.addInput({
@@ -70,6 +70,9 @@ export class NotificationProvider {
     let notification: any = {
       id: nTime,
       title: data.Name,
+      text: data.Description,
+      icon: "assets/copper.jpg",
+      smallIcon: "assets/copper.jpg",
       actions: [{ id: "reschedule", title: "Reschedule" }],
       trigger: { at: nTime },
       led: "FF0000",

@@ -69,17 +69,7 @@
           <ion-row>
             <ion-item no-lines class="leftpadding">
               <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
-                <!-- <ion-avatar>
-                  <img
-                    src="{{ item?.Logo }}"
-                    class="scroll-item"
-                    style="border: 1px solid grey;width: 70px;
-    height: 70px;padding:0px;"
-                    *ngFor="let item of brands"
-                  />
-                </ion-avatar> -->
-                <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index" >
-       <!-- <img src=" ../../assets/a3.png" alt="" style="width:100px" [ngClass]="" /> -->
+                <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index"  (click)="brandMethod(item)">
                 <div class="image" [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"></div>
                 <img src="{{item.Logo}}" alt="" class="inner-image" />
                 </div>
@@ -129,7 +119,7 @@
           </ion-col>
 
         </ion-row>
-        <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length" [in]="i"></singleadd>
+        <!-- <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length" [in]="i"></singleadd> -->
       </ng-container>
     </ng-container>
     <ion-row *ngIf="lastStore">

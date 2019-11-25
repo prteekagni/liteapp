@@ -144,7 +144,7 @@ export class DealsPage {
 
     setTimeout(() => {
       console.log("Async operation has ended");
-      // refresher.complete();
+      refresher.complete();
     }, 2000);
   }
 }

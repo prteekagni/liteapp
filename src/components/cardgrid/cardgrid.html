@@ -1,8 +1,8 @@
 <ion-row text-left>
   <ion-col col-12>
-    <h4 *ngIf="items.length >= 1" style="margin-top:0px;margin-bottom:0px;">Top Shops</h4>
+    <h4 *ngIf="items.length >= 1" style="margin-top:0px;margin-bottom:0px;">Top Stores</h4>
   </ion-col>
-  <ion-col col-12>
+  <ion-col col-12 *ngIf="items.length >= 1">
     <ion-row [ngClass]="{ 'show-less ': !showMore }">
       <ng-container *ngFor="let item of tempsubdeals; index as i">
         <ion-col col-4 (click)="goToStore(item)">

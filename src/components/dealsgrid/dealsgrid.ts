@@ -12,7 +12,8 @@ import {
   ModalController,
   ViewController,
   NavController,
-  AlertController
+  AlertController,
+  App
 } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import { Events } from "ionic-angular";
@@ -52,7 +53,8 @@ export class DealsgridComponent implements OnInit {
     private navCtrl: NavController,
     private storage: Storage,
     private sharedService: SharedProvider,
-    private file: File
+    private file: File,
+    private app:App
   ) {}
 
   ngOnInit() {
@@ -121,6 +123,8 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
         .getSubStores(this.items.CatPID, this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
+          console.log("From " + this.items.Name + "Lenght" + this.cards.length);
+          
         });
     } else if (this.type == "stores") {
       this.dealService.storesdata.subscribe((res: any) => {
@@ -293,7 +297,8 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
       },
       {
         cssClass: "linkmodal"
-      }
+      },
+      
     );
     modal.present();
   }
@@ -302,14 +307,17 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
     this.viewController.dismiss();
   }
   getToDeal(item) {
-    if (this.type == "stores") {
+    if (this.type == "stores" || this.type == "substores") {
+      
       let modal = this.modalController.create(
         "LinkmodalPage",
         {
           data: item
         },
         {
-          cssClass: "mymodal"
+          cssClass: "my-modal",
+          showBackdrop: true,
+          enableBackdropDismiss: true
         }
       );
       modal.present();
@@ -322,7 +330,7 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
   }
   getOfferDetail(data) {
     console.log(this.type)
-    if (this.type == "stores") {
+    if (this.type == "stores" || this.type == "substores") {
       console.log(data)
       let modal = this.modalController.create(
         "LinkmodalPage",
@@ -330,7 +338,9 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
           data: data
         },
         {
-          cssClass: "mymodal"
+          cssClass: "my-modal",
+          showBackdrop: true,
+          enableBackdropDismiss: true
         }
       );
        modal.present();

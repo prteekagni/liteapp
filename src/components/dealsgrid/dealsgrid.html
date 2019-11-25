@@ -1,3 +1,4 @@
+<ng-container *ngIf="cards.length > 0">
 <ng-container *ngIf="!directLinks">
   <ng-container *ngIf="cards.length > 4; else elseTemplate">
     <ion-row>
@@ -36,7 +37,7 @@
   <ng-template #elseTemplate>
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="cards.length !== 0">{{ copyItem?.Name }}</h4>
+        <h4 *ngIf="cards.length !== 0" style="margin-top:0px">{{ copyItem?.Name }}</h4>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -49,8 +50,8 @@
             *ngFor="let item of cards"
             text-center
           >
-            <ion-img src="{{item.Logo}}" alt="" class="squareimage">
-            </ion-img>
+            <img src="{{item.Logo}}" alt="" class="squareimage"/>
+            
             <p
               style="text-align: center;margin-top: 0px;
     margin-bottom: 0px;"
@@ -79,7 +80,7 @@
     </ion-col>
   </ion-row>
 </ng-container>
-
+</ng-container>
 <!-- <ng-container>
   <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>
 </ng-container> -->

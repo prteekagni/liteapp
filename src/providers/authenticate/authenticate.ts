@@ -6,7 +6,7 @@ import { getAllDebugNodes } from "@angular/core/src/debug/debug_node";
 @Injectable()
 export class AuthenticateProvider {
   user;
-  apiUrl = "http://192.168.225.44:52044/api/";
+  apiUrl = "http://http://13.235.82.211/api/";
   constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {
@@ -38,7 +38,6 @@ export class AuthenticateProvider {
   }
 
   getUserDetail() {
-    
     return localStorage.getItem("User");
   }
 
@@ -51,9 +50,8 @@ export class AuthenticateProvider {
     localStorage.setItem("GoogleLogin", "true");
   }
 
-  getloginStatus(){
-  return  localStorage.getItem("GoogleLogin");
-
+  getloginStatus() {
+    return localStorage.getItem("GoogleLogin");
   }
 
   setToken(data) {
@@ -79,10 +77,7 @@ export class AuthenticateProvider {
 
   // register user
   registerUser(registerdata) {
-    return this.http.post(
-      this.apiUrl+"users",
-      registerdata
-    );
+    return this.http.post(this.apiUrl + "users", registerdata);
   }
 
   // login user with email

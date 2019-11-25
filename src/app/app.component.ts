@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Platform, App, Nav } from "ionic-angular";
+import { Platform, App, Nav, IonicApp, ModalController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { SharedProvider } from "../providers/shared/shared";
@@ -9,6 +9,13 @@ import { Deeplinks } from "@ionic-native/deeplinks";
 import { NotificationProvider } from "../providers/notification/notification";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { GooglePlus } from "@ionic-native/google-plus";
+import { Storage } from "@ionic/storage";
+import { HomePage } from "../pages/home/home";
+import { DealsPage } from "../pages/deals/deals";
+import { ProductsPage } from "../pages/products/products";
+import { MyaccountPage } from "../pages/myaccount/myaccount";
+import { DealdetailPage } from "../pages/dealdetail/dealdetail";
+import { ProductlistPage } from "../pages/productlist/productlist";
 
 declare var window: { KochavaTracker };
 
@@ -23,115 +30,127 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    public app: App,
+    public ionicApp: IonicApp,
+    private app: App,
     private sharedService: SharedProvider,
     private oneSignal: OneSignal,
     private storageService: StorageProvider,
     private deeplinks: Deeplinks,
     localNotification: LocalNotifications,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
+    private storage: Storage,
+    private modalController: ModalController
   ) {
-      platform.ready().then(() => {
-        
+    platform.ready().then(() => {
+       this.storage.get('introShown').then((result) => {
 
-        // statusBar.styleDefault();
-        statusBar.overlaysWebView(true);
-        // set status bar to white
-        
-        if (platform.is("android")) {
-          // statusBar.styleBlackTranslucent();
-          statusBar.backgroundColorByHexString("#80000000");
-        }
-        // statusBar.backgroundColorByHexString("#ff4500");
-        splashScreen.hide();
-          // this.storageService.removelAll();
-        this.deeplinks
-          .route({
-            "/": "TabsPage",
-            "/products": "ProductsPage",
-            "/productlist/:id": "ProductlistPage",
-            "/todays-event": "EventPage",
-            "/Dealdetail/:id": "DealdetailPage",
-            "forgotpassword/:id": "ForgotpassPage"
-          })
-          .subscribe(
-            match => {
-              if (
-                match.$route == "ProductsPage" ||
-                match.$route == "DealsPage"
-              ) {
-                this.nav.setRoot(match.$route).then(res => {
-                  
-                });
+              if(result){
+                this.rootPage = "TabsPage";
               } else {
-                this.nav.push(match.$route, match.$args).then(
-                  res => {
-                    console.log("push successful");
-                  },
-                  err => {
-                    this.nav.push("HomePage");
-                    console.log("unsuccesful");
-                  }
-                );
+                this.rootPage = 'IntroPage';
+                this.storage.set('introShown', true);
               }
-            },
-            nomatch => {
-              alert(JSON.stringify(nomatch));
-            }
-          );
-                  this.initializeOneSignal();
-                  this.initializeTracker();
-        localNotification.on("click").subscribe((res: any) => {
-          this.nav.push("DealdetailPage", {
-            id: res.data.ID
+              // this.loader.dismiss();
           });
-        });
-        storageService
-          .checkDirectory()
-          .then(res =>
-            console.log(JSON.stringify(res), err =>
-              console.log(JSON.stringify(err))
-            )
-          );
-        this.googlePlus.trySilentLogin({}).then(
-          res => console.log(res),
-          err => console.log(err)
-        );
-         platform.registerBackButtonAction(() => {
-           var lastTimeBackPress = 0;
-           var timePeriodToExit = 2000;
-           // get current active page
-           let navstring = app.getActiveNavs()[0];
-           
-           let activeView = navstring.getActive();
-               let ismodalopened=this.app._appRoot._modalPortal.getActive();
-                if(ismodalopened){
-                  app.navPop();
-                }
-           if (activeView.component.name == "HomePage") {
-             //Double check to exit app
-             if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-               platform.exitApp(); //Exit from app
-             } else {
-               let toast = this.sharedService.createToast(
-                 "Press back again to exit App?"
-               );
-               lastTimeBackPress = new Date().getTime();
-             }
-             // go to previous page
-           } else if (
-             activeView.component.name == "DealsPage" ||
-             activeView.component.name == "ProductsPage" ||
-             activeView.component.name == "MyaccountPage"
-           ) {
-             // go to previous page
-             this.nav.setRoot("TabsPage");
-           } else if(navstring.canGoBack()){
-                navstring.pop();
-           }
-         },10);
-      });
-    }
+      // statusBar.styleDefault();
+      statusBar.overlaysWebView(true);
+      // set status bar to white
+
+      if (platform.is("android")) {
+        // statusBar.styleBlackTranslucent();
+        statusBar.backgroundColorByHexString("#80000000");
+      }
+      // statusBar.backgroundColorByHexString("#ff4500");
+      splashScreen.hide();
+      // this.storageService.removelAll();
+      // this.deeplinks
+      //   .route({
+      //     "/": "TabsPage",
+      //     "/products": "ProductsPage",
+      //     "/productlist/:id": "ProductlistPage",
+      //     "/todays-event": "EventPage",
+      //     "/Dealdetail/:id": "DealdetailPage",
+      //     "forgotpassword/:id": "ForgotpassPage"
+      //   })
+      //   .subscribe(
+      //     match => {
+      //       if (match.$route == "ProductsPage" || match.$route == "DealsPage") {
+      //         this.nav.setRoot(match.$route).then(res => {});
+      //       } else {
+      //         this.nav.push(match.$route, match.$args).then(
+      //           res => {
+      //             console.log("push successful");
+      //           },
+      //           err => {
+      //             this.nav.push("HomePage");
+      //             console.log("unsuccesful");
+      //           }
+      //         );
+      //       }
+      //     },
+      //     nomatch => {
+      //       alert(JSON.stringify(nomatch));
+      //     }
+      //   );
+      // this.initializeOneSignal();
+      // this.initializeTracker();
+      // localNotification.on("click").subscribe((res: any) => {
+      //   this.nav.push("DealdetailPage", {
+      //     data: res.data
+      //   });
+      
+      // });
+      // storageService
+      //   .checkDirectory()
+      //   .then(res =>
+      //     console.log(JSON.stringify(res), err =>
+      //       console.log(JSON.stringify(err))
+      //     )
+      //   );
+      // this.googlePlus.trySilentLogin({}).then(
+      //   res => console.log(res),
+      //   err => console.log(err)
+      // );
+      platform.registerBackButtonAction(() => {
+        var lastTimeBackPress = 0;
+        var timePeriodToExit = 2000;
+        // get current active page
+        let navstring = app.getActiveNavs()[0];
+        let activeView = navstring.getActive().instance;
+        let ismodalopened = this.ionicApp._modalPortal.getActive();
+        if (ismodalopened) {
+          app.navPop();
+        }
+        if(ismodalopened == undefined && activeView instanceof ProductlistPage){
+          this.nav.setRoot("DealsPage")
+        }
+        if (activeView instanceof HomePage) {
+          //Double check to exit app
+          if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+            platform.exitApp(); //Exit from app
+          } else {
+            let toast = this.sharedService.createToast(
+              "Press back again to exit App?"
+            );
+            lastTimeBackPress = new Date().getTime();
+          }
+          // go to previous page
+        } else if (
+          activeView instanceof DealsPage ||
+          activeView instanceof ProductsPage ||
+          activeView instanceof MyaccountPage
+        ) {
+          // go to previous page
+          this.nav.setRoot("TabsPage");
+        } else if (activeView instanceof DealdetailPage){
+          navstring.popTo("ProductListPage");
+        }
+                 if (navstring.canGoBack()) {
+                   navstring.pop();
+                 }
+      }, 10);
+    });
+  }
 
   initializeOneSignal() {
     this.oneSignal.startInit(
@@ -160,12 +179,11 @@ export class MyApp {
 
   onNotificationRecieved(data) {
     // alert(JSON.stringify(data));
-    
+
     this.storageService.savePushNotification(data);
   }
 
   onNotificationOpened(payloaddata) {
-    
     if (payloaddata.additionalData.page == "Deals") {
       this.nav.push("DealdetailPage", {
         id: payloaddata.additionalData.id

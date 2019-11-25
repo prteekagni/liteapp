@@ -6,7 +6,8 @@ import {
   Events,
   Platform,
   Content,
-  Slides
+  Slides,
+  ModalController
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
 import { ScrollHideConfig } from "../../directives/scroll/scroll";
@@ -68,7 +69,8 @@ export class HomePage {
     private sharedService: SharedProvider,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
     private dealService: DealsProvider,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private modalController: ModalController
   ) {
     // platform.ready().then(() => {
     //   this.firebaseAnalytics
@@ -149,18 +151,15 @@ export class HomePage {
       });
     });
 
-    this.dealService
-      .getTopBrands()
-      .pipe(map((res: any) => res.filter(resp => resp.BrandType == 3)))
-      .subscribe(
-        (res: any) => {
-          this.brands = res;
-          console.log(this.brands);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+    this.dealService.getTopBrands().subscribe(
+      (res: any) => {
+        this.brands = res;
+        console.log(this.brands);
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
     this.dealService.getAllStores();
 
@@ -196,7 +195,6 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-
     // this.sharedService.createToast("Testing Toaster")
     // this.events.subscribe("nstatus", res => {
     //   if (res) {
@@ -235,19 +233,18 @@ export class HomePage {
   ionViewWillLeave() {}
 
   doInfinite(event) {
+    console.log("loading event called");
     this.dealService.storesdata.subscribe((res: any) => {
       console.log(res);
     });
     if (this.store.length <= this.tempStore.length) {
-      console.log(this.store.length);
-      console.log(this.tempStore.length);
       for (let cindex = 0; cindex < 4; cindex++) {
         this.store.push(this.tempStore[this.count]);
         this.count++;
+        if (cindex == 3) {
+          event.complete();
+        }
       }
-      setTimeout(() => {
-        event.complete();
-      }, 500);
     } else {
       this.lastStore = true;
       event.enable(false);
@@ -272,45 +269,60 @@ export class HomePage {
 
   doRefresh(refresher) {
     console.log("Begin async operation", refresher);
-     this.dealService.getStoreCategory().subscribe((res: any) => {
-       if (res) {
-         res.forEach(element => {
-           this.tempStore.push(element);
-           if (element.Name == "Shop By Category") {
-             this.shopbyID = element.ID;
-           }
-         });
-         for (
-           this.count = 0;
-           this.count < 3 && this.count < this.tempStore.length;
-           this.count++
-         ) {
-           this.store.push(this.tempStore[this.count]);
-         }
-       }
+    this.dealService.getStoreCategory().subscribe((res: any) => {
+      if (res) {
+        res.forEach(element => {
+          this.tempStore.push(element);
+          if (element.Name == "Shop By Category") {
+            this.shopbyID = element.ID;
+          }
+        });
+        for (
+          this.count = 0;
+          this.count < 3 && this.count < this.tempStore.length;
+          this.count++
+        ) {
+          this.store.push(this.tempStore[this.count]);
+        }
+      }
 
-       this.dealService.getFeatureStore().subscribe((res: any) => {
-         this.substores = res;
-         console.log(this.substores);
-       });
-     });
+      this.dealService.getFeatureStore().subscribe((res: any) => {
+        this.substores = res;
+        console.log(this.substores);
+      });
+    });
 
-     this.dealService
-       .getTopBrands()
-       .pipe(map((res: any) => res.filter(resp => resp.BrandType == "M")))
-       .subscribe(
-         (res: any) => {
-           this.brands = res;
-           console.log(this.brands);
-         },
-         err => {
-           console.log(err);
-         }
-       );
+    this.dealService.getTopBrands().subscribe(
+      (res: any) => {
+        this.brands = res;
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
     setTimeout(() => {
       console.log("Async operation has ended");
       refresher.complete();
     }, 2000);
+  }
+
+  brandMethod(data){
+    if (Array.isArray(data.Url)){
+   let modal = this.modalController.create(
+     "LinkmodalPage",
+     {
+       data: data
+     },
+     {
+       cssClass: "my-modal",
+       showBackdrop: true,
+       enableBackdropDismiss: true
+     }
+   );
+   modal.present();
+    } else{
+    this.sharedService.openBrowser(data);
+    } 
   }
 }

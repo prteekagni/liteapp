@@ -32,15 +32,15 @@ export class CardgridComponent {
     //   });
     this.dealsProvider.getTopStores().subscribe((res: any) => {
       this.items = res;
-      for (let index = 0; index < 6; index++) {
+      for (let index = 0; index < this.items.length && 6 ; index++) {
         this.tempsubdeals.push(this.items[index]);
-        this.sharedProvider
-          .downloadOnMemory(this.items[index] ,"stores")
-          .then((res: any) => {
-            // console.log(res);
-            var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
-            this.tempsubdeals[index].Logo = a;
-          });
+        // this.sharedProvider
+        //   .downloadOnMemory(this.items[index] ,"stores")
+        //   .then((res: any) => {
+        //     // console.log(res);
+        //     var a = (<any>window).Ionic.WebView.convertFileSrc(res.toURL());
+        //     this.tempsubdeals[index].Logo = a;
+        //   });
       }
       // console.log(this.items);
     });

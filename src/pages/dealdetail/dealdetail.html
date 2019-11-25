@@ -25,7 +25,7 @@
     </ion-col>
     <ion-col col-12 style="margin-top: 15px;">
       <h4>Description</h4>
-      <p>
+      <p style="margin-left:15px;">
        {{deal.Description}}
       </p>
 
@@ -34,10 +34,13 @@
   <ion-row>
     <ion-col col-12>
       <ion-list>
-        <ion-item (click)="(fsf)" >
+          <ion-item (click)="setReminder()" >
+          Set Reminder
+        </ion-item>
+        <ion-item (click)="setFav()" >
           Add to Favourite
         </ion-item>
-        <ion-item (click)="(dsfsdf)">
+        <ion-item (click)="reportIssue()">
           Report Issue
         </ion-item>
       </ion-list>
@@ -59,6 +62,6 @@
 </ion-content>
 
 <ion-footer>
-   <button ion-button color="danger" round full (click)="getDeal(deal)">Get Deal</button>
+   <button ion-button color="danger" round full (click)="getDeal()">Get Deal</button>
 
 </ion-footer>
