@@ -16,6 +16,7 @@ import { ProductsPage } from "../pages/products/products";
 import { MyaccountPage } from "../pages/myaccount/myaccount";
 import { DealdetailPage } from "../pages/dealdetail/dealdetail";
 import { ProductlistPage } from "../pages/productlist/productlist";
+import { AppMinimize } from "@ionic-native/app-minimize";
 
 declare var window: { KochavaTracker };
 
@@ -39,7 +40,8 @@ export class MyApp {
     localNotification: LocalNotifications,
     private googlePlus: GooglePlus,
     private storage: Storage,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private appMinimize: AppMinimize
   ) {
     platform.ready().then(() => {
        this.storage.get('introShown').then((result) => {
@@ -62,58 +64,59 @@ export class MyApp {
       }
       // statusBar.backgroundColorByHexString("#ff4500");
       splashScreen.hide();
-      // this.storageService.removelAll();
-      // this.deeplinks
-      //   .route({
-      //     "/": "TabsPage",
-      //     "/products": "ProductsPage",
-      //     "/productlist/:id": "ProductlistPage",
-      //     "/todays-event": "EventPage",
-      //     "/Dealdetail/:id": "DealdetailPage",
-      //     "forgotpassword/:id": "ForgotpassPage"
-      //   })
-      //   .subscribe(
-      //     match => {
-      //       if (match.$route == "ProductsPage" || match.$route == "DealsPage") {
-      //         this.nav.setRoot(match.$route).then(res => {});
-      //       } else {
-      //         this.nav.push(match.$route, match.$args).then(
-      //           res => {
-      //             console.log("push successful");
-      //           },
-      //           err => {
-      //             this.nav.push("HomePage");
-      //             console.log("unsuccesful");
-      //           }
-      //         );
-      //       }
-      //     },
-      //     nomatch => {
-      //       alert(JSON.stringify(nomatch));
-      //     }
-      //   );
-      // this.initializeOneSignal();
-      // this.initializeTracker();
-      // localNotification.on("click").subscribe((res: any) => {
-      //   this.nav.push("DealdetailPage", {
-      //     data: res.data
-      //   });
       
-      // });
-      // storageService
-      //   .checkDirectory()
-      //   .then(res =>
-      //     console.log(JSON.stringify(res), err =>
-      //       console.log(JSON.stringify(err))
-      //     )
-      //   );
+      this.deeplinks
+        .route({
+          "/": "TabsPage",
+          "/products": "ProductsPage",
+          "/productlist/:id": "ProductlistPage",
+          "/todays-event": "EventPage",
+          "/Dealdetail/:id": "DealdetailPage",
+          "forgotpassword/:id": "ForgotpassPage"
+        })
+        .subscribe(
+          match => {
+            if (match.$route == "ProductsPage" || match.$route == "DealsPage") {
+              this.nav.setRoot(match.$route).then(res => {});
+            } else {
+              this.nav.push(match.$route, match.$args).then(
+                res => {
+                  console.log("push successful");
+                },
+                err => {
+                  this.nav.push("HomePage");
+                  console.log("unsuccesful");
+                }
+              );
+            }
+          },
+          nomatch => {
+            alert(JSON.stringify(nomatch));
+          }
+        );
+      this.initializeOneSignal();
+      this.initializeTracker();
+      localNotification.on("click").subscribe((res: any) => {
+        this.nav.push("DealdetailPage", {
+          data: res.data
+        });
+      
+      });
+      storageService
+        .checkDirectory()
+        .then(res =>
+          console.log(JSON.stringify(res), err =>
+            console.log(JSON.stringify(err))
+          )
+        );
       // this.googlePlus.trySilentLogin({}).then(
       //   res => console.log(res),
       //   err => console.log(err)
       // );
+           var lastTimeBackPress = 0;
+           var timePeriodToExit = 2000;
       platform.registerBackButtonAction(() => {
-        var lastTimeBackPress = 0;
-        var timePeriodToExit = 2000;
+   
         // get current active page
         let navstring = app.getActiveNavs()[0];
         let activeView = navstring.getActive().instance;
@@ -127,7 +130,7 @@ export class MyApp {
         if (activeView instanceof HomePage) {
           //Double check to exit app
           if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-            platform.exitApp(); //Exit from app
+           this.appMinimize.minimize();
           } else {
             let toast = this.sharedService.createToast(
               "Press back again to exit App?"
@@ -144,8 +147,7 @@ export class MyApp {
           this.nav.setRoot("TabsPage");
         } else if (activeView instanceof DealdetailPage){
           navstring.popTo("ProductListPage");
-        }
-                 if (navstring.canGoBack()) {
+        } else if(navstring.canGoBack()) {
                    navstring.pop();
                  }
       }, 10);

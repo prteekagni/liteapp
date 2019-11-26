@@ -62,6 +62,20 @@
   font-weight: 200;
   font-style: normal;
 }
+@font-face {
+ font-family: 'Merienda';
+  src: url("../assets/fonts/Merienda-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+ font-family:'Permanent Marker';
+  src: url("../assets/fonts/PermanentMarker-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+
 // span {
 //    font-family: 'Source Code Pro';
 //  }
@@ -288,6 +302,42 @@ div.image.odd {
  .has-refresher > .scroll-content {
     border-top: 0px !important;
   }
+
+
+
+  .alert-md .alert-radio-inner{
+    background-color: #ff6700 !important;
+  }
+  .alert-md [aria-checked=true] .alert-radio-icon {
+    border-color: #ff6700;
+  }
+
+   .dealsimage {
+    z-index: 91554;
+    // -webkit-box-shadow: 0 8px 6px -6px black;
+    // -moz-box-shadow: 0 8px 6px -6px black;
+    // box-shadow: 0 8px 6px -6px black;
+    width:80px;
+  }
+  .overflowtext{
+      white-space: nowrap;
+    /* width: 50px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ion-img img{
+  margin: 0px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
 // .back-button-icon-md{
 //   margin-bottom:24px;
 // }

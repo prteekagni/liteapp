@@ -1,5 +1,11 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, Slides, ModalController } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Slides,
+  ModalController
+} from "ionic-angular";
 import { StorageProvider } from "../../providers/storage/storage";
 import { SharedProvider } from "../../providers/shared/shared";
 
@@ -81,5 +87,26 @@ export class NotificationPage {
       }
     );
     dealmodal.present();
+  }
+
+  removeLNotification(data) {
+    this.storageService.deleteDeals(data.ID).then(
+      res => {
+        this.getData();
+      },
+      err => {
+        console.log("Error in removing data");
+      }
+    );
+  }
+  getData() {
+    this.sharedService.createLoader();
+    this.storageService.getDeals().then(res => {
+      this.localNotification = res || [];
+      this.localNotification.forEach(element => {
+        element.time = "";
+      });
+      this.sharedService.dismissLoader();
+    });
   }
 }

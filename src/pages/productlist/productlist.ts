@@ -36,6 +36,7 @@ export class ProductlistPage implements OnInit {
   searchBoxOpened: boolean = false;
   type;
   clickoncard: boolean = false;
+  id;
   constructor(
     public navParams: NavParams,
     private storageService: StorageProvider,
@@ -44,8 +45,7 @@ export class ProductlistPage implements OnInit {
     public alertCtrl: AlertController,
     public sharedService: SharedProvider,
     private modalController: ModalController,
-    private dealService: DealsProvider,
-    
+    private dealService: DealsProvider
   ) {
     // let id = this.navParams.get("id");
     // let type = this.navParams.get("type");
@@ -72,16 +72,16 @@ export class ProductlistPage implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    let id = this.navParams.get("id");
+    this.id = this.navParams.get("id");
     this.type = this.navParams.get("type");
-    console.log("From Product List page " + id.ID);
+    console.log("From Product List page " + this.id);
     if (this.type == "deals") {
-      this.dealService.getDealsByCategory(id.ID).subscribe((res: any) => {
+      this.dealService.getDealsByCategory(this.id.ID).subscribe((res: any) => {
         this.newItem = res;
         this.checkForFavourite(this.newItem);
       });
     } else {
-      this.dealService.getProductByCategory(id).subscribe((res: any) => {
+      this.dealService.getProductByCategory(this.id).subscribe((res: any) => {
         this.newItem = res;
       });
     }
@@ -104,9 +104,10 @@ export class ProductlistPage implements OnInit {
         return item.employee_name.toLowerCase().indexOf(val.toLowerCase()) > -1;
       });
     }
-    this._content
-      .scrollToTop()
-      .then(res => console.log(res), err => console.warn(err));
+    this._content.scrollToTop().then(
+      res => console.log(res),
+      err => console.warn(err)
+    );
   }
 
   setFocus() {
@@ -185,8 +186,7 @@ export class ProductlistPage implements OnInit {
   }
 
   shareApp() {
-this.sharedService.shareapplication();
-   
+    this.sharedService.shareapplication();
   }
 
   checkForFavourite(data) {
@@ -201,7 +201,13 @@ this.sharedService.shareapplication();
     });
   }
 
-  cardClick(item){
+  cardClick(item) {
     this.clickoncard = !this.clickoncard;
+  }
+
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete;
+    }, 1000);
   }
 }

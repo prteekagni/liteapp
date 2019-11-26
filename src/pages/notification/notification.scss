@@ -35,20 +35,23 @@ page-notification {
       color:orangered !important;
       border-bottom:3px solid orangered;
   }
-      .dealsimage {
-    z-index: 91554;
-    // -webkit-box-shadow: 0 8px 6px -6px black;
-    // -moz-box-shadow: 0 8px 6px -6px black;
-    // box-shadow: 0 8px 6px -6px black;
-    width:60px;
-  }
- .overflowtext{
-      white-space: nowrap;
-    /* width: 50px; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 ion-img{
   min-height: 75px;
 }
+
+  .item-md.item-block .item-inner{
+    border:0px !important;
+  }
+
+  .label-md{
+    margin:0px 
+  }
+
+  ion-card{
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+
+  
 }

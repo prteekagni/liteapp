@@ -49,6 +49,13 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
+
+  <ion-row text-center>
+    <ion-col col-12>
+      <img src="{{id?.Logo}}" alt="" style="width:80px">
+      <h4>{{id?.Name}}</h4>
+    </ion-col>
+  </ion-row>
   <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
@@ -59,7 +66,7 @@
             </ion-col>
             <ion-col col-8>
               <h3 style="    white-space: initial;
-    font-size: 1.8rem;">{{ item.Name }}</h3>
+    font-size: 1.8rem;font-family: Permanent Marker;">{{ item.Name }}</h3>
                     <h3>Coupon</h3>
             </ion-col>
           </ion-row>

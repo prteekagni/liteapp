@@ -17,6 +17,7 @@ import { Subject } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { BrowserTab } from "@ionic-native/browser-tab";
 
 declare var cordova: any;
 
@@ -54,7 +55,8 @@ export class SharedProvider {
     private transfer: FileTransfer,
     private inappBrowser: InAppBrowser,
     private statusBar: StatusBar,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private browserTab: BrowserTab
   ) {
     this.checkNetworkStatusOnPage();
   }
@@ -104,19 +106,25 @@ export class SharedProvider {
   }
 
   shareapplication() {
-    this.createLoader
-    var message = "All Deals at one place, lock your deals with the deals locker app. Download Now!!"
-this.socialSharing.share(
-  message,
-  "",
-  "assets/levis.jpg",
-  "https://play.google.com/store/apps/details?id=io.palianews.app&hl=en"
-).then((res:any)=>{
-  this.dismissLoader();
-},err=>{
-  this.dismissLoader();
-});
-}
+    this.createLoader;
+    var message =
+      "All Deals at one place, lock your deals with the deals locker app. Download Now!!";
+    this.socialSharing
+      .share(
+        message,
+        "",
+        "assets/levis.jpg",
+        "https://play.google.com/store/apps/details?id=io.palianews.app&hl=en"
+      )
+      .then(
+        (res: any) => {
+          this.dismissLoader();
+        },
+        err => {
+          this.dismissLoader();
+        }
+      );
+  }
 
   isConnected() {
     let conntype = this.network.type;
@@ -208,17 +216,37 @@ this.socialSharing.share(
       if (data.Url.length <= 1 && data.Url.length !== 0) {
         url = data.Url[0].Url;
         console.log(url);
-        const browser = this.inappBrowser.create(url, "_system", {
+        // const browser = this.inappBrowser.create(url, "_system", {
+        //   location: "yes",
+        //   fullscreen: "yes"
+        // });
+        this.browserTab.isAvailable().then(isAvailable => {
+          if (isAvailable) {
+            this.browserTab.openUrl(url);
+          } else {
+            const browser = this.inappBrowser.create(url, "_system", {
           location: "yes",
           fullscreen: "yes"
+        });
+          }
         });
       } else if (data.Url.length == 0) {
         this.createToast("Error");
       }
     } else {
-      const browser = this.inappBrowser.create(data.Url, "_system", {
-        location: "yes",
-        fullscreen: "yes"
+      // const browser = this.inappBrowser.create(data.Url, "_system", {
+      //   location: "yes",
+      //   fullscreen: "yes"
+      // });
+      this.browserTab.isAvailable().then(isAvailable => {
+        if (isAvailable) {
+          this.browserTab.openUrl(data.Url);
+        } else {
+          const browser = this.inappBrowser.create(data.Url, "_system", {
+            location: "yes",
+            fullscreen: "yes"
+          });
+        }
       });
       //      browser.on("loadstart").subscribe(event=>{
       //  this.statusBar.styleLightContent();
@@ -245,59 +273,58 @@ this.socialSharing.share(
     return fileTransfer.download(url, targetPath, true);
   }
 
-  checkDownloadedImage(data ,type): Promise<string> {
-    if(type == "deals"){
-     var dataName= data.Name + data.ID.substring(0, 5);
+  checkDownloadedImage(data, type): Promise<string> {
+    if (type == "deals") {
+      var dataName = data.Name + data.ID.substring(0, 5);
       console.log(data.Name);
-      
-        return this.file
-          .checkFile(
-            this.file.externalDataDirectory + "images/",
-            dataName + ".png"
-          )
-          .then(
-            resolve => {
-              if (resolve == true) {
-                console.log("file found");
-                return this.file.checkFile(
-                  this.file.externalDataDirectory + "images/",
-                  dataName + ".png"
-                );
-              } else {
-                console.log("file not found");
-                return false;
-              }
-            },
-            reject => {
+
+      return this.file
+        .checkFile(
+          this.file.externalDataDirectory + "images/",
+          dataName + ".png"
+        )
+        .then(
+          resolve => {
+            if (resolve == true) {
+              console.log("file found");
+              return this.file.checkFile(
+                this.file.externalDataDirectory + "images/",
+                dataName + ".png"
+              );
+            } else {
               console.log("file not found");
-              return null;
+              return false;
             }
-          );
-    }
-    else{
-    return this.file
-      .checkFile(
-        this.file.externalDataDirectory + "images/",
-        data.Name + ".png"
-      )
-      .then(
-        resolve => {
-          if (resolve == true) {
-            console.log("file found");
-            return this.file.checkFile(
-              this.file.externalDataDirectory + "images/",
-              data.Name + ".png"
-            );
-          } else {
+          },
+          reject => {
             console.log("file not found");
-            return false;
+            return null;
           }
-        },
-        reject => {
-          console.log("file not found");
-          return null;
-        }
-      );
+        );
+    } else {
+      return this.file
+        .checkFile(
+          this.file.externalDataDirectory + "images/",
+          data.Name + ".png"
+        )
+        .then(
+          resolve => {
+            if (resolve == true) {
+              console.log("file found");
+              return this.file.checkFile(
+                this.file.externalDataDirectory + "images/",
+                data.Name + ".png"
+              );
+            } else {
+              console.log("file not found");
+              return false;
+            }
+          },
+          reject => {
+            console.log("file not found");
+            return null;
+          }
+        );
     }
   }
 
@@ -314,21 +341,23 @@ this.socialSharing.share(
   shareDeals(data) {
     this.createLoader();
     var message = "Now get all deals at one place \\n" + data.Name;
-    this.createDynamicLinks(data.Url).then((res:any)=>{
-   data.Url = res;
-    this.socialSharing.share(message, "", data.Logo, data.Url);
-this.dismissLoader();
-    },err=>{
-      data.Url = data.Url 
-    this.socialSharing.share(message, "", data.Logo, data.Url);
-this.dismissLoader();
-    });
+    this.createDynamicLinks(data.Url).then(
+      (res: any) => {
+        data.Url = res;
+        this.socialSharing.share(message, "", data.Logo, data.Url);
+        this.dismissLoader();
+      },
+      err => {
+        data.Url = data.Url;
+        this.socialSharing.share(message, "", data.Logo, data.Url);
+        this.dismissLoader();
+      }
+    );
   }
 
   createDynamicLinks(data) {
-   return cordova.plugins.firebase.dynamiclinks
-      .createShortDynamicLink({
-        link: data
-      });
+    return cordova.plugins.firebase.dynamiclinks.createShortDynamicLink({
+      link: data
+    });
   }
 }

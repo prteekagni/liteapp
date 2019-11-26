@@ -11,45 +11,53 @@
   <ng-template #thenTemplate>
     <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
       <ion-item *virtualItem="let item">
-        <ion-card [ngClass]="{ secondclass: true }"  (click)="getDeal()">
-               <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
-          <ion-row>
+        <ion-card
+          [ngClass]="{ secondclass: itemfav }"
+          (click)="remove(item)"
+          style="border-radius: 10px;"
+        >
+          <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+            <ion-row>
               <ion-col col-4 text-left>
-              <ion-img src="{{item.Logo}}" class="dealsimage"></ion-img>
-            </ion-col>
-            <ion-col col-8>
-              <h4>{{ item.Name }}</h4>
-                    <h3>Coupon</h3>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-12>
-              <ion-row>
-                <ion-col col-12>
-                   <p class="overflowtext">
-                {{ item.Description }}
-              </p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            
-          </ion-row>
-        </ion-card-content>
+                <ion-img src="{{item.Logo}}" class="dealsimage"></ion-img>
+              </ion-col>
+              <ion-col col-8>
+                <h3
+                  style="    white-space: initial;
+    font-size: 1.8rem;font-family: Permanent Marker;"
+                >
+                  {{ item.Name }}
+                </h3>
+                <h3>Coupon</h3>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <ion-row>
+                  <ion-col col-12>
+                    <p class="overflowtext">
+                      {{ item.Description }}
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
           <ion-row no-padding>
-            <ion-col>
+            <ion-col col-4>
               <button
                 ion-button
                 clear
                 small
                 color="danger"
                 icon-start
-                (click)="setDealAsFav(item)"
+                (click)="remove(item)"
               >
                 <ion-icon name="star"></ion-icon>
                 Remove
               </button>
             </ion-col>
-            <ion-col text-center>
+            <ion-col col-4 text-center>
               <button
                 ion-button
                 clear
@@ -59,19 +67,19 @@
                 (click)="remindBtn(item)"
               >
                 <ion-icon name="musical-notes"></ion-icon>
-                Set Reminder
+                Remind
               </button>
               <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
       </ion-datetime>  -->
             </ion-col>
-            <ion-col text-right>
+            <ion-col col-4 text-right>
               <button
                 ion-button
                 clear
                 small
                 color="danger"
                 icon-start
-                (click)="getDeal()"
+                (click)="getDeal(item)"
               >
                 <ion-icon name="share-alt"></ion-icon>
                 Buy

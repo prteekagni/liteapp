@@ -28,12 +28,12 @@
       <ion-card
         [ngClass]="{ secondclass: true }"
         *ngFor="let item of pushNotification"
-         (click)="getDeal(item)"
+        (click)="getDeal(item)"
       >
         <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
           <ion-row>
             <ion-col col-4>
-              <img src="{{item.largeIcon}}" alt="">
+              <img src="{{item.largeIcon}}" alt="" />
             </ion-col>
             <ion-col col-8>
               <h4>{{ item.title }}</h4>
@@ -47,47 +47,6 @@
           </ion-row>
         </ion-card-content>
         <ion-row no-padding>
-          <!-- <ion-col>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="setDealAsFav(item)"
-            >
-              <ion-icon name="star"></ion-icon>
-              Favorite
-            </button>
-          </ion-col> -->
-          <!-- <ion-col text-center>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="remindBtn(item)"
-            >
-              <ion-icon name="musical-notes"></ion-icon>
-              Remind
-            </button>
-             <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
-      </ion-datetime>  
-          </ion-col> 
-                    <ion-col text-right>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="getDeal(item)"
-            >
-              <ion-icon name="share-alt"></ion-icon>
-              Buy
-            </button>
-          </ion-col> -->
         </ion-row>
       </ion-card>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -100,15 +59,15 @@
           [ngClass]="{ secondclass: true }"
           *ngFor="let item of localNotification"
         >
-             
-               <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
-          <ion-row>
+          <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+           <ion-row>
               <ion-col col-4 text-left>
               <ion-img src="{{item.data.Logo}}" class="dealsimage"></ion-img>
             </ion-col>
             <ion-col col-8>
-              <h4>{{ item.data.Name }}</h4>
-                    <!-- <p ngif>{{item.data.Coupon}}</p> -->
+              <h3 style="    white-space: initial;
+    font-size: 1.8rem;font-family: Permanent Marker cursive;">{{ item.data.Name }}</h3>
+                    <h3>Coupon</h3>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -123,7 +82,7 @@
             </ion-col>
             
           </ion-row>
-        </ion-card-content>
+          </ion-card-content>
           <ion-row no-padding>
             <ion-col col-4>
               <button
@@ -132,7 +91,7 @@
                 small
                 color="danger"
                 icon-start
-                (click)="setDealAsFav(item)"
+                (click)="removeLNotification(item)"
               >
                 <ion-icon name="star"></ion-icon>
                 Remove
@@ -148,10 +107,8 @@
                 (click)="remindBtn(item)"
               >
                 <ion-icon name="musical-notes"></ion-icon>
-                Set Reminder
+                Reminder
               </button>
-              <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
-      </ion-datetime>  -->
             </ion-col>
             <ion-col text-center col-4>
               <button
@@ -167,42 +124,8 @@
               </button>
             </ion-col>
           </ion-row>
-       
         </ion-card>
       </ion-list>
     </ion-slide>
   </ion-slides>
-  <!-- <ion-card style="margin-top:75px;" *ngFor="let item of de">
-  <img src="../../assets/imgs/logo.png" style="width: 150px;
-    margin-top: -39px;
-    z-index: 91554;
-    position: absolute;"/>
-  <ion-card-content>
-    <p style="margin-left: 150px;">
-      The most popular industrial group ever, and largely
-      responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-   <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start (click)="save()">
-          <ion-icon name='star'></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='musical-notes'></ion-icon>
-        Buy
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='share-alt'></ion-icon>
-          Share
-        </button>
-      </ion-col>
-    </ion-row>
-
-</ion-card> -->
 </ion-content>

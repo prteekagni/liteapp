@@ -31,6 +31,7 @@ export class StorageProvider {
         }
       } else {
         this.storage.set(DEALS_KEY, [item]);
+        return true;
       }
     });
   }
@@ -71,7 +72,7 @@ export class StorageProvider {
       }
       let toKeep: deals[] = [];
       for (let i of items) {
-        if (i.id !== id) {
+        if (i.ID !== id) {
           toKeep.push(i);
         }
       }
@@ -125,7 +126,7 @@ export class StorageProvider {
       }
       let toKeep: deals[] = [];
       for (let i of items) {
-        if (i.id !== id) {
+        if (i.ID !== id) {
           toKeep.push(i);
         }
       }
@@ -158,7 +159,7 @@ export class StorageProvider {
       }
       let toKeep: deals[] = [];
       for (let i of items) {
-        if (i.id !== id) {
+        if (i.ID !== id) {
           toKeep.push(i);
         }
       }

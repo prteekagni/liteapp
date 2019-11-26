@@ -1,5 +1,5 @@
 export interface deals {
-  id: number;
+  ID: number;
   title: string;
   link: string;
   image: string;

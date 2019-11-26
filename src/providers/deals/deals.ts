@@ -6,9 +6,9 @@ import { Category } from "../../models/category";
 import { ProductsPage } from "../../pages/products/products";
 import { Subject, ReplaySubject } from "rxjs";
 
-// const apiUrl = "http://13.235.82.211/api/";
+const apiUrl = "http://13.235.82.211/api/";
 
-const apiUrl = "http://localhost:5000/api/";
+// const apiUrl = "http://192.168.225.44:52044/api/";
 
 @Injectable()
 export class DealsProvider {
