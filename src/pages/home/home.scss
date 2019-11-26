@@ -165,11 +165,18 @@ page-home {
   .container {
     position: relative;
   }
-  div.image.even {
+
+  .scroll-item:nth-child(4n+0)  div.image{
     content: url(../../assets/a3.png);
   }
-  div.image.odd {
-    content: url(../../assets/a3.png);
+  .scroll-item:nth-child(4n+1)  div.image{
+    content: url(../../assets/border2.png);
+  }
+ .scroll-item:nth-child(4n+2)   div.image{
+    content: url(../../assets/border3.png);
+  }
+  .scroll-item:nth-child(4n+3) div.image {
+    content: url(../../assets/border4.png);
   }
 
   .toolbar-title-md{

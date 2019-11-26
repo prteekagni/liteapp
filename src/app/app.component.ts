@@ -125,7 +125,7 @@ export class MyApp {
           app.navPop();
         }
         if(ismodalopened == undefined && activeView instanceof ProductlistPage){
-          this.nav.setRoot("DealsPage")
+          this.nav.getPrevious();
         }
         if (activeView instanceof HomePage) {
           //Double check to exit app

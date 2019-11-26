@@ -23,7 +23,7 @@ export class NotificationProvider {
     alertBtn.addInput({
       type: "radio",
       label: "30 Mins",
-      value: "30",
+      value: "1",
       checked: true
     });
     alertBtn.addInput({

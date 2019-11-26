@@ -269,28 +269,30 @@ export class HomePage {
 
   doRefresh(refresher) {
     console.log("Begin async operation", refresher);
-    this.dealService.getStoreCategory().subscribe((res: any) => {
-      if (res) {
-        res.forEach(element => {
-          this.tempStore.push(element);
-          if (element.Name == "Shop By Category") {
-            this.shopbyID = element.ID;
-          }
-        });
-        for (
-          this.count = 0;
-          this.count < 3 && this.count < this.tempStore.length;
-          this.count++
-        ) {
-          this.store.push(this.tempStore[this.count]);
-        }
-      }
+    // this.tempStore = [];
+    // this.dealService.getStoreCategory().subscribe((res: any) => {
+    //   if (res) {
+    //     res.forEach(element => {
+    //       this.tempStore.push(element);
+    //       if (element.Name == "Shop By Category") {
+    //         this.shopbyID = element.ID;
+    //       }
+    //     });
+    //     for (
+    //       this.count = 0;
+    //       this.count < 3 && this.count < this.tempStore.length;
+    //       this.count++
+    //     ) {
+    //       this.store.push(this.tempStore[this.count]);
+    //     }
+    //   }
 
-      this.dealService.getFeatureStore().subscribe((res: any) => {
-        this.substores = res;
-        console.log(this.substores);
-      });
-    });
+     
+    // });
+     this.dealService.getFeatureStore().subscribe((res: any) => {
+       this.substores = res;
+       console.log(this.substores);
+     });
 
     this.dealService.getTopBrands().subscribe(
       (res: any) => {
