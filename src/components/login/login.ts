@@ -5,6 +5,7 @@ import { GooglePlus } from "@ionic-native/google-plus";
 import { LOCATION_INITIALIZED } from "@angular/common";
 import { SharedProvider } from "../../providers/shared/shared";
 import { NgForm } from "@angular/forms";
+import { BrowserTab } from "@ionic-native/browser-tab";
 
 /**
  * Generated class for the LoginComponent component.
@@ -24,23 +25,23 @@ export class LoginComponent {
     private events: Events,
     private navCtrl: NavController,
     private googlePlus: GooglePlus,
-    private sharedService: SharedProvider
+    private sharedService: SharedProvider,
+    private Browser: BrowserTab
   ) {}
 
-  onSubmit(data:NgForm) {
-   
-                    this.authService.loginUser(data.value).subscribe((res: any) => {
-                      console.log(res);
-                        this.events.publish("login", true);
-                      if (res.Token.Value) {
-                        this.authService.setUserLogin();
-                        this.authService.setUserDetails(res);
-                        this.events.publish("login", true);
-                        this.authService.setToken(res.Token);
-                      } else {
-                        this.sharedService.createToast("Wrong Password");
-                      }
-                    });
+  onSubmit(data: NgForm) {
+    this.authService.loginUser(data.value).subscribe((res: any) => {
+      console.log(res);
+      this.events.publish("login", true);
+      if (res.Token.Value) {
+        this.authService.setUserLogin();
+        this.authService.setUserDetails(res);
+        this.events.publish("login", true);
+        this.authService.setToken(res.Token);
+      } else {
+        this.sharedService.createToast("Wrong Password");
+      }
+    });
   }
 
   forgotPassword() {
@@ -84,8 +85,26 @@ export class LoginComponent {
         this.authService.setUserLogin();
         this.authService.setloginStatus();
         this.events.publish("login", true);
-
       })
       .catch(err => console.log(JSON.stringify(err)));
+  }
+
+  loginWithTrueCaller(){
+    this.Browser.openUrl(`truecallersdk://truesdk/web_verify?
+                               requestNonce=UNIQUE_REQUEST_ID
+                               &partnerKey=DBiI36fc5fdf08d2245b491909b2fbe9428a1
+                               &partnerName=dealslocker
+                               &lang=EN
+                               &title=El Infinito Technologies`);
+                               setTimeout(function() {
+                                 if (document.hasFocus()) {
+                                   // Truecaller app not present on the device and you redirect the user
+                                   // to your alternate verification page
+                                 } else {
+                                   // Truecaller app present on the device and the profile overlay opens
+                                   // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
+                                   // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+                                 }
+                               }, 600);
   }
 }
