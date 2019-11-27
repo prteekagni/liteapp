@@ -43,7 +43,7 @@ export class MyApp {
     private modalController: ModalController,
     private appMinimize: AppMinimize
   ) {
-    platform.ready().then(() => {
+    platform.ready().then(() => {      
        this.storage.get('introShown').then((result) => {
 
               if(result){
@@ -96,12 +96,15 @@ export class MyApp {
         );
       this.initializeOneSignal();
       this.initializeTracker();
-      localNotification.on("click").subscribe((res: any) => {
-        this.nav.push("DealdetailPage", {
-          data: res.data
+        localNotification.on("click").subscribe((res: any) => {
+          // this.nav.push("DealdetailPage", {
+          //   data: res.data
+          // });
+          let modal = this.modalController.create("DealdetailPage", {
+            data: res.data
+          });
+          modal.present();
         });
-      
-      });
       storageService
         .checkDirectory()
         .then(res =>
@@ -123,10 +126,7 @@ export class MyApp {
         let ismodalopened = this.ionicApp._modalPortal.getActive();
         if (ismodalopened) {
           app.navPop();
-        }
-        if(ismodalopened == undefined && activeView instanceof ProductlistPage){
-          this.nav.getPrevious();
-        }
+        }else
         if (activeView instanceof HomePage) {
           //Double check to exit app
           if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
@@ -149,6 +149,9 @@ export class MyApp {
           navstring.popTo("ProductListPage");
         } else if(navstring.canGoBack()) {
                    navstring.pop();
+                 }
+                 else{
+                   this.nav.setRoot("TabsPage");
                  }
       }, 10);
     });
@@ -187,9 +190,11 @@ export class MyApp {
 
   onNotificationOpened(payloaddata) {
     if (payloaddata.additionalData.page == "Deals") {
-      this.nav.push("DealdetailPage", {
-        id: payloaddata.additionalData.id
-      });
+      console.log(payloaddata.additionalData);
+       let modal = this.modalController.create("DealdetailPage", {
+         data: payloaddata.additionalData
+       });
+       modal.present();
     } else {
       this.nav.setRoot(payloaddata.additionalData.page);
     }

@@ -12,7 +12,7 @@ export class NotificationProvider {
     public http: HttpClient,
     public localNotification: LocalNotifications,
     private storageService: StorageProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
   ) {
     console.log("Hello NotificationProvider Provider");
   }

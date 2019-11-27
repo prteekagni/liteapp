@@ -17,6 +17,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 import { Subject } from "rxjs";
 import { locateHostElement } from "@angular/core/src/render3/instructions";
 import { map } from "rxjs/operators";
+import { LocalNotifications } from "@ionic-native/local-notifications";
 
 
 const animationsOptions = {
@@ -70,7 +71,8 @@ export class HomePage {
     private firebaseDynamicLinks: FirebaseDynamicLinks,
     private dealService: DealsProvider,
     private ngZone: NgZone,
-    private modalController: ModalController
+    private modalController: ModalController,
+    localNotification:LocalNotifications
   ) {
     // platform.ready().then(() => {
     //   this.firebaseAnalytics
@@ -99,6 +101,18 @@ export class HomePage {
     //     }
     //   );
     // });
+
+    localNotification.on("click").subscribe((res: any) => {
+      // this.nav.push("DealdetailPage", {
+      //   data: res.data
+      // });
+
+      alert(JSON.stringify(res));
+      let modal = this.modalController.create("DealdetailPage", {
+        data: res.data
+      });
+      modal.present();
+    });
 
     platform.resume.subscribe(() => {
       this.sharedService.checkNetworkStatus().subscribe(
@@ -287,12 +301,11 @@ export class HomePage {
     //     }
     //   }
 
-     
     // });
-     this.dealService.getFeatureStore().subscribe((res: any) => {
-       this.substores = res;
-       console.log(this.substores);
-     });
+    this.dealService.getFeatureStore().subscribe((res: any) => {
+      this.substores = res;
+      console.log(this.substores);
+    });
 
     this.dealService.getTopBrands().subscribe(
       (res: any) => {
@@ -309,22 +322,22 @@ export class HomePage {
     }, 2000);
   }
 
-  brandMethod(data){
-    if (Array.isArray(data.Url)){
-   let modal = this.modalController.create(
-     "LinkmodalPage",
-     {
-       data: data
-     },
-     {
-       cssClass: "my-modal",
-       showBackdrop: true,
-       enableBackdropDismiss: true
-     }
-   );
-   modal.present();
-    } else{
-    this.sharedService.openBrowser(data);
-    } 
+  brandMethod(data) {
+    if (Array.isArray(data.Url)) {
+      let modal = this.modalController.create(
+        "LinkmodalPage",
+        {
+          data: data
+        },
+        {
+          cssClass: "my-modal",
+          showBackdrop: true,
+          enableBackdropDismiss: true
+        }
+      );
+      modal.present();
+    } else {
+      this.sharedService.openBrowser(data);
+    }
   }
 }

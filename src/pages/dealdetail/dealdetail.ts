@@ -23,6 +23,7 @@ declare var cordova;
 export class DealdetailPage {
   deal: any;
   backbtn;
+  type;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,20 +35,27 @@ export class DealdetailPage {
     private storageService: StorageProvider,
     private notificationService: NotificationProvider
   ) {
-    // let a = this.navParams.get("data");
-    this.deal = this.navParams.get("data");
-    console.log(this.deal);
-
-    if (this.deal.hasOwnProperty("Coupon")) {
-      this.clipboard.copy(this.deal.Coupon).then(
-        res => {
-          this.sharedService.createToast("Coupon Copied" + this.deal.Coupon);
-        },
-        err => {
-          console.log("coupon code not copy");
-        }
-      );
-    }
+    this.type = this.navParams.get("data");
+    debugger;
+    if (this.type.type == "push") {
+      this.dealService.getDealByID(this.type.id).subscribe((res:any)=>{
+        this.deal = res;
+      })
+    } else {
+             this.deal = this.navParams.get("data");
+             if (this.deal.hasOwnProperty("Coupon")) {
+               this.clipboard.copy(this.deal.Coupon).then(
+                 res => {
+                   this.sharedService.createToast(
+                     "Coupon Copied" + this.deal.Coupon
+                   );
+                 },
+                 err => {
+                   console.log("coupon code not copy");
+                 }
+               );
+             }
+           }
   }
 
   ionViewDidLoad() {

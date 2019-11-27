@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-     <span class="titlecolormargin">{{deal.Name}}</span>
+     <span class="titlecolormargin">{{deal?.Name}}</span>
         
     </ion-title>
     <ion-buttons start color="theme">
@@ -17,7 +17,7 @@
   <ion-row style="margin-top:12px">
     <ion-col col-12>
       <img
-        src="{{deal.Logo}}"
+        src="{{deal?.Logo}}"
         alt=""
         srcset=""
         class="centerimage"
@@ -26,7 +26,7 @@
     <ion-col col-12 style="margin-top: 15px;">
       <h4>Description</h4>
       <p style="margin-left:15px;">
-       {{deal.Description}}
+       {{deal?.Description}}
       </p>
 
     </ion-col>

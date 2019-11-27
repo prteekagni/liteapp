@@ -32,6 +32,7 @@ import { CacheService } from "../providers/shared/cache";
 import { CacheInterceptor } from "../providers/shared/cahce.interceptor";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { BrowserTab } from "@ionic-native/browser-tab";
+
 @NgModule({
   declarations: [MyApp],
   // schemas: [
@@ -82,7 +83,8 @@ import { BrowserTab } from "@ionic-native/browser-tab";
     CacheService,
     InAppBrowser,
     SocialSharing,
-    BrowserTab
+    BrowserTab,
+    
     // FirebaseAnalytics
   ],
   exports: []
