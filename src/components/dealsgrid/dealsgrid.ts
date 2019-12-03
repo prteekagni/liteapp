@@ -46,76 +46,68 @@ export class DealsgridComponent implements OnInit {
   data1: any = [];
   constructor(
     private dealService: DealsProvider,
-    private http: HttpClient,
-    private event: Events,
     private modalController: ModalController,
     private viewController: ViewController,
     private navCtrl: NavController,
-    private storage: Storage,
     private sharedService: SharedProvider,
-    private file: File,
-    private app:App
+    private file: File
   ) {}
 
   ngOnInit() {
     this.copyItem = this.items;
-    console.log("From Dealsgrdid" + this.type);
-
     if (this.type === "deals" && this.items.ID) {
       this.dealService
         .getDealBySubCategory(this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
-          console.log(this.cards);
-
           for (let index = 0; index < this.cards.length; index++) {
-            console.log("Index is " + this.cards[index]);
-
-            this.sharedService.checkDownloadedImage(this.cards[index] , this.type).then(
-              res => {
-                if (res) {
-                  console.log("Response:" + res);
-var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
-                  var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                    this.file.externalDataDirectory +
-                      "images/" +
-                      dataName +
-                      ".png"
-                  );
-                  console.log(nativeUrl);
-                  if (nativeUrl.length > 0) {
-                    this.cards[index].Logo = nativeUrl;
-                  }
-                } else {
-                  this.sharedService
-                    .downloadOnMemory(this.cards[index] , this.type)
-                    .then((res: any) => {
-                      console.log(res);
-                      var a = (<any>window).Ionic.WebView.convertFileSrc(
-                        res.toURL()
-                      );
-                      this.cards[index].Logo = a;
-                    });
-                }
-              },
-              err => {
-                this.sharedService
-                  .downloadOnMemory(this.cards[index], this.type)
-                  .then(
-                    (res: any) => {
-                      console.log(res);
-                      var a = (<any>window).Ionic.WebView.convertFileSrc(
-                        res.toURL()
-                      );
-                      this.cards[index].Logo = a;
-                    },
-                    error => {
-                      index++;
-                      console.log(JSON.stringify(error));
+            this.sharedService
+              .checkDownloadedImage(this.cards[index], this.type)
+              .then(
+                res => {
+                  if (res) {
+                    var dataName =
+                      this.cards[index].Name +
+                      this.cards[index].ID.substring(0, 5);
+                    var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                      this.file.externalDataDirectory +
+                        "images/" +
+                        dataName +
+                        ".png"
+                    );
+                    if (nativeUrl.length > 0) {
+                      this.cards[index].Logo = nativeUrl;
                     }
-                  );
-              }
-            );
+                  } else {
+                    this.sharedService
+                      .downloadOnMemory(this.cards[index], this.type)
+                      .then((res: any) => {
+                        console.log(res);
+                        var a = (<any>window).Ionic.WebView.convertFileSrc(
+                          res.toURL()
+                        );
+                        this.cards[index].Logo = a;
+                      });
+                  }
+                },
+                err => {
+                  this.sharedService
+                    .downloadOnMemory(this.cards[index], this.type)
+                    .then(
+                      (res: any) => {
+                        console.log(res);
+                        var a = (<any>window).Ionic.WebView.convertFileSrc(
+                          res.toURL()
+                        );
+                        this.cards[index].Logo = a;
+                      },
+                      error => {
+                        index++;
+                        console.log(JSON.stringify(error));
+                      }
+                    );
+                }
+              );
           }
         });
     } else if (this.type == "substores") {
@@ -124,7 +116,6 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
         .subscribe((res: any) => {
           this.cards = res;
           console.log("From " + this.items.Name + "Lenght" + this.cards.length);
-          
         });
     } else if (this.type == "stores") {
       this.dealService.storesdata.subscribe((res: any) => {
@@ -134,20 +125,23 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
             this.cards.push(element);
           }
         });
-        if(this.cards.length !== 0) {
-        if (
-          (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
-          this.cards[0].StoreType == 6
-        ) {
-          this.directLinks = true;
+        if (this.cards.length !== 0) {
+          if (
+            (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
+            this.cards[0].StoreType == 6
+          ) {
+            this.directLinks = true;
+          }
+          this.copiedData = this.cards;
         }
-        this.copiedData = this.cards;
-      }});
-       for (let index = 0; index < this.copiedData.length; index++) {
-          this.sharedService.checkDownloadedImage(this.copiedData[index] ,this.type).then(
+      });
+      for (let index = 0; index < this.copiedData.length; index++) {
+        this.sharedService
+          .checkDownloadedImage(this.copiedData[index], this.type)
+          .then(
             res => {
               console.log(res);
-              
+
               if (res) {
                 var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
                   this.file.externalDataDirectory +
@@ -159,8 +153,7 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
                 if (nativeUrl.length > 0) {
                   this.copiedData[index].Logo = nativeUrl;
                 }
-              }
-                else {
+              } else {
                 this.sharedService
                   .downloadOnMemory(this.copiedData[index], this.type)
                   .then((res: any) => {
@@ -170,123 +163,124 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
                     );
                     this.copiedData[index].Logo = a;
                   });
-          }
-        },err=>{
-           this.sharedService
-             .downloadOnMemory(this.copiedData[index], this.type)
-             .then(
-               (res: any) => {
-                 console.log(res);
-                 var a = (<any>window).Ionic.WebView.convertFileSrc(
-                   res.toURL()
-                 );
-                 this.copiedData[index].Logo = a;
-               },
-               error => {
-                 index++;
-                 console.log(JSON.stringify(error));
-               }
-             );
-              })
+              }
+            },
+            err => {
+              this.sharedService
+                .downloadOnMemory(this.copiedData[index], this.type)
+                .then(
+                  (res: any) => {
+                    console.log(res);
+                    var a = (<any>window).Ionic.WebView.convertFileSrc(
+                      res.toURL()
+                    );
+                    this.copiedData[index].Logo = a;
+                  },
+                  error => {
+                    index++;
+                    console.log(JSON.stringify(error));
+                  }
+                );
             }
-          }
-    
+          );
+      }
+    }
 
-      // this.dealService.getStores(this.items.ID).subscribe((res: any) => {
-      //   this.cards = res;
-      //   this.copiedData = this.cards;
-      //   console.log(this.cards[0]);
-      //   if (
-      //     (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
-      //     this.cards[0].StoreType == 6
-      //   ) {
-      //     this.directLinks = true;
-      //   }
-      //   for (let index = 0; index < this.copiedData.length; index++) {
-      //     this.sharedService.checkDownloadedImage(this.copiedData[index]).then(
-      //       res => {
-      //         if (res) {
-      //           var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
-      //             this.file.externalDataDirectory +
-      //               "images/" +
-      //               this.copiedData[index].Name +
-      //               ".png"
-      //           );
-      //           console.log(nativeUrl);
-      //           if (nativeUrl.length > 0) {
-      //             this.copiedData[index].Logo = nativeUrl;
-      //           }
-      //         } else {
-      //           this.sharedService
-      //             .downloadOnMemory(this.copiedData[index])
-      //             .then(
-      //               (res: any) => {
-      //                 console.log(res);
-      //                 var a = (<any>window).Ionic.WebView.convertFileSrc(
-      //                   res.toURL()
-      //                 );
-      //                 this.copiedData[index].Logo = a;
+    // this.dealService.getStores(this.items.ID).subscribe((res: any) => {
+    //   this.cards = res;
+    //   this.copiedData = this.cards;
+    //   console.log(this.cards[0]);
+    //   if (
+    //     (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
+    //     this.cards[0].StoreType == 6
+    //   ) {
+    //     this.directLinks = true;
+    //   }
+    //   for (let index = 0; index < this.copiedData.length; index++) {
+    //     this.sharedService.checkDownloadedImage(this.copiedData[index]).then(
+    //       res => {
+    //         if (res) {
+    //           var nativeUrl = (<any>window).Ionic.WebView.convertFileSrc(
+    //             this.file.externalDataDirectory +
+    //               "images/" +
+    //               this.copiedData[index].Name +
+    //               ".png"
+    //           );
+    //           console.log(nativeUrl);
+    //           if (nativeUrl.length > 0) {
+    //             this.copiedData[index].Logo = nativeUrl;
+    //           }
+    //         } else {
+    //           this.sharedService
+    //             .downloadOnMemory(this.copiedData[index])
+    //             .then(
+    //               (res: any) => {
+    //                 console.log(res);
+    //                 var a = (<any>window).Ionic.WebView.convertFileSrc(
+    //                   res.toURL()
+    //                 );
+    //                 this.copiedData[index].Logo = a;
 
-      //                 // this.storage.get("images").then((res: any) => {
-      //                 //   if (res) {
-      //                 //     if (
-      //                 //       res.find(x => x.ID === this.copiedData[index].ID)
-      //                 //     ) {
-      //                 //     } else {
-      //                 //       res.push(this.copiedData[index]);
-      //                 //       this.storage.set("images", res);
-      //                 //     }
-      //                 //   } else {
-      //                 //     this.storage.set("images", this.copiedData[index]);
-      //                 //   }
-      //                 // });
-      //               },
-      //               error => {
-      //                 index++;
-      //                 console.log(JSON.stringify(error));
-      //               }
-      //             );
-      //         }
-      //       },
-      //       err => {
-      //         this.sharedService.downloadOnMemory(this.copiedData[index]).then(
-      //           (res: any) => {
-      //             console.log(res);
-      //             var a = (<any>window).Ionic.WebView.convertFileSrc(
-      //               res.toURL()
-      //             );
-      //             this.copiedData[index].Logo = a;
+    //                 // this.storage.get("images").then((res: any) => {
+    //                 //   if (res) {
+    //                 //     if (
+    //                 //       res.find(x => x.ID === this.copiedData[index].ID)
+    //                 //     ) {
+    //                 //     } else {
+    //                 //       res.push(this.copiedData[index]);
+    //                 //       this.storage.set("images", res);
+    //                 //     }
+    //                 //   } else {
+    //                 //     this.storage.set("images", this.copiedData[index]);
+    //                 //   }
+    //                 // });
+    //               },
+    //               error => {
+    //                 index++;
+    //                 console.log(JSON.stringify(error));
+    //               }
+    //             );
+    //         }
+    //       },
+    //       err => {
+    //         this.sharedService.downloadOnMemory(this.copiedData[index]).then(
+    //           (res: any) => {
+    //             console.log(res);
+    //             var a = (<any>window).Ionic.WebView.convertFileSrc(
+    //               res.toURL()
+    //             );
+    //             this.copiedData[index].Logo = a;
 
-      //             // this.storage.get("images").then((res: any) => {
-      //             //   if (res) {
-      //             //     if (res.find(x => x.ID === this.copiedData[index].ID)) {
-      //             //     } else {
-      //             //       res.push(this.copiedData[index]);
-      //             //       this.storage.set("images", res);
-      //             //     }
-      //             //   } else {
-      //             //     this.storage.set("images", this.copiedData[index]);
-      //             //   }
-      //             // });
-      //           },
-      //           error => {
-      //             index++;
-      //             console.log(JSON.stringify(error));
-      //           }
-      //         );
-      //       }
-      //     );
-      //   }
-      // });
-     else if (this.type == "products") {
-       console.log("In Products Section");
-       
-            this.dealService
-              .getProductSubCategory(this.items.ID)
-              .subscribe((res: any) => {
-                this.cards = res;
-              });
-          }
+    //             // this.storage.get("images").then((res: any) => {
+    //             //   if (res) {
+    //             //     if (res.find(x => x.ID === this.copiedData[index].ID)) {
+    //             //     } else {
+    //             //       res.push(this.copiedData[index]);
+    //             //       this.storage.set("images", res);
+    //             //     }
+    //             //   } else {
+    //             //     this.storage.set("images", this.copiedData[index]);
+    //             //   }
+    //             // });
+    //           },
+    //           error => {
+    //             index++;
+    //             console.log(JSON.stringify(error));
+    //           }
+    //         );
+    //       }
+    //     );
+    //   }
+    // });
+    else if (this.type == "products") {
+      console.log("In Products Section");
+
+      this.dealService
+        .getProductSubCategory(this.items.ID)
+        .subscribe((res: any) => {
+          this.cards = res;
+        });
+    }
   }
 
   goToStore(item) {
@@ -297,8 +291,7 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
       },
       {
         cssClass: "linkmodal"
-      },
-      
+      }
     );
     modal.present();
   }
@@ -308,7 +301,6 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
   }
   getToDeal(item) {
     if (this.type == "stores" || this.type == "substores") {
-      
       let modal = this.modalController.create(
         "LinkmodalPage",
         {
@@ -329,9 +321,9 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
     }
   }
   getOfferDetail(data) {
-    console.log(this.type)
+    console.log(this.type);
     if (this.type == "stores" || this.type == "substores") {
-      console.log(data)
+      console.log(data);
       let modal = this.modalController.create(
         "LinkmodalPage",
         {
@@ -343,7 +335,7 @@ var dataName = this.cards[index].Name + this.cards[index].ID.substring(0, 5);
           enableBackdropDismiss: true
         }
       );
-       modal.present();
+      modal.present();
     } else {
       this.navCtrl.push("ProductlistPage", {
         id: data,

@@ -2,23 +2,13 @@ import {
   Component,
   ElementRef,
   ViewChild,
-  Renderer,
-  Renderer2,
   AfterViewInit
 } from "@angular/core";
 import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
 import { Events, AlertController } from "ionic-angular";
 import { ModalController, ViewController } from "ionic-angular";
-import { FormBuilder, Validators, NgForm } from "@angular/forms";
-import { DISABLED } from "@angular/forms/src/model";
 import { GooglePlus } from "@ionic-native/google-plus";
-
-/**
- * Generated class for the ProfileComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "profile",
@@ -30,7 +20,7 @@ export class ProfileComponent implements AfterViewInit {
   profileForm;
   profile;
   editForm: boolean = false;
-
+  isGoogleLogin:boolean = false;
   @ViewChild("name") nameField: ElementRef;
 
   constructor(
@@ -41,16 +31,16 @@ export class ProfileComponent implements AfterViewInit {
     private viewCtrl: ViewController,
     private googlePlus: GooglePlus
   ) {
-    console.log("Hello ProfileComponent Component");
-    this.text = "Hello World";
     var tempdata = JSON.parse(this.authService.getUserDetail());
-    if(tempdata.hasOwnProperty("Result")){
-                                           this.profile = tempdata.Result;
-                                         }
-                                         else{
-    this.profile = tempdata;
-
-                                         }
+    if (this.authService.checkGLogin() == "true") {
+          this.isGoogleLogin = true;
+          this.profile = tempdata;
+    }
+      if (tempdata.hasOwnProperty("Result")) {
+        this.profile = tempdata.Result;
+      } else {
+        this.profile = tempdata;
+      }
     console.log(this.profile);
   }
 
@@ -76,7 +66,10 @@ export class ProfileComponent implements AfterViewInit {
           text: "Logout",
           handler: () => {
             if (this.authService.getloginStatus() == "true") {
-              this.googlePlus.logout().then(res=> console.log(res),err=> console.log(err));
+              this.googlePlus.logout().then(
+                res => console.log(res),
+                err => console.log(err)
+              );
             }
             this.authService.logoutUser();
             this.events.publish("logout", "false");
@@ -117,7 +110,7 @@ export class ProfileComponent implements AfterViewInit {
     console.log(data);
     this.editForm = !this.editForm;
     let formControls = data.controls;
-    console.log(formControls);    
+    console.log(formControls);
     if (formControls.PhoneNo.dirty) {
       console.log("Need to call update api");
 

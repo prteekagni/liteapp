@@ -12,6 +12,9 @@
   <ion-col col-12>
     <h3>{{profile.Name}}</h3>
   </ion-col>
+    <ion-col col-12 *ngIf="isGoogleLogin">
+    <h3>{{profile.Name}}</h3>
+  </ion-col>
 </ion-row>
 <ion-row>
   <ion-col col-12>
@@ -48,19 +51,21 @@
       <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
         Others
       </ion-list-header>
-      <ion-item (click)="updateProfile(profileForm)" *ngIf="!editForm">
+      <ng-container *ngIf="!isGoogleLogin">
+ <ion-item (click)="updateProfile(profileForm)" *ngIf="!editForm">
         <ion-icon name="md-settings" item-start></ion-icon>
         Edit Profile
       </ion-item>
-      <ion-item (click)="updateProfile(profileForm)" *ngIf="editForm">
+        <ion-item (click)="updateProfile(profileForm)" *ngIf="editForm">
         <ion-icon name="md-settings" item-start></ion-icon>
         Save Profile
       </ion-item>
-      <ion-item (click)="changePassword()">
+        <ion-item (click)="changePassword()">
         <ion-icon name="md-phone-portrait" item-start></ion-icon>
         Change Password
       </ion-item>
-      <ion-item (click)="logOut()">
+      </ng-container>
+    <ion-item (click)="logOut()">
         <ion-icon name="md-log-out" item-start></ion-icon>
         Sign out
       </ion-item>

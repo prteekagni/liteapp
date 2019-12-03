@@ -42,6 +42,7 @@ export class DealsPage {
   showMore: boolean = true;
   lastStore: boolean = false;
   type: string = "deals";
+  test: any = [];
   shopByCateory;
   constructor(
     public navCtrl: NavController,
@@ -51,16 +52,17 @@ export class DealsPage {
     private events: Events
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
-      this.tempdeals = res;
-      if (this.tempdeals.length >= 1) {
-        for (
-          let index = 0;
-          index < 4 && index < this.tempdeals.length;
-          index++
-        ) {
-          this.deals.push(this.tempdeals[index]);
-        }
-      }
+      this.deals = res;
+      this.test = res;
+      // if (this.tempdeals.length >= 1) {
+      //   for (
+      //     let index = 0;
+      //     index < 4 && index < this.tempdeals.length;
+      //     index++
+      //   ) {
+      //     this.deals.push(this.tempdeals[index]);
+      //   }
+      // }
     });
     this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
       this.subdeals = res;
@@ -146,5 +148,13 @@ export class DealsPage {
       console.log("Async operation has ended");
       refresher.complete();
     }, 2000);
+  }
+
+  getAllDeals(data){
+    console.log(data);
+    this.navCtrl.push("StabsPage",{
+      data:data
+    });
+    
   }
 }

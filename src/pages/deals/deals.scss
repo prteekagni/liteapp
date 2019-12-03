@@ -61,5 +61,18 @@ page-deals {
     min-height: 100px;
   }
 
+  .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start] {
+    margin:5px 10px 5px 0 !important;
+  }
  
+  .item-md ion-thumbnail{
+  min-width: 35px !important;
+    min-height: 50px !important;
+  }
+
+  .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+    width: 30px;
+    height: 30px;
+  }
+
 }

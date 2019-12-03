@@ -2,56 +2,77 @@
   <ion-grid class="margintop">
     <ion-row text-center>
       <ion-col col-12 icon-start>
-        <img src="assets/imgs/logo.png" alt="" width="80px;" />
+        <img src="assets/logo192.png" alt="" width="80px;" />
       </ion-col>
     </ion-row>
-    
+
     <ion-row text-center>
       <ion-col col-10 offset-1>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
           <ion-item>
             <ion-icon name="call"></ion-icon>
             <ion-label stacked color="theme">Email</ion-label>
-            <ion-input type="email" required name="Username" (ngModel)="(login.Username)"></ion-input>
+            <ion-input
+              type="email"
+              required
+              name="Username"
+              (ngModel)="(login.Username)"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked color="theme">Enter Password</ion-label>
-            <ion-input type="password" required name="Password" (ngModel)="(login.Password)"></ion-input>
+            <ion-input
+              type="password"
+              required
+              name="Password"
+              (ngModel)="(login.Password)"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-row text-right class="forgotbutton">
               <ion-col>
-                <span (click)="forgotPassword()" style="font-size:1.25rem;color:gray">Forgot Password?</span>
+                <span
+                  (click)="forgotPassword()"
+                  style="font-size:1.25rem;color:gray"
+                  >Forgot Password?</span
+                >
               </ion-col>
             </ion-row>
           </ion-item>
-          
-            <button ion-button type="submit" block class="submitbutton" color="theme">
-              Login
-            </button>
-          
+
+          <button
+            ion-button
+            type="submit"
+            block
+            class="submitbutton"
+            color="theme"
+          >
+            Login
+          </button>
         </form>
       </ion-col>
     </ion-row>
-      <ion-row text-left>
-           <ion-col col-10 offset-1>
-           
-        <span style="padding-left:15px;font-size:1.25rem" (click)="gotoRegister()">Create Account</span>
-
-         
+    <ion-row text-left>
+      <ion-col col-10 offset-1>
+        <span
+          style="padding-left:15px;font-size:1.25rem"
+          (click)="gotoRegister()"
+          >Create Account</span
+        >
       </ion-col>
-      </ion-row>
+    </ion-row>
     <ion-row text-center>
       <ion-col col-12 text-center>
-        Other ways to sign in 
+        Other ways to sign in
       </ion-col>
       <ion-col col-12 text-center>
-        <img src="../../assets/google.png" alt="" style="width:30px" (click)="loginWithGoogle()" />
+        <img
+          src="../../assets/google.png"
+          alt=""
+          style="width:30px"
+          (click)="loginWithGoogle()"
+        />
       </ion-col>
-        <!-- <ion-col col-12 text-center>
-        <img src="../../assets/google.png" alt="" style="width:30px" (click)="loginWithTrueCaller()" />
-      </ion-col> -->
     </ion-row>
-  
   </ion-grid>
 </div>

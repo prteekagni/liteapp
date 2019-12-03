@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-content #MultiItemsScrollingTabs class="tabsContent">
+      <ion-segment class="SwipedTabs-tabs">
+        <ion-segment-button
+          *ngFor="let tab of tabs ; let i = index "
+          id="tabTitle{{i}}"
+          value="IngoreMe"
+          (click)="selectTab(i)"
+          [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'
+        >
+          <span *ngIf=" i !== 0">{{tab.Name}}</span>
+          <span *ngIf=" i == 0">All</span>
+        </ion-segment-button>
+      </ion-segment>
+      <!-- here is our dynamic line  "indicator"-->
+      <div id="indicator" class="SwipedTabs-indicatorSegment"></div>
+    </ion-content>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-slides
+    #SwipedTabsSlider
+    (ionSlideDrag)="animateIndicator($event)"
+    (ionSlideDidChange)="updateIndicatorPosition($event)"
+    (ionSlideWillChange)="scrollIndicatiorTab($event)"
+    (panend)="updateIndicatorPositionOnTouchEnd()"
+    [pager]="false"
+  >
+    <ion-slide>
+      <ion-card
+        *ngFor="let item of alldeals"
+        [ngClass]="{ secondclass: itemfav }"
+        style="border-radius: 10px;"
+      >
+        <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+          <ion-row>
+            <ion-col col-3>
+              <img src="{{item.Logo}}" class="dealsimage" />
+            </ion-col>
+            <ion-col col-9 text-left>
+              <h3
+                style="
+    font-size: 1.8rem;"
+              >
+                {{ item.Name }}
+              </h3>
+              <h3>Coupon</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-12>
+                  <p class="overflowtext">
+                    {{ item.Description }}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col col-4>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="setDealAsFav(item)"
+            >
+              <ion-icon name="star"></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col col-4 text-center>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="remindBtn(item)"
+            >
+              <ion-icon name="musical-notes"></ion-icon>
+              Remind
+            </button>
+          </ion-col>
+          <ion-col col-4 text-right>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="getDeal(item)"
+            >
+              <ion-icon name="share-alt"></ion-icon>
+              Get Deal
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-slide>
+    <ion-slide *ngFor="let item of tabs">
+      <ion-card
+        *ngFor="let item of newItem"
+        [ngClass]="{ secondclass: itemfav }"
+        style="border-radius: 10px;"
+      >
+        <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+          <ion-row>
+            <ion-col col-3>
+              <img src="{{item.Logo}}" class="dealsimage" />
+            </ion-col>
+            <ion-col col-9 text-left>
+              <h3
+                style=" 
+    font-size: 1.8rem;"
+              >
+                {{ item.Name }}
+              </h3>
+              <!-- <h3>{{item.SubCategory.Name}}</h3> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-12>
+                  <p class="overflowtext">
+                    {{ item.Description }}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col col-4>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="setDealAsFav(item)"
+            >
+              <ion-icon name="star"></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col col-4 text-center>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="remindBtn(item)"
+            >
+              <ion-icon name="musical-notes"></ion-icon>
+              Remind
+            </button>
+          </ion-col>
+          <ion-col col-4 text-right>
+            <button
+              ion-button
+              clear
+              small
+              color="danger"
+              icon-start
+              (click)="getDeal(item)"
+            >
+              <ion-icon name="share-alt"></ion-icon>
+              Get Deal
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

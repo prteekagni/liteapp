@@ -61,50 +61,16 @@ export class LoginComponent {
   }
 
   loginWithGoogle() {
-    // this.googlePlus
-    //   .login({
-    //     webClientId:
-    //       "340483402651-a5m6satt4d7d88dvulgh7gbn9m4pa6t8.apps.googleusercontent.com"
-    //   })
-    //   .then(
-    //     res => {
-    //       this.authService.setUserLogin();
-    //       this.events.publish("login", true);
-    //       console.log(res);
-    //     },
-    //     err => {
-    //       alert(err);
-    //     }
-    //   );
-
     this.googlePlus
       .login({})
       .then((res: any) => {
         console.log(res);
+        this.authService.isGoogleLogin();
         this.authService.setUserDetails(res);
         this.authService.setUserLogin();
         this.authService.setloginStatus();
         this.events.publish("login", true);
       })
       .catch(err => console.log(JSON.stringify(err)));
-  }
-
-  loginWithTrueCaller(){
-    this.Browser.openUrl(`truecallersdk://truesdk/web_verify?
-                               requestNonce=UNIQUE_REQUEST_ID
-                               &partnerKey=DBiI36fc5fdf08d2245b491909b2fbe9428a1
-                               &partnerName=dealslocker
-                               &lang=EN
-                               &title=El Infinito Technologies`);
-                               setTimeout(function() {
-                                 if (document.hasFocus()) {
-                                   // Truecaller app not present on the device and you redirect the user
-                                   // to your alternate verification page
-                                 } else {
-                                   // Truecaller app present on the device and the profile overlay opens
-                                   // The user clicks on verify & you'll receive the user's access token to fetch the profile on your
-                                   // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
-                                 }
-                               }, 600);
   }
 }

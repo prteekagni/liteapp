@@ -102,17 +102,6 @@ export class HomePage {
     //   );
     // });
 
-    localNotification.on("click").subscribe((res: any) => {
-      // this.nav.push("DealdetailPage", {
-      //   data: res.data
-      // });
-
-      alert(JSON.stringify(res));
-      let modal = this.modalController.create("DealdetailPage", {
-        data: res.data
-      });
-      modal.present();
-    });
 
     platform.resume.subscribe(() => {
       this.sharedService.checkNetworkStatus().subscribe(

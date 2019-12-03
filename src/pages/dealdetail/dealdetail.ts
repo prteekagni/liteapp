@@ -36,7 +36,6 @@ export class DealdetailPage {
     private notificationService: NotificationProvider
   ) {
     this.type = this.navParams.get("data");
-    debugger;
     if (this.type.type == "push") {
       this.dealService.getDealByID(this.type.id).subscribe((res:any)=>{
         this.deal = res;

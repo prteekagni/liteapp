@@ -90,7 +90,17 @@ export class AuthenticateProvider {
   logoutUser() {
     localStorage.setItem("isLoggedIn", "false");
     localStorage.setItem("User", "");
+    localStorage.setItem("isGLogin", "");
   }
+
+  isGoogleLogin(){
+    localStorage.setItem("isGLogin", "true");
+  }
+
+  checkGLogin(){
+    return localStorage.getItem("isGLogin");
+  }
+
 
   //
 }
