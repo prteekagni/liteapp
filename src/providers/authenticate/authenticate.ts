@@ -10,13 +10,6 @@ export class AuthenticateProvider {
   constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {
-    // return (
-    //   localStorage.getItem("isLoggedIn") === "true" &&
-    //   JSON.parse(localStorage.getItem("User"))
-    // );
-    // // return true;
-    console.log(this.getUserDetail() + this.getUserLogin());
-
     if (this.getUserDetail() && this.getUserLogin() === "true") {
       return true;
     } else {
@@ -82,8 +75,6 @@ export class AuthenticateProvider {
 
   // login user with email
   loginUser(logindata) {
-    console.log("From Service " + logindata);
-
     return this.http.post(this.apiUrl + "users/Login", logindata);
   }
 
@@ -100,7 +91,4 @@ export class AuthenticateProvider {
   checkGLogin(){
     return localStorage.getItem("isGLogin");
   }
-
-
-  //
 }

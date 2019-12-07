@@ -90,7 +90,7 @@ export class NotificationPage {
   }
 
   removeLNotification(data) {
-    this.storageService.deleteDeals(data.ID).then(
+    this.storageService.removeNotification(data.id).then(
       res => {
         this.getData();
       },
@@ -101,7 +101,7 @@ export class NotificationPage {
   }
   getData() {
     this.sharedService.createLoader();
-    this.storageService.getDeals().then(res => {
+    this.storageService.getNotification().then(res => {
       this.localNotification = res || [];
       this.localNotification.forEach(element => {
         element.time = "";
@@ -109,4 +109,5 @@ export class NotificationPage {
       this.sharedService.dismissLoader();
     });
   }
+  doInfinite(data){}
 }

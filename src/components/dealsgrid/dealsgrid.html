@@ -1,4 +1,4 @@
-<ng-container *ngIf="cards.length > 0">
+<ng-container *ngIf="cards.length > 0 && type !== 'products'">
 <ng-container *ngIf="!directLinks">
   <ng-container *ngIf="cards.length > 4; else elseTemplate">
     <ion-row>
@@ -80,6 +80,43 @@
     </ion-col>
   </ion-row>
 </ng-container>
+</ng-container>
+
+<ng-container *ngIf="type == 'products' && cards.length !== 0">
+    <ng-container>
+    <ion-row>
+      <ion-col col-12 text-left>
+        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;margin-bottom: 0px;">{{ copyItem?.Name }}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-col col-12>
+      <ion-item no-lines class="paddingleft">
+        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
+          <ion-card
+            class="scroll-item largecard"
+            (click)="getToServices(item)"
+            *ngFor="let item of cards; index as i"
+          >
+            <ng-container>
+              <img
+                *ngIf="item.Image != null"
+                src="{{ item.Image }}"
+                class="largecardimg"
+              />
+            
+              <div class="overlay-effect h-100 w-100"></div>
+              <h1 class="textstyle">
+                {{ item.Name }}
+              </h1>
+            </ng-container>
+          </ion-card>
+        </ion-scroll>
+        <ng-template #loading>
+          dfjghfjkdghjkh
+        </ng-template>
+      </ion-item>
+    </ion-col>
+  </ng-container>
 </ng-container>
 <!-- <ng-container>
   <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>

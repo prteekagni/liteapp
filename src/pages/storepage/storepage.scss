@@ -187,14 +187,14 @@ page-storepage {
 }
 
  div.image.even {
-    content: url(../../assets/a3.png);
+    content: url(../../assets/border2.png);
   }
   div.image.odd {
-    content: url(../../assets/a3.png);
+    content: url(../../assets/border3.png);
   }
 
   div{
     position: relative;
   }
-  
+  $toolbar-background:black;
 }

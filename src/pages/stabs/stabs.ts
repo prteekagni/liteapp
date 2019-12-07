@@ -5,13 +5,6 @@ import { SharedProvider } from '../../providers/shared/shared';
 import { NotificationProvider } from '../../providers/notification/notification';
 import { StorageProvider } from '../../providers/storage/storage';
 
-/**
- * Generated class for the StabsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: "page-stabs",
@@ -49,8 +42,6 @@ export class StabsPage implements OnInit {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.data = this.navParams.get("data");
     this.title = this.data.Name;
 
@@ -58,31 +49,32 @@ export class StabsPage implements OnInit {
       .getDealBySubCategory(this.data.ID)
       .subscribe((res: any) => {
         this.tabs = res;
-        // this.tabs.insert(0, this.data);
-  this.tabs.splice(0, 0, this.data); 
-        // console.log(this.newItem);
+        this.tabs.splice(0, 0, this.data); 
       });
        this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
          this.alldeals = res;
-         console.log(this.newItem);
+         console.log(this.alldeals);
          //  this.checkForFavourite(this.newItem);
        });
   }
 
   ionViewDidEnter() {
     this.SwipedTabsIndicator = document.getElementById("indicator");
-    for (let i in this.tabs)
-      this.tabTitleWidthArray.push(
-        document.getElementById("tabTitle" + i).offsetWidth
-      );
-
+   if (this.tabs.length !== 0){
+     for (let i in this.tabs)
+       this.tabTitleWidthArray.push(
+         document.getElementById("tabTitle" + i).offsetWidth
+       );
+       }
     this.selectTab(0);
-    this.dealService
-      .getDealsByCategory(this.tabs[0].ID)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.newItem = res;
-      });
+    if (this.tabs.length !== 0) {
+      this.dealService
+        .getDealsBySubCategory(this.tabs[0].ID)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.newItem = res;
+        });
+    }
   }
 
   scrollIndicatiorTab(data) {
@@ -122,7 +114,7 @@ export class StabsPage implements OnInit {
     // console.log(this.tabs[this.SwipedTabsSlider.realIndex]);
 
     this.dealService
-      .getDealsByCategory(this.tabs[this.SwipedTabsSlider.realIndex].ID)
+      .getDealsBySubCategory(this.tabs[this.SwipedTabsSlider.realIndex].ID)
       .subscribe((res: any) => {
         console.log(res);
         this.newItem = res;

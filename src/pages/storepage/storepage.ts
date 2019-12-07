@@ -6,21 +6,12 @@ import {
   Slides,
   Content,
   Events,
-  Platform,
-  ModalController
+  ModalController,
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
-import { HttpClient } from "@angular/common/http";
 import { animationsOptions } from "../../app/env";
-
-/**
- * Generated class for the StorepagePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -37,7 +28,7 @@ export class StorepagePage {
   showToolbar: boolean;
   visibility: boolean = true;
   counter: any = 0;
-  stores: any = [];
+  brandID: any;
   storelinks;
   defaultImage = "../../assets/images/logo.png";
   page: number = 1;
@@ -55,31 +46,41 @@ export class StorepagePage {
   title: string;
   tempcateg;
   count;
-  tempStore:any =[];
+  tempStore: any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
     private sharedService: SharedProvider,
     private firebaseDynamicLinks: FirebaseDynamicLinks,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private modalController: ModalController
   ) {
     this.showToolbar = false;
     this.firebaseDynamicLinks.onDynamicLink().subscribe(
       (res: any) => console.log(res),
       (error: any) => console.log(error)
     );
-
     this.tempdata = this.navParams.get("data");
     this.tempcateg = this.navParams.get("type");
     this.title = this.navParams.get("title");
-
-    console.log(this.tempcateg);
-
     this.dealService
       .getStoreSubCategory(this.tempdata.ID)
       .subscribe((res: any) => {
         this.store = res;
+        this.store.forEach(element => {
+          if (element.Name == "Top Brands") {
+            this.brandID = element.ID;
+            console.log(element);
+            this.dealService
+              .getSubStores(element.CatPID, this.brandID)
+              .subscribe((res: any) => {
+                this.brands = res;
+                console.log(this.brands);
+              });
+          }
+        });
         for (
           this.count = 0;
           this.count < 3 && this.count < this.tempStore.length;
@@ -89,10 +90,6 @@ export class StorepagePage {
         }
         console.log(this.store);
       });
-
-    this.dealService.getTopBrands().subscribe((res: any) => {
-      this.brands = res;
-    });
   }
 
   ionViewDidLoad() {
@@ -151,5 +148,20 @@ export class StorepagePage {
 
   toggleDisplay() {
     this.showMore = !this.showMore;
+  }
+
+  brandClick(data) {
+    let modal = this.modalController.create(
+      "LinkmodalPage",
+      {
+        data: data
+      },
+      {
+        cssClass: "my-modal",
+        showBackdrop: true,
+        enableBackdropDismiss: true
+      }
+    );
+    modal.present();
   }
 }

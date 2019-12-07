@@ -72,7 +72,7 @@ export class HomePage {
     private dealService: DealsProvider,
     private ngZone: NgZone,
     private modalController: ModalController,
-    localNotification:LocalNotifications
+    localNotification: LocalNotifications
   ) {
     // platform.ready().then(() => {
     //   this.firebaseAnalytics
@@ -101,7 +101,6 @@ export class HomePage {
     //     }
     //   );
     // });
-
 
     platform.resume.subscribe(() => {
       this.sharedService.checkNetworkStatus().subscribe(
@@ -133,12 +132,15 @@ export class HomePage {
 
     this.dealService.getStoreCategory().subscribe((res: any) => {
       if (res) {
-        res.forEach(element => {
-          this.tempStore.push(element);
-          if (element.Name == "Shop By Category") {
-            this.shopbyID = element.ID;
-          }
-        });
+        this.tempStore = res;
+        let shopByCategory = this.tempStore.find(
+          element => element.Name == "Shop By Category"
+        );
+        console.log(shopByCategory);
+
+        // this.shopbyID = shopByCategory.ID;
+        // let topbrand = this.tempStore.find(element=> element.Name == "Top Brands");
+
         for (
           this.count = 0;
           this.count < 3 && this.count < this.tempStore.length;
@@ -328,5 +330,19 @@ export class HomePage {
     } else {
       this.sharedService.openBrowser(data);
     }
+  }
+  brandClick(data) {
+    let modal = this.modalController.create(
+      "LinkmodalPage",
+      {
+        data: data
+      },
+      {
+        cssClass: "my-modal",
+        showBackdrop: true,
+        enableBackdropDismiss: true
+      }
+    );
+    modal.present();
   }
 }

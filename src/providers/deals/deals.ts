@@ -1,42 +1,43 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
 import { map, filter, mergeMap, tap } from "rxjs/operators";
-import { Category } from "../../models/category";
-import { ProductsPage } from "../../pages/products/products";
-import { Subject, ReplaySubject } from "rxjs";
+import { ReplaySubject } from "rxjs";
 
-const apiUrl = "http://13.235.82.211/api/";
+// const apiUrl = "http://13.235.82.211/api/";
 
-// const apiUrl = "http://192.168.225.44:52044/api/";
+const apiUrl = "http://localhost:5000/api/";
 
 @Injectable()
 export class DealsProvider {
   storesdata: ReplaySubject<any> = new ReplaySubject(1);
 
-  constructor(public http: HttpClient) {
-    console.log("Hello DealsProvider Provider");
-  }
+  constructor(public http: HttpClient) {}
 
+  // get all category
   getAllCategory() {
     return this.http.get(apiUrl + "category");
   }
 
+  // get stores by id
   getStores(id) {
     return this.http.get(apiUrl + "stores/getStores/" + id);
   }
 
+  // get fav stores
   getTopStores() {
     return this.http
       .get(apiUrl + "stores")
       .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)));
   }
+
+  // get all stores
   getAllStores() {
-    return this.http.get(apiUrl + "stores")
-    .pipe(map((res: any) => res.filter(resp => resp.StoreType !== 0)))
-    .subscribe((res: any) => {
-      this.storesdata.next(res);
-    });
+    return this.http
+      .get(apiUrl + "stores")
+      .pipe(map((res: any) => res.filter(resp => resp.StoreType !== 0)))
+      .subscribe((res: any) => {
+        this.storesdata.next(res);
+      });
   }
 
   // get store links
@@ -71,16 +72,23 @@ export class DealsProvider {
     return this.http.get(apiUrl + "category/getDealsSubCategory/" + id);
   }
 
+  GetProductsByCategory(id){
+    return this.http.get(apiUrl + "product/GetProductsByCategory/" + id);
+  }
+
   getDealSubCategory() {
     return this.http
       .get(apiUrl + "category")
       .pipe(map((res: any) => res.filter(resp => resp.CatType == 11)));
-    // .pipe(map((res: any) => res.filter(resp => resp.CatType == 2)));
   }
 
   // get deals for category
   getDealsByCategory(data) {
     return this.http.get(apiUrl + "deals/getDealsByCategory/" + data);
+  }
+
+  getDealsBySubCategory(data){
+    return this.http.get(apiUrl + "deals/getDealsByParentCategory/" + data);
   }
 
   // get Deal Details
@@ -97,18 +105,18 @@ export class DealsProvider {
   getProductCategory() {
     return this.http
       .get(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 8)));
+      .pipe(map((res: any) => res.filter(resp => resp.CatType == 4)));
   }
 
   getProductSubCategory(data) {
     console.log("From Deals grid " + data);
-    
+
     return this.http.get(apiUrl + "category/GetSubCategory/" + data);
   }
 
   // get products by category
   getProductByCategory(data) {
-    return this.http.get(apiUrl + "products", data);
+    return this.http.get(apiUrl + "product/", data);
   }
 
   // get product detail
@@ -117,16 +125,18 @@ export class DealsProvider {
   }
 
   getTopBrands() {
-    return this.http.get(apiUrl + "stores").pipe(map((res:any)=> res.filter((resp:any)=> resp.StoreType == 20)));
+    return this.http
+      .get(apiUrl + "stores")
+      .pipe(
+        map((res: any) => res.filter((resp: any) => resp.StoreType == 100))
+      );
   }
-
 
   getBrandsByCategory(data) {
     return this.http.get(apiUrl + "brand/" + data);
   }
 
-
-  getDealByID(data){
+  getDealByID(data) {
     return this.http.get(apiUrl + "deals/ " + data);
   }
 }

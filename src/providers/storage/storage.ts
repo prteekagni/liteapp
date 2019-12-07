@@ -120,13 +120,13 @@ export class StorageProvider {
     });
   }
   removeNotification(id: number): Promise<any> {
-    return this.storage.get(N_KEY).then((items: deals[]) => {
+    return this.storage.get(N_KEY).then((items: any[]) => {
       if (!items || items.length === 0) {
         return null;
       }
       let toKeep: deals[] = [];
       for (let i of items) {
-        if (i.ID !== id) {
+        if (i.id !== id) {
           toKeep.push(i);
         }
       }

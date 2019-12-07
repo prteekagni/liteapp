@@ -30,4 +30,14 @@ page-favourites {
 ion-img{
   min-height: 75px;
 }
+.item-md {
+ padding-left:0px; 
+}
+.item-md.item-block .item-inner{
+  padding-right: 0px !important;
+}
+.label-md {
+      margin: 13px 0px 13px 0 !important;
+}
+
 }

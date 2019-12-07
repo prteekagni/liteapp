@@ -20,6 +20,10 @@ page-productlist {
     // -moz-box-shadow: 0 8px 6px -6px black;
     // box-shadow: 0 8px 6px -6px black;
     width:80px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
   }
 
   .toolbar-background-md {

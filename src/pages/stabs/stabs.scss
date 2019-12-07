@@ -8,7 +8,7 @@ page-stabs {
   }
 
   ion-slides {
-    height: auto !important;
+    height: 100% !important;
 
     margin-top: 10px;
 
@@ -73,9 +73,9 @@ page-stabs {
   .scroll-content {
     padding-top: 0 !important;
   }
-  .slide-zoom {
-    height: 100%;
-  }
+  // .slide-zoom {
+  //   height: 100%;
+  // }
 
   ion-img {
     min-height: 75px !important;
@@ -87,8 +87,14 @@ page-stabs {
     max-width: 80px !important;
   }
 
+
   .segment-md .segment-button {
     font-size: 1.6rem !important;
     line-height: 3.4rem !important;
   }
+
+  .dealsimage{
+    width: 80px !important;
+  }
+ 
 }

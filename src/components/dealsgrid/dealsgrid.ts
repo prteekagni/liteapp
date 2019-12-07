@@ -12,21 +12,10 @@ import {
   ModalController,
   ViewController,
   NavController,
-  AlertController,
-  App
 } from "ionic-angular";
-import { HttpClient } from "@angular/common/http";
-import { Events } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
 import { File } from "@ionic-native/file";
-import { Storage } from "@ionic/storage";
-import { Subject } from "rxjs";
-/**
- * Generated class for the DealsgridComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: "dealsgrid",
   templateUrl: "dealsgrid.html"
@@ -55,6 +44,8 @@ export class DealsgridComponent implements OnInit {
 
   ngOnInit() {
     this.copyItem = this.items;
+    console.log(this.copyItem);
+
     if (this.type === "deals" && this.items.ID) {
       this.dealService
         .getDealBySubCategory(this.items.ID)
@@ -184,6 +175,13 @@ export class DealsgridComponent implements OnInit {
             }
           );
       }
+    } else if (this.type == "products") {
+      this.dealService
+        .getStoreSubCategory(this.copyItem.ID)
+        .subscribe((res: any) => {
+          this.cards = res;
+          console.log(this.cards);
+        });
     }
 
     // this.dealService.getStores(this.items.ID).subscribe((res: any) => {
@@ -342,5 +340,11 @@ export class DealsgridComponent implements OnInit {
         type: "deals"
       });
     }
+  }
+
+  getToServices(data) {
+    this.navCtrl.push("ProductlistPage", {
+      id: data
+    });
   }
 }

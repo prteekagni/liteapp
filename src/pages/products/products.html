@@ -13,9 +13,9 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ng-container
+  <!-- <ng-container
     *ngIf="noproducts; then thenTemplate; else elseTemplate"
-  ></ng-container>
+  ></ng-container> -->
 
   <!-- <ion-row>
       <ion-col col-4 *ngFor="let item of products">
@@ -37,8 +37,8 @@
     <ion-col col-12 text-center class="nopadding">
       <dealsgrid [items]="item" [type]="'products'" *ngIf="item?.ID"></dealsgrid>
     </ion-col>
-    <!-- <singleadd *ngIf="i % 3 == 0 && i !== 0"></singleadd> -->
   </ion-row>
+
 
   <ng-template #elseTemplate>
     <h3>no producys</h3>

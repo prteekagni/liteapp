@@ -45,7 +45,8 @@ export class ProductlistPage implements OnInit {
     public alertCtrl: AlertController,
     public sharedService: SharedProvider,
     private modalController: ModalController,
-    private dealService: DealsProvider
+    private dealService: DealsProvider,
+    private navCtrl: NavController
   ) {
     // let id = this.navParams.get("id");
     // let type = this.navParams.get("type");
@@ -202,7 +203,12 @@ export class ProductlistPage implements OnInit {
   }
 
   cardClick(item) {
-    this.clickoncard = !this.clickoncard;
+    // this.clickoncard = !this.clickoncard;
+    console.log(item);
+    this.navCtrl.push("DealdetailPage", {
+      data:item,
+      type:"services"
+    });
   }
 
   doRefresh(refresher){

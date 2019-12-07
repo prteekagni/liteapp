@@ -24,6 +24,7 @@ export class DealdetailPage {
   deal: any;
   backbtn;
   type;
+  services;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,25 +37,25 @@ export class DealdetailPage {
     private notificationService: NotificationProvider
   ) {
     this.type = this.navParams.get("data");
+ 
     if (this.type.type == "push") {
-      this.dealService.getDealByID(this.type.id).subscribe((res:any)=>{
+      this.dealService.getDealByID(this.type.id).subscribe((res: any) => {
         this.deal = res;
-      })
+      });
     } else {
-             this.deal = this.navParams.get("data");
-             if (this.deal.hasOwnProperty("Coupon")) {
-               this.clipboard.copy(this.deal.Coupon).then(
-                 res => {
-                   this.sharedService.createToast(
-                     "Coupon Copied" + this.deal.Coupon
-                   );
-                 },
-                 err => {
-                   console.log("coupon code not copy");
-                 }
-               );
-             }
-           }
+      this.deal = this.navParams.get("data");
+         this.services = this.navParams.get("type");
+      if (this.deal.hasOwnProperty("Coupon")) {
+        this.clipboard.copy(this.deal.Coupon).then(
+          res => {
+            this.sharedService.createToast("Coupon Copied" + this.deal.Coupon);
+          },
+          err => {
+            console.log("coupon code not copy");
+          }
+        );
+      }
+    }
   }
 
   ionViewDidLoad() {
@@ -103,4 +104,5 @@ export class DealdetailPage {
       });
     });
   }
+  reportIssue() {}
 }

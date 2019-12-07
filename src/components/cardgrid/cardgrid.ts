@@ -4,12 +4,7 @@ import { DealsProvider } from "../../providers/deals/deals";
 import { take, tap, map } from "rxjs/operators";
 import { SharedProvider } from "../../providers/shared/shared";
 import { File } from "@ionic-native/file";
-/**
- * Generated class for the CardgridComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: "cardgrid",
   templateUrl: "cardgrid.html"
@@ -28,6 +23,8 @@ export class CardgridComponent {
   ) {
     this.dealsProvider.getTopStores().subscribe((res: any) => {
       this.items = res;
+      console.log(this.items);
+      
       for (let index = 0; index < this.items.length && 6; index++) {
         this.tempsubdeals.push(this.items[index]);
         this.sharedService

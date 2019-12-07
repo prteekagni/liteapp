@@ -25,30 +25,33 @@
     speed="800"
   >
     <ion-slide>
-      <ion-card
-        [ngClass]="{ secondclass: true }"
-        *ngFor="let item of pushNotification"
-        (click)="getDeal(item)"
-      >
-        <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
-          <ion-row>
-            <ion-col col-4>
-              <img src="{{item.largeIcon}}" alt="" />
-            </ion-col>
-            <ion-col col-8>
-              <h4>{{ item.title }}</h4>
-              <p>
-                {{ item.body }}
-              </p>
-            </ion-col>
-            <ion-col col-12>
-              <img src="{{item.bigPicture}}" class="dealsimage" />
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-        <ion-row no-padding>
-        </ion-row>
-      </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let item of pushNotification" (click)="getDeal(item)">
+          <ion-card [ngClass]="{ secondclass: true }">
+            <ion-card-content style="padding:7px 16px;padding-bottom: 0px;">
+              <ion-row>
+                <ion-col col-4>
+                  <img src="{{item.largeIcon}}" alt="" style="width:80px;" />
+                </ion-col>
+                <ion-col col-8>
+                  <h4>{{ item.title }}</h4>
+                  <p
+                    style="text-overflow: ellipsis;
+    overflow: hidden;"
+                  >
+                    {{ item.body }}
+                  </p>
+                </ion-col>
+                <ion-col col-12>
+                  <img src="{{item.bigPicture}}" class="dealsimage" />
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+            <ion-row no-padding> </ion-row>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
@@ -60,28 +63,31 @@
           *ngFor="let item of localNotification"
         >
           <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
-           <ion-row>
+            <ion-row>
               <ion-col col-4 text-left>
-              <ion-img src="{{item.data.Logo}}" class="dealsimage"></ion-img>
-            </ion-col>
-            <ion-col col-8>
-              <h3 style="    white-space: initial;
-    font-size: 1.8rem;font-family: Permanent Marker cursive;">{{ item.data.Name }}</h3>
-                    <h3>Coupon</h3>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-12>
-              <ion-row>
-                <ion-col col-12>
-                   <p class="overflowtext">
-                {{ item.data.Description }}
-              </p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-            
-          </ion-row>
+                <ion-img src="{{item.data.Logo}}" class="dealsimage"></ion-img>
+              </ion-col>
+              <ion-col col-8>
+                <h3
+                  style="    white-space: initial;
+    font-size: 1.8rem;font-family: Permanent Marker cursive;"
+                >
+                  {{ item.data.Name }}
+                </h3>
+                <h3>Coupon</h3>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <ion-row>
+                  <ion-col col-12>
+                    <p class="overflowtext">
+                      {{ item.data.Description }}
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
           </ion-card-content>
           <ion-row no-padding>
             <ion-col col-4>
@@ -98,14 +104,7 @@
               </button>
             </ion-col>
             <ion-col text-center col-4>
-              <button
-                ion-button
-                clear
-                small
-                color="danger"
-                icon-start
-                (click)="remindBtn(item)"
-              >
+              <button ion-button clear small color="danger" icon-start>
                 <ion-icon name="musical-notes"></ion-icon>
                 Reminder
               </button>
