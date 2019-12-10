@@ -20,7 +20,7 @@ export class ProfileComponent implements AfterViewInit {
   profileForm;
   profile;
   editForm: boolean = false;
-  isGoogleLogin:boolean = false;
+  isGoogleLogin: boolean = false;
   @ViewChild("name") nameField: ElementRef;
 
   constructor(
@@ -33,14 +33,14 @@ export class ProfileComponent implements AfterViewInit {
   ) {
     var tempdata = JSON.parse(this.authService.getUserDetail());
     if (this.authService.checkGLogin() == "true") {
-          this.isGoogleLogin = true;
-          this.profile = tempdata;
+      this.isGoogleLogin = true;
+      this.profile = tempdata;
     }
-      if (tempdata.hasOwnProperty("Result")) {
-        this.profile = tempdata.Result;
-      } else {
-        this.profile = tempdata;
-      }
+    if (tempdata.hasOwnProperty("Result")) {
+      this.profile = tempdata.Result;
+    } else {
+      this.profile = tempdata;
+    }
     console.log(this.profile);
   }
 
@@ -118,5 +118,9 @@ export class ProfileComponent implements AfterViewInit {
     } else {
       console.log("donot call api ");
     }
+  }
+
+  UpdatePhoneNo(data){
+    console.log(data);
   }
 }

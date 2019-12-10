@@ -1,14 +1,25 @@
 <ion-header [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
-  <ion-navbar  id="navbar">
+  <ion-navbar id="navbar">
     <ion-title>
       <ion-row>
         <ion-col col-6 text-left>
           <span class=""> Deals Locker</span>
         </ion-col>
         <ion-col col-6 text-right>
-          <ion-icon ios="ios-notifications-outline" md="ios-notifications-outline" (click)="goToNotification()" class="iconspace"
-            style="margin-left: 5px;font-size: 1.4em"></ion-icon>
-          <ion-icon ios="ios-star-outline" md="ios-star-outline" (click)="goToFav()" style="margin-right: 15px;font-size: 1.4em;"> </ion-icon>
+          <ion-icon
+            ios="ios-notifications-outline"
+            md="ios-notifications-outline"
+            (click)="goToNotification()"
+            class="iconspace"
+            style="margin-left: 5px;font-size: 1.4em"
+          ></ion-icon>
+          <ion-icon
+            ios="ios-star-outline"
+            md="ios-star-outline"
+            (click)="goToFav()"
+            style="margin-right: 15px;font-size: 1.4em;"
+          >
+          </ion-icon>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -16,16 +27,16 @@
 </ion-header>
 
 <ion-content #pageContent fullscreen>
-  
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
       refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+      refreshingText="Refreshing..."
+    >
     </ion-refresher-content>
   </ion-refresher>
-  
+
   <!-- Sliders -->
 
   <ng-container *ngIf="isConnected; then connected; else notconnected">
@@ -33,8 +44,15 @@
 
   <ng-template #connected class="main-content">
     <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
-      <ion-slides *ngIf="mainslide.length > 0" pager speed="1000" effect="slides" class="mainslide" autoplay="1000"
-        loop="true">
+      <ion-slides
+        *ngIf="mainslide.length > 0"
+        pager
+        speed="1000"
+        effect="slides"
+        class="mainslide"
+        autoplay="1000"
+        loop="true"
+      >
         <ion-slide *ngFor="let item of mainslide">
           <img src="{{ item.Logo }}" alt="" class="header-image" />
         </ion-slide>
@@ -48,7 +66,14 @@
           </ion-col>
         </ion-row>
       </div> -->
-      <ion-slides pager speed="1000" effect="slides" class="mainslide" autoplay="1000" loop="true">
+      <ion-slides
+        pager
+        speed="1000"
+        effect="slides"
+        class="mainslide"
+        autoplay="1000"
+        loop="true"
+      >
         <ion-slide>
           <img src="../../assets/b.jpg" alt="" class="header-image" />
         </ion-slide>
@@ -61,27 +86,6 @@
       </ion-col>
     </ion-row>
 
-    <!-- <ion-row text-left>
-      <ion-col col-12>
-
-        <ng-container *ngIf="brands.length > 0">
-          <h4>Top brands</h4>
-          <ion-row>
-            <ion-item no-lines class="leftpadding">
-              <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
-                <div class="container" class="scroll-item" *ngFor="let item of brands;let i = index"  (click)="brandMethod(item)">
-                <div class="image"></div>
-                <img src="{{item.Logo}}" alt="" class="inner-image" />
-                </div>
-              </ion-scroll>
-            </ion-item>
-          </ion-row>
-        </ng-container>
-        <ng-template #loading>
-          <ion-spinner name="bubbles"></ion-spinner>
-        </ng-template>
-      </ion-col>
-    </ion-row> -->
     <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="brands.length > 0">
@@ -113,7 +117,9 @@
     <!-- Substores -->
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">Stores by Category</h4>
+        <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">
+          Stores by Category
+        </h4>
       </ion-col>
 
       <ion-col col-12 *ngIf="substores.length > 0">
@@ -142,9 +148,12 @@
             <h2>{{ item?.Name }}</h2>
           </ion-col> -->
           <ion-col col-12 text-center class="nopadding">
-            <dealsgrid [items]="item" [type]="'stores'" *ngIf="item?.ID"></dealsgrid>
+            <dealsgrid
+              [items]="item"
+              [type]="'stores'"
+              *ngIf="item?.ID"
+            ></dealsgrid>
           </ion-col>
-
         </ion-row>
         <!-- <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length" [in]="i"></singleadd> -->
       </ng-container>
@@ -161,7 +170,10 @@
     <!-- <singleadd></singleadd> -->
   </ng-template>
   <ng-template #notconnected>
-    <h3>Please connecet to internet</h3>
+    <div class="nointernetimage">
+      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
+      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
+    </div>
   </ng-template>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

@@ -14,8 +14,8 @@
 </ion-header>
 
 <ion-content>
-
-  <ng-container *ngIf="services !== 'services'; else elseTemplate">
+<ng-container *ngIf="deal">
+ <ng-container *ngIf="services !== 'services'; else elseTemplate">
     <ion-row style="margin-top:25px">
     <ion-col col-12>
       <img
@@ -97,13 +97,13 @@
       <ion-icon name="md-share"></ion-icon>
     </button>
   </ion-fab>
-  <button ion-button color="danger"  full (click)="getDeal()" class="btnBottom">Get Deal</button>
+  <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Get Deal</button>
   </ng-container>
   <ng-template #elseTemplate>
  <ion-row style="margin-top:25px">
     <ion-col col-12>
       <img
-        src="{{deal?.Image}}"
+        src="{{deal?.Logo}}"
         alt=""
         srcset=""
         style="    top: 50%;
@@ -135,14 +135,17 @@
           <p style="margin-left: 10px !important;
     margin-top: 0px;
     margin-bottom: 0px;">
-            {{deal.Descriptions}}
+            {{deal.Description}}
           </p> 
-           <button ion-button color="danger"  full (click)="getDeal()" class="btnBottom">Apply</button>
+           <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Apply</button>
         <!-- </ion-card-content>
       </ion-card> -->
     </ion-col>
   </ion-row>
   </ng-template>
+</ng-container>
+
+ 
   
 
   

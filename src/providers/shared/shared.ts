@@ -210,24 +210,18 @@ export class SharedProvider {
   // createBrowserLink
 
   openBrowser(data) {
-    var url;
-    var temp = Array.isArray(data.Url) ? true : false;
+        var temp = Array.isArray(data.Url) ? true : false;
     if (temp) {
       if (data.Url.length <= 1 && data.Url.length !== 0) {
-        url = data.Url[0].Url;
-        console.log(url);
-        // const browser = this.inappBrowser.create(url, "_system", {
-        //   location: "yes",
-        //   fullscreen: "yes"
-        // });
+        var url = data.Url[0].Url;
         this.browserTab.isAvailable().then(isAvailable => {
           if (isAvailable) {
             this.browserTab.openUrl(url);
           } else {
             const browser = this.inappBrowser.create(url, "_system", {
-          location: "yes",
-          fullscreen: "yes"
-        });
+              location: "yes",
+              fullscreen: "yes"
+            });
           }
         });
       } else if (data.Url.length == 0) {
@@ -340,7 +334,7 @@ export class SharedProvider {
 
   shareDeals(data) {
     this.createLoader();
-    var message = "Now get all deals at one place \\n" + data.Name;
+    var message = "Deal on " + data.Name + " on Deals Locker App. Download for more similar deals and enjoy shopping."; 
     this.createDynamicLinks(data.Url).then(
       (res: any) => {
         data.Url = res;

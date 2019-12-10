@@ -69,9 +69,8 @@ export class DealdetailPage {
     this.sharedService.shareDeals(this.deal);
   }
 
-  getDeal() {
-    console.log(this.deal);
-    this.sharedService.openBrowser(this.deal.Url);
+  getDeal(data) {
+     this.sharedService.openBrowser(data);
   }
 
   ionViewWillLeave() {}

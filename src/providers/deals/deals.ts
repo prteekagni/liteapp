@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { ReplaySubject } from "rxjs";
 
-// const apiUrl = "http://13.235.82.211/api/";
+const apiUrl = "http://13.235.82.211/api/";
 
-const apiUrl = "http://localhost:5000/api/";
+// const apiUrl = "http://localhost:5000/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -116,7 +116,7 @@ export class DealsProvider {
 
   // get products by category
   getProductByCategory(data) {
-    return this.http.get(apiUrl + "product/", data);
+    return this.http.get(apiUrl + "product/", data.ID);
   }
 
   // get product detail

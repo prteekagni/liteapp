@@ -8,12 +8,12 @@
     </ion-row>
     <ion-col col-12>
       <ion-item no-lines class="paddingleft">
-        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
+        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer"  overflow-scroll="false" >
           <ion-card
             class="scroll-item largecard"
             (click)="getToDeal(item)"
             *ngFor="let item of cards; index as i"
-          >
+         (touchstart)="touchstart($event)" >
             <ng-container>
               <ion-img
                 *ngIf="item.Logo != null"
@@ -93,14 +93,15 @@
       <ion-item no-lines class="paddingleft">
         <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
           <ion-card
-            class="scroll-item largecard"
+            class="scroll-item largecardservices"
             (click)="getToServices(item)"
             *ngFor="let item of cards; index as i"
+
           >
             <ng-container>
               <img
-                *ngIf="item.Image != null"
-                src="{{ item.Image }}"
+                
+                src="{{ item.Logo }}"
                 class="largecardimg"
               />
             

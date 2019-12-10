@@ -347,4 +347,9 @@ export class DealsgridComponent implements OnInit {
       id: data
     });
   }
+
+  touchstart(data){
+    console.log(data);
+    
+  }
 }

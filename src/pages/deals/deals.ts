@@ -1,9 +1,8 @@
 import {
   Component,
   ViewChild,
-  ElementRef,
-  Renderer,
-  Input
+  Input,
+  NgZone
 } from "@angular/core";
 import {
   IonicPage,
@@ -12,17 +11,10 @@ import {
   Content,
   Searchbar,
   Keyboard,
-  Item,
   Events
 } from "ionic-angular";
 import { DealsProvider } from "../../providers/deals/deals";
 
-/**
- * Generated class for the DealsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -39,18 +31,23 @@ export class DealsPage {
   tempdeals: any = [];
   tempsubdeals: any = [];
   copyItem;
+  
   showMore: boolean = true;
   lastStore: boolean = false;
   type: string = "deals";
   test: any = [];
+  isConnected: boolean = true;
   shopByCateory;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private dealsprovider: DealsProvider,
     public keyboard: Keyboard,
-    private events: Events
+    private events: Events,
+    private ngZone: NgZone
   ) {
+    
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.deals = res;
       this.test = res;
@@ -66,6 +63,17 @@ export class DealsPage {
     });
     this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
       this.subdeals = res;
+    });
+    this.events.subscribe("nstatus", res => {
+      if (res) {
+        this.ngZone.run(() => {
+          this.isConnected = true;
+        });
+      } else {
+        this.ngZone.run(() => {
+          this.isConnected = false;
+        });
+      }
     });
   }
 
@@ -150,11 +158,10 @@ export class DealsPage {
     }, 2000);
   }
 
-  getAllDeals(data){
+  getAllDeals(data) {
     console.log(data);
-    this.navCtrl.push("StabsPage",{
-      data:data
+    this.navCtrl.push("StabsPage", {
+      data: data
     });
-    
   }
 }

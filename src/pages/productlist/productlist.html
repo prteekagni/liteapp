@@ -2,11 +2,11 @@
   <ion-navbar>
     <ion-title *ngIf="!searchBoxOpened">Products</ion-title>
     <ion-searchbar
-      [(ngModel)]="searcTerm"
+      [(ngModel)]="searchterm"
       (ionInput)="onInput($event)"
       (ionCancel)="searchBoxOpened = false"
       [debounce]="500"
-      [autocomplete]="on"
+      
       [animated]="true"
       *ngIf="searchBoxOpened"
       style="height: 64px;
@@ -50,7 +50,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-row text-center>
+  <ion-row text-center style="margin-top: 20px;">
     <ion-col col-12>
       <img src="{{id?.Logo}}" alt="" style="width:80px">
       <h4>{{id?.Name}}</h4>
@@ -62,12 +62,12 @@
         <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
           <ion-row>
               <ion-col col-4 text-left>
-              <img src="{{item.Image}}" class="dealsimage"/>
+              <img src="{{item.Logo}}" class="dealsimage"/>
             </ion-col>
             <ion-col col-8>
               <h3 style="white-space: initial;
-    font-size: 1.8rem;">Citi Bank Insurance</h3>
-                    <h3>Coupon</h3>
+    font-size: 1.8rem;">{{item.Name}}</h3>
+                    <!-- <h3></h3> -->
             </ion-col>
           </ion-row>
           <ion-row>
@@ -75,7 +75,7 @@
               <ion-row>
                 <ion-col col-12>
                    <p class="overflowtext">
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis quidem harum quisquam ipsum vel dolorum corrupti, odit reprehenderit sit accusamus vero, laboriosam iste quis repudiandae.
+               {{item.Description}}
               </p>
                 </ion-col>
               </ion-row>

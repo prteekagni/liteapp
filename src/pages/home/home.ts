@@ -13,10 +13,6 @@ import { SharedProvider } from "../../providers/shared/shared";
 import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
-
-import { Subject } from "rxjs";
-import { locateHostElement } from "@angular/core/src/render3/instructions";
-import { map } from "rxjs/operators";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 
 
@@ -72,35 +68,32 @@ export class HomePage {
     private dealService: DealsProvider,
     private ngZone: NgZone,
     private modalController: ModalController,
-    localNotification: LocalNotifications
+    localNotification: LocalNotifications,
+    
   ) {
-    // platform.ready().then(() => {
-    //   this.firebaseAnalytics
-    //     .logEvent("page_view", { page: "dashboard" })
-    //     .then((res: any) => console.log(res))
-    //     .catch((error: any) => console.error(error));
-    //   // this.checkDirectory();
-    //   this.sharedService.checkNetworkStatus().subscribe(
-    //     res => {
-    //       if (res) {
-    //         this.ngZone.run(() => {
-    //           this.isConnected = true;
-    //         });
+    platform.ready().then(() => {
+      // this.checkDirectory();
+      this.sharedService.checkNetworkStatus().subscribe(
+        res => {
+          if (res) {
+            this.ngZone.run(() => {
+              this.isConnected = true;
+            });
 
-    //         console.log("Internet COnnected");
-    //       } else {
-    //         this.ngZone.run(() => {
-    //           this.isConnected = false;
-    //         });
-    //         this.sharedService.createToast("No Internet Avaiable");
-    //         console.log("Internet npot connected");
-    //       }
-    //     },
-    //     err => {
-    //       alert("Error in checking network statua");
-    //     }
-    //   );
-    // });
+            console.log("Internet COnnected");
+          } else {
+            this.ngZone.run(() => {
+              this.isConnected = false;
+            });
+            this.sharedService.createToast("No Internet Avaiable");
+            console.log("Internet npot connected");
+          }
+        },
+        err => {
+          alert("Error in checking network statua");
+        }
+      );
+    });
 
     platform.resume.subscribe(() => {
       this.sharedService.checkNetworkStatus().subscribe(
@@ -176,19 +169,19 @@ export class HomePage {
         console.log(err);
       }
     );
-    // this.events.subscribe("nstatus", res => {
-    //   if (res) {
-    //     console.log("Home PAge:" + res);
-    //     this.ngZone.run(() => {
-    //       this.isConnected = true;
-    //     });
-    //   } else {
-    //     console.log("From Home Page " + res);
-    //     this.ngZone.run(() => {
-    //       this.isConnected = false;
-    //     });
-    //   }
-    // });
+    this.events.subscribe("nstatus", res => {
+      if (res) {
+        console.log("Home PAge:" + res);
+        this.ngZone.run(() => {
+          this.isConnected = true;
+        });
+      } else {
+        console.log("From Home Page " + res);
+        this.ngZone.run(() => {
+          this.isConnected = false;
+        });
+      }
+    });
 
     // this.dealService
     //   .getDealBySubCategory("d5b257c2-165b-4b7b-9bc6-57bee17e4f58")

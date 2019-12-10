@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
 import { Events, NavController } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
-import { LOCATION_INITIALIZED } from "@angular/common";
 import { SharedProvider } from "../../providers/shared/shared";
 import { NgForm } from "@angular/forms";
 import { BrowserTab } from "@ionic-native/browser-tab";
@@ -20,6 +19,7 @@ import { BrowserTab } from "@ionic-native/browser-tab";
 export class LoginComponent {
   text: string;
   login: any;
+
   constructor(
     private authService: AuthenticateProvider,
     private events: Events,
@@ -64,7 +64,7 @@ export class LoginComponent {
     this.googlePlus
       .login({})
       .then((res: any) => {
-        console.log(res);
+        alert(JSON.stringify(res));
         this.authService.isGoogleLogin();
         this.authService.setUserDetails(res);
         this.authService.setUserLogin();

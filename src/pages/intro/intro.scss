@@ -9,5 +9,16 @@
 
   }
 
+  .introimage{
+     width: 300px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
 
+.swiper-pagination-bullet-active{
+  background:#f53d3d;
+}
 }

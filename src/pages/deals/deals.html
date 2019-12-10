@@ -115,21 +115,34 @@
 </ion-list>
     </ion-col>
   </ion-row> -->
-  <ion-row>
-    <ion-col col-12>
-      <ion-list style="margin-left: 10px;">
-        <ion-item *ngFor="let item of test " class="dealslist"  (click)="getAllDeals(item)">
-          <ion-thumbnail item-start>
-            <img
-              src="{{item.Logo}}"
-              style="    top: 20px;
+
+  <ng-container
+    *ngIf="isConnected; then thenTemplate; else notconnected"
+  ></ng-container>
+  <ng-template #thenTemplate>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list style="margin-left: 10px;">
+          <ion-item
+            *ngFor="let item of test "
+            class="dealslist"
+            (click)="getAllDeals(item)"
+          >
+            <ion-thumbnail item-start>
+              <img
+                src="{{item.Logo}}"
+                style="    top: 20px;
     position: absolute;"
-            />
-          </ion-thumbnail>
-          <h2 style="font-family: PlayfairDisplay-Regular;top: 20px;
-    position: absolute;">{{item.Name}}</h2>
-          <!-- <p>Total Deals 1988</p> -->
-          <!-- <button
+              />
+            </ion-thumbnail>
+            <h2
+              style="font-family: PlayfairDisplay-Regular;top: 20px;
+    position: absolute;"
+            >
+              {{item.Name}}
+            </h2>
+            <!-- <p>Total Deals 1988</p> -->
+            <!-- <button
             ion-button
             color="theme"
             clear
@@ -138,8 +151,15 @@
           >
             View
           </button> -->
-        </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+ <ng-template #notconnected>
+    <div class="nointernetimage">
+      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
+      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
+    </div>
+  </ng-template>
 </ion-content>

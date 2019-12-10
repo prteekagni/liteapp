@@ -1,49 +1,34 @@
 <ion-header class="show-background">
   <ion-navbar>
-    <ion-title><span class="titlecolormargin">Products & Services</span></ion-title>
+    <ion-title
+      ><span class="titlecolormargin">Products & Services</span></ion-title
+    >
   </ion-navbar>
 </ion-header>
 
 <ion-content fullscreen>
-   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
-  <!-- <ng-container
-    *ngIf="noproducts; then thenTemplate; else elseTemplate"
-  ></ng-container> -->
+  <ng-container
+    *ngIf="isConnected; then thenTemplate; else notconnected"
+  ></ng-container>
 
-  <!-- <ion-row>
-      <ion-col col-4 *ngFor="let item of products">
-        <ion-card class="roundedcorner" (click)="gotoProducts(item)">
-          <ion-card-content>
-            <img
-              src="../../assets/categories/Grocery_v2.png"
-              alt=""
-              class="centered-image"
-            />
-            <p class="itemtext" style="white-space: nowrap">
-              {{ item.Name }}
-            </p>
-          </ion-card-content>
-        </ion-card>
+  <ng-template #thenTemplate>
+    <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego">
+      <ion-col col-12 text-center class="nopadding">
+        <dealsgrid
+          [items]="item"
+          [type]="'products'"
+          *ngIf="item?.ID"
+        ></dealsgrid>
       </ion-col>
-    </ion-row> -->
-  <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego">
-    <ion-col col-12 text-center class="nopadding">
-      <dealsgrid [items]="item" [type]="'products'" *ngIf="item?.ID"></dealsgrid>
-    </ion-col>
-  </ion-row>
-
-
-  <ng-template #elseTemplate>
-    <h3>no producys</h3>
+    </ion-row>
   </ng-template>
 
+<ng-template #notconnected>
+    <div class="nointernetimage">
+      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
+      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
+    </div>
+  </ng-template>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

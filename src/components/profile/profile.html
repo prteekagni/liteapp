@@ -1,4 +1,7 @@
-<ion-row text-center>
+<ng-container *ngIf="!isGoogleLogin; then thenTemplate; else elseTemplate"></ng-container>
+
+<ng-template #thenTemplate>
+  <ion-row text-center>
   <ion-col col-12>
     <div>
       <img
@@ -10,13 +13,10 @@
     </div>
   </ion-col>
   <ion-col col-12>
-    <h3>{{profile.Name}}</h3>
-  </ion-col>
-    <ion-col col-12 *ngIf="isGoogleLogin">
-    <h3>{{profile.Name}}</h3>
+    <!-- <h3>{{profile.Name}}</h3> -->
   </ion-col>
 </ion-row>
-<ion-row>
+  <ion-row>
   <ion-col col-12>
     <form #profileForm="ngForm">
       <ion-list>
@@ -51,7 +51,7 @@
       <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
         Others
       </ion-list-header>
-      <ng-container *ngIf="!isGoogleLogin">
+      <ng-container>
  <ion-item (click)="updateProfile(profileForm)" *ngIf="!editForm">
         <ion-icon name="md-settings" item-start></ion-icon>
         Edit Profile
@@ -72,3 +72,62 @@
     </ion-list>
   </ion-col>
 </ion-row>
+</ng-template>
+<ng-template #elseTemplate>
+  <ion-row text-center>
+  <ion-col col-12>
+    <div>
+      <img
+        src="../../assets/logo192.png"
+        alt=""
+        srcset=""
+        class="profileimage"
+      />
+    </div>
+  </ion-col>
+  <ion-col col-12>
+    <h3>{{profile.displayName}}</h3>
+    <!-- <h3>kdjhfslkdahflds;kjhf</h3> -->
+  </ion-col>
+</ion-row>
+<ng-template #thenTemplate>
+  <ion-row>
+  <ion-col col-12>
+    <form #profileForm="ngForm">
+      <ion-list>
+        <ion-item [ngClass]="{'disabled':!editForm}">
+          <ion-label floating>Email</ion-label>
+          <ion-input
+            type="email"
+            [(ngModel)]="profile.email"
+            name="Email"
+          ></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-label floating>Mobile Number</ion-label>
+          <ion-input
+            type="number"
+            (ngModel)="profile.PhoneNo"
+            name="PhoneNo"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+    <ion-list>
+      <ion-list-header style="margin-bottom: 0px !important;font-size: 1.5em;">
+        Others
+      </ion-list-header>
+        <ion-item (click)="UpdatePhoneNo()">
+        <ion-icon name="md-settings" item-start></ion-icon>
+        Update Details
+      </ion-item>
+    <ion-item (click)="logOut()">
+        <ion-icon name="md-log-out" item-start></ion-icon>
+        Sign out
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ng-template>
+
+

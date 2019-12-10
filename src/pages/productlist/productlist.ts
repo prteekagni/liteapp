@@ -37,6 +37,7 @@ export class ProductlistPage implements OnInit {
   type;
   clickoncard: boolean = false;
   id;
+  searchterm;
   constructor(
     public navParams: NavParams,
     private storageService: StorageProvider,
@@ -76,6 +77,7 @@ export class ProductlistPage implements OnInit {
     this.id = this.navParams.get("id");
     this.type = this.navParams.get("type");
     console.log("From Product List page " + this.id);
+   
     if (this.type == "deals") {
       this.dealService.getDealsByCategory(this.id.ID).subscribe((res: any) => {
         this.newItem = res;
@@ -206,12 +208,12 @@ export class ProductlistPage implements OnInit {
     // this.clickoncard = !this.clickoncard;
     console.log(item);
     this.navCtrl.push("DealdetailPage", {
-      data:item,
-      type:"services"
+      data: item,
+      type: "services"
     });
   }
 
-  doRefresh(refresher){
+  doRefresh(refresher) {
     setTimeout(() => {
       refresher.complete;
     }, 1000);
