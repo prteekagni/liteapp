@@ -12,8 +12,8 @@
   ></ng-container>
 
   <ng-template #thenTemplate>
-    <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego">
-      <ion-col col-12 text-center class="nopadding">
+    <ion-row *ngFor="let item of tempproducts; let i = index" class="mycatego" >
+      <ion-col col-12 text-center class="nopadding" style="padding: 0px;">
         <dealsgrid
           [items]="item"
           [type]="'products'"
@@ -24,10 +24,19 @@
   </ng-template>
 
 <ng-template #notconnected>
-    <div class="nointernetimage">
-      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
-      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
-    </div>
+    <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+    <img
+      src="../../assets/nointernetbg.png"
+      alt=""
+      style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;"
+    />
+  
+  </div>
   </ng-template>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

@@ -75,6 +75,12 @@
   font-weight: 200;
   font-style: normal;
 }
+@font-face {
+ font-family:'GloriaHallelujah-Regular';
+  src: url("../assets/fonts/GloriaHallelujah-Regular.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
 
 // span {
 //    font-family: 'Source Code Pro';
@@ -336,20 +342,37 @@ ion-img img{
 
 
    .slide-zoom {
-        height: 95%;
+        height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
     }
 
 
  .nointernetimage{
-    width: 200px;
+    width: 250px;
     margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
   }
+
+  .waitlinkmodal{
+    left: 5%;
+    top: calc(50% - 100px);
+    position: absolute;
+    display: block;
+    width: 90%;
+    height: 200px;
+    contain: strict;
+    /* z-index: 11111111111158; */
+    border-radius: 20px;
+  }
+
+
+  .tabs-md .tabbar {
+    background: #F8F8F8 !important;
+}
 
 
 // .back-button-icon-md{

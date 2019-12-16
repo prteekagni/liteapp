@@ -5,10 +5,11 @@ import {
   AfterViewInit
 } from "@angular/core";
 import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
-import { Events, AlertController } from "ionic-angular";
+import { Events, AlertController, NavController } from "ionic-angular";
 import { ModalController, ViewController } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
 import { NgForm } from "@angular/forms";
+import { StorageProvider } from "../../providers/storage/storage";
 
 @Component({
   selector: "profile",
@@ -29,8 +30,11 @@ export class ProfileComponent implements AfterViewInit {
     private alertCtrl: AlertController,
     public modalCtrl: ModalController,
     private viewCtrl: ViewController,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
+    private storageService:StorageProvider,
+    private navCtrl: NavController
   ) {
+    
     var tempdata = JSON.parse(this.authService.getUserDetail());
     if (this.authService.checkGLogin() == "true") {
       this.isGoogleLogin = true;
@@ -50,7 +54,7 @@ export class ProfileComponent implements AfterViewInit {
     // console.log(this.nameField.nativeElement)
   }
 
-  logOut() {
+  logOutFromGoogle() {
     let alert = this.alertCtrl.create({
       title: "Confirm",
       message: "Do you want to logout?",
@@ -70,6 +74,31 @@ export class ProfileComponent implements AfterViewInit {
                 res => console.log(res),
                 err => console.log(err)
               );
+            }
+            this.authService.logoutUser();
+            this.events.publish("logout", "false");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  logOut() {
+    let alert = this.alertCtrl.create({
+      title: "Confirm",
+      message: "Do you want to logout?",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          }
+        },
+        {
+          text: "Logout",
+          handler: () => {
+            if (this.authService.getloginStatus() == "true") {
             }
             this.authService.logoutUser();
             this.events.publish("logout", "false");
@@ -120,7 +149,14 @@ export class ProfileComponent implements AfterViewInit {
     }
   }
 
-  UpdatePhoneNo(data){
+  UpdatePhoneNo(data) {
     console.log(data);
   }
+
+  getHistory(){
+  this.navCtrl.push("ProductlistPage", {
+    type: "history"
+  });
+  }
+
 }

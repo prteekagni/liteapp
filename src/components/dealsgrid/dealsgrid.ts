@@ -44,8 +44,7 @@ export class DealsgridComponent implements OnInit {
 
   ngOnInit() {
     this.copyItem = this.items;
-    console.log(this.copyItem);
-
+    
     if (this.type === "deals" && this.items.ID) {
       this.dealService
         .getDealBySubCategory(this.items.ID)
@@ -344,7 +343,8 @@ export class DealsgridComponent implements OnInit {
 
   getToServices(data) {
     this.navCtrl.push("ProductlistPage", {
-      id: data
+      id: data,
+      type: "services"
     });
   }
 

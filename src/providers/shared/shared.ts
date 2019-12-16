@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { LoadingController, ToastController, Events } from "ionic-angular";
+import { Injectable, ViewChild } from "@angular/core";
+import { LoadingController, ToastController, Events, NavController, Nav } from "ionic-angular";
 
 import { Network } from "@ionic-native/network";
 import {
@@ -18,6 +18,7 @@ import { of } from "rxjs/observable/of";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { BrowserTab } from "@ionic-native/browser-tab";
+import { FirebaseAnalytics } from "@ionic-native/firebase-analytics";
 
 declare var cordova: any;
 
@@ -43,10 +44,11 @@ export class SharedProvider {
   loading;
 
   browserOpenSubject = new Subject<boolean>();
+  @ViewChild(Nav) nav: Nav;
 
   constructor(
     private loadingCtrl: LoadingController,
-
+    private firebaseAnalytics: FirebaseAnalytics,
     private toastCtrl: ToastController,
     private network: Network,
     private events: Events,
@@ -169,6 +171,13 @@ export class SharedProvider {
     );
   }
 
+  firebaseevent(event, params) {
+    this.firebaseAnalytics
+      .logEvent(event, params)
+      .then((res: any) => console.log(res))
+      .catch((error: any) => console.error(error));
+  }
+
   nativeSlide() {
     this.nativeTrasnitions
       .slide(options)
@@ -204,13 +213,15 @@ export class SharedProvider {
 
   handleError(error) {
     // alert(JSON.stringify(error));
+    this.firebaseevent("Server Error", { Description: JSON.stringify(error) });
     this.createToast(error.statusText);
   }
 
   // createBrowserLink
 
   openBrowser(data) {
-        var temp = Array.isArray(data.Url) ? true : false;
+    // this.firebaseevent("openLink", { name: data.Name });
+    var temp = Array.isArray(data.Url) ? true : false;
     if (temp) {
       if (data.Url.length <= 1 && data.Url.length !== 0) {
         var url = data.Url[0].Url;
@@ -334,7 +345,10 @@ export class SharedProvider {
 
   shareDeals(data) {
     this.createLoader();
-    var message = "Deal on " + data.Name + " on Deals Locker App. Download for more similar deals and enjoy shopping."; 
+    var message =
+      "Deal on " +
+      data.Name +
+      " on Deals Locker App. Download for more similar deals and enjoy shopping.";
     this.createDynamicLinks(data.Url).then(
       (res: any) => {
         data.Url = res;
@@ -354,4 +368,6 @@ export class SharedProvider {
       link: data
     });
   }
+
+
 }

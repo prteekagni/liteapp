@@ -187,6 +187,24 @@ page-home {
     top: 0px !important;
   }
 
- 
+   .largecard {
+    position: relative;
+    text-align: center;
+    height: 60px;
+    width: 120px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    -webkit-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+  } 
+h4, h5, h6{
+ margin-left: 10px;
+    margin-bottom: 5px;
+    margin-top:0px
+}
+
 
 }

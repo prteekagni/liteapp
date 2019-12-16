@@ -151,8 +151,8 @@ dealsgrid {
   .largecardservices{
      position: relative;
     text-align: center;
-    height: 150px;
-    width: 280px;
+    height: 200px;
+    width: 200px;
     margin-right: 0px;
     padding: 0px;
     margin-left: 10px;
@@ -160,6 +160,10 @@ dealsgrid {
     -moz-box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
     box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
+  }
+
+  .paddingleft.item-md{
+padding-left:0px;
   }
 
   // ion-img{

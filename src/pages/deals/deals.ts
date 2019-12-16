@@ -14,6 +14,7 @@ import {
   Events
 } from "ionic-angular";
 import { DealsProvider } from "../../providers/deals/deals";
+import { SharedProvider } from "../../providers/shared/shared";
 
 
 @IonicPage()
@@ -45,21 +46,13 @@ export class DealsPage {
     private dealsprovider: DealsProvider,
     public keyboard: Keyboard,
     private events: Events,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private sharedService:SharedProvider
   ) {
     
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.deals = res;
       this.test = res;
-      // if (this.tempdeals.length >= 1) {
-      //   for (
-      //     let index = 0;
-      //     index < 4 && index < this.tempdeals.length;
-      //     index++
-      //   ) {
-      //     this.deals.push(this.tempdeals[index]);
-      //   }
-      // }
     });
     this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
       this.subdeals = res;
@@ -77,12 +70,14 @@ export class DealsPage {
     });
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    // this.sharedService.firebaseevent("DealsPage","");
+  }
 
   scrollHandler(event) {}
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad DealsPage");
+    
   }
 
   toggleDisplay() {
@@ -162,6 +157,8 @@ export class DealsPage {
     console.log(data);
     this.navCtrl.push("StabsPage", {
       data: data
+    }).then(res=>{},err=>{
+      this.sharedService.createToast("Sorry !!")
     });
   }
 }

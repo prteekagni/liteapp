@@ -1,67 +1,145 @@
 <ion-row text-left>
   <ion-col col-12>
-    <h4 *ngIf="items.length >= 1" style="margin-top:0px;margin-bottom:0px;">Top Stores</h4>
+    <h4 style="margin-top:0px;margin-bottom:0px;">
+      Top Stores
+    </h4>
   </ion-col>
-  <ion-col col-12 *ngIf="items.length >= 1">
-    <ion-row [ngClass]="{ 'show-less ': !showMore }">
-      <ng-container *ngFor="let item of tempsubdeals; index as i">
-        <ion-col col-4 (click)="goToStore(item)">
-          <ion-card class="roundedcorner">
-            <ion-card-content>
-              <img src="{{ item.Logo }}" />
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+  <ng-container
+    *ngIf="items.length > 0; then thenTemplate; else elseTemplate"
+  ></ng-container>
+  <ng-template #thenTemplate>
+    <ion-col col-12 *ngIf="items.length >= 1">
+      <ion-row #myrow class="grow">
+        <ng-container #mywrapper>
+          <ng-container *ngFor="let item of tempsubdeals; index as i">
+            <ion-col col-4 (click)="goToStore(item)">
+              <ion-card class="roundedcorner">
+                <ion-card-content>
+                  <img [src]="item.Logo" [ngClass]="{'showcontent':item.Logo == null}" (load)="onImageLoad($event)"/>
+                 <!-- <img [src]="item?.Logo!= 'unknown' ? item.Logo : myImgUrl" /> -->
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+      </ion-row>
+      <ng-container *ngIf="items.length > 6">
+        <ion-row text-center>
+          <ion-col col-12 text-center *ngIf="showMore">
+            <ion-col col-3>
+              <button
+                ion-button
+                round
+                (click)="toggleDisplay()"
+                text-center
+                color="danger"
+              >
+                Show Less
+              </button>
+            </ion-col>
+          </ion-col>
+          <ion-col col-12 text-center *ngIf="!showMore">
+            <ion-col col-3>
+              <button ion-button round (click)="toggleDisplay()" color="danger">
+                Show More
+              </button>
+            </ion-col>
+          </ion-col>
+        </ion-row>
       </ng-container>
-    </ion-row>
-    <ng-container *ngIf="items.length > 6">
+    </ion-col>
+  </ng-template>
+  <ng-template #elseTemplate>
+    <ion-col col-12>
+      <ion-row #myrow class="grow">
+        <ng-container #mywrapper>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4>
+            <ion-card class="roundedcorner">
+              <ion-card-content>
+                <img src="../../assets/dealslocker1.png" />
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
       <ion-row text-center>
         <ion-col col-12 text-center *ngIf="showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" text-center color="theme">
-          Show Less
-        </button>
-      </ion-col>
-    </ion-col>
-    <ion-col col-12 text-center *ngIf="!showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" color="theme">
-          Show More
-        </button>
-      </ion-col>
-    </ion-col>
-      </ion-row>
-         
-      </ng-container>
-  </ion-col>
-</ion-row>
-
-<!--  <ion-row
-        [ngClass]="{ 'show-less ': showMore }"
-        *ngIf="subdeals.length > 0"
-      >
-        <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
-          <ion-item (click)="goToPage(item)" item-start>
-            <ion-avatar style="width: 106px;">
-              <ion-img src="assets/men.jpg" class="storeimage"></ion-img>
-              <p style="text-align: center">{{ item?.Name }}</p>
-            </ion-avatar>
-          </ion-item>
+          <ion-col col-3>
+            <button
+              ion-button
+              round
+              (click)="toggleDisplay()"
+              text-center
+              color="danger"
+            >
+              Show Less
+            </button>
+          </ion-col>
         </ion-col>
       </ion-row>
     </ion-col>
-    <ion-col col-12 text-center *ngIf="!showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" text-center>
-          Show Less
-        </button>
-      </ion-col>
-    </ion-col>
-    <ion-col col-12 text-center *ngIf="showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()">
-          Show More
-        </button>
-      </ion-col>
-    </ion-col>
-  </ion-row> -->
+  </ng-template>
+</ion-row>

@@ -37,7 +37,10 @@ export class DealdetailPage {
     private notificationService: NotificationProvider
   ) {
     this.type = this.navParams.get("data");
- 
+  this.storageService.visitedDeals(this.type).then((res:any)=>{
+    console.log(res);
+    
+  })
     if (this.type.type == "push") {
       this.dealService.getDealByID(this.type.id).subscribe((res: any) => {
         this.deal = res;
@@ -67,9 +70,11 @@ export class DealdetailPage {
   }
   shareApp() {
     this.sharedService.shareDeals(this.deal);
+     this.sharedService.firebaseevent("shareDeal", "");
   }
 
   getDeal(data) {
+    this.sharedService.firebaseevent("Opened Deal", "");
      this.sharedService.openBrowser(data);
   }
 

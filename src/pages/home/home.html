@@ -27,6 +27,7 @@
 </ion-header>
 
 <ion-content #pageContent fullscreen>
+ 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -37,7 +38,6 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <!-- Sliders -->
 
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
@@ -59,13 +59,6 @@
       </ion-slides>
     </ng-container>
     <ng-template #elseTemplate style="height:40vh">
-      <!-- <div style="height:200px">
-        <ion-row text-center>
-          <ion-col col-12>
-              <img src="../../assets/banner2.jpg" alt="" class="header-image" />
-          </ion-col>
-        </ion-row>
-      </div> -->
       <ion-slides
         pager
         speed="1000"
@@ -74,18 +67,46 @@
         autoplay="1000"
         loop="true"
       >
-        <ion-slide>
+        <ion-slide (click)="gotToAds()">
           <img src="../../assets/b.jpg" alt="" class="header-image" />
         </ion-slide>
       </ion-slides>
     </ng-template>
-    <!-- top shops -->
+    
     <ion-row>
       <ion-col col-12>
         <cardgrid></cardgrid>
       </ion-col>
     </ion-row>
-
+    <ion-row text-left>
+      <ion-col col-12>
+        <ng-container *ngIf="topVisitedStores.length > 0">
+          <h4>Most Visited Stores</h4>
+          <ion-row>
+            <ion-item no-lines class="leftpadding">
+              <ion-scroll scrollX="true" scroll-avatar style="height:90px;">
+                <ion-card
+                  class="scroll-item largecard"
+                  *ngFor="let item of topVisitedStores;let i = index"
+                  (click)="goToTopVisitedStore(item.data)"
+                >
+                  <ion-card-content style="padding:0px">
+                    <img src="{{ item.data.Logo }}" style="width: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)"/>
+                  </ion-card-content>
+                </ion-card>
+              </ion-scroll>
+            </ion-item>
+          </ion-row>
+        </ng-container>
+        <ng-template #loading>
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ng-template>
+      </ion-col>
+    </ion-row>
     <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="brands.length > 0">
@@ -97,13 +118,13 @@
                   class="container"
                   class="scroll-item"
                   *ngFor="let item of brands;let i = index"
-                  (click)="brandClick(item)"
+                  (click)="onTopBrandClick(item)"
                 >
                   <div
                     class="image"
                     [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"
                   ></div>
-                  <img src="{{item.Logo}}" alt="" class="inner-image" />
+                  <ion-img src="{{item.Logo}}" alt="" class="inner-image" style="min-width: 60px;min-height:30px;"></ion-img>
                 </div>
               </ion-scroll>
             </ion-item>
@@ -114,7 +135,7 @@
         </ng-template>
       </ion-col>
     </ion-row>
-    <!-- Substores -->
+    
     <ion-row>
       <ion-col col-12 text-left>
         <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">
@@ -133,20 +154,9 @@
         </ion-row>
       </ion-col>
     </ion-row>
-
-    <!-- <ion-row>
-      <ion-col col-3 *ngFor="let item of store">
-        <img src="../../assets/amazon-logo.png" alt="" />
-        <p style="text-align: center;">{{ item.Name }}</p>
-      </ion-col>
-    </ion-row> -->
-    <!-- Store category with store links -->
     <ng-container *ngIf="store.length > 0">
       <ng-container *ngFor="let item of store; let i = index">
         <ion-row *ngIf="item?.Name != 'Shop By Category'" class="mycatego">
-          <!-- <ion-col col-12 text-center>
-            <h2>{{ item?.Name }}</h2>
-          </ion-col> -->
           <ion-col col-12 text-center class="nopadding">
             <dealsgrid
               [items]="item"
@@ -155,28 +165,37 @@
             ></dealsgrid>
           </ion-col>
         </ion-row>
-        <!-- <singleadd *ngIf="i % 3 == 0 && i !== 0 && i !== store.length" [in]="i"></singleadd> -->
       </ng-container>
     </ng-container>
-    <ion-row *ngIf="lastStore">
+    <ion-row *ngIf="lastStore" text-center>
       <ion-col col-12>
-        <h1>No more stores</h1>
+        <h2 style="font-family:GloriaHallelujah-Regular">No more stores</h2>
       </ion-col>
     </ion-row>
     <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
     </ng-template>
-    <!-- Single Add -->
-    <!-- <singleadd></singleadd> -->
+  
   </ng-template>
   <ng-template #notconnected>
-    <div class="nointernetimage">
-      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
-      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
-    </div>
+     <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+    <img
+      src="../../assets/nointernetbg.png"
+      alt=""
+      style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;"
+    />
+    
+  </div>
   </ng-template>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+ 
+ 
 </ion-content>

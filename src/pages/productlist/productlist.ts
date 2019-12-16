@@ -49,44 +49,33 @@ export class ProductlistPage implements OnInit {
     private dealService: DealsProvider,
     private navCtrl: NavController
   ) {
-    // let id = this.navParams.get("id");
-    // let type = this.navParams.get("type");
-    // console.log("From Product List page " + id.ID);
-    // this.http
-    //   .get("http://dummy.restapiexample.com/api/v1/employees")
-    //   .subscribe(res => {
-    //     this.newItem = res;
-    //     this.copyItem = this.newItem;
-    //     // this.storageService.getDeals().then((res: any) => {
-    //     //   this.saveItem = res;
-    //     //   var same = this.newItem
-    //     //     .filter(f => {
-    //     //       return this.saveItem.find(ff => ff.id === f.id);
-    //     //     })
-    //     //     .map(m => {
-    //     //       return (m.isMatched = true);
-    //     //     });
-    //     console.log(this.newItem);
-    //   });
-    // // });
+    
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.id = this.navParams.get("id");
     this.type = this.navParams.get("type");
-    console.log("From Product List page " + this.id);
+    console.log("From Product List page " + this.type);
    
-    if (this.type == "deals") {
+    if (this.type == "deals" && this.id.ID) {
       this.dealService.getDealsByCategory(this.id.ID).subscribe((res: any) => {
         this.newItem = res;
-        this.checkForFavourite(this.newItem);
+        // this.checkForFavourite(this.newItem);
       });
-    } else {
+    } 
+    if(this.type == "services" && this.id.ID) {
       this.dealService.getProductByCategory(this.id).subscribe((res: any) => {
         this.newItem = res;
       });
+    } 
+    if(this.type == "history"){
+      this.storageService.getVisitedDeals().then((res:any)=>{
+        this.newItem = res;
+        console.log("From history " + res);
+      }, err=>{
+        this.sharedService.createToast("Unable to get history.");
+      })
+      
     }
   }
   ionViewDidLoad() {
@@ -155,10 +144,10 @@ export class ProductlistPage implements OnInit {
 
   setAsFav(data) {
     this.sharedService.addToFavEventTrack(data);
-
     this.storageService.addDeals(data).then(res => {
       if (res == true) {
         this.sharedService.createToast("Deal added to favourite");
+        this.sharedService.firebaseevent("DealAddedToFav",data.Name)
       } else {
         this.sharedService.createToast("Deal already present");
       }

@@ -21,7 +21,7 @@
     <ion-col col-12>
       <ion-row>
         <ion-col col-4 *ngFor="let item of Url" (click)="goToUrl(item)">
-          <ion-card>
+          <ion-card style="border-radius:5px">
             <img src="{{item.Name}}" />
           </ion-card>
         </ion-col>

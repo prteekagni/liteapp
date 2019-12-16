@@ -59,6 +59,8 @@ export class LinkmodalPage implements OnInit {
     //     this.items = res;
     //     console.log(this.items);
     //   });
+
+    // this.sharedService.firebaseevent("LinkModalOpened", "");
   }
 
   goToUrl(data) {
@@ -70,7 +72,9 @@ export class LinkmodalPage implements OnInit {
         data: data
       },
       {
-        cssClass: "mymodal"
+        cssClass: "waitlinkmodal",
+        showBackdrop: true,
+        enableBackdropDismiss: true
       }
     );
     modal.present();

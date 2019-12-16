@@ -9,7 +9,7 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { _throw as throwError } from "rxjs/observable/throw";
-import { catchError, finalize } from "rxjs/operators";
+import { catchError, finalize, tap } from "rxjs/operators";
 import { SharedProvider } from "./shared";
 import { Injectable } from "@angular/core";
 
@@ -48,6 +48,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     // });
 
     return next.handle(request).pipe(
+      tap(()=> console.log("request " + JSON.stringify(request))),
        finalize(() => this.SharedProvider.dismissLoader()),
       catchError((error: HttpErrorResponse) => {
         // alert(data);

@@ -8,6 +8,8 @@ const DEALS_KEY = "deals";
 const N_KEY = "notifications";
 const P_KEY = "pushNotifications";
 const I_KEY = "images";
+const V_KEY = "visitedDeals";
+const S_KEY = "visitedStores";
 
 @Injectable()
 export class StorageProvider {
@@ -95,6 +97,72 @@ export class StorageProvider {
         this.storage.set(N_KEY, [item]);
       }
     });
+  }
+  visitedDeals(item: any): Promise<any> {
+    return this.storage.get(V_KEY).then(items => {
+      if (items) {
+        if (items.find(x => x.ID === item.ID)) {
+          return false;
+        } else {
+          items.push(item);
+          this.storage.set(V_KEY, items);
+        }
+      } else {
+        this.storage.set(V_KEY, [item]);
+      }
+    });
+  }
+
+  visitedStores(item: any): Promise<any> {
+    var tempData = {};
+    return this.storage.get(S_KEY).then(items => {
+      if (items) {
+        if (items.find(x => x.data.ID === item.ID)) {
+          const result = items.find(x => x.data.ID === item.ID);
+          console.log(result);
+          var newfrequency = result.frequency + 1;
+          tempData = {
+            data: item,
+            frequency: newfrequency
+          };
+          let newItems: any[] = [];
+          for (let i of items) {
+            if (i.data.ID === item.ID) {
+              newItems.push(tempData);
+            }
+            else{
+              newItems.push(i);
+            }
+          }
+           this.storage.set(S_KEY, newItems);
+        } else {
+          tempData = {
+            data: item,
+            frequency: 1
+          };
+          items.push(tempData);
+          this.storage.set(S_KEY, items);
+        }
+      } else {
+        tempData = {
+          data: item,
+          frequency: 1
+        };
+        this.storage.set(S_KEY, [tempData]);
+      }
+    });
+  }
+
+  getVisitedDeals() {
+    return this.storage.get(V_KEY);
+  }
+
+  getVisitedStores() {
+    return this.storage.get(S_KEY);
+  }
+
+  removeVisitedStores() {
+    return this.storage.set(S_KEY, "");
   }
 
   getNotification(): Promise<any[]> {

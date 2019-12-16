@@ -1,9 +1,18 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Content, Platform, Modal, ModalController } from 'ionic-angular';
-import { DealsProvider } from '../../providers/deals/deals';
-import { SharedProvider } from '../../providers/shared/shared';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { StorageProvider } from '../../providers/storage/storage';
+import { Component, ViewChild, OnInit } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Slides,
+  Content,
+  Platform,
+  Modal,
+  ModalController
+} from "ionic-angular";
+import { DealsProvider } from "../../providers/deals/deals";
+import { SharedProvider } from "../../providers/shared/shared";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { StorageProvider } from "../../providers/storage/storage";
 
 @IonicPage()
 @Component({
@@ -25,7 +34,7 @@ export class StabsPage implements OnInit {
   newItem;
   data;
   title: string;
-  alldeals:any = [];
+  alldeals: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -37,36 +46,34 @@ export class StabsPage implements OnInit {
     private storageService: StorageProvider,
     private modalController: ModalController
   ) {
-    
     this.screenWidth_px = platform.width();
   }
 
   ngOnInit(): void {
     this.data = this.navParams.get("data");
     this.title = this.data.Name;
-
-    this.dealService
-      .getDealBySubCategory(this.data.ID)
-      .subscribe((res: any) => {
-        this.tabs = res;
-        this.tabs.splice(0, 0, this.data); 
-      });
-       this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
-         this.alldeals = res;
-         console.log(this.alldeals);
-         //  this.checkForFavourite(this.newItem);
-       });
+    this.tabs.splice(0, 0, this.data);
+ this.dealService.getDealBySubCategory(this.data.ID).subscribe((res: any) => {
+   this.tabs = res;
+   
+ });
+    this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
+      this.alldeals = res;
+      console.log(this.alldeals);
+      //  this.checkForFavourite(this.newItem);
+    });
   }
-
+ 
   ionViewDidEnter() {
     this.SwipedTabsIndicator = document.getElementById("indicator");
-   if (this.tabs.length !== 0){
-     for (let i in this.tabs)
-       this.tabTitleWidthArray.push(
-         document.getElementById("tabTitle" + i).offsetWidth
-       );
-       }
-    this.selectTab(0);
+    if (this.tabs.length !== 0) {
+      for (let i in this.tabs)
+        this.tabTitleWidthArray.push(
+          document.getElementById("tabTitle" + i).offsetWidth
+        );
+         this.selectTab(0);
+    }
+   
     if (this.tabs.length !== 0) {
       this.dealService
         .getDealsBySubCategory(this.tabs[0].ID)
@@ -241,7 +248,5 @@ export class StabsPage implements OnInit {
     });
   }
 
-  doInfinite(refresher){
-
-  }
+  doInfinite(refresher) {}
 }

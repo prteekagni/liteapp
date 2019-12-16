@@ -34,7 +34,7 @@ export class WaitmodalPage {
     // });
     setTimeout(() => {
       this.dismiss();
-      this.sharedService.openBrowser(this.data);
+      // this.sharedService.openBrowser(this.data);
     }, 300);
   }
 

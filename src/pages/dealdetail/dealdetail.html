@@ -30,8 +30,8 @@
       />
     </ion-col>
   </ion-row>
-  <ion-row>
-      <ion-col col-12 text-center>
+  <ion-row text-center>
+      <ion-col col-12 >
       <h4 style="margin-top: 10px;
     margin-bottom: 0px;">{{deal.Name}}</h4>
       <h6 style="margin-left: 10px !important;
@@ -39,27 +39,24 @@
     margin-bottom: 0px;">{{deal.Category.Name}}</h6>
     </ion-col>
     <ion-col col-12>
-      {{deal.ShortDescription}}
+      <h4 style="margin-top:5px">{{deal.ShortDescription}}</h4>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col col-12>
-      <h4 >Description</h4>
-      <!-- <ion-card>
-        <ion-card-content> -->
+      
+           <h4 >Offer Details</h4>
           <p style="margin-left: 10px !important;
     margin-top: 0px;
     margin-bottom: 0px;">
-            {{deal.Description}}
+            {{deal.Description}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium eum esse cumque atque, aspernatur, laborum minima ipsum reiciendis autem dolorem velit unde modi quasi quos?
           </p> 
-          
-        <!-- </ion-card-content>
-      </ion-card> -->
-    </ion-col>
-  </ion-row>
+      
 
-  <ion-row>
+
+
+    <ion-row>
     <ion-col col-12>
       <!-- <ion-card>
         <ion-card-content> -->
@@ -74,7 +71,6 @@
       </ion-card> -->
     </ion-col>
   </ion-row>
-
 
 
   <ion-row>
@@ -92,6 +88,11 @@
       </ion-list>
     </ion-col>
   </ion-row>
+
+    </ion-col>
+  </ion-row>
+
+ 
   <ion-fab right bottom >
     <button ion-fab (click)="shareApp()">
       <ion-icon name="md-share"></ion-icon>
@@ -102,7 +103,9 @@
   <ng-template #elseTemplate>
  <ion-row style="margin-top:25px">
     <ion-col col-12>
-      <img
+      <div style="height: 50px;">
+<img
+      
         src="{{deal?.Logo}}"
         alt=""
         srcset=""
@@ -112,11 +115,13 @@
     position: absolute;
     width: 80px;"
       />
+      </div>
+      
     </ion-col>
   </ion-row>
   <ion-row>
       <ion-col col-12 text-center>
-      <h4 style="margin-top: 10px;
+      <h4 style="margin-top: 00px;
     margin-bottom: 0px;">{{deal.Name}}</h4>
       <!-- <h6 style="margin-left: 10px !important;
     margin-top: 0px;
@@ -130,28 +135,14 @@
   <ion-row>
     <ion-col col-12>
       <h4 >Description</h4>
-      <!-- <ion-card>
-        <ion-card-content> -->
           <p style="margin-left: 10px !important;
     margin-top: 0px;
     margin-bottom: 0px;">
             {{deal.Description}}
           </p> 
            <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Apply</button>
-        <!-- </ion-card-content>
-      </ion-card> -->
     </ion-col>
   </ion-row>
   </ng-template>
 </ng-container>
-
- 
-  
-
-  
 </ion-content>
-<!-- 
-<ion-footer>
- 
-
-</ion-footer> -->

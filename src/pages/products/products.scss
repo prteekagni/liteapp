@@ -118,7 +118,7 @@ page-products {
   // }
 
   .toolbar-background-md {
-    background: transparent;
+    background: white;
   }
 
   // .toolbar-title-md {
@@ -140,7 +140,7 @@ page-products {
 
 
   .toolbar-background-md {
-    background: transparent;
+    background: white;
   }
 
    ion-scroll[scrollX] {
@@ -158,7 +158,7 @@ page-products {
   }
 
 
-  .mycatego:first-child(){
+  .scroll-content .mycatego{
 margin-top: 20px;
   }
 

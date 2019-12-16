@@ -14,15 +14,15 @@ cardgrid {
   }
 
   img {
-  margin: 0;
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 80px;
-}
-  
+    width: 90px;
+  }
+
   .card-content-md {
     padding: 1px 16px;
   }
@@ -32,6 +32,8 @@ cardgrid {
     margin-left: 0px;
     margin-right: 0px;
     height: 60px;
+    margin-top: 5px;
+    margin-bottom: 0px;
   }
 
   ion-col {
@@ -41,7 +43,22 @@ cardgrid {
     width: 100%;
   }
   .show-less {
-  height: 170px;
-  overflow: hidden;
-}
+    height: 150px;
+    overflow: hidden;
+    transition: max-height 1s ease-out;
+  }
+
+  .grow {
+    -moz-transition: height 1s;
+    -ms-transition: height 1s;
+    -o-transition: height 1s;
+    -webkit-transition: height 1s;
+    transition: height 1s;
+    height: 150px;
+    overflow: hidden;
+  }
+
+  .showcontent{
+    background-image: url('../../assets/dealslocker1.png');
+  }
 }

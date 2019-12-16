@@ -43,79 +43,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-<!-- <ion-content (ionScroll)="scrollHandler($event)" #content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
-  <ion-row text-center>
-    <ion-col col-12>
-      <h4 >Deals By Category</h4>
-    </ion-col>
-    <ion-col col-12>
-      <ion-row>
-        <ion-col col-4 text-center *ngFor="let item of subdeals; index as i">
-          <ion-item (click)="goToPage(item)" item-start>
-            <ion-avatar style="width: 106px;">
-              <img
-                src="{{ item.Logo }}"
-                class="storeimage"
-              />
-              <p style="text-align: center">{{ item?.Name }}</p>
-            </ion-avatar>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-col>
-    <ion-col col-12 text-center *ngIf="!showMore">
-      <ion-col col-3>
-        <button ion-button round (click)="toggleDisplay()" text-center>
-          Show Less
-        </button>
-      </ion-col>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngFor="let item of deals; let i = index" class="mycatego">
-    <ion-col col-12>
-            <dealsgrid [items]="item" *ngIf="item.ID" type="deals"></dealsgrid>
-      <ng-template #loading>
-        <ion-spinner name="bubbles"></ion-spinner>
-      </ng-template>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf="lastStore">
-    <ion-col col-12>
-      <h6>No more stores</h6>
-    </ion-col>
-  </ion-row>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content> -->
-
 <ion-content>
-  <!-- <ion-row>
-    <ion-col col-12>
-      <ion-list>
-  <ion-item *ngFor="let item of test " (click)="getList(item)">
-    <ion-thumbnail item-start>
-      <img src="../../assets/health.png" style="   top: 18px;
-    position: absolute;
-    left: 15px;height: 50px;width: 50px;">
-    </ion-thumbnail>
-    <h2>{{item.Name}}</h2>
-    <p>Total Deals 1988</p>
-    <button ion-button clear item-end>View</button>
-  </ion-item>
-</ion-list>
-    </ion-col>
-  </ion-row> -->
-
   <ng-container
     *ngIf="isConnected; then thenTemplate; else notconnected"
   ></ng-container>
@@ -156,10 +84,19 @@
       </ion-col>
     </ion-row>
   </ng-template>
- <ng-template #notconnected>
-    <div class="nointernetimage">
-      <img src="../../assets/nointernetbg.png" alt="" style="width:200px;" />
-      <h6 style="margin:0px;text-align: center;">No Internet!!</h6>
-    </div>
+  <ng-template #notconnected>
+     <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+    <img
+      src="../../assets/nointernetbg.png"
+      alt=""
+      style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;"
+    />
+  
+  </div>
   </ng-template>
 </ion-content>

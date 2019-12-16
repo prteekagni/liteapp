@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from "@angular/core";
+import { Component, ViewChild, NgZone, ElementRef, AfterViewInit } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -14,7 +14,7 @@ import { ScrollHideConfig } from "../../directives/scroll/scroll";
 import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
 import { LocalNotifications } from "@ionic-native/local-notifications";
-
+import { StorageProvider } from "../../providers/storage/storage";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -26,7 +26,7 @@ const animationsOptions = {
   selector: "page-home",
   templateUrl: "home.html"
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
   headerScrollConfig: ScrollHideConfig = {
     cssProperty: "margin-top",
     maxValue: 44
@@ -53,23 +53,23 @@ export class HomePage {
   items: any = [];
   tempStore: any = [];
   substores: any = [];
+  visitedStores: any = [];
+  topVisitedStores: any = [];
   shopbyID: any;
   lastStore: boolean = false;
   fileTransfer;
   mobile;
-
+  itemLogo:any = "assets/imgs/dealslocker1.png";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private events: Events,
     private platform: Platform,
     private sharedService: SharedProvider,
-    private firebaseDynamicLinks: FirebaseDynamicLinks,
     private dealService: DealsProvider,
     private ngZone: NgZone,
     private modalController: ModalController,
-    localNotification: LocalNotifications,
-    
+    private storageService: StorageProvider
   ) {
     platform.ready().then(() => {
       // this.checkDirectory();
@@ -126,14 +126,6 @@ export class HomePage {
     this.dealService.getStoreCategory().subscribe((res: any) => {
       if (res) {
         this.tempStore = res;
-        let shopByCategory = this.tempStore.find(
-          element => element.Name == "Shop By Category"
-        );
-        console.log(shopByCategory);
-
-        // this.shopbyID = shopByCategory.ID;
-        // let topbrand = this.tempStore.find(element=> element.Name == "Top Brands");
-
         for (
           this.count = 0;
           this.count < 3 && this.count < this.tempStore.length;
@@ -159,7 +151,7 @@ export class HomePage {
       }
     );
 
-    this.dealService.getAllStores();
+    // this.dealService.getAllStores();
 
     this.dealService.getAdsData().subscribe(
       (res: any) => {
@@ -182,53 +174,42 @@ export class HomePage {
         });
       }
     });
-
-    // this.dealService
-    //   .getDealBySubCategory("d5b257c2-165b-4b7b-9bc6-57bee17e4f58")
-    //   .subscribe((res: any) => {
-    //     this.testdemo = res;
-    //     console.log(this.testdemo);
-
-    //   });
-  }
-
-  ionViewDidLoad() {
-    // this.sharedService.createToast("Testing Toaster")
-    // this.events.subscribe("nstatus", res => {
-    //   if (res) {
-    //     console.log("Home PAge:" + res);
-    //   } else {
-    //     console.log("From Home Page " + res);
-    //     this.isConnected = false;
-    //   }
-    // });
+    this.storageService.getVisitedStores().then((res: any) => {
+      this.tempStore = res || 0;
+      this.topVisitedStores = this.tempStore.sort(function(a, b) {
+        return b.frequency - a.frequency;
+      });
+    });
   }
 
   nav11() {
     this.navCtrl.push("ProductlistPage");
   }
 
-  ionViewWillEnter() {
-    // this.dealService.getTopStores().subscribe((res: any) => {
-    //   this.testdemo = res;
-    //   console.log("Will View Enter " + this.testdemo);
-    // });
-  }
+  ionViewWillEnter() {}
 
   goToNotification() {
     // this.firebaseAnalytics
-    //   .logEvent("share", { name: "notification" })
+    //   .logEvent("gTNotification","")
     //   .then((res: any) => alert(res))
     //   .catch((error: any) => console.error(error));
+    // this.sharedService.firebaseevent("gToNotificaitonP", "");
     // this.checkDirectory();
     this.navCtrl.push("NotificationPage", {}, animationsOptions);
   }
 
   goToFav() {
+    // this.sharedService.firebaseevent("gToFavouriteP", "");
     this.navCtrl.push("FavouritesPage", {}, animationsOptions);
   }
 
   ionViewWillLeave() {}
+
+  ngAfterViewInit() {
+    debugger;
+    console.log("Done");
+    
+  }
 
   doInfinite(event) {
     console.log("loading event called");
@@ -250,17 +231,25 @@ export class HomePage {
   }
 
   goToPage(data) {
-    console.log(data);
     var type;
     if (data.CatType == 11) {
       type = "substores";
     } else {
       type = "stores";
     }
-    this.navCtrl.push("StorepagePage", {
-      data: data,
-      type: type
-    });
+    this.navCtrl
+      .push("StorepagePage", {
+        data: data,
+        type: type
+      })
+      .then(
+        (res: any) => {
+          // this.sharedService.firebaseevent("gToStorePage", "");
+        },
+        err => {
+          // this.sharedService.createToast("Sorry!!");
+        }
+      );
   }
 
   generate() {}
@@ -324,7 +313,7 @@ export class HomePage {
       this.sharedService.openBrowser(data);
     }
   }
-  brandClick(data) {
+  onTopBrandClick(data) {
     let modal = this.modalController.create(
       "LinkmodalPage",
       {
@@ -337,5 +326,16 @@ export class HomePage {
       }
     );
     modal.present();
+  }
+  gotToAds(data) {
+    console.log(data);
+  }
+
+  goToTopVisitedStore(data) {
+    this.sharedService.openBrowser(data);
+  }
+
+  removeVistedStore() {
+    this.storageService.removeVisitedStores();
   }
 }

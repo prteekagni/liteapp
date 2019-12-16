@@ -48,21 +48,27 @@
       refreshingSpinner="circles"
       refreshingText="Refreshing...">
     </ion-refresher-content>
-  </ion-refresher>
+    </ion-refresher>
 
-  <ion-row text-center style="margin-top: 20px;">
+
+    <ng-container *ngIf="type == 'services'; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+        <ion-row text-center style="margin-top: 20px;">
     <ion-col col-12>
       <img src="{{id?.Logo}}" alt="" style="width:80px">
       <h4>{{id?.Name}}</h4>
     </ion-col>
   </ion-row>
-  <ion-list [virtualScroll]="newItem" approxItemHeight="225px">
+  <ion-list [virtualScroll]="newItem" approxItemHeight="250px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
         <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
           <ion-row>
               <ion-col col-4 text-left>
-              <img src="{{item.Logo}}" class="dealsimage"/>
+                <div style="height: 80px;">
+<img src="{{item.Logo}}" class="dealsimage"/>
+                </div>
+              
             </ion-col>
             <ion-col col-8>
               <h3 style="white-space: initial;
@@ -83,53 +89,52 @@
             
           </ion-row>
         </ion-card-content>
-        <!-- <ion-row no-padding>
-          <ion-col col-4>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="setDealAsFav(item)"
-            >
-              <ion-icon name="star"></ion-icon>
-              Favorite
-            </button>
-          </ion-col>
-          <ion-col col-4 text-center>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="remindBtn(item)"
-            >
-              <ion-icon name="musical-notes"></ion-icon>
-              Remind
-            </button>
-             <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.time" (ionChange)="setData(item)" style="padding-top:0px">
-      </ion-datetime> 
-          </ion-col>
-          <ion-col col-4 text-right>
-            <button
-              ion-button
-              clear
-              small
-              color="danger"
-              icon-start
-              (click)="getDeal(item)"
-            >
-              <ion-icon name="share-alt"></ion-icon>
-              Buy
-            </button>
-          </ion-col>
-        </ion-row> -->
       </ion-card>
     </ion-item>
   </ion-list>
-
+    </ng-template>
+    <ng-template #elseTemplate>
+            <ion-row text-center style="margin-top: 20px;">
+    <ion-col col-12>
+      <img src="{{id?.Logo}}" alt="" style="width:80px">
+      <h4>{{id?.Name}}</h4>
+    </ion-col>
+  </ion-row>
+  <ion-list [virtualScroll]="newItem" approxItemHeight="250px">
+    <ion-item *virtualItem="let item">
+      <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
+      <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
+          <ion-row>
+            <ion-col col-3>
+              <img src="{{item.Logo}}" style="width: 80px !important;" />
+            </ion-col>
+            <ion-col col-9 text-left>
+              <h3
+                style="
+    font-size: 1.8rem;"
+              >
+                {{ item.Name }}
+              </h3>
+              <h3>{{item.Category.Name}}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row text-left>
+                <ion-col col-12>
+                  <p class="overflowtext">
+                    {{ item.Description }}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+    </ng-template>
+    
   <ion-fab right bottom>
     <button ion-fab  (click)="shareApp()">
       <ion-icon name="arrow-dropleft"></ion-icon>

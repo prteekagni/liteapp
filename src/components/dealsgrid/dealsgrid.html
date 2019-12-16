@@ -88,10 +88,11 @@
       <ion-col col-12 text-left>
         <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;margin-bottom: 0px;">{{ copyItem?.Name }}</h4>
       </ion-col>
-    </ion-row>
-    <ion-col col-12>
+        <ion-col col-12 style="padding: 0px;">
       <ion-item no-lines class="paddingleft">
-        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer">
+        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer" style="white-space: nowrap;
+    height: 230px;
+    overflow: hidden;">
           <ion-card
             class="scroll-item largecardservices"
             (click)="getToServices(item)"
@@ -102,13 +103,10 @@
               <img
                 
                 src="{{ item.Logo }}"
-                class="largecardimg"
+               style="width: 200px;height:100%;"
               />
             
-              <div class="overlay-effect h-100 w-100"></div>
-              <h1 class="textstyle">
-                {{ item.Name }}
-              </h1>
+           
             </ng-container>
           </ion-card>
         </ion-scroll>
@@ -117,8 +115,8 @@
         </ng-template>
       </ion-item>
     </ion-col>
+    </ion-row>
+  
   </ng-container>
 </ng-container>
-<!-- <ng-container>
-  <ion-spinner name="bubbles" *ngIf="cards.length == 0"></ion-spinner>
-</ng-container> -->
+
