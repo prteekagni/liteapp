@@ -220,7 +220,7 @@ export class SharedProvider {
   // createBrowserLink
 
   openBrowser(data) {
-    // this.firebaseevent("openLink", { name: data.Name });
+    this.firebaseevent("openLink", { Name: data.Name });
     var temp = Array.isArray(data.Url) ? true : false;
     if (temp) {
       if (data.Url.length <= 1 && data.Url.length !== 0) {

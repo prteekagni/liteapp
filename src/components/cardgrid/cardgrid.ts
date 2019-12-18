@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, Output } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { DealsProvider } from "../../providers/deals/deals";
 import { take, tap, map } from "rxjs/operators";
@@ -17,6 +17,7 @@ export class CardgridComponent {
   tempsubdeals: any = [];
   copiedData: any;
   sharedProvider: any;
+  
   @ViewChild("myrow", { read: ElementRef }) myrow: ElementRef;
   @ViewChild("mywrapper", { read: ElementRef }) mywrapper: ElementRef;
   myImgUrl = "assets/dealslocker1.png";
@@ -28,7 +29,6 @@ export class CardgridComponent {
   ) {
     this.dealsProvider.getTopStores().subscribe((res: any) => {
       this.items = res;
-
       for (let index = 0; index < 6 && this.items.length; index++) {
         this.tempsubdeals.push(this.items[index]);
         // this.tempsubdeals[index].Logo = "";

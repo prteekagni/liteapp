@@ -11,8 +11,8 @@
     <ion-col col-12 *ngIf="items.length >= 1">
       <ion-row #myrow class="grow">
         <ng-container #mywrapper>
-          <ng-container *ngFor="let item of tempsubdeals; index as i">
-            <ion-col col-4 (click)="goToStore(item)">
+          <ng-container *ngFor="let item of tempsubdeals; index as i" >
+            <ion-col col-4 (click)="goToStore(item)" class="animated lightSpeedIn">
               <ion-card class="roundedcorner">
                 <ion-card-content>
                   <img [src]="item.Logo" [ngClass]="{'showcontent':item.Logo == null}" (load)="onImageLoad($event)"/>

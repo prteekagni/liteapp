@@ -17,8 +17,8 @@
     <ion-col col-10 offset-1>
       <form #registerForm="ngForm" (ngSubmit)="registerUser(registerForm.value)">
         <ion-item>
-          <ion-icon name="call"></ion-icon>
-          <ion-label stacked>Name</ion-label>
+          <ion-icon name="call" color="theme"></ion-icon>
+          <ion-label stacked color="theme">Name</ion-label>
           <ion-input
             type="text"
             required
@@ -27,8 +27,8 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="call"></ion-icon>
-          <ion-label stacked>Mobile Number</ion-label>
+          <ion-icon name="call" color="theme"></ion-icon>
+          <ion-label stacked color="theme">Mobile Number</ion-label>
           <ion-input
             type="number"
             required
@@ -38,8 +38,8 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="call"></ion-icon>
-          <ion-label stacked>Email</ion-label>
+          <ion-icon name="call" color="theme"></ion-icon>
+          <ion-label stacked color="theme">Email</ion-label>
           <ion-input
             type="email"
             required
@@ -49,7 +49,7 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Enter Password</ion-label>
+          <ion-label stacked color="theme">Enter Password</ion-label>
           <ion-input
             type="password"
             required
@@ -58,7 +58,7 @@
           ></ion-input>
         </ion-item>
         <ion-col col-6 offset-3>
-          <button ion-button type="submit" block class="submitbutton">
+          <button ion-button type="submit" block class="submitbutton" color="theme">
             Login
           </button>
         </ion-col>

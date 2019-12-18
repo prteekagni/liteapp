@@ -53,14 +53,15 @@ export class StabsPage implements OnInit {
     this.data = this.navParams.get("data");
     this.title = this.data.Name;
     this.tabs.splice(0, 0, this.data);
+    
  this.dealService.getDealBySubCategory(this.data.ID).subscribe((res: any) => {
-   this.tabs = res;
-   
+   res.forEach(element => {
+     this.tabs.push(element)
+   });
  });
     this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
       this.alldeals = res;
-      console.log(this.alldeals);
-      //  this.checkForFavourite(this.newItem);
+       this.checkForFavourite(this.alldeals);
     });
   }
  
@@ -78,7 +79,6 @@ export class StabsPage implements OnInit {
       this.dealService
         .getDealsBySubCategory(this.tabs[0].ID)
         .subscribe((res: any) => {
-          console.log(res);
           this.newItem = res;
         });
     }
@@ -93,8 +93,6 @@ export class StabsPage implements OnInit {
   }
 
   selectTab(index) {
-    console.log(index);
-
     this.SwipedTabsIndicator.style.width =
       this.tabTitleWidthArray[index] + "px";
     this.SwipedTabsIndicator.style.webkitTransform =
@@ -118,12 +116,9 @@ export class StabsPage implements OnInit {
       this.tabTitleWidthArray[index] + "px";
     this.SwipedTabsIndicator.style.webkitTransform =
       "translate3d(" + this.calculateDistanceToSpnd(index) + "px,0,0)";
-    // console.log(this.tabs[this.SwipedTabsSlider.realIndex]);
-
     this.dealService
       .getDealsBySubCategory(this.tabs[this.SwipedTabsSlider.realIndex].ID)
       .subscribe((res: any) => {
-        console.log(res);
         this.newItem = res;
       });
   }
@@ -239,9 +234,9 @@ export class StabsPage implements OnInit {
   checkForFavourite(data) {
     this.storageService.getDeals().then((res: any) => {
       if (res) {
-        this.newItem.forEach(element => {
+        this.alldeals.forEach(element => {
           if (res.ID == element.ID) {
-            this.newItem.itemfav = true;
+            this.alldeals.itemfav = true;
           }
         });
       }

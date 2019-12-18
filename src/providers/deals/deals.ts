@@ -40,6 +40,13 @@ export class DealsProvider {
       });
   }
 
+  getAllStoresLink(){
+    return this.http
+    .get(apiUrl + "stores");
+  }
+
+  
+
   // get store links
   getSubStores(mid, id) {
     return this.http.get(apiUrl + "stores/getSubStores/" + mid + "/" + id);
@@ -138,5 +145,10 @@ export class DealsProvider {
 
   getDealByID(data) {
     return this.http.get(apiUrl + "deals/ " + data);
+  }
+
+
+  getAllDeals(){
+    return this.http.get(apiUrl + "deals")
   }
 }

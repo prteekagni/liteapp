@@ -36,12 +36,13 @@
     <ion-slide>
      
       <ng-container   *ngFor="let item of alldeals">
-        <ng-container *ngIf="item.length < 0; then thenTemplate; else elseTemplate"></ng-container>
+        <ng-container *ngIf="alldeals.length > 0; then thenTemplate; else elseTemplate"></ng-container>
         <ng-template #thenTemplate>
            <ion-card
-        
+        class="animated lightSpeedIn"
         [ngClass]="{ secondclass: itemfav }"
         style="border-radius: 10px;"
+      
       >
         <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
           <ion-row>
@@ -141,15 +142,17 @@
     
     </ion-slide>
 
-    <ion-slide *ngFor="let item of tabs">
+    <ng-container *ngFor="let item of tabs;index as i">
+ <ion-slide *ngIf="i !== 0">
       <ng-container
-        *ngIf="item.length; then thenTemplate; else elseTemplate"
+        *ngIf="newItem?.length; then thenTemplate; else elseTemplate"
       ></ng-container>
       <ng-template #thenTemplate>
         <ion-card
           *ngFor="let item of newItem"
           [ngClass]="{ secondclass: itemfav }"
           style="border-radius: 10px;"
+          class="animated lightSpeedIn"
         >
           <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
             <ion-row>
@@ -247,6 +250,8 @@
         </div>
       </ng-template>
     </ion-slide>
+    </ng-container>
+   
   </ion-slides>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

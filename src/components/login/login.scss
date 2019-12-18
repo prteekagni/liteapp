@@ -7,4 +7,12 @@ login {
     opacity:0.6;         //This grays it out to look disabled
 
     }
+
+
+    ion-grid {
+      position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
 }

@@ -1,0 +1,68 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-row>
+  <ion-col col-12>
+  <div class="search__container">
+    <span class="search__title">
+        Go ahead and search your   </span>
+        <h2 style="display: inline;font-family: GloriaHallelujah-Regular;color:#ff6700">{{type|uppercase}}</h2>
+        
+   
+    <!-- <input class="search__input" type="text" placeholder="Search"  [(ngModel)]="searcTerm"
+      (ionInput)="onInput($event)"> -->
+      <ion-searchbar class="search__input" placeholder="Search" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)" style="margin-top:10px;"></ion-searchbar>
+</div>
+  </ion-col>
+</ion-row>
+
+
+<ng-container *ngIf="type == 'stores'">
+  <ion-row>
+  <ion-col col-12>
+    <h4>Store</h4>
+    <ion-list >
+      <ion-item *ngFor="let store of data" (click)="goToStore(store)">
+      <img [src]="store.Logo" alt="" style="width:100px">
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
+<!-- <ion-row>
+  <ion-col col-12>
+    <h4>Store from category</h4>
+    <ion-list >
+      <ion-item *ngFor="let store of listitems">
+      <img [src]="store.Logo" alt="" style="width:100px">
+      <span>{{store.Name}}</span>
+
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row> -->
+</ng-container>
+
+<ng-container *ngIf="type == 'deals'">
+  <ion-row>
+  <ion-col col-12>
+    
+    <ion-list >
+      <ion-item *ngFor="let deal of data" (click)="getAllDeals(deal)">
+      <img [src]="deal.Logo" alt="" style="width:100px">
+      <span>{{deal.Name}}</span>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ng-container>
+</ion-content>

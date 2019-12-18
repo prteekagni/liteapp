@@ -48,7 +48,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     // });
 
     return next.handle(request).pipe(
-      tap(()=> console.log("request " + JSON.stringify(request))),
+      
        finalize(() => this.SharedProvider.dismissLoader()),
       catchError((error: HttpErrorResponse) => {
         // alert(data);

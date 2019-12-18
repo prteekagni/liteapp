@@ -32,7 +32,7 @@ export class DealsPage {
   tempdeals: any = [];
   tempsubdeals: any = [];
   copyItem;
-  
+
   showMore: boolean = true;
   lastStore: boolean = false;
   type: string = "deals";
@@ -47,9 +47,8 @@ export class DealsPage {
     public keyboard: Keyboard,
     private events: Events,
     private ngZone: NgZone,
-    private sharedService:SharedProvider
+    private sharedService: SharedProvider
   ) {
-    
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.deals = res;
       this.test = res;
@@ -76,9 +75,7 @@ export class DealsPage {
 
   scrollHandler(event) {}
 
-  ionViewDidLoad() {
-    
-  }
+  ionViewDidLoad() {}
 
   toggleDisplay() {
     if (this.tempsubdeals.length !== this.subdeals.length) {
@@ -90,19 +87,10 @@ export class DealsPage {
     console.log(this.showMore);
   }
 
-  onInput(event) {
-    this.deals = this.copyItem;
-    const val = event.target.value;
-    console.log(val);
-    if (val && val.trim() != "") {
-      this.deals = this.deals.filter(item => {
-        return item.employee_name.toLowerCase().indexOf(val.toLowerCase()) > -1;
-      });
-    }
-    this.content.scrollToTop().then(
-      res => console.log(res),
-      err => console.warn(err)
-    );
+  search(event) {
+   this.navCtrl.push("SearchPage",{
+     type:"deals"
+   })
   }
 
   setFocus() {
@@ -155,10 +143,19 @@ export class DealsPage {
 
   getAllDeals(data) {
     console.log(data);
-    this.navCtrl.push("StabsPage", {
-      data: data
-    }).then(res=>{},err=>{
-      this.sharedService.createToast("Sorry !!")
-    });
+    this.navCtrl
+      .push("StabsPage", {
+        data: data
+      })
+      .then(
+        res => {},
+        err => {
+          this.sharedService.createToast("Sorry !!");
+        }
+      );
+  }
+
+  goToFav() {
+    this.navCtrl.push("FavouritesPage");
   }
 }

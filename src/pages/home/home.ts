@@ -15,6 +15,7 @@ import { FirebaseDynamicLinks } from "@ionic-native/firebase-dynamic-links";
 import { DealsProvider } from "../../providers/deals/deals";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { StorageProvider } from "../../providers/storage/storage";
+import { CardgridComponent } from "../../components/cardgrid/cardgrid";
 
 const animationsOptions = {
   animation: "ios-transition",
@@ -34,6 +35,7 @@ export class HomePage implements AfterViewInit {
 
   @ViewChild(Slides) slides1: Slides;
   @ViewChild(Content) content: Content;
+  @ViewChild(CardgridComponent) cardgridd: CardgridComponent;
   slides;
   isLoggedIn: boolean = false;
   lnotification: any = [];
@@ -59,7 +61,8 @@ export class HomePage implements AfterViewInit {
   lastStore: boolean = false;
   fileTransfer;
   mobile;
-  itemLogo:any = "assets/imgs/dealslocker1.png";
+  allstores: any[];
+  itemLogo: any = "assets/imgs/dealslocker1.png";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -208,7 +211,6 @@ export class HomePage implements AfterViewInit {
   ngAfterViewInit() {
     debugger;
     console.log("Done");
-    
   }
 
   doInfinite(event) {
@@ -338,4 +340,18 @@ export class HomePage implements AfterViewInit {
   removeVistedStore() {
     this.storageService.removeVisitedStores();
   }
+
+  search() {
+    this.navCtrl.push("SearchPage", {
+      data: this.cardgridd.items,
+      type:"stores"
+    });
+  }
+
+  // ngAfterViewChecked(): void {
+  //   //Called after every check of the component's view. Applies to components only.
+  //   //Add 'implements AfterViewChecked' to the class.
+  //   console.log(this.cardgridd);
+    
+  // }
 }

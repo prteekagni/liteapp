@@ -17,9 +17,10 @@
             ios="ios-star-outline"
             md="ios-star-outline"
             (click)="goToFav()"
-            style="margin-right: 15px;font-size: 1.4em;"
+            style="font-size: 1.4em;"
           >
           </ion-icon>
+          <ion-icon ios="ios-search" md="md-search"  style="margin-left: 5px;font-size: 1.4em"   (click)="search()"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -91,7 +92,7 @@
                   (click)="goToTopVisitedStore(item.data)"
                 >
                   <ion-card-content style="padding:0px">
-                    <img src="{{ item.data.Logo }}" style="width: 60px;
+                    <img src="{{ item.data.Logo }}" style="width: 80px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -145,7 +146,7 @@
 
       <ion-col col-12 *ngIf="substores.length > 0">
         <ion-row>
-          <ion-col col-4 text-center *ngFor="let item of substores; index as i">
+          <ion-col col-4 text-center *ngFor="let item of substores; index as i" class="animated bounceInRight">
             <ion-item (click)="goToPage(item)" item-start>
               <img src="{{item.Logo}}" alt="" />
               <p style="text-align: center">{{ item?.Name }}</p>
@@ -156,7 +157,7 @@
     </ion-row>
     <ng-container *ngIf="store.length > 0">
       <ng-container *ngFor="let item of store; let i = index">
-        <ion-row *ngIf="item?.Name != 'Shop By Category'" class="mycatego">
+        <ion-row *ngIf="item?.Name != 'Shop By Category'" class="mycatego animated pulse">
           <ion-col col-12 text-center class="nopadding">
             <dealsgrid
               [items]="item"
@@ -169,7 +170,7 @@
     </ng-container>
     <ion-row *ngIf="lastStore" text-center>
       <ion-col col-12>
-        <h2 style="font-family:GloriaHallelujah-Regular">No more stores</h2>
+        <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;">No more stores</h2>
       </ion-col>
     </ion-row>
     <ng-template #loading>
