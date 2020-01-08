@@ -54,9 +54,9 @@ page-deals {
   // .col {
   //   padding: 0px !important;
   // }
-  ion-scroll[scroll-avatar] {
-    height: 175px !important; // height: 140px;
-  }
+  // ion-scroll[scroll-avatar] {
+  //   height: 175px !important; // height: 140px;
+  // }
   ion-img{
     min-height: 100px;
   }
@@ -74,5 +74,52 @@ page-deals {
     width: 30px;
     height: 30px;
   }
+   ion-scroll {
+    white-space: nowrap;
+    height: 100%;
+    margin-top: 10px;
+  }
 
+  // horizontal scroll of cards container , it will be removed from ionic 4( need edit )
+  ion-scroll[scrollX] {
+    white-space: nowrap;
+    height: 100px;
+    overflow: hidden;
+
+    .scroll-item {
+      display: inline-block;
+    }
+
+    img {
+      // margin: 5px;
+       width: 30px;
+      // height: 100%;
+    }
+  }
+  .largecardcontainer {
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 85px;
+    margin-top: 0px;
+  }
+
+  // this is used for cards used to display stores and brands
+  .largecard {
+    position: relative;
+    text-align: center;
+    height: 70px;
+    width: 75px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+   
+    border-radius: 10px;
+  }
+  .dealscardimage{
+       width: 40px !important;
+   
+    margin-bottom: 3px;
+    margin-top: 5px;
+  }
 }

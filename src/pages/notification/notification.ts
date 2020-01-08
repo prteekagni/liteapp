@@ -33,7 +33,10 @@ export class NotificationPage {
     public storageService: StorageProvider,
     private modalController: ModalController,
     private sharedService: SharedProvider
-  ) {}
+  ) {
+    this.sharedService.firebaseevent("screen_view", { Name: "NotificationPage" });
+    
+  }
 
   ionViewDidLoad() {
     this.storageService.getPushNotification().then(res => {

@@ -58,10 +58,11 @@ export class MyApp {
 
     //   if (platform.is("android")) {
     //     // statusBar.styleBlackTranslucent();
-    //     statusBar.backgroundColorByHexString("#80000000");
+    //     // statusBar.backgroundColorByHexString("#80000000");
+    //     statusBar.backgroundColorByHexString("#000000");
     //   }
-    //   // statusBar.backgroundColorByHexString("#ff4500");
-    //   splashScreen.hide();
+    // //   // statusBar.backgroundColorByHexString("#ff4500");
+    // //   splashScreen.hide();
 
     //   this.deeplinks
     //     .route({
@@ -159,7 +160,7 @@ export class MyApp {
     //   }, 10);
     // });
   }
-
+ 
   initializeOneSignal() {
     this.oneSignal.startInit(
       "85ba853d-6931-4776-ac42-ce54c6fd8ba8",

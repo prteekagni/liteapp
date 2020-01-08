@@ -25,7 +25,11 @@ page-dealdetail {
      padding: 0 1.1em !important; 
   }
 
-  ion-fab[bottom]{
-    bottom:75px
+  // ion-fab[bottom]{
+  //   bottom:75px
+  // }
+
+  .label-md{
+    margin:0px;
   }
 }

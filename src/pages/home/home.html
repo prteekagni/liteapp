@@ -3,7 +3,7 @@
     <ion-title>
       <ion-row>
         <ion-col col-6 text-left>
-          <span class=""> Deals Locker</span>
+          <span class="tracking-in-expand"> Deals Locker</span>
         </ion-col>
         <ion-col col-6 text-right>
           <ion-icon
@@ -20,16 +20,20 @@
             style="font-size: 1.4em;"
           >
           </ion-icon>
-          <ion-icon ios="ios-search" md="md-search"  style="margin-left: 5px;font-size: 1.4em"   (click)="search()"></ion-icon>
+          <ion-icon
+            ios="ios-search"
+            md="md-search"
+            style="margin-left: 5px;font-size: 1.4em"
+            (click)="search()"
+          ></ion-icon>
         </ion-col>
       </ion-row>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content #pageContent fullscreen>
- 
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+<ion-content #pageContent fullscreen contentBottom=100>
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
@@ -37,8 +41,7 @@
       refreshingText="Refreshing..."
     >
     </ion-refresher-content>
-  </ion-refresher>
-
+  </ion-refresher> -->
 
   <ng-container *ngIf="isConnected; then connected; else notconnected">
   </ng-container>
@@ -65,15 +68,18 @@
         speed="1000"
         effect="slides"
         class="mainslide"
-        autoplay="1000"
+       
         loop="true"
       >
         <ion-slide (click)="gotToAds()">
-          <img src="../../assets/b.jpg" alt="" class="header-image" />
+          <img src="../../assets/Formals.png" alt="" class="header-image" />
+        </ion-slide>
+            <ion-slide (click)="gotToAds()">
+          <img src="../../assets/ajio.jpg" alt="" class="header-image" />
         </ion-slide>
       </ion-slides>
     </ng-template>
-    
+
     <ion-row>
       <ion-col col-12>
         <cardgrid></cardgrid>
@@ -82,7 +88,7 @@
     <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="topVisitedStores.length > 0">
-          <h4>Most Visited Stores</h4>
+          <h4 class="focus-in-expand">Most Visited Stores</h4>
           <ion-row>
             <ion-item no-lines class="leftpadding">
               <ion-scroll scrollX="true" scroll-avatar style="height:90px;">
@@ -92,11 +98,14 @@
                   (click)="goToTopVisitedStore(item.data)"
                 >
                   <ion-card-content style="padding:0px">
-                    <img src="{{ item.data.Logo }}" style="width: 80px;
+                    <img
+                      src="{{ item.data.Logo }}"
+                      style="width: 80px;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%)"/>
+    transform: translate(-50%,-50%)"
+                    />
                   </ion-card-content>
                 </ion-card>
               </ion-scroll>
@@ -107,6 +116,41 @@
           <ion-spinner name="bubbles"></ion-spinner>
         </ng-template>
       </ion-col>
+    </ion-row>
+        <ion-row  *ngIf="mVisitedDeals.length > 0">
+      <ion-col col-12>
+        <h4>Recently Visted Category</h4>
+       <ion-item no-lines class="paddingleft">
+          <ion-scroll scrollX="true" scroll-avatar class="dealslargecardcontainer">
+            <div
+              class="scroll-item dealslargecard"
+              (click)="getVistedDeal(item)"
+              *ngFor="let item of mVisitedDeals; index as i"
+            >
+              <ng-container>
+                <img
+                  src="{{ item.data.Logo }}"
+                  class="dealscardimage"
+                />
+                <!-- </ion-img> -->
+                <div class="overlay-effect h-100 w-100"></div>
+                <p
+                  class="textstyle"
+                  style="
+    text-overflow: ellipsis;overflow: hidden;left: 5px;font-size: 12px;"
+                  text-center
+                >
+                  {{ item.data.Name }}
+                </p>
+              </ng-container>
+            </div>
+          </ion-scroll>
+          <ng-template #loading>
+            dfjghfjkdghjkh
+          </ng-template>
+        </ion-item>
+      </ion-col>
+      
     </ion-row>
     <ion-row text-left>
       <ion-col col-12>
@@ -125,7 +169,12 @@
                     class="image"
                     [ngClass]="{'even': i%2 == 0 , 'odd': i%2 !=0}"
                   ></div>
-                  <ion-img src="{{item.Logo}}" alt="" class="inner-image" style="min-width: 60px;min-height:30px;"></ion-img>
+                  <ion-img
+                    src="{{item.Logo}}"
+                    alt=""
+                    class="inner-image"
+                    style="min-width: 60px;min-height:30px;"
+                  ></ion-img>
                 </div>
               </ion-scroll>
             </ion-item>
@@ -136,7 +185,7 @@
         </ng-template>
       </ion-col>
     </ion-row>
-    
+
     <ion-row>
       <ion-col col-12 text-left>
         <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">
@@ -144,21 +193,32 @@
         </h4>
       </ion-col>
 
-      <ion-col col-12 *ngIf="substores.length > 0">
+      <ion-col col-12 *ngIf="substores.length > 0" style="    border-bottom: 1px solid #dedede;">
         <ion-row>
-          <ion-col col-4 text-center *ngFor="let item of substores; index as i" class="animated bounceInRight">
-            <ion-item (click)="goToPage(item)" item-start>
+          <ion-col
+            col-4
+            text-center
+            *ngFor="let item of substores; index as i"
+            class="substores"
+            [@photosAnimation]="substores.length"
+          >
+            <div (click)="goToPage(item)" item-start style="border-bottom:0px">
               <img src="{{item.Logo}}" alt="" />
               <p style="text-align: center">{{ item?.Name }}</p>
-            </ion-item>
+            </div>
           </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
     <ng-container *ngIf="store.length > 0">
-      <ng-container *ngFor="let item of store; let i = index">
-        <ion-row *ngIf="item?.Name != 'Shop By Category'" class="mycatego animated pulse">
-          <ion-col col-12 text-center class="nopadding">
+      <ion-list class="borderlist" style="margin:-1px 0 30px">
+        <ion-item *ngFor="let item of store; let i = index">
+            <ng-container>
+        <ion-row
+          *ngIf="item?.Name != 'Shop By Category'"
+          class="mycatego animated pulse"
+        >
+          <ion-col col-12 text-center class="nopadding" sytle="margin-bottom:100px;">
             <dealsgrid
               [items]="item"
               [type]="'stores'"
@@ -167,36 +227,45 @@
           </ion-col>
         </ion-row>
       </ng-container>
-    </ng-container>
-    <ion-row *ngIf="lastStore" text-center>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+   <ion-row text-center>
       <ion-col col-12>
-        <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;">No more stores</h2>
+        <h2
+          style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;"
+          class="animated infinite pulse"
+        >
+          No more stores
+        </h2>
       </ion-col>
     </ion-row>
-    <ng-template #loading>
+    </ng-container>
+   
+    <!-- <ng-template #loading>
       <ion-spinner name="bubbles"></ion-spinner>
-    </ng-template>
-  
+    </ng-template> -->
   </ng-template>
   <ng-template #notconnected>
-     <div style="height: 100%;width:100%;background: ivory;position: absolute;">
-    <img
-      src="../../assets/nointernetbg.png"
-      alt=""
-      style="
+    <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+      <img
+        src="../../assets/nointernetbg.png"
+        alt=""
+        style="
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;"
-    />
-    
-  </div>
+      />
+    </div>
   </ng-template>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
- 
- 
+
+
 </ion-content>

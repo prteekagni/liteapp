@@ -6,7 +6,7 @@ import { getAllDebugNodes } from "@angular/core/src/debug/debug_node";
 @Injectable()
 export class AuthenticateProvider {
   user;
-  apiUrl = "http://http://13.235.82.211/api/";
+  apiUrl = "http://13.235.82.211/api/";
   constructor(public http: HttpClient, public googlePlus: GooglePlus) {}
 
   checkUserLogin() {

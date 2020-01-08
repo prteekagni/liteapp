@@ -1,7 +1,7 @@
 <ion-row text-left>
   <ion-col col-12>
-    <h4 style="margin-top:0px;margin-bottom:0px;">
-      Top Stores
+    <h4 style="margin-top:0px;margin-bottom:0px;" class="focus-in-expand">
+      Best Stores
     </h4>
   </ion-col>
   <ng-container
@@ -25,7 +25,7 @@
       </ion-row>
       <ng-container *ngIf="items.length > 6">
         <ion-row text-center>
-          <ion-col col-12 text-center *ngIf="showMore">
+          <ion-col col-12 text-center>
             <ion-col col-3>
               <button
                 ion-button
@@ -33,18 +33,24 @@
                 (click)="toggleDisplay()"
                 text-center
                 color="danger"
+                [@btnanimation]="btnstate"
               >
-                Show Less
+               <span *ngIf="!showMore">
+                 Show More
+               </span>
+<span *ngIf="showMore">
+ Show Less
+</span>
               </button>
             </ion-col>
           </ion-col>
-          <ion-col col-12 text-center *ngIf="!showMore">
+          <!-- <ion-col col-12 text-center *ngIf="!showMore">
             <ion-col col-3>
-              <button ion-button round (click)="toggleDisplay()" color="danger">
+              <button ion-button round (click)="toggleDisplay()" color="danger" [@btnanimation]="btnstate">
                 Show More
               </button>
             </ion-col>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ng-container>
     </ion-col>

@@ -10,6 +10,7 @@ const P_KEY = "pushNotifications";
 const I_KEY = "images";
 const V_KEY = "visitedDeals";
 const S_KEY = "visitedStores";
+const VDC_KEY = "visitedDealCategory";
 
 @Injectable()
 export class StorageProvider {
@@ -129,12 +130,11 @@ export class StorageProvider {
           for (let i of items) {
             if (i.data.ID === item.ID) {
               newItems.push(tempData);
-            }
-            else{
+            } else {
               newItems.push(i);
             }
           }
-           this.storage.set(S_KEY, newItems);
+          this.storage.set(S_KEY, newItems);
         } else {
           tempData = {
             data: item,
@@ -153,6 +153,55 @@ export class StorageProvider {
     });
   }
 
+  visitedDealCategory(item: any): Promise<any> {
+    var tempData = {};
+    console.log(item);
+    
+    return this.storage.get(VDC_KEY).then(items => {
+      if (items) {
+        
+        if (items.find(x => x.data.ID === item.ID)) {
+          const result = items.find(x => x.data.ID === item.ID);
+          console.log(result);
+          var newfrequency = result.frequency + 1;
+          tempData = {
+            data: item,
+            frequency: newfrequency
+          };
+          let newItems: any[] = [];
+          for (let i of items) {
+            if (i.data.ID === item.ID) {
+              newItems.push(tempData);
+              console.log(newItems);
+              
+            } else {
+              newItems.push(i);
+            }
+          }
+          console.log("New Items going to push" + newItems);
+          
+          this.storage.set(VDC_KEY, newItems);
+        } else {
+          tempData = {
+            data: item,
+            frequency: 1
+          };
+          items.push(tempData);
+          this.storage.set(VDC_KEY, items);
+        }
+      } else {
+        tempData = {
+          data: item,
+          frequency: 1
+        };
+        this.storage.set(VDC_KEY, [tempData]);
+      }
+    });
+  }
+
+  getVisitedDealCategory() {
+    return this.storage.get(VDC_KEY);
+  }
   getVisitedDeals() {
     return this.storage.get(V_KEY);
   }
@@ -163,6 +212,10 @@ export class StorageProvider {
 
   removeVisitedStores() {
     return this.storage.set(S_KEY, "");
+  }
+
+  removeVisitedCategory(){
+    return this.storage.set(VDC_KEY, "");
   }
 
   getNotification(): Promise<any[]> {

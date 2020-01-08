@@ -35,7 +35,7 @@ page-home {
 
   .item-md.item-block .item-inner {
     padding-right: 0px !important;
-    border-bottom: 0px !important;
+    // border-bottom: 0px !important;
   }
 
   .leftpadding {
@@ -57,7 +57,18 @@ page-home {
   //  }
   .header-image {
     //  background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950);
-    height: 250px;
+    // height: 250px;
+    width: fit-content;
+    margin-top: 24px;
+  }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+        left: 0;
+    bottom: 20px;
+    width: 100%;
+  }
+  .ios .swiper-pagination-bullet-active, .md .swiper-pagination-bullet-active{
+    color:white
   }
 
   .main-content {
@@ -93,8 +104,7 @@ page-home {
   }
 
   .mainslide {
-    height: 250px;
-    margin-top: -18px;
+    height: 250px;  
   }
 
   //  .mytextcolor{
@@ -206,5 +216,46 @@ h4, h5, h6{
     margin-top:0px
 }
 
+body {
+   overflow-x:hidden;
+}
+ .dealscardimage{
+       width: 40px !important;
+   
+    margin-bottom: 3px;
+    margin-top: 5px;
+  }
+    .dealslargecard {
+    position: relative;
+    text-align: center;
+    height: 70px;
+    width: 80px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+   
+    border-radius: 10px;
+  }
+ .dealslargecardcontainer {
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 75px !important;
+    margin-top: 0px;
+  }
 
+   :root {
+      --ion-safe-area-top: 20px;
+      --ion-safe-area-bottom: 49px;
+    }
+
+   .item-inner{
+    }
+
+    .borderlist >.item-md.item-block .item-inner{
+      border-bottom: 1px solid #dedede;
+    }
+   .borderlist >.item-md:last-child.item-block .item-inner  {
+     border-bottom : 0px !important;
+   }
 }

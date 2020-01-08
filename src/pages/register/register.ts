@@ -31,14 +31,17 @@ export class RegisterPage {
     private sharedService: SharedProvider,
     private authService: AuthenticateProvider
   ) {
-    let backAction = this.platform.registerBackButtonAction(() => {
-      console.log("second");
-      this.events.publish("change-tab", 0);
-      backAction();
-    }, 2);
-    // this.navCtrl.popToRoot();
-    //    this.events.publish("change-tab", 0);
-  }
+      let backAction = this.platform.registerBackButtonAction(() => {
+        console.log("second");
+        this.events.publish("change-tab", 0);
+        backAction();
+      }, 2);
+      // this.navCtrl.popToRoot();
+      //    this.events.publish("change-tab", 0);
+      this.sharedService.firebaseevent("screen_view", {
+        Name: "RegisterPage"
+      });
+    }
 
 
   ionViewDidLoad() {

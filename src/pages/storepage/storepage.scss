@@ -20,7 +20,7 @@ page-storepage {
   }
 
   ion-scroll[scroll-avatar] {
-    height: 120px;
+    height: 200px;
   }
 
   /* Hide ion-content scrollbar */
@@ -144,7 +144,7 @@ page-storepage {
 
   //
   ion-scroll[scroll-avatar] {
-    height: 172px; // height: 140px;
+    height: 250px; // height: 140px;
   }
   /*this is used as a container to show largecards */
   .largecardcontainer {
@@ -157,7 +157,7 @@ page-storepage {
   .brandcard {
     position: relative;
     text-align: center;
-  height: 60px;
+    height: 60px;
     width: 80px;
     margin-right: 0px;
     padding: 0px;
@@ -179,22 +179,23 @@ page-storepage {
     background: transparent;
   }
 
- .inner-image {
+  .inner-image {
     position: absolute;
-    top: 43%;
-    left: 20%;
-    width: 65px;
-}
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+  }
 
- div.image.even {
-    content: url(../../assets/border2.png);
+  div.image.even {
+    content: url(../../assets/blueborder.png);
   }
   div.image.odd {
-    content: url(../../assets/border3.png);
+    content: url(../../assets/pinkborder.png);
   }
 
-  div{
+  div {
     position: relative;
   }
-  $toolbar-background:black;
+  $toolbar-background: black;
 }

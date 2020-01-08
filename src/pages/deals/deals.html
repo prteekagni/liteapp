@@ -3,7 +3,7 @@
     <ion-title>
       <ion-row>
         <ion-col col-6 text-left>
-          <span class=""> Deals Locker</span>
+          <span class="tracking-in-expand"> Deals Locker</span>
         </ion-col>
         <ion-col col-6 text-right>
           <ion-icon
@@ -29,14 +29,15 @@
     *ngIf="isConnected; then thenTemplate; else notconnected"
   ></ng-container>
   <ng-template #thenTemplate>
+
+  
     <ion-row>
       <ion-col col-12>
-        <ion-list style="margin-left: 10px;">
+        <ion-list style="margin-left: 10px;" [@photosAnimation]="deals.length">
           <ion-item
             *ngFor="let item of deals "
-            class="dealslist animated shake"
+            class="dealslist"
             (click)="getAllDeals(item)"
-            class='animated lightSpeedIn'
           >
             <ion-thumbnail item-start>
               <img
@@ -63,12 +64,16 @@
           </button> -->
           </ion-item>
         </ion-list>
-       
       </ion-col>
     </ion-row>
-     <ion-row text-center>
+    <ion-row text-center>
       <ion-col col-12>
-        <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;    margin: 0px;">No more category</h2>
+        <h2
+          style="font-family:GloriaHallelujah-Regular;color:#ff6700;margin: 0px;"
+          class="animated infinite pulse"
+        >
+          No more category
+        </h2>
       </ion-col>
     </ion-row>
   </ng-template>

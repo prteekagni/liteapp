@@ -31,10 +31,9 @@ export class ProfileComponent implements AfterViewInit {
     public modalCtrl: ModalController,
     private viewCtrl: ViewController,
     private googlePlus: GooglePlus,
-    private storageService:StorageProvider,
+    private storageService: StorageProvider,
     private navCtrl: NavController
   ) {
-    
     var tempdata = JSON.parse(this.authService.getUserDetail());
     if (this.authService.checkGLogin() == "true") {
       this.isGoogleLogin = true;
@@ -153,10 +152,57 @@ export class ProfileComponent implements AfterViewInit {
     console.log(data);
   }
 
-  getHistory(){
-  this.navCtrl.push("ProductlistPage", {
-    type: "history"
-  });
+  getHistory() {
+    this.navCtrl.push("ProductlistPage", {
+      type: "history"
+    });
   }
 
+  removeVisitedStore() {
+        let alert = this.alertCtrl.create({
+          title: "Confirm",
+          message: "Do you want to remove visited store?",
+          buttons: [
+            {
+              text: "Cancel",
+              role: "cancel",
+              handler: () => {
+                console.log("Cancel clicked");
+              }
+            },
+            {
+              text: "Remove",
+              handler: () => {
+                 this.storageService
+                   .removeVisitedStores()
+                   .then(res => console.log(res));
+              }
+            }
+          ]
+        });
+        alert.present();
+  }
+
+  removeVisitedCategory() {
+     let alert = this.alertCtrl.create({
+       title: "Confirm",
+       message: "Do you want to remove visited category?",
+       buttons: [
+         {
+           text: "Cancel",
+           role: "cancel",
+           handler: () => {
+             console.log("Cancel clicked");
+           }
+         },
+         {
+           text: "Remove",
+           handler: () => {
+               this.storageService.removeVisitedCategory().then(res => console.log(res));
+         }
+        }
+       ]
+     });
+     alert.present();
+  }
 }

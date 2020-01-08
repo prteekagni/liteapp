@@ -4,11 +4,28 @@ import { DealsProvider } from "../../providers/deals/deals";
 import { map } from "rxjs/operators";
 import { SharedProvider } from "../../providers/shared/shared";
 import { StorageProvider } from "../../providers/storage/storage";
+import { trigger, transition, query, style, stagger, animate } from "@angular/animations";
 
 @IonicPage()
 @Component({
   selector: "page-search",
-  templateUrl: "search.html"
+  templateUrl: "search.html",
+  animations: [
+    trigger("photosAnimation", [
+      transition("* => *", [
+        query(".dealslist", style({ transform: "translateX(-100%)" }), {
+          optional: true
+        }),
+        query(
+          ".dealslist",
+          stagger("100ms", [
+            animate("500ms", style({ transform: "translateX(0)" }))
+          ]),
+          { optional: true }
+        )
+      ])
+    ])
+  ]
 })
 export class SearchPage {
   data;
@@ -30,17 +47,21 @@ export class SearchPage {
     //Add 'implements OnInit' to the class.
 
     this.type = this.navParams.get("type");
+    //  this.sharedService.firebaseevent("screen_view", {
+    //    Name: "SearchPage"
+    //  });
+
     // this.sharedService.firebaseevent("searchPage", { Name: this.type });
     if (this.type == "stores") {
       this.data = this.navParams.get("data");
       this.allitems = this.data;
-      this.dealService
-        .getAllStoresLink()
-        .pipe(map((res: any) => res.filter((resp: any) => resp.isFav != true)))
-        .subscribe((res: any) => {
-          this.listitems = res;
-          this.copylistitems = res;
-        });
+      // this.dealService
+      //   .getAllStoresLink()
+      //   .pipe(map((res: any) => res.filter((resp: any) => resp.isFav != true)))
+      //   .subscribe((res: any) => {
+      //     this.listitems = res;
+      //     this.copylistitems = res;
+      //   });
     }
     if (this.type == "deals") {
       this.dealService.getAllDeals().subscribe((res: any) => {
@@ -63,6 +84,8 @@ export class SearchPage {
       if (this.type == "stores") {
         this.listitems = this.copylistitems;
         this.data = this.data.filter(item => {
+          // this.sharedService.firebaseevent("serach_keyword", { Name: val });
+
           return item.Name.toLowerCase().indexOf(val.toLowerCase()) > -1;
         });
         this.listitems = this.listitems.filter(item => {
@@ -70,6 +93,8 @@ export class SearchPage {
         });
       } else if (this.type == "deals") {
         this.data = this.data.filter(item => {
+          // this.sharedService.firebaseevent("serach_keyword", { Name: val });
+
           return (
             item.Name.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
             item.SubCategory.Name.toLowerCase().indexOf(val.toLowerCase()) >

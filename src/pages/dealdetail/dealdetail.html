@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-     <span class="titlecolormargin">Offer Detail</span>
-        
+     <span class="titlecolormargin" *ngIf="services !== 'services'">{{deal?.ShortDescription}}</span>
+     <span class="titlecolormargin" *ngIf="services == 'services'">{{deal?.SubCategory.Name}}</span>
     </ion-title>
     <ion-buttons start color="theme">
       <button ion-button (click)="dismiss()" color="theme">
@@ -14,9 +14,12 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab right bottom>
+    <button ion-fab color="buttons" (click)="shareApp()"><ion-icon name="md-share"></ion-icon></button>
+     </ion-fab>
 <ng-container *ngIf="deal">
  <ng-container *ngIf="services !== 'services'; else elseTemplate">
-    <ion-row style="margin-top:25px">
+    <ion-row style="margin-top:50px">
     <ion-col col-12>
       <img
         src="{{deal?.Logo}}"
@@ -32,30 +35,35 @@
   </ion-row>
   <ion-row text-center>
       <ion-col col-12 >
-      <h4 style="margin-top: 10px;
-    margin-bottom: 0px;">{{deal.Name}}</h4>
+      <!-- <h4 style="margin-top: 10px;
+    margin-bottom: 0px;">{{deal.Name}}</h4> -->
       <h6 style="margin-left: 10px !important;
-    margin-top: 0px;
+    margin-top: 20px;
     margin-bottom: 0px;">{{deal.Category.Name}}</h6>
     </ion-col>
-    <ion-col col-12>
-      <h4 style="margin-top:5px">{{deal.ShortDescription}}</h4>
-    </ion-col>
+    <!-- <ion-col col-12>
+      <h6 style="margin-top:5px">{{deal.ShortDescription}}</h6>
+    </ion-col> -->
   </ion-row>
 
   <ion-row>
     <ion-col col-12>
       
-           <h4 >Offer Details</h4>
-          <p style="margin-left: 10px !important;
+           <h4 style="font-family: Teko-Regular;">Offer Details</h4>
+          <!-- <p style="margin-left: 10px !important;
     margin-top: 0px;
-    margin-bottom: 0px;">
-            {{deal.Description}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium eum esse cumque atque, aspernatur, laborum minima ipsum reiciendis autem dolorem velit unde modi quasi quos?
-          </p> 
+    margin-bottom: 0px;"> -->
+    <ul>
+      <ng-container *ngFor="let item of description">
+ <li *ngIf="item.length > 1"> {{item}}.</li>
+
+      </ng-container>
       
+</ul>  
 
-
-
+         
+          <!-- </p>  -->
+    
     <ion-row>
     <ion-col col-12>
       <!-- <ion-card>
@@ -64,7 +72,8 @@
             <ion-col col-12>
               <h6>Coupon Code</h6>
               <!-- <h4>{{deal?.Coupon}}</h4> -->
-              <h2 style="color:#ff6700;text-transform: uppercase;">{{deal?.Coupon}}</h2>
+              <h2 *ngIf="deal.Coupon" style="color:#ff6700;text-transform: uppercase;">{{deal?.Coupon}}</h2>
+              <h2 *ngIf="!deal.Coupon" style="color:#ff6700;text-transform: uppercase;font-family: GloriaHallelujah-Regular;">No Coupon Required</h2>
             </ion-col>
           </ion-row>
         <!-- </ion-card-content>
@@ -92,13 +101,14 @@
     </ion-col>
   </ion-row>
 
- 
-  <ion-fab right bottom >
-    <button ion-fab (click)="shareApp()">
-      <ion-icon name="md-share"></ion-icon>
-    </button>
-  </ion-fab>
-  <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Get Deal</button>
+
+  <div style="position:absolute;bottom:0px;z-index:9999">
+<!-- <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Get Deal</button> -->
+ <!-- <ion-fab right bottom>
+   <button ion-fab color="danger"  full (click)="getDeal(deal)" class="btnBottom">Get Deal</button>
+ </ion-fab> -->
+  </div>
+  
   </ng-container>
   <ng-template #elseTemplate>
  <ion-row style="margin-top:25px">
@@ -134,15 +144,48 @@
 
   <ion-row>
     <ion-col col-12>
-      <h4 >Description</h4>
+     <h4 style="font-family: Teko-Regular;">Offer Description</h4>
           <p style="margin-left: 10px !important;
     margin-top: 0px;
     margin-bottom: 0px;">
             {{deal.Description}}
           </p> 
-           <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Apply</button>
+           <!-- <button ion-button color="danger"  full (click)="getDeal(deal)" class="btnBottom">Apply</button> -->
     </ion-col>
   </ion-row>
   </ng-template>
 </ng-container>
 </ion-content>
+
+<ion-footer>
+  <button ion-button full style="border-radius: 2px;
+    overflow: hidden;
+    height: 4.6rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+     margin: 0;
+     padding: 0"  color="danger" (click)="getDeal(deal)" *ngIf="this.services !== 'services'">Get Deal</button>
+     <button ion-button full style="border-radius: 2px;
+    overflow: hidden;
+    height: 4.6rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+     margin: 0;
+     padding: 0"  color="danger" (click)="getDeal(deal)" *ngIf="this.services == 'services'">Apply</button>
+</ion-footer>

@@ -43,7 +43,7 @@ page-waitmodal {
   }
 
   .loader {
-    width: 100px;
+    width: 94px;
     /* height: 100px; */
     display: -webkit-box;
     display: -webkit-flex;
@@ -57,7 +57,7 @@ page-waitmodal {
     /* -webkit-align-items: center; */
     -ms-flex-align: center;
     align-items: center;
-    margin: -5px -1px;
+    margin: 6px -1px;
   }
 
   @keyframes load10 {
@@ -83,5 +83,12 @@ page-waitmodal {
   }
   .toolbar-background-md {
     background: transparent;
+  }
+
+  .logoimage{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
   }
 }

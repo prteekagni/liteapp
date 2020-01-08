@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, filter, mergeMap, tap } from "rxjs/operators";
-import { ReplaySubject } from "rxjs";
+import { ReplaySubject, Observable } from "rxjs";
 
 const apiUrl = "http://13.235.82.211/api/";
 
@@ -20,11 +20,15 @@ export class DealsProvider {
 
   // get stores by id
   getStores(id) {
-    return this.http.get(apiUrl + "stores/getStores/" + id);
-  }
+                  console.log("Stores by Id APi");
+
+                  return this.http.get(apiUrl + "stores/getStores/" + id);
+                }
 
   // get fav stores
   getTopStores() {
+    console.log("Top Stores APi");
+    
     return this.http
       .get(apiUrl + "stores")
       .pipe(map((res: any) => res.filter((resp: any) => resp.isFav == true)));
@@ -32,6 +36,7 @@ export class DealsProvider {
 
   // get all stores
   getAllStores() {
+    console.log("All Stores APi");
     return this.http
       .get(apiUrl + "stores")
       .pipe(map((res: any) => res.filter(resp => resp.StoreType !== 0)))
@@ -40,22 +45,28 @@ export class DealsProvider {
       });
   }
 
-  getAllStoresLink(){
-    return this.http
-    .get(apiUrl + "stores");
-  }
+  // getAllStoresLink(){
+  //   console.log("All Link Stores APi");
+  //   return this.http
+  //   .get(apiUrl + "stores");
+  // }
 
   
 
   // get store links
   getSubStores(mid, id) {
-    return this.http.get(apiUrl + "stores/getSubStores/" + mid + "/" + id);
-  }
+                          console.log("Sub Stores APi");
 
-  getStoreCategory() {
+                          return this.http.get(
+                            apiUrl + "stores/getSubStores/" + mid + "/" + id
+                          );
+                        }
+
+  getStoreCategory():Observable<any> {
+    
     return this.http
       .get(apiUrl + "category")
-      .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
+      // .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
   }
 
   getFeatureStore() {
@@ -123,7 +134,8 @@ export class DealsProvider {
 
   // get products by category
   getProductByCategory(data) {
-    return this.http.get(apiUrl + "product/", data.ID);
+    console.log("ID from prodcut service " +data.ID);
+    return this.http.get(apiUrl + "product/GetProductsByCategory/" +data.ID);
   }
 
   // get product detail
@@ -131,13 +143,13 @@ export class DealsProvider {
     return;
   }
 
-  getTopBrands() {
-    return this.http
-      .get(apiUrl + "stores")
-      .pipe(
-        map((res: any) => res.filter((resp: any) => resp.StoreType == 100))
-      );
-  }
+  // getTopBrands() {
+  //   return this.http
+  //     .get(apiUrl + "stores")
+  //     .pipe(
+  //       map((res: any) => res.filter((resp: any) => resp.StoreType == 100))
+  //     );
+  // }
 
   getBrandsByCategory(data) {
     return this.http.get(apiUrl + "brand/" + data);

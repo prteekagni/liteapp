@@ -31,16 +31,19 @@ export class LoginComponent {
 
   onSubmit(data: NgForm) {
     this.authService.loginUser(data.value).subscribe((res: any) => {
-      console.log(res);
-      this.events.publish("login", true);
-      if (res.Token.Value) {
+      if (res.Token !== null && res.Token.hasOwnProperty("Value")) {
         this.authService.setUserLogin();
         this.authService.setUserDetails(res);
         this.events.publish("login", true);
         this.authService.setToken(res.Token);
       } else {
+        if(res.Token !==null)
         this.sharedService.createToast("Wrong Password");
+        else{
+          this.sharedService.createToast("No User Found")
+        }
       }
+    
     });
   }
 

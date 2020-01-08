@@ -15,10 +15,34 @@ import {
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
 import { File } from "@ionic-native/file";
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from "@angular/animations";
 @Component({
   selector: "dealsgrid",
-  templateUrl: "dealsgrid.html"
+  templateUrl: "dealsgrid.html",
+  animations: [
+    trigger("photosAnimation", [
+      transition("* => *", [
+        query(".dealslist", style({ transform: "translateX(-100%)" }), {
+          optional: true
+        }),
+        query(
+          ".dealslist",
+          stagger("600ms", [
+            animate("900ms", style({ transform: "translateX(0)" }))
+          ]),
+          { optional: true }
+        )
+      ])
+    ])
+  ]
 })
 export class DealsgridComponent implements OnInit {
   text: string;
@@ -31,7 +55,6 @@ export class DealsgridComponent implements OnInit {
   @ViewChild(Content) content: Content;
   allstores: any = [];
   copiedData: any = [];
-
   data1: any = [];
   constructor(
     private dealService: DealsProvider,
@@ -44,7 +67,7 @@ export class DealsgridComponent implements OnInit {
 
   ngOnInit() {
     this.copyItem = this.items;
-    
+
     if (this.type === "deals" && this.items.ID) {
       this.dealService
         .getDealBySubCategory(this.items.ID)
@@ -105,7 +128,8 @@ export class DealsgridComponent implements OnInit {
         .getSubStores(this.items.CatPID, this.items.ID)
         .subscribe((res: any) => {
           this.cards = res;
-          console.log("From " + this.items.Name + "Lenght" + this.cards.length);
+         console.log(this.cards);
+         
         });
     } else if (this.type == "stores") {
       this.dealService.storesdata.subscribe((res: any) => {
@@ -115,12 +139,19 @@ export class DealsgridComponent implements OnInit {
             this.cards.push(element);
           }
         });
+        
         if (this.cards.length !== 0) {
           if (
             (this.cards.length > 1 && this.cards[0].StoreType == 1) ||
             this.cards[0].StoreType == 6
           ) {
             this.directLinks = true;
+          }
+          else{ if(this.cards[0].StoreType == 2 && this.cards[0].CategoryID !== null && this.type == "stores"){
+              console.log(this.cards);
+              this.directLinks = true;
+              
+            }
           }
           this.copiedData = this.cards;
         }
@@ -348,8 +379,7 @@ export class DealsgridComponent implements OnInit {
     });
   }
 
-  touchstart(data){
+  touchstart(data) {
     console.log(data);
-    
   }
 }

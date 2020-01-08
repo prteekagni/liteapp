@@ -263,6 +263,8 @@ export class SharedProvider {
     //   console.log(event);
     //   this.browserOpenSubject.next(true);
     // });
+
+  
   }
 
   downloadOnMemory(data, type) {

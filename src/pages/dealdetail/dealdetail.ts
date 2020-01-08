@@ -25,6 +25,7 @@ export class DealdetailPage {
   backbtn;
   type;
   services;
+  description;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,17 +38,20 @@ export class DealdetailPage {
     private notificationService: NotificationProvider
   ) {
     this.type = this.navParams.get("data");
-  this.storageService.visitedDeals(this.type).then((res:any)=>{
-    console.log(res);
-    
-  })
+
+    // this.type.Description = this.type.Description.replace("/.", "/br");
+    this.description = this.type.Description !== null?this.type.Description.split("."):[];
+
+    this.storageService.visitedDeals(this.type).then((res: any) => {
+      console.log(res);
+    });
     if (this.type.type == "push") {
       this.dealService.getDealByID(this.type.id).subscribe((res: any) => {
         this.deal = res;
       });
     } else {
       this.deal = this.navParams.get("data");
-         this.services = this.navParams.get("type");
+      this.services = this.navParams.get("type");
       if (this.deal.hasOwnProperty("Coupon")) {
         this.clipboard.copy(this.deal.Coupon).then(
           res => {
@@ -70,12 +74,12 @@ export class DealdetailPage {
   }
   shareApp() {
     this.sharedService.shareDeals(this.deal);
-     this.sharedService.firebaseevent("shareDeal", "");
+    this.sharedService.firebaseevent("shareDeal", "");
   }
 
   getDeal(data) {
     this.sharedService.firebaseevent("Opened Deal", "");
-     this.sharedService.openBrowser(data);
+    this.sharedService.openBrowser(data);
   }
 
   ionViewWillLeave() {}

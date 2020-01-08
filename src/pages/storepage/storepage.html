@@ -2,7 +2,7 @@
   <ion-navbar id="navbar">
     <ion-title>
       <ion-row>
-        <ion-col col-6 text-left style="color:orangered;">
+        <ion-col col-6 text-left style="color:black;">
           {{ title }}
         </ion-col>
         <ion-col col-6 text-right>
@@ -184,7 +184,7 @@
           *ngIf="item?.ID"
         ></dealsgrid>
       </ng-container>
-
+  
       <!-- </ion-col>
         </ion-row> -->
       <!-- <ng-template #loading>
@@ -193,7 +193,16 @@
       <!-- </ion-col> -->
       <!-- <singleadd *ngIf="i % 3 == 0"></singleadd> -->
     </ng-container>
-
+ <ion-row text-center>
+      <ion-col col-12>
+        <h2
+          style="font-family:GloriaHallelujah-Regular;color:#ff6700;margin: 0px;"
+          class="animated infinite pulse"
+        >
+          No More Stores
+        </h2>
+      </ion-col>
+    </ion-row>
     <!-- Single Add -->
     <!-- <singleadd></singleadd> -->
   </ng-template>

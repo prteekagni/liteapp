@@ -42,6 +42,7 @@ export class LinkmodalPage implements OnInit {
     console.log("From Link modal" + this.Url);
     
     this.title = this.navParams.get("data").Name;
+    // this.sharedService.firebaseevent("screen_view", { Name: "LinkModalPage" });
       
   }
 
@@ -72,7 +73,7 @@ export class LinkmodalPage implements OnInit {
         data: data
       },
       {
-        cssClass: "waitlinkmodal",
+        cssClass: "linkmodal",
         showBackdrop: true,
         enableBackdropDismiss: true
       }

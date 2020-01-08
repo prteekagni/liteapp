@@ -2,7 +2,7 @@ import {
   Component,
   ViewChild,
   Input,
-  NgZone
+  NgZone,
 } from "@angular/core";
 import {
   IonicPage,
@@ -16,11 +16,36 @@ import {
 import { DealsProvider } from "../../providers/deals/deals";
 import { SharedProvider } from "../../providers/shared/shared";
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from "@angular/animations";
+import { StorageProvider } from "../../providers/storage/storage";
 
 @IonicPage()
 @Component({
   selector: "page-deals",
-  templateUrl: "deals.html"
+  templateUrl: "deals.html",
+  animations: [
+    trigger("photosAnimation", [
+      transition("* => *", [
+        query(
+          ".dealslist",
+          style({ transform: "translateX(-100%)" }),
+           { optional: true }),
+        query(
+          ".dealslist",
+          stagger("100ms", [
+            animate("500ms", style({ transform: "translateX(0)" }))
+          ]), { optional: true })
+      ])
+    ])
+  ]
 })
 export class DealsPage {
   @ViewChild(Content) content: Content;
@@ -47,15 +72,16 @@ export class DealsPage {
     public keyboard: Keyboard,
     private events: Events,
     private ngZone: NgZone,
-    private sharedService: SharedProvider
+    private sharedService: SharedProvider,
+    private storageService: StorageProvider
   ) {
     this.dealsprovider.getDealsCategory().subscribe((res: any) => {
       this.deals = res;
       this.test = res;
     });
-    this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
-      this.subdeals = res;
-    });
+    // this.dealsprovider.getDealSubCategory().subscribe((res: any) => {
+    //   this.subdeals = res;
+    // });
     this.events.subscribe("nstatus", res => {
       if (res) {
         this.ngZone.run(() => {
@@ -70,7 +96,7 @@ export class DealsPage {
   }
 
   ionViewWillEnter() {
-    // this.sharedService.firebaseevent("DealsPage","");
+    // this.sharedService.firebaseevent("screen_view", { Name: "DealsPage" });
   }
 
   scrollHandler(event) {}
@@ -88,9 +114,9 @@ export class DealsPage {
   }
 
   search(event) {
-   this.navCtrl.push("SearchPage",{
-     type:"deals"
-   })
+    this.navCtrl.push("SearchPage", {
+      type: "deals"
+    });
   }
 
   setFocus() {
@@ -142,18 +168,22 @@ export class DealsPage {
   }
 
   getAllDeals(data) {
-    console.log(data);
-    this.navCtrl
-      .push("StabsPage", {
-        data: data
-      })
-      .then(
-        res => {},
-        err => {
-          this.sharedService.createToast("Sorry !!");
-        }
-      );
-  }
+                      this.storageService
+                        .visitedDealCategory(data)
+                        .then((res: any) => console.log(res));
+
+                      console.log(data);
+                      this.navCtrl
+                        .push("StabsPage", {
+                          data: data
+                        })
+                        .then(
+                          res => {},
+                          err => {
+                            this.sharedService.createToast("Sorry !!");
+                          }
+                        );
+                    }
 
   goToFav() {
     this.navCtrl.push("FavouritesPage");

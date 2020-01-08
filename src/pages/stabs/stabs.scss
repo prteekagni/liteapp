@@ -1,18 +1,41 @@
 page-stabs {
+ .toolbar-md {
+padding:0px;
+min-height: 62px;
+}
+//  .scroll-content {
+//     padding: 0px !important;
+//     margin-top: 127px !important;
+// }
+  .label-md {
+    margin: 0px !important;
+  }
+
+  .list-md .item-block .item-inner {
+    padding-right: 0px !important;
+    border-bottom: 0px !important;
+  }
+
+  .item-md {
+    padding-left: 0px !important;
+    background-image: linear-gradient(109.6deg, #ecf0f7 11.2%, #f8f8fc 91.1%);
+  }
   .toolbar-title-md {
     color: black !important;
   }
   .scroll-content {
     padding: 0px !important;
     margin-top: 120px !important;
-    
   }
 
   ion-slides {
     height: 100% !important;
-    background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );
+    background-image: linear-gradient(
+      109.6deg,
+      rgba(236, 240, 247, 1) 11.2%,
+      rgba(248, 248, 252, 1) 91.1%
+    );
     margin-top: 20px;
-    
   }
   .SwipedTabs-indicatorSegment {
     -webkit-transition: 0.2s all;
@@ -51,7 +74,7 @@ page-stabs {
   }
 
   .tabsContent {
-    height: 50px !important;
+    height: 44px !important;
   }
 
   .segment-button {
@@ -81,31 +104,41 @@ page-stabs {
   ion-img {
     min-height: 75px !important;
   }
-  .swiper-slide img{
+  .swiper-slide img {
     width: 80px !important;
     height: 60px !important;
     max-height: 60px !important;
     max-width: 80px !important;
   }
 
-
   .segment-md .segment-button {
     font-size: 1.6rem !important;
     line-height: 3.4rem !important;
+
+    background-image: linear-gradient(
+      109.6deg,
+      rgba(236, 240, 247, 1) 11.2%,
+      rgba(248, 248, 252, 1) 91.1%
+    );
   }
 
-  .dealsimage{
+  .dealsimage {
     width: 80px !important;
   }
 
-  ion-infinite-scroll-content{
-    background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );
+  ion-infinite-scroll-content {
+    background-image: linear-gradient(
+      109.6deg,
+      rgba(236, 240, 247, 1) 11.2%,
+      rgba(248, 248, 252, 1) 91.1%
+    );
   }
 
-  .slide-zoom{
+  .slide-zoom {
     height: 100% !important;
   }
  
+
   // .header-md::after{
   //   background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==") !important;
   // }

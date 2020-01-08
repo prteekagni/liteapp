@@ -13,16 +13,78 @@ import { DealsProvider } from "../../providers/deals/deals";
 import { SharedProvider } from "../../providers/shared/shared";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { StorageProvider } from "../../providers/storage/storage";
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger,
+  keyframes
+} from "@angular/animations";
 @IonicPage()
 @Component({
   selector: "page-stabs",
-  templateUrl: "stabs.html"
+  templateUrl: "stabs.html",
+  animations: [
+    trigger("photosAnimation", [
+      transition(":enter", [
+        query(".dealslist", style({ transform: "translateX(-100%)" }), {
+          optional: true
+        }),
+        query(
+          ".dealslist",
+          stagger("300ms", [
+            animate("500ms", style({ transform: "translateX(0)" }))
+          ]),
+          { optional: true }
+        )
+      ])
+    ]),
+    trigger("btnanimation", [
+      transition("more => less", [
+        query(
+          ":self",
+          animate(
+            "1s",
+            keyframes([
+              style({ transform: "translateY(0) rotate(0)" }),
+              style({ transform: "translateY(-5px) rotate(1deg)" }),
+              style({ transform: "translateY(0px) rotate(-1deg)" }),
+              style({ transform: "translateY(-9px) rotate(3.2deg)" }),
+              style({ transform: "translateY(5px) rotate(-2.4deg)" }),
+              style({ transform: " translateY(-6px) rotate(1.2deg)" }),
+              style({ transform: "translateY(0) rotate(0)" })
+            ])
+          )
+        )
+      ]),
+      transition("less => more", [
+        query(
+          ":self",
+          animate(
+            "1s",
+            keyframes([
+              style({ transform: "translateY(0) rotate(0)" }),
+              style({ transform: "translateY(-5px) rotate(1deg)" }),
+              style({ transform: "translateY(0px) rotate(-1deg)" }),
+              style({ transform: "translateY(-9px) rotate(1.2deg)" }),
+              style({ transform: "translateY(5px) rotate(-1.4deg)" }),
+              style({ transform: " translateY(-6px) rotate(1.2deg)" }),
+              style({ transform: "translateY(0) rotate(0)" })
+            ])
+          )
+        )
+      ])
+    ])
+  ]
 })
 export class StabsPage implements OnInit {
   @ViewChild("SwipedTabsSlider") SwipedTabsSlider: Slides;
   @ViewChild("MultiItemsScrollingTabs") ItemsTitles: Content;
 
+  dealcard = "more";
   SwipedTabsIndicator: any = null;
   tabTitleWidthArray: any = [];
   tabElementWidth_px: number = 50;
@@ -35,7 +97,7 @@ export class StabsPage implements OnInit {
   data;
   title: string;
   alldeals: any = [];
-
+  clickanm = "active";
   constructor(
     public navCtrl: NavController,
     platform: Platform,
@@ -53,18 +115,27 @@ export class StabsPage implements OnInit {
     this.data = this.navParams.get("data");
     this.title = this.data.Name;
     this.tabs.splice(0, 0, this.data);
-    
- this.dealService.getDealBySubCategory(this.data.ID).subscribe((res: any) => {
-   res.forEach(element => {
-     this.tabs.push(element)
-   });
- });
+
+    this.dealService
+      .getDealBySubCategory(this.data.ID)
+      .subscribe((res: any) => {
+        res.forEach(element => {
+          this.tabs.push(element);
+        });
+      });
     this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
       this.alldeals = res;
-       this.checkForFavourite(this.alldeals);
+      this.alldeals = this.alldeals.map(job => {
+        job.state = "more";
+        return job;
+      });
+      
+      console.log(this.alldeals);
+
+      this.checkForFavourite(this.alldeals);
     });
   }
- 
+
   ionViewDidEnter() {
     this.SwipedTabsIndicator = document.getElementById("indicator");
     if (this.tabs.length !== 0) {
@@ -72,9 +143,9 @@ export class StabsPage implements OnInit {
         this.tabTitleWidthArray.push(
           document.getElementById("tabTitle" + i).offsetWidth
         );
-         this.selectTab(0);
+      this.selectTab(0);
     }
-   
+
     if (this.tabs.length !== 0) {
       this.dealService
         .getDealsBySubCategory(this.tabs[0].ID)
@@ -97,6 +168,7 @@ export class StabsPage implements OnInit {
       this.tabTitleWidthArray[index] + "px";
     this.SwipedTabsIndicator.style.webkitTransform =
       "translate3d(" + this.calculateDistanceToSpnd(index) + "px,0,0)";
+    // this.SwipedTabsIndicator.style.left = 4 + "px";
     this.SwipedTabsSlider.slideTo(index);
   }
 
@@ -111,11 +183,18 @@ export class StabsPage implements OnInit {
   updateIndicatorPosition(data) {
     var index = this.SwipedTabsSlider.getActiveIndex();
     if (this.SwipedTabsSlider.length() == index) index = index - 1;
-
     this.SwipedTabsIndicator.style.width =
       this.tabTitleWidthArray[index] + "px";
+    // if (this.SwipedTabsSlider.realIndex == 0) {
+    //   this.SwipedTabsIndicator.style.left = 4 + "px";
+    // } else {
+    //   this.SwipedTabsIndicator.style.left = 0 + "px";
+    // }
     this.SwipedTabsIndicator.style.webkitTransform =
       "translate3d(" + this.calculateDistanceToSpnd(index) + "px,0,0)";
+    this.newItem = [];
+    console.log(this.newItem);
+
     this.dealService
       .getDealsBySubCategory(this.tabs[this.SwipedTabsSlider.realIndex].ID)
       .subscribe((res: any) => {
@@ -190,6 +269,10 @@ export class StabsPage implements OnInit {
         this.sharedService.createToast("Already in the list");
       }
     });
+    console.log("Before change" + element.state);
+    element.state = element.state == "more" ? "less" : "more";
+    this.clickanm = "inactive";
+    console.log("After Change" + element.state);
   }
   remindBtn(item) {
     this.notificationService.remindBtn(time => {
@@ -205,7 +288,6 @@ export class StabsPage implements OnInit {
 
   setAsFav(data) {
     this.sharedService.addToFavEventTrack(data);
-
     this.storageService.addDeals(data).then(res => {
       if (res == true) {
         this.sharedService.createToast("Deal added to favourite");

@@ -49,6 +49,7 @@ export class ProductlistPage implements OnInit {
     private dealService: DealsProvider,
     private navCtrl: NavController
   ) {
+    // this.sharedService.firebaseevent("screen_view", { Name: "ProductListPage" });
     
   }
 
@@ -57,15 +58,17 @@ export class ProductlistPage implements OnInit {
     this.type = this.navParams.get("type");
     console.log("From Product List page " + this.type);
    
-    if (this.type == "deals" && this.id.ID) {
-      this.dealService.getDealsByCategory(this.id.ID).subscribe((res: any) => {
-        this.newItem = res;
-        // this.checkForFavourite(this.newItem);
-      });
-    } 
+    // if (this.type == "deals" && this.id.ID) {
+    //   this.dealService.getDealsByCategory(this.id.ID).subscribe((res: any) => {
+    //     this.newItem = res;
+    //     // this.checkForFavourite(this.newItem);
+    //   });
+    // } 
     if(this.type == "services" && this.id.ID) {
       this.dealService.getProductByCategory(this.id).subscribe((res: any) => {
         this.newItem = res;
+        console.log("New Item from service" + this.newItem);
+        
       });
     } 
     if(this.type == "history"){

@@ -64,6 +64,14 @@
             <ion-icon name="md-settings" item-start></ion-icon>
             Save Profile
           </ion-item>
+             <ion-item (click)="removeVisitedStore()">
+          <ion-icon name="md-trash" item-start></ion-icon>
+          Clear Visited Store
+        </ion-item>
+          <ion-item (click)="removeVisitedCategory()">
+          <ion-icon name="md-trash" item-start></ion-icon>
+          Clear Visited Category
+        </ion-item>
           <ion-item (click)="changePassword()">
             <ion-icon name="md-phone-portrait" item-start></ion-icon>
             Change Password
@@ -123,15 +131,23 @@
           Others
         </ion-list-header>
           <ion-item (click)="getHistory()">
-          <ion-icon name="md-settings" item-start style="color:#ff6700"></ion-icon>
+          <ion-icon name="md-settings" item-start></ion-icon>
           History
         </ion-item>
         <ion-item (click)="UpdatePhoneNo()" >
-          <ion-icon name="md-settings" item-start style="color:#ff6700"></ion-icon>
+          <ion-icon name="md-settings" item-start></ion-icon>
           Update Details
         </ion-item>
+          <ion-item (click)="removeVisitedStore()">
+          <ion-icon name="md-trash" item-start></ion-icon>
+          Clear Visited Store
+        </ion-item>
+          <ion-item (click)="removeVisitedCategory()">
+          <ion-icon name="md-trash" item-start></ion-icon>
+          Clear Visited Category
+        </ion-item>
         <ion-item (click)="logOutFromGoogle()">
-          <ion-icon name="md-log-out" item-start style="color:#ff6700"></ion-icon>
+          <ion-icon name="md-log-out" item-start></ion-icon>
           Sign out
         </ion-item>
       </ion-list>

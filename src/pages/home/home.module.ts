@@ -11,6 +11,6 @@ import { DirectivesModule } from "../../directives/directives.module";
     IonicPageModule.forChild(HomePage),
     ComponentsModule,
     DirectivesModule
-  ]
+  ] 
 })
 export class HomePageModule {}

@@ -5,14 +5,15 @@
     </ion-col>
     <ion-col col-12 class="centerrow">
       <ion-row>
-        <ion-col col-4>
-          <img src="assets/logo192.png" />
+        <ion-col col-4 text-right>
+          <img src="assets/logo192.png"  style="width: 70px;"/>
         </ion-col>
         <ion-col>
           <div class="loader loader10"></div>
         </ion-col>
         <ion-col>
-          <img src="logo" alt="" />
+          <img src="{{data.Logo}}" alt=""  class="logoimage" *ngIf="data.Logo !==null"/>
+          <img src="{{logo}}" alt=""  class="logoimage" *ngIf="data.Logo == null"/>
         </ion-col>
       </ion-row>
       <ion-row> </ion-row>

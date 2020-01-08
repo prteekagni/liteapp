@@ -41,6 +41,7 @@
 </ion-header>
 
 <ion-content>
+
    <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -50,7 +51,11 @@
     </ion-refresher-content>
     </ion-refresher>
 
-
+<ion-fab right bottom>
+    <button ion-fab  (click)="shareApp()">
+      <ion-icon name="md-share"></ion-icon>
+    </button>
+  </ion-fab>
     <ng-container *ngIf="type == 'services'; then thenTemplate; else elseTemplate"></ng-container>
     <ng-template #thenTemplate>
         <ion-row text-center style="margin-top: 20px;">
@@ -59,7 +64,9 @@
       <h4>{{id?.Name}}</h4>
     </ion-col>
   </ion-row>
-  <ion-list [virtualScroll]="newItem" approxItemHeight="250px">
+  
+  <!-- <ng-container *ngIf="newItem.length > 0; else noproducttemplate"> -->
+ <ion-list [virtualScroll]="newItem" approxItemHeight="250px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
         <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
@@ -73,7 +80,7 @@
             <ion-col col-8>
               <h3 style="white-space: initial;
     font-size: 1.8rem;">{{item.Name}}</h3>
-                    <!-- <h3></h3> -->
+                    
             </ion-col>
           </ion-row>
           <ion-row>
@@ -92,6 +99,30 @@
       </ion-card>
     </ion-item>
   </ion-list>
+  <!-- </ng-container> -->
+  <ng-template #noproducttemplate>
+     <div style="height:calc(100% - 130px);;width:100%;position: absolute;">
+            <img
+              src="../../assets/noproduct.png"
+              alt=""
+              style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);"
+            />
+            <h3
+              style="    position: absolute;
+    top: calc(50% + 90px);
+    left: 50%;
+    transform: translate(-50%, -50%);font-family:GloriaHallelujah-Regular;"
+            >
+              No Product
+            </h3>
+          </div>
+  </ng-template>
+  
+ 
     </ng-template>
     <ng-template #elseTemplate>
             <ion-row text-center style="margin-top: 20px;">
@@ -135,9 +166,5 @@
   </ion-list>
     </ng-template>
     
-  <ion-fab right bottom>
-    <button ion-fab  (click)="shareApp()">
-      <ion-icon name="arrow-dropleft"></ion-icon>
-    </button>
-  </ion-fab>
+  
 </ion-content>

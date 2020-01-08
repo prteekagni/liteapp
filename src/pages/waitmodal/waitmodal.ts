@@ -24,6 +24,7 @@ export class WaitmodalPage {
     private viewController: ViewController
   ) {
     this.data = this.navParams.get("data");
+    
     this.logo = this.data.Name;
     console.log(this.data);
 
@@ -34,8 +35,8 @@ export class WaitmodalPage {
     // });
     setTimeout(() => {
       this.dismiss();
-      // this.sharedService.openBrowser(this.data);
-    }, 300);
+      this.sharedService.openBrowser(this.data);
+    }, 500);
   }
 
   ionViewDidLoad() {

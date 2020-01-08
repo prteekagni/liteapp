@@ -1,4 +1,12 @@
-import { Component, ViewChild, NgZone, ElementRef, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  NgZone,
+  ElementRef,
+  AfterViewInit,
+  Output,
+  EventEmitter
+} from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -7,7 +15,8 @@ import {
   Platform,
   Content,
   Slides,
-  ModalController
+  ModalController,
+  InfiniteScroll
 } from "ionic-angular";
 import { SharedProvider } from "../../providers/shared/shared";
 import { ScrollHideConfig } from "../../directives/scroll/scroll";
@@ -17,6 +26,17 @@ import { LocalNotifications } from "@ionic-native/local-notifications";
 import { StorageProvider } from "../../providers/storage/storage";
 import { CardgridComponent } from "../../components/cardgrid/cardgrid";
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from "@angular/animations";
+import { ReplaySubject } from "rxjs";
+import { count } from "rxjs/operator/count";
 const animationsOptions = {
   animation: "ios-transition",
   duration: 1000
@@ -25,7 +45,23 @@ const animationsOptions = {
 @IonicPage()
 @Component({
   selector: "page-home",
-  templateUrl: "home.html"
+  templateUrl: "home.html",
+  animations: [
+    trigger("photosAnimation", [
+      transition("* => *", [
+        query(".substores", style({ transform: "translateX(-100%)" }), {
+          optional: true
+        }),
+        query(
+          ".substores",
+          stagger("100ms", [
+            animate("500ms", style({ transform: "translateX(0)" }))
+          ]),
+          { optional: true }
+        )
+      ])
+    ])
+  ]
 })
 export class HomePage implements AfterViewInit {
   headerScrollConfig: ScrollHideConfig = {
@@ -36,6 +72,7 @@ export class HomePage implements AfterViewInit {
   @ViewChild(Slides) slides1: Slides;
   @ViewChild(Content) content: Content;
   @ViewChild(CardgridComponent) cardgridd: CardgridComponent;
+  topstoredata: ReplaySubject<any> = new ReplaySubject(1);
   slides;
   isLoggedIn: boolean = false;
   lnotification: any = [];
@@ -44,10 +81,10 @@ export class HomePage implements AfterViewInit {
   visibility: boolean = true;
   counter: any = 0;
   stores: any = [];
-  count;
+
   testdemo;
   defaultImage = "../../assets/images/logo.png";
-
+  mVisitedDeals: any = [];
   adsData: any = [];
   mainslide: any = [];
   brands: any = [];
@@ -128,31 +165,40 @@ export class HomePage implements AfterViewInit {
 
     this.dealService.getStoreCategory().subscribe((res: any) => {
       if (res) {
-        this.tempStore = res;
-        for (
-          this.count = 0;
-          this.count < 3 && this.count < this.tempStore.length;
-          this.count++
-        ) {
-          this.store.push(this.tempStore[this.count]);
+        this.tempStore = res.filter(opt => opt.CatType == 1);
+        console.log("From Store API " + this.tempStore.length);
+        this.substores = res.filter(opt => opt.CatType == 11);
+        this.brands = res.filter(opt => opt.CatType == 100);
+        if (this.tempStore.length > 1) {
+          for (
+            var count = 0;
+            count < 1 && count < this.tempStore.length;
+            count++
+          ) {
+            console.log("Count for stores " + count);
+            this.store.push(this.tempStore[count]);
+            console.log(this.store);
+          }
         }
       }
 
-      this.dealService.getFeatureStore().subscribe((res: any) => {
-        this.substores = res;
-        console.log(this.substores);
-      });
+      //   this.dealService.getFeatureStore().subscribe((res: any) => {
+      //     this.substores = res;
+      //     console.log(this.substores);
+      //     WOW.sync;
+      //   });
     });
 
-    this.dealService.getTopBrands().subscribe(
-      (res: any) => {
-        this.brands = res;
-        console.log(this.brands);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.dealService.getTopBrands().subscribe(
+    //   (res: any) => {
+    //     this.brands = res;
+    //     console.log(this.brands);
+    //     WOW.sync;
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
 
     // this.dealService.getAllStores();
 
@@ -177,60 +223,99 @@ export class HomePage implements AfterViewInit {
         });
       }
     });
-    this.storageService.getVisitedStores().then((res: any) => {
-      this.tempStore = res || 0;
-      this.topVisitedStores = this.tempStore.sort(function(a, b) {
-        return b.frequency - a.frequency;
-      });
-    });
   }
 
   nav11() {
     this.navCtrl.push("ProductlistPage");
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    this.storageService.getVisitedStores().then((res: any) => {
+      this.topVisitedStores = res || 0;
+      console.log(this.topVisitedStores);
+      if (this.topVisitedStores.length > 0) {
+        this.topVisitedStores = this.topVisitedStores.sort(function(a, b) {
+          return b.frequency - a.frequency;
+        });
+      }
+    });
+    this.storageService.getVisitedDealCategory().then((res: any) => {
+      this.mVisitedDeals = res || 0;
+      console.log(this.mVisitedDeals);
+      if (this.mVisitedDeals.length > 0)
+        this.mVisitedDeals = this.mVisitedDeals.sort(function(a, b) {
+          return b.frequency - a.frequency;
+        });
+    });
+  }
 
   goToNotification() {
     // this.firebaseAnalytics
     //   .logEvent("gTNotification","")
     //   .then((res: any) => alert(res))
     //   .catch((error: any) => console.error(error));
-    // this.sharedService.firebaseevent("gToNotificaitonP", "");
+    // this.sharedService.firebaseevent("NotificationPage", "");
     // this.checkDirectory();
     this.navCtrl.push("NotificationPage", {}, animationsOptions);
   }
 
   goToFav() {
-    // this.sharedService.firebaseevent("gToFavouriteP", "");
+    // this.sharedService.firebaseevent("FavouritePage", "");
     this.navCtrl.push("FavouritesPage", {}, animationsOptions);
   }
 
   ionViewWillLeave() {}
 
-  ngAfterViewInit() {
-    debugger;
-    console.log("Done");
-  }
-
   doInfinite(event) {
     console.log("loading event called");
-    this.dealService.storesdata.subscribe((res: any) => {
-      console.log(res);
-    });
-    if (this.store.length <= this.tempStore.length) {
-      for (let cindex = 0; cindex < 4; cindex++) {
-        this.store.push(this.tempStore[this.count]);
-        this.count++;
-        if (cindex == 3) {
-          event.complete();
-        }
+    if (this.store.length < this.tempStore.length) {
+      for (
+        let cindex = 0;
+        cindex < 4 &&
+        cindex < this.tempStore.length &&
+        this.store.length < this.tempStore.length;
+        cindex++
+      ) {
+        this.store.push(this.tempStore[this.store.length]);
       }
+      event.complete();
+      // this.lastStore = true;
+      // event.enable(false);
     } else {
       this.lastStore = true;
-      event.enable(false);
+      setTimeout(() => {
+        event.enable(false);
+      }, 500);
     }
   }
+  // doInfinite(infiniteScroll: InfiniteScroll) {
+  //     // infiniteScroll.complete();
+  //       console.log("loading event called");
+
+  // if (this.store.length < this.tempStore.length) {
+  //      console.log("Stores length not less than");
+  //     var templength = this.store.length;
+  //     for (let cindex = 1; cindex < 4 &&  cindex < this.tempStore.length  ; cindex++) {
+  //       this.store.push(this.tempStore[this.store.length]);
+  //       console.log("Store length " + this.store.length);
+  //     }
+  //      setTimeout(() => {
+  //     infiniteScroll.complete();
+  //       }, 2000);
+  //     }
+  //     else {
+  //     // infiniteScroll.complete();
+  //     this.lastStore = true;
+  //     setTimeout(() => {
+  //    infiniteScroll.enable(false);
+  //     }, 500);
+
+  //   }
+  // // setTimeout(() => {
+  // //    this.lastStore = true;
+  // //   infiniteScroll.enable(false);
+  // // }, 3000);
+  //   }
 
   goToPage(data) {
     var type;
@@ -242,11 +327,12 @@ export class HomePage implements AfterViewInit {
     this.navCtrl
       .push("StorepagePage", {
         data: data,
-        type: type
+        type: type,
+        title: data.Name
       })
       .then(
         (res: any) => {
-          // this.sharedService.firebaseevent("gToStorePage", "");
+          // this.sharedService.firebaseevent("StorePage", "");
         },
         err => {
           // this.sharedService.createToast("Sorry!!");
@@ -258,6 +344,7 @@ export class HomePage implements AfterViewInit {
 
   doRefresh(refresher) {
     console.log("Begin async operation", refresher);
+
     // this.tempStore = [];
     // this.dealService.getStoreCategory().subscribe((res: any) => {
     //   if (res) {
@@ -277,19 +364,19 @@ export class HomePage implements AfterViewInit {
     //   }
 
     // });
-    this.dealService.getFeatureStore().subscribe((res: any) => {
-      this.substores = res;
-      console.log(this.substores);
-    });
+    // this.dealService.getFeatureStore().subscribe((res: any) => {
+    //   this.substores = res;
+    //   console.log(this.substores);
+    // });
 
-    this.dealService.getTopBrands().subscribe(
-      (res: any) => {
-        this.brands = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.dealService.getTopBrands().subscribe(
+    //   (res: any) => {
+    //     this.brands = res;
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
 
     setTimeout(() => {
       console.log("Async operation has ended");
@@ -344,14 +431,44 @@ export class HomePage implements AfterViewInit {
   search() {
     this.navCtrl.push("SearchPage", {
       data: this.cardgridd.items,
-      type:"stores"
+      type: "stores"
     });
   }
 
-  // ngAfterViewChecked(): void {
-  //   //Called after every check of the component's view. Applies to components only.
-  //   //Add 'implements AfterViewChecked' to the class.
-  //   console.log(this.cardgridd);
-    
-  // }
+  ngAfterViewInit(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    // wow.init()
+    this.dealService.getAllStores();
+  }
+  getAllDeals(data) {
+    this.storageService
+      .visitedDealCategory(data)
+      .then((res: any) => console.log(res));
+
+    console.log(data);
+    this.navCtrl
+      .push("StabsPage", {
+        data: data.data
+      })
+      .then(
+        res => {},
+        err => {
+          this.sharedService.createToast("Sorry !!");
+        }
+      );
+  }
+
+  getVistedDeal(data){
+     this.navCtrl
+      .push("StabsPage", {
+        data: data.data
+      })
+      .then(
+        res => {},
+        err => {
+          this.sharedService.createToast("Sorry !!");
+        }
+      );
+  }
 }

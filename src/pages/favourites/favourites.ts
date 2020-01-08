@@ -24,7 +24,10 @@ export class FavouritesPage {
     public sharedService: SharedProvider,
     public modalController : ModalController,
     public notificationService: NotificationProvider
-  ) {}
+  ) {
+
+     this.sharedService.firebaseevent("screen_view", { Name: "FavouritePage" });
+  }
 
   ionViewDidLoad() {
     this.getData();

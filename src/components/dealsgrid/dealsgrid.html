@@ -1,60 +1,142 @@
 <ng-container *ngIf="cards.length > 0 && type !== 'products'">
-<ng-container *ngIf="!directLinks">
-  <ng-container *ngIf="cards.length > 4; else elseTemplate">
-    <ion-row>
-      <ion-col col-12 text-left>
-        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;margin-bottom: 0px;">{{ copyItem?.Name }}</h4>
+  <ng-container *ngIf="!directLinks">
+    <ng-container *ngIf="cards.length > 4; else elseTemplate">
+      <ion-row>
+        <ion-col col-12 text-left>
+          <h4
+            *ngIf="cards.length !== 0"
+            style="margin-top: 0px;margin-bottom: 0px;"
+            class="focus-in-expand"
+          >
+            {{ copyItem?.Name }}
+          </h4>
+        </ion-col>
+      </ion-row>
+      <ion-col col-12>
+        <ion-item no-lines class="paddingleft">
+          <ion-scroll
+            scrollX="true"
+            scroll-avatar
+            class="largecardcontainer"
+            overflow-scroll="false"
+          >
+            <ion-card
+              class="scroll-item largecard "
+              (click)="getToDeal(item)"
+              *ngFor="let item of cards; index as i"
+              (touchstart)="touchstart($event)"
+              [@photosAnimation]="cards.length"
+            >
+              <ng-container>
+                <img
+                  *ngIf="item.Logo != null"
+                  src="{{ item.Logo }}"
+                  class="largecardimg"
+                />
+                <!-- </img> -->
+                <div class="overlay-effect h-100 w-100"></div>
+                <h1 class="textstyle">
+                  {{ item.Name }}
+                </h1>
+              </ng-container>
+            </ion-card>
+          </ion-scroll>
+          <ng-template #loading>
+            dfjghfjkdghjkh
+          </ng-template>
+        </ion-item>
       </ion-col>
-    </ion-row>
-    <ion-col col-12>
-      <ion-item no-lines class="paddingleft">
-        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer"  overflow-scroll="false" >
-          <ion-card
-            class="scroll-item largecard animated zoomIn"
-            (click)="getToDeal(item)"
-            *ngFor="let item of cards; index as i"
-         (touchstart)="touchstart($event)" >
-            <ng-container>
-              <ion-img
-                *ngIf="item.Logo != null"
-                src="{{ item.Logo }}"
-                class="largecardimg "
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ion-row>
+        <ion-col col-12 text-left>
+          <h4 *ngIf="cards.length !== 0" style="margin-top:0px">
+            {{ copyItem?.Name }}
+          </h4>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-row>
+            <ion-col
+              col-6
+              class="nopaddingbtm "
+              (click)="getOfferDetail(item)"
+              *ngFor="let item of cards"
+              text-center
+              [@photosAnimation]="cards.length"
+            >
+              <img src="{{item.Logo}}" alt="" class="squareimage" />
+
+              <p
+                style="text-align: center;margin-top: 0px;
+    margin-bottom: 0px;"
               >
-              </ion-img>
-              <div class="overlay-effect h-100 w-100"></div>
-              <h1 class="textstyle">
                 {{ item.Name }}
-              </h1>
-            </ng-container>
-          </ion-card>
-        </ion-scroll>
-        <ng-template #loading>
-          dfjghfjkdghjkh
-        </ng-template>
-      </ion-item>
-    </ion-col>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ng-template>
   </ng-container>
-  <ng-template #elseTemplate>
+
+  <ng-container *ngIf="directLinks">
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="cards.length !== 0" style="margin-top:0px">{{ copyItem?.Name }}</h4>
+        <h4 style="font-size: 2rem;margin-left: 10px;">{{ copyItem?.Name }}</h4>
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)">
+        <div           style="        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-top: 0px;
+    /* padding-right: 10px; */
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);"
+ >
+<img
+          src="{{ item.Logo }}"
+          alt=""
+          [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
+          style="position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:5px"
+        />
+
+        </div>
+        <p style="text-align: center;margin-top:1px;margin-bottom: 0px;font-size: smaller;">
+          {{ item.Name }}
+        </p>
+      </ion-col>
+
+    </ion-row>
+  </ng-container>
+</ng-container>
+
+<!-- <ng-container *ngIf="directStore">
+   <ion-row>
       <ion-col col-12>
         <ion-row>
           <ion-col
-            col-6
-            class="nopaddingbtm animated bounceInRight"
+            col-3
+            class="nopaddingbtm "
             (click)="getOfferDetail(item)"
             *ngFor="let item of cards"
             text-center
+            [@photosAnimation]="cards.length"
           >
             <img src="{{item.Logo}}" alt="" class="squareimage"/>
             
             <p
               style="text-align: center;margin-top: 0px;
-    margin-bottom: 0px;"
+    margin-bottom: 0px;font-size: small;"
             >
               {{ item.Name }}
             </p>
@@ -62,61 +144,44 @@
         </ion-row>
       </ion-col>
     </ion-row>
-  </ng-template>
-</ng-container>
-
-<ng-container *ngIf="directLinks">
-  <ion-row>
-    <ion-col col-12 text-left>
-      <h4>{{ copyItem?.Name }}</h4>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)"  class="animated bounceInRight">
-      <img src="{{ item.Logo }}" alt=""  [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"/>
-      <p style="text-align: center;margin-top: 0px;margin-bottom: 0px;">
-        {{ item.Name }}
-      </p>
-    </ion-col>
-  </ion-row>
-</ng-container>
-</ng-container>
+</ng-container> -->
 
 <ng-container *ngIf="type == 'products' && cards.length !== 0">
-    <ng-container>
+  <ng-container>
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="cards.length !== 0" style="margin-top: 0px;margin-bottom: 0px;">{{ copyItem?.Name }}</h4>
+        <h4
+          *ngIf="cards.length !== 0"
+          style="margin-top: 0px;margin-bottom: 0px;"
+        >
+          {{ copyItem?.Name }}
+        </h4>
       </ion-col>
-        <ion-col col-12 style="padding: 0px;">
-      <ion-item no-lines class="paddingleft">
-        <ion-scroll scrollX="true" scroll-avatar class="largecardcontainer" style="white-space: nowrap;
+      <ion-col col-12 style="padding: 0px;">
+        <ion-item no-lines class="paddingleft">
+          <ion-scroll
+            scrollX="true"
+            scroll-avatar
+            class="largecardcontainer"
+            style="white-space: nowrap;
     height: 230px;
-    overflow: hidden;">
-          <ion-card
-            class="scroll-item largecardservices animated bounceInRight"
-            (click)="getToServices(item)"
-            *ngFor="let item of cards; index as i"
-
+    overflow: hidden;"
           >
-            <ng-container>
-              <img
-                
-                src="{{ item.Logo }}"
-               style="width: 200px;height:100%;"
-              />
-            
-           
-            </ng-container>
-          </ion-card>
-        </ion-scroll>
-        <ng-template #loading>
-          dfjghfjkdghjkh
-        </ng-template>
-      </ion-item>
-    </ion-col>
+            <ion-card
+              class="scroll-item largecardservices animated bounceInRight"
+              (click)="getToServices(item)"
+              *ngFor="let item of cards; index as i"
+            >
+              <ng-container>
+                <img src="{{ item.Logo }}" style="width: 200px;height:100%;" />
+              </ng-container>
+            </ion-card>
+          </ion-scroll>
+          <ng-template #loading>
+            dfjghfjkdghjkh
+          </ng-template>
+        </ion-item>
+      </ion-col>
     </ion-row>
-  
   </ng-container>
 </ng-container>
-

@@ -23,8 +23,11 @@ export class ProductsPage {
     private events: Events,
     private ngZone: NgZone
   ) {
-    this.getAllServices();
-  }
+      this.getAllServices();
+      // this.sharedService.firebaseevent("screen_view", {
+      //   Name: "ProductsPage"
+      // });
+    }
 
   ionViewDidLoad() {}
 
@@ -63,7 +66,7 @@ export class ProductsPage {
     this.sharedService.nativeSlide();
     this.navCtrl.push("ProductlistPage", {
       id: data.id,
-      type: "fashion"
+      type: "services"
     });
   }
   doInfinite(event) {
