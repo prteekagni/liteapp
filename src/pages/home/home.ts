@@ -230,7 +230,7 @@ export class HomePage implements AfterViewInit {
     //  this.dealService.storesdata.subscribe((res:any)=>{
    this.dealService
      .getAdsData()
-     .pipe(map((res: any) => res.filter(resp => resp.Category.Name === "Ads")))
+     .pipe(map((res: any) => res.filter(resp => resp.Category.Name == "Ads")))
      .subscribe((res: any) => {
        console.log(res);
        this.adsData = res;

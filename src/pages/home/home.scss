@@ -211,6 +211,16 @@ page-home {
     box-shadow: 2px 3px 16px -4px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
   } 
+  .visitedlargecard{
+     position: relative;
+    text-align: center;
+    height: 60px;
+    width: 120px;
+    margin-right: 0px;
+    padding: 0px;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
 h4, h5, h6{
  margin-left: 10px;
     margin-bottom: 5px;
@@ -296,5 +306,16 @@ body {
     100%{
         background-position: 468px 0
     }
+}
+
+.labelmargin .label-md{
+      margin: 13px 5px 13px 5px;
+}
+
+.padding-left .label-md{
+  margin:13px 0px 13px 0px
+}
+ion-scroll[scrollX] .scroll-item:first-child{
+  margin-left: 5px;
 }
 }

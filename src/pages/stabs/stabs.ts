@@ -168,25 +168,39 @@ export class StabsPage implements OnInit {
           this.checkForFavourite(this.alldeals);
         });
     } else {
-      this.dealService
-        .getDealsBySubCategory(
-          this.tabs[this.SwipedTabsSlider.realIndex].ID,
-          this.pageCount
-        )
-        .subscribe((res: any) => {
-          this.newItem = res.data;
-          this.pageCount = res.totalPages;
-          this.pageNumber = res.pageNumber;
-          console.log(res);
-          this.checkForFavourite(this.newItem);
+        this.ItemsTitles.scrollTo(
+          this.calculateDistanceToSpnd(this.SwipedTabsSlider.getActiveIndex()) -
+            this.screenWidth_px / 2,
+          0
+        ).then(res=>{
+             this.dealService
+               .getDealsBySubCategory(
+                 this.tabs[this.SwipedTabsSlider.realIndex].ID,
+                 this.pageCount
+               )
+               .subscribe((res: any) => {
+                 this.newItem = res.data;
+                 this.pageCount = res.totalPages;
+                 this.pageNumber = res.pageNumber;
+                 console.log(res);
+                 this.checkForFavourite(this.newItem);
+               });
         });
+      // this.dealService
+      //   .getDealsBySubCategory(
+      //     this.tabs[this.SwipedTabsSlider.realIndex].ID,
+      //     this.pageCount
+      //   )
+      //   .subscribe((res: any) => {
+      //     this.newItem = res.data;
+      //     this.pageCount = res.totalPages;
+      //     this.pageNumber = res.pageNumber;
+      //     console.log(res);
+      //     this.checkForFavourite(this.newItem);
+      //   });
     }
 
-    this.ItemsTitles.scrollTo(
-      this.calculateDistanceToSpnd(this.SwipedTabsSlider.getActiveIndex()) -
-        this.screenWidth_px / 2,
-      0
-    );
+  
   }
 
   selectTab(index) {
@@ -223,7 +237,7 @@ export class StabsPage implements OnInit {
   updateIndicatorPositionOnTouchEnd() {
     setTimeout(() => {
       this.updateIndicatorPosition("a");
-    }, 200);
+    }, 300);
   }
 
   animateIndicator($event) {
@@ -275,7 +289,7 @@ export class StabsPage implements OnInit {
   setDealAsFav(element) {
     this.storageService.addDeals(element).then(res => {
       if (res == true) {
-        this.sharedService.createToast("Item added!");
+        this.sharedService.createToast("Deals saved!");
         this.newItem
           .filter(f => {
             return f.id == element.id;
@@ -411,7 +425,7 @@ export class StabsPage implements OnInit {
                 this.pageNumber = res.pageNumber;
                 this.pageCount--;
               });
-        }, 3000);
+        }, 500);
         
       
         this.checkForFavourite(this.alldeals);

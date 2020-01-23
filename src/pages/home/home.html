@@ -51,7 +51,7 @@
       <ion-slides
         *ngIf="adsData.length > 0"
         pager
-        speed="800"
+        speed="1000"
         effect="slides"
         class="mainslide"
         loop="true"
@@ -87,20 +87,20 @@
       </ion-slides> -->
     </ng-template>
 
-    <ion-row>
+    <ion-row style="border-bottom: 1px solid #dedede;">
       <ion-col col-12>
         <cardgrid></cardgrid>
       </ion-col>
-    </ion-row>
+    </ion-row >
     <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="topVisitedStores.length > 0">
           <h5 class="focus-in-expand">Your Top Stores</h5>
           <ion-row>
-            <ion-item no-lines class="leftpadding">
-              <ion-scroll scrollX="true" scroll-avatar style="height:90px;">
+            <ion-item  class="">
+              <ion-scroll scrollX="true" scroll-avatar style="height:75px;">
                 <ion-card
-                  class="scroll-item largecard"
+                  class="scroll-item visitedlargecard"
                   *ngFor="let item of topVisitedStores;let i = index"
                   (click)="goToTopVisitedStore(item.data)"
                 >
@@ -127,7 +127,7 @@
         <ion-row  *ngIf="mVisitedDeals.length > 0">
       <ion-col col-12>
         <h5>Your Top Category</h5>
-       <ion-item no-lines class="paddingleft">
+       <ion-item class="paddingleft">
           <ion-scroll scrollX="true" scroll-avatar class="dealslargecardcontainer">
             <div
               class="scroll-item dealslargecard"
@@ -193,7 +193,7 @@
       </ion-col>
     </ion-row> -->
 
-    <ion-row>
+    <ion-row style="border-bottom: 1px solid #dedede;">
       <ion-col col-12 text-left>
         <h5 *ngIf="substores.length >= 1" style="margin-top: 0px;">
           Stores by Category
@@ -219,7 +219,7 @@
     </ion-row>
     <ng-container *ngIf="store.length > 0">
       <ion-list class="borderlist" style="margin:-1px 0 30px">
-        <ion-item *ngFor="let item of store; let i = index">
+        <ion-item *ngFor="let item of store; let i = index" class="labelmargin">
             <ng-container>
         <ion-row
           *ngIf="item?.Name != 'Shop By Category'"
@@ -259,7 +259,9 @@
     </ng-template> -->
   </ng-template>
   <ng-template #notconnected>
-    <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+   <ion-row>
+      <ion-col col-12 class="nointernetimage">
+      
       <img
         src="../../assets/nointernetbg.png"
         alt=""
@@ -270,7 +272,9 @@
     transform: translate(-50%, -50%);
     width: 200px;"
       />
-    </div>
+   
+      </ion-col>
+    </ion-row>
   </ng-template>
 
 

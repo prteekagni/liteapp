@@ -29,7 +29,7 @@
           <ion-list [@photosAnimation]="alldeals.length">
             <ion-item *ngFor="let item of alldeals">
               <ion-card class="dealslist" [ngClass]="{ secondclass: itemfav }" style="border-radius: 10px;"
-                [@btnanimation]="item.state">
+                [@btnanimation]="item.state" (click)="getDeal(item)">
                 <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
                   <ion-row>
                     <ion-col col-3>
@@ -102,17 +102,12 @@
               </ion-card>
             </ion-item>
           </ion-list>
-          <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" #refresher>
-    <ion-infinite-scroll-content
-      style="  background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );"
-    ></ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
           <button ion-button clear (click)="loadMore('alldeals')" *ngIf="pageCount !==0" [@btnanimation]="btnstate">
             Load More
           </button>
           <ion-row text-center *ngIf="pageCount == 0">
             <ion-col col-12>
-              <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;"
+              <h2 style="font-family:GloriaHallelujah-Regular;color:#fb595e;  margin: 0px;"
                 class="animated infinite pulse">
                 No more deals
               </h2>
@@ -143,7 +138,7 @@
         <ng-template #thenTemplate>
           <ion-list [@photosAnimation]="newItem.length">
             <ion-item *ngFor="let item of newItem">
-              <ion-card class="dealslist" [ngClass]="{ 'secondclass': itemfav }" style="border-radius: 10px;" #dealcard>
+              <ion-card class="dealslist" [ngClass]="{ 'secondclass': itemfav }" style="border-radius: 10px;" #dealcard (click)="getDeal(item)">
                 <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
                   <ion-row>
                     <ion-col col-3>
@@ -226,7 +221,7 @@
           </button>
           <ion-row text-center *ngIf="pageCount === 1">
             <ion-col col-12>
-              <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;"
+              <h2 style="font-family:GloriaHallelujah-Regular;color:#fb595e;  margin: 0px;"
                 class="animated infinite pulse">
                 No more deals
               </h2>

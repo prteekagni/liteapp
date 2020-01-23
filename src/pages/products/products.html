@@ -38,9 +38,9 @@
   ></ng-container>
 
   <ng-template #thenTemplate>
-     <ng-container *ngIf="adsData.length > 0; else elseTemplate">
+     <ng-container *ngIf="ads.length > 0; else elseTemplate">
       <ion-slides
-        *ngIf="adsData.length > 0"
+        *ngIf="ads.length > 0"
         pager
         speed="1000"
         effect="slides"
@@ -48,7 +48,7 @@
         loop="true"
         style="margin-top: 25px;height: 220px;"
       >
-        <ion-slide *ngFor="let item of adsData">
+        <ion-slide *ngFor="let item of ads">
           <img src="{{ item.Logo }}" alt="" class="header-image" (click)="goToAds(item)"/>
         </ion-slide>
       </ion-slides>
@@ -75,19 +75,22 @@
   </ng-template>
 
 <ng-template #notconnected>
-    <div style="height: 100%;width:100%;background: ivory;position: absolute;">
-    <img
-      src="../../assets/nointernetbg.png"
-      alt=""
-      style="
+ <ion-row>
+      <ion-col col-12 class="nointernetimage">
+      
+      <img
+        src="../../assets/nointernetbg.png"
+        alt=""
+        style="
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;"
-    />
-  
-  </div>
+      />
+   
+      </ion-col>
+    </ion-row>
   </ng-template>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

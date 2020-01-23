@@ -12,7 +12,8 @@
           </h5>
         </ion-col>
       </ion-row>
-      <ion-col col-12>
+      <ion-row>
+   <ion-col col-12 style="padding:0px"> 
         <ion-item no-lines class="paddingleft">
           <ion-scroll
             scrollX="true"
@@ -46,6 +47,8 @@
           </ng-template>
         </ion-item>
       </ion-col>
+      </ion-row>
+   
     </ng-container>
     <ng-template #elseTemplate>
       <ion-row>
@@ -84,27 +87,11 @@
   <ng-container *ngIf="directLinks">
     <ion-row>
       <ion-col col-12 text-left>
-        <h5 style="font-size: 2rem;margin-left: 10px;">{{ copyItem?.Name }}</h5>
+        <h5 style="font-size: 2rem;">{{ copyItem?.Name }}</h5>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-4 *ngFor="let item of cards" (click)="goToStore(item)">
-        <!-- <div           style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    height: 75px;
-    width: 75px;
-    border-radius: 50%;
-    margin-top: 0px;
-    /* padding-right: 10px; */
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);"
- > -->
-  <!-- <div           style="
-    width: 75px;
-    border-radius: 50%;
-    margin-top: 0px;
-    /* padding-right: 10px; */
-  "> -->
   <ion-card style="margin: 0px;
     border-radius: 8px;
     width: 100%;
@@ -123,56 +110,13 @@
           style="
   padding: 6px;"
         />
-           <!-- <p style="text-align: center;margin-top:1px;margin-bottom: 0px;font-size: x-small;">
-          {{ item.Name }}
-        </p> -->
     </ion-card-content>
   </ion-card>
-
-<!-- <img
-          src="{{ item.Logo }}"
-          alt=""
-          [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
-          style="position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding:4px"
-        /> -->
-
-        <!-- </div> -->
-     
-      </ion-col>
+           </ion-col>
 
     </ion-row>
   </ng-container>
 </ng-container>
-
-<!-- <ng-container *ngIf="directStore">
-   <ion-row>
-      <ion-col col-12>
-        <ion-row>
-          <ion-col
-            col-3
-            class="nopaddingbtm "
-            (click)="getOfferDetail(item)"
-            *ngFor="let item of cards"
-            text-center
-            [@photosAnimation]="cards.length"
-          >
-            <img src="{{item.Logo}}" alt="" class="squareimage"/>
-            
-            <p
-              style="text-align: center;margin-top: 0px;
-    margin-bottom: 0px;font-size: small;"
-            >
-              {{ item.Name }}
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-</ng-container> -->
 
 <ng-container *ngIf="type == 'products' && cards.length !== 0">
   <ng-container>

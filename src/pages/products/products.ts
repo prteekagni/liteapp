@@ -17,7 +17,7 @@ export class ProductsPage {
   tempproducts: any = [];
   noproducts: boolean = false;
   services;
-  adsData: any = [];
+  ads: any = [];
   isConnected: boolean = true;
   servicesads: any = [];
   mainslide;
@@ -72,7 +72,7 @@ export class ProductsPage {
        .pipe(map((res: any) => res.filter(resp => resp.Category.Name === 'Services')))
        .subscribe(
          (res: any) => {
-           this.adsData = res;
+           this.ads = res;
          },
          err => {
            console.log(err);

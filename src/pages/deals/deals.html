@@ -59,18 +59,10 @@
             >
               {{item.Name}}
             </h2>
-            <!-- <p>Total Deals 1988</p> -->
-            <!-- <button
-            ion-button
-            color="theme"
-            clear
-            item-end
-            (click)="getAllDeals(item)"
-          >
-            View
-          </button> -->
           </ion-item>
         </ion-list>
+
+        
       </ion-col>
     </ion-row>
     <ion-row text-center>
@@ -85,7 +77,9 @@
     </ion-row>
   </ng-template>
   <ng-template #notconnected>
-    <div style="height: 100%;width:100%;background: ivory;position: absolute;">
+    <ion-row>
+      <ion-col col-12 class="nointernetimage">
+      
       <img
         src="../../assets/nointernetbg.png"
         alt=""
@@ -96,6 +90,9 @@
     transform: translate(-50%, -50%);
     width: 200px;"
       />
-    </div>
+   
+      </ion-col>
+    </ion-row>
+   
   </ng-template>
 </ion-content>
