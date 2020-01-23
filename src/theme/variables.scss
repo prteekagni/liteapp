@@ -28,12 +28,13 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary: #488aff,
+  primary: #fb595e,
   secondary: #32db64,
   danger: #f53d3d,
   light: #f4f4f4,
   dark: #222,
-  theme: #FF6700
+  theme: #9455e6,
+  
 );
 
 // App iOS Variables
@@ -45,18 +46,18 @@ $colors: (
 // Material Design only Sass variables can go here
 
 //
-$toolbar-background: transparent;
+$toolbar-background: white;
 $text-input-highlight-color-valid: #488aff;
-$text-input-md-show-focus-highlight: #FF6700;
+$text-input-md-show-focus-highlight: map-get($colors,primary);
 $alert-md-button-text-color: black;
 // $segment-button-md-text-color-activated: orangered;
-$segment-button-md-border-color-activated: orangered; // App Windows Variables
+$segment-button-md-border-color-activated: map-get($colors,primary); // App Windows Variables
 
-$searchbar-md-input-search-icon-color: orange;
+$searchbar-md-input-search-icon-color: map-get($colors,primary);
 $searchbar-md-input-search-icon-size: 25px;
 $tabs-background:#ffff;
 $text-input-md-highlight-color:black;
-$label-md-text-color-focused:#f53d3d;
+$label-md-text-color-focused:#fb595e;
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
@@ -112,8 +113,10 @@ margin-top: 24px;
 }
 
 .fab-md{
-  background:#FF6700 !important;
+  background: map-get($colors,primary)
 }
+
+$toolbar-md-title-text-color: map-get($colors,theme);
 
 ion-toast{
   top:24px !important;

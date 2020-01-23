@@ -37,6 +37,7 @@ import {
 } from "@angular/animations";
 import { ReplaySubject } from "rxjs";
 import { count } from "rxjs/operator/count";
+import { map } from "rxjs/operators";
 const animationsOptions = {
   animation: "ios-transition",
   duration: 1000
@@ -100,6 +101,8 @@ export class HomePage implements AfterViewInit {
   mobile;
   allstores: any[];
   itemLogo: any = "assets/imgs/dealslocker1.png";
+  adsStore:any = [];
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -111,119 +114,128 @@ export class HomePage implements AfterViewInit {
     private modalController: ModalController,
     private storageService: StorageProvider
   ) {
-    platform.ready().then(() => {
-      // this.checkDirectory();
-      this.sharedService.checkNetworkStatus().subscribe(
-        res => {
-          if (res) {
-            this.ngZone.run(() => {
+      platform.ready().then(() => {
+        // this.checkDirectory();
+        this.sharedService.checkNetworkStatus().subscribe(
+          res => {
+            if (res) {
+              this.ngZone.run(() => {
+                this.isConnected = true;
+              });
+
+              console.log("Internet COnnected");
+            } else {
+              this.ngZone.run(() => {
+                this.isConnected = false;
+              });
+              this.sharedService.createToast("No Internet Avaiable");
+              console.log("Internet npot connected");
+            }
+          },
+          err => {
+            alert("Error in checking network statua");
+          }
+        );
+      });
+
+      platform.resume.subscribe(() => {
+        this.sharedService.checkNetworkStatus().subscribe(
+          res => {
+            if (res) {
               this.isConnected = true;
-            });
-
-            console.log("Internet COnnected");
-          } else {
-            this.ngZone.run(() => {
+              console.log("Internet COnnected");
+            } else {
               this.isConnected = false;
-            });
-            this.sharedService.createToast("No Internet Avaiable");
-            console.log("Internet npot connected");
+              this.sharedService.createToast("No Internet Avaiable");
+              console.log("Internet npot connected");
+            }
+          },
+          err => {
+            alert("Error in checking network statua");
           }
-        },
-        err => {
-          alert("Error in checking network statua");
-        }
-      );
-    });
+        );
+      });
 
-    platform.resume.subscribe(() => {
-      this.sharedService.checkNetworkStatus().subscribe(
-        res => {
-          if (res) {
-            this.isConnected = true;
-            console.log("Internet COnnected");
-          } else {
-            this.isConnected = false;
-            this.sharedService.createToast("No Internet Avaiable");
-            console.log("Internet npot connected");
-          }
-        },
-        err => {
-          alert("Error in checking network statua");
-        }
-      );
-    });
+      this.showToolbar = false;
 
-    this.showToolbar = false;
+      // On Click of dynamic Link
+      // this.firebaseDynamicLinks
+      //   .onDynamicLink()
+      //   .subscribe(
+      //     (res: any) => console.log(res),
+      //     (error: any) => console.log(error)
+      //   );
 
-    // On Click of dynamic Link
-    // this.firebaseDynamicLinks
-    //   .onDynamicLink()
-    //   .subscribe(
-    //     (res: any) => console.log(res),
-    //     (error: any) => console.log(error)
-    //   );
-
-    this.dealService.getStoreCategory().subscribe((res: any) => {
-      if (res) {
-        this.tempStore = res.filter(opt => opt.CatType == 1);
-        console.log("From Store API " + this.tempStore.length);
-        this.substores = res.filter(opt => opt.CatType == 11);
-        this.brands = res.filter(opt => opt.CatType == 100);
-        if (this.tempStore.length > 1) {
-          for (
-            var count = 0;
-            count < 1 && count < this.tempStore.length;
-            count++
-          ) {
-            console.log("Count for stores " + count);
-            this.store.push(this.tempStore[count]);
-            console.log(this.store);
+      this.dealService.getStoreCategory().subscribe((res: any) => {
+        if (res) {
+          this.tempStore = res.filter(opt => opt.CatType == 1);
+          console.log("From Store API " + this.tempStore.length);
+          this.substores = res.filter(opt => opt.CatType == 11);
+          // this.brands = res.filter(opt => opt.CatType == 100);
+          if (this.tempStore.length > 1) {
+            for (
+              var count = 0;
+              count < 1 && count < this.tempStore.length;
+              count++
+            ) {
+              console.log("Count for stores " + count);
+              this.store.push(this.tempStore[count]);
+              console.log(this.store);
+            }
           }
         }
-      }
 
-      //   this.dealService.getFeatureStore().subscribe((res: any) => {
-      //     this.substores = res;
-      //     console.log(this.substores);
+        //   this.dealService.getFeatureStore().subscribe((res: any) => {
+        //     this.substores = res;
+        //     console.log(this.substores);
+        //     WOW.sync;
+        //   });
+      });
+
+      // this.dealService.getTopBrands().subscribe(
+      //   (res: any) => {
+      //     this.brands = res;
+      //     console.log(this.brands);
       //     WOW.sync;
-      //   });
-    });
+      //   },
+      //   err => {
+      //     console.log(err);
+      //   }
+      // );
 
-    // this.dealService.getTopBrands().subscribe(
-    //   (res: any) => {
-    //     this.brands = res;
-    //     console.log(this.brands);
-    //     WOW.sync;
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
+      // this.dealService.getAllStores();
 
-    // this.dealService.getAllStores();
-
-    this.dealService.getAdsData().subscribe(
-      (res: any) => {
-        this.mainslide = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
-    this.events.subscribe("nstatus", res => {
-      if (res) {
-        console.log("Home PAge:" + res);
-        this.ngZone.run(() => {
-          this.isConnected = true;
-        });
-      } else {
-        console.log("From Home Page " + res);
-        this.ngZone.run(() => {
-          this.isConnected = false;
-        });
-      }
-    });
-  }
+      this.dealService.getAdsData().subscribe(
+        (res: any) => {
+          this.adsData = res;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      this.events.subscribe("nstatus", res => {
+        if (res) {
+          console.log("Home PAge:" + res);
+          this.ngZone.run(() => {
+            this.isConnected = true;
+          });
+        } else {
+          console.log("From Home Page " + res);
+          this.ngZone.run(() => {
+            this.isConnected = false;
+          });
+        }
+      });
+      this.dealService.getAllStores();
+    //  this.dealService.storesdata.subscribe((res:any)=>{
+   this.dealService
+     .getAdsData()
+     .pipe(map((res: any) => res.filter(resp => resp.Category.Name === "Ads")))
+     .subscribe((res: any) => {
+       console.log(res);
+       this.adsData = res;
+     });
+    }
 
   nav11() {
     this.navCtrl.push("ProductlistPage");
@@ -247,6 +259,10 @@ export class HomePage implements AfterViewInit {
           return b.frequency - a.frequency;
         });
     });
+  }
+
+  goToAds(data){
+    this.sharedService.openBrowser(data);
   }
 
   goToNotification() {
@@ -439,7 +455,6 @@ export class HomePage implements AfterViewInit {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
     // wow.init()
-    this.dealService.getAllStores();
   }
   getAllDeals(data) {
     this.storageService

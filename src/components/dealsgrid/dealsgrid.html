@@ -3,13 +3,13 @@
     <ng-container *ngIf="cards.length > 4; else elseTemplate">
       <ion-row>
         <ion-col col-12 text-left>
-          <h4
+          <h5
             *ngIf="cards.length !== 0"
             style="margin-top: 0px;margin-bottom: 0px;"
             class="focus-in-expand"
           >
             {{ copyItem?.Name }}
-          </h4>
+          </h5>
         </ion-col>
       </ion-row>
       <ion-col col-12>
@@ -50,9 +50,9 @@
     <ng-template #elseTemplate>
       <ion-row>
         <ion-col col-12 text-left>
-          <h4 *ngIf="cards.length !== 0" style="margin-top:0px">
+          <h5 *ngIf="cards.length !== 0" style="margin-top:0px">
             {{ copyItem?.Name }}
-          </h4>
+          </h5>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -84,22 +84,52 @@
   <ng-container *ngIf="directLinks">
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 style="font-size: 2rem;margin-left: 10px;">{{ copyItem?.Name }}</h4>
+        <h5 style="font-size: 2rem;margin-left: 10px;">{{ copyItem?.Name }}</h5>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-3 *ngFor="let item of cards" (click)="goToStore(item)">
-        <div           style="        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    height: 80px;
-    width: 80px;
+      <ion-col col-4 *ngFor="let item of cards" (click)="goToStore(item)">
+        <!-- <div           style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    height: 75px;
+    width: 75px;
     border-radius: 50%;
     margin-top: 0px;
     /* padding-right: 10px; */
     position: relative;
     left: 50%;
     transform: translate(-50%);"
- >
-<img
+ > -->
+  <!-- <div           style="
+    width: 75px;
+    border-radius: 50%;
+    margin-top: 0px;
+    /* padding-right: 10px; */
+  "> -->
+  <ion-card style="margin: 0px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1.4rem;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);">
+    <ion-card-content style="    padding: 5px 4px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    ">
+        <img
+          src="{{ item.Logo }}"
+          alt=""
+          [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
+          style="
+  padding: 6px;"
+        />
+           <!-- <p style="text-align: center;margin-top:1px;margin-bottom: 0px;font-size: x-small;">
+          {{ item.Name }}
+        </p> -->
+    </ion-card-content>
+  </ion-card>
+
+<!-- <img
           src="{{ item.Logo }}"
           alt=""
           [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
@@ -107,13 +137,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding:5px"
-        />
+    padding:4px"
+        /> -->
 
-        </div>
-        <p style="text-align: center;margin-top:1px;margin-bottom: 0px;font-size: smaller;">
-          {{ item.Name }}
-        </p>
+        <!-- </div> -->
+     
       </ion-col>
 
     </ion-row>
@@ -150,12 +178,12 @@
   <ng-container>
     <ion-row>
       <ion-col col-12 text-left>
-        <h4
+        <h5
           *ngIf="cards.length !== 0"
           style="margin-top: 0px;margin-bottom: 0px;"
         >
           {{ copyItem?.Name }}
-        </h4>
+        </h5>
       </ion-col>
       <ion-col col-12 style="padding: 0px;">
         <ion-item no-lines class="paddingleft">

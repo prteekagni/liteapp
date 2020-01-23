@@ -213,7 +213,9 @@ export class SharedProvider {
 
   handleError(error) {
     // alert(JSON.stringify(error));
-    this.firebaseevent("Server Error", { Description: JSON.stringify(error) });
+    // this.firebaseevent("Server Error", { Description: JSON.stringify(error) });
+    console.log(JSON.stringify(error));
+    
     this.createToast(error.statusText);
   }
 
@@ -353,12 +355,10 @@ export class SharedProvider {
       " on Deals Locker App. Download for more similar deals and enjoy shopping.";
     this.createDynamicLinks(data.Url).then(
       (res: any) => {
-        data.Url = res;
-        this.socialSharing.share(message, "", data.Logo, data.Url);
+        this.socialSharing.share(message, "", data.Logo, res);
         this.dismissLoader();
       },
       err => {
-        data.Url = data.Url;
         this.socialSharing.share(message, "", data.Logo, data.Url);
         this.dismissLoader();
       }

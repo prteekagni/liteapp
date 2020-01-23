@@ -3,7 +3,8 @@ import { IonicPage, Events, Tabs } from "ionic-angular";
 
 @IonicPage()
 @Component({
-  templateUrl: "tabs.html"
+  templateUrl: "tabs.html",
+  
 })
 export class TabsPage {
   HomePage: any = "HomePage";

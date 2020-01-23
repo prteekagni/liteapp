@@ -195,7 +195,7 @@ ion-content {
 }
 
 .transparentBackground {
-  background: transparent !important;
+  background: white !important;
   color: orangered;
   transition: background-color 500ms linear;
   opacity: 0.8;
@@ -243,7 +243,7 @@ ion-content {
 }
 
 .addcolortitle {
-  color: black !important;
+  // color: black !important;
 }
 
 ion-router-outlet > .ion-page {
@@ -269,7 +269,7 @@ ion-router-outlet > .ion-page {
 .bar-button-default-md,
 .bar-button-clear-md-default,
 .bar-button-md-default {
-  color: orangered;
+  color: #9455e6;
 }
 
 .centerboximage {
@@ -282,8 +282,8 @@ ion-router-outlet > .ion-page {
 }
 
 .toolbar-title-md {
-  color: white;
-
+  // color: #9b45e4 !important;
+font-size: 2.3rem;
   font-family: Georgia, "Times New Roman", Times, serif;
 
   padding: 0px 0px !important;
@@ -307,12 +307,17 @@ ion-img {
   display: none;
 }
 
-.tabs-md .tab-button[aria-selected="true"] .tab-button-icon {
-  color: orangered;
-}
+
+
+// .tabs-md .tab-button[aria-selected="true"] .tab-button-icon {
+//   // color: orangered;
+//      content: url(../../assets/fhome.png);
+//     width: 40px;
+// }
 
 .tabs-md .tab-button[aria-selected="true"] {
-  color: orangered;
+  // color: orangered;
+color: #9455e6;
 }
 
 // .button-md{
@@ -320,10 +325,10 @@ ion-img {
 //   color: white;
 // }
 
-.fab-md {
-  color: white;
-  background: orangered;
-}
+// .fab-md {
+//   color: white;
+//   background: orangered;
+// }
 
 // three classes for top brands outer image and inner image
 div.image.even {
@@ -339,10 +344,10 @@ div.image.odd {
   width: 100px;
 }
 
-.titlecolormargin {
-  padding-left: 9px;
-  color: black;
-}
+// .titlecolormargin {
+//   padding-left: 9px;
+//   color: black;
+// }
 
 .refresher-active {
   top: 0px !important;
@@ -354,10 +359,10 @@ div.image.odd {
 
 
   .alert-md .alert-radio-inner{
-    background-color: #ff6700 !important;
+    background-color: #fb595e !important;
   }
   .alert-md [aria-checked=true] .alert-radio-icon {
-    border-color: #ff6700;
+    border-color: #fb595e;
   }
 
    .dealsimage {
@@ -523,3 +528,47 @@ ion-img img{
 // .back-button-icon-md{
 //   margin-bottom:24px;
 // }
+
+// .tab-button-icon.icon.icon-md.ion-ios-home{
+//   content: url(../../assets/home.png);
+//     width: 40px;
+// }
+.tab-button-icon.icon.icon-md.ion-ios-home-outline{
+  content: url(../../assets/homelatest.png);
+  height: 25px;
+  width: 27px;
+    
+}
+
+.tab-button-icon.icon.icon-md.ion-ios-information-circle-outline{
+ content: url(../../assets/dealslatest.png);
+    height: 25px;
+}
+
+.tab-button-icon.icon.icon-md.ion-ios-contacts-outline{
+  content: url(../../assets/serviceslatest.png);
+ height: 25px;   
+}
+
+.tab-button-icon.icon.icon-md.ion-ios-settings-outline{
+  content: url(../../assets/personal.png);
+height: 25px;    
+}
+
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-home {
+     content: url(../../assets/homelatestfill.png);
+   height: 30px;
+   width: 30px;
+}
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-information-circle {
+     content: url(../../assets/fdealslatest.png);
+   height: 30px;
+}
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-contacts {
+     content: url(../../assets/fservices.png);
+height: 30px;
+}
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-settings {
+     content: url(../../assets/fpersonal.png);
+ height: 30px;
+}

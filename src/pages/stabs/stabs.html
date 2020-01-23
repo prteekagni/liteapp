@@ -2,21 +2,14 @@
   <ion-navbar>
     <ion-title>{{title}}</ion-title>
   </ion-navbar>
-  <ion-toolbar
-    style="padding-top: 0px;
-    padding-bottom: 0px;"
-  >
+  <ion-toolbar style="padding-top: 0px;
+    padding-bottom: 0px;">
     <ion-content #MultiItemsScrollingTabs class="tabsContent">
       <ion-segment class="SwipedTabs-tabs">
-        <ion-segment-button
-          *ngFor="let tab of tabs ; let i = index "
-          id="tabTitle{{i}}"
-          value="IngoreMe"
+        <ion-segment-button *ngFor="let tab of tabs ; let i = index " id="tabTitle{{i}}" value="IngoreMe"
           (click)="selectTab(i)"
-          [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'
-        >
-          <span *ngIf=" i !== 0">{{tab.Name}} 
-          </span>
+          [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }'>
+          <span *ngIf=" i !== 0">{{tab.Name}} </span>
           <span *ngIf=" i == 0">All</span>
         </ion-segment-button>
       </ion-segment>
@@ -26,45 +19,51 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-slides
-    #SwipedTabsSlider
-    (ionSlideDrag)="animateIndicator($event)"
-    (ionSlideDidChange)="updateIndicatorPosition($event)"
-    (ionSlideWillChange)="scrollIndicatiorTab($event)"
-    (panend)="updateIndicatorPositionOnTouchEnd()"
-    [pager]="false"
-  >
+  <ion-slides #SwipedTabsSlider (ionSlideDrag)="animateIndicator($event)"
+    (ionSlideDidChange)="updateIndicatorPosition($event)" (ionSlideWillChange)="scrollIndicatiorTab($event)"
+    (panend)="updateIndicatorPositionOnTouchEnd()" [pager]="false">
     <ion-slide>
-      <ng-container
-        *ngIf="alldeals.length > 0; then thenTemplate; else elseTemplate"
-      ></ng-container>
+      <ng-container *ngIf="alldeals.length > 0; then thenTemplate; else elseTemplate"></ng-container>
       <ng-template #thenTemplate>
         <ng-container>
-          <ion-list  [@photosAnimation]="alldeals.length">
-            <ion-item *ngFor="let item of alldeals"  >
-              <ion-card
-                class="dealslist"
-                [ngClass]="{ secondclass: itemfav }"
-                style="border-radius: 10px;"
-               [@btnanimation]="item.state"
-              >
+          <ion-list [@photosAnimation]="alldeals.length">
+            <ion-item *ngFor="let item of alldeals">
+              <ion-card class="dealslist" [ngClass]="{ secondclass: itemfav }" style="border-radius: 10px;"
+                [@btnanimation]="item.state">
                 <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
                   <ion-row>
                     <ion-col col-3>
-                      <img
-                        src="{{item.Logo}}"
-                        style="width: 80px !important;"
-                      />
+                      <img src="{{item.Logo}}" style="top: 50%;
+    position: absolute;
+    transform: translate(0%,-50%);width: 75px;" />
                     </ion-col>
                     <ion-col col-9 text-left>
-                      <h3
-                        style="
+                      <span style="
     font-size: 1.8rem;overflow: auto;
-    text-overflow: ellipsis;font-family: Solway;"
-                      >
+    text-overflow: ellipsis;font-family: Solway;">
                         {{ item.Name }}
-                      </h3>
-                      <h3>Coupon</h3>
+                      </span>
+                      <div class="">
+                        <!-- <img src="../../assets/25533.jpg" alt="" *ngIf="item.itemisFav" style="
+    position: absolute;
+    width: 50px;
+    right: 0px;
+    top: -5px;"> -->
+                        <span class="" *ngIf="item.itemfav" style="
+      width: 90px;
+    right: 0px;
+    top: 0px;
+    background-color: #9455e6;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-size: 1rem;">Favourite Deal</span>
+                      </div>
+                      <!-- <h3 [hidden]="item.Coupon == null">Coupon</h3>
+                      <h4 [hidden]="item.Coupon !== null">No Coupon Required</h4> -->
                     </ion-col>
                   </ion-row>
                   <ion-row>
@@ -82,41 +81,20 @@
                 </ion-card-content>
                 <ion-row no-padding>
                   <ion-col col-4>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="setDealAsFav(item)"
-                    >
+                    <button ion-button clear small color="primary" icon-start (click)="setDealAsFav(item)">
                       <ion-icon name="star"></ion-icon>
                       Favorite
                     </button>
                   </ion-col>
                   <ion-col col-4 text-center>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="remindBtn(item)"
-                    >
-                      <ion-icon name="musical-notes"></ion-icon>
+                    <button ion-button clear small color="primary" icon-start (click)="remindBtn(item)">
+                     <ion-icon ios="ios-timer" md="md-timer"></ion-icon>
                       Remind
                     </button>
                   </ion-col>
-                  <ion-col col-4 text-right>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="getDeal(item)"
-                    >
-                      <ion-icon name="share-alt"></ion-icon>
+                  <ion-col col-4 text-left>
+                    <button ion-button clear small color="primary" icon-start (click)="getDeal(item)">
+                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
                       Get Deal
                     </button>
                   </ion-col>
@@ -124,25 +102,35 @@
               </ion-card>
             </ion-item>
           </ion-list>
+          <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" #refresher>
+    <ion-infinite-scroll-content
+      style="  background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+          <button ion-button clear (click)="loadMore('alldeals')" *ngIf="pageCount !==0" [@btnanimation]="btnstate">
+            Load More
+          </button>
+          <ion-row text-center *ngIf="pageCount == 0">
+            <ion-col col-12>
+              <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;"
+                class="animated infinite pulse">
+                No more deals
+              </h2>
+            </ion-col>
+          </ion-row>
         </ng-container>
       </ng-template>
       <ng-template #elseTemplate>
         <div style="height: 100%;width:100%;position: absolute;">
-          <img
-            src="../../assets/noproduct.png"
-            alt=""
-            style="
+          <img src="../../assets/noproduct.png" alt="" style="
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);"
-          />
-          <h3
-            style="    position: absolute;
+    transform: translate(-50%, -50%);" />
+          <h3 style="    position: absolute;
     top: calc(50% + 90px);
     left: 50%;
-    transform: translate(-50%, -50%);font-family:GloriaHallelujah-Regular;"
-          >
+    transform: translate(-50%, -50%);font-family:GloriaHallelujah-Regular;">
             No Product
           </h3>
         </div>
@@ -151,35 +139,41 @@
 
     <ng-container *ngFor="let item of tabs;index as i">
       <ion-slide *ngIf="i !== 0">
-        <ng-container
-          *ngIf="newItem?.length; then thenTemplate; else elseTemplate"
-        ></ng-container>
+        <ng-container *ngIf="newItem?.length; then thenTemplate; else elseTemplate"></ng-container>
         <ng-template #thenTemplate>
           <ion-list [@photosAnimation]="newItem.length">
             <ion-item *ngFor="let item of newItem">
-              <ion-card
-                class="dealslist"
-                [ngClass]="{ secondclass: itemfav }"
-                style="border-radius: 10px;"
-                #dealcard
-              >
+              <ion-card class="dealslist" [ngClass]="{ 'secondclass': itemfav }" style="border-radius: 10px;" #dealcard>
                 <ion-card-content style="padding:7px 6px;padding-bottom: 0px;">
                   <ion-row>
                     <ion-col col-3>
-                      <img
-                        src="{{item.Logo}}"
-                        style="width: 80px !important;"
-                      />
+                      <img src="{{item.Logo}}" style="width: 80px !important;" />
                     </ion-col>
                     <ion-col col-9 text-left>
-                      <h3
-                        style="
-    font-size: 1.8rem;font-family: Solway;overflow: hidden;
-    text-overflow: ellipsis;"
-                      >
+                      <span style="
+    font-size: 1.8rem;overflow: auto;
+    text-overflow: ellipsis;font-family: Solway;">
                         {{ item.Name }}
-                      </h3>
-                      <h3>Coupon</h3>
+                      </span>
+
+                      <!-- <img src="../../assets/25533.jpg" alt="" *ngIf="item?.itemisFav" style="
+    position: absolute;
+    right: 0px;
+    top: -5px;"> -->
+                      <span class="" *ngIf="item.itemfav" style="
+      width: 90px;
+    right: 0px;
+    top: 0px;
+    background-color: #9455e6;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-size: 1rem;">Favourite Deal</span>
+
+                      <!-- <h3>Coupon</h3> -->
                     </ion-col>
                   </ion-row>
                   <ion-row>
@@ -197,40 +191,19 @@
                 </ion-card-content>
                 <ion-row no-padding>
                   <ion-col col-4>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="setDealAsFav(item)"
-                    >
+                    <button ion-button clear small color="danger" icon-start (click)="setDealAsFav(item)">
                       <ion-icon name="star"></ion-icon>
                       Favorite
                     </button>
                   </ion-col>
                   <ion-col col-4 text-center>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="remindBtn(item)"
-                    >
+                    <button ion-button clear small color="danger" icon-start (click)="remindBtn(item)">
                       <ion-icon name="musical-notes"></ion-icon>
                       Remind
                     </button>
                   </ion-col>
                   <ion-col col-4 text-right>
-                    <button
-                      ion-button
-                      clear
-                      small
-                      color="danger"
-                      icon-start
-                      (click)="getDeal(item)"
-                    >
+                    <button ion-button clear small color="danger" icon-start (click)="getDeal(item)">
                       <ion-icon name="share-alt"></ion-icon>
                       Get Deal
                     </button>
@@ -239,24 +212,38 @@
               </ion-card>
             </ion-item>
           </ion-list>
+          <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" #refresher>
+    <ion-infinite-scroll-content
+      style="  background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+          <button ion-button clear (click)="loadMore('categorydeal')" *ngIf="isloading">
+            Load More
+          </button>
+          <button ion-button clear (click)="loadMore('categorydeal')" *ngIf="pageCount !== 1"
+            [@btnanimation]="btnstate">
+            Load More
+          </button>
+          <ion-row text-center *ngIf="pageCount === 1">
+            <ion-col col-12>
+              <h2 style="font-family:GloriaHallelujah-Regular;color:#ff6700;  margin: 0px;"
+                class="animated infinite pulse">
+                No more deals
+              </h2>
+            </ion-col>
+          </ion-row>
         </ng-template>
         <ng-template #elseTemplate>
           <div style="height: 100%;width:100%;position: absolute;">
-            <img
-              src="../../assets/noproduct.png"
-              alt=""
-              style="
+            <img src="../../assets/noproduct.png" alt="" style="
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);"
-            />
-            <h3
-              style="    position: absolute;
+    transform: translate(-50%, -50%);" />
+            <h3 style="    position: absolute;
     top: calc(50% + 90px);
     left: 50%;
-    transform: translate(-50%, -50%);font-family:GloriaHallelujah-Regular;"
-            >
+    transform: translate(-50%, -50%);font-family:GloriaHallelujah-Regular;">
               No Product
             </h3>
           </div>
@@ -264,10 +251,4 @@
       </ion-slide>
     </ng-container>
   </ion-slides>
-
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content
-      style="  background-image: linear-gradient( 109.6deg,  rgba(236,240,247,1) 11.2%, rgba(248,248,252,1) 91.1% );"
-    ></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

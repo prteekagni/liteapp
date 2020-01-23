@@ -11,19 +11,19 @@
             md="ios-notifications-outline"
             (click)="goToNotification()"
             class="iconspace"
-            style="margin-left: 5px;font-size: 1.4em"
+            style="margin-left: 5px;font-size: 1em"
           ></ion-icon>
           <ion-icon
             ios="ios-star-outline"
             md="ios-star-outline"
             (click)="goToFav()"
-            style="font-size: 1.4em;"
+            style="font-size: 1em;"
           >
           </ion-icon>
           <ion-icon
             ios="ios-search"
             md="md-search"
-            style="margin-left: 5px;font-size: 1.4em"
+            style="margin-left: 5px;font-size: 1em"
             (click)="search()"
           ></ion-icon>
         </ion-col>
@@ -47,37 +47,44 @@
   </ng-container>
 
   <ng-template #connected class="main-content">
-    <ng-container *ngIf="mainslide.length > 0; else elseTemplate">
+    <ng-container *ngIf="adsData.length > 0; else elseTemplate">
       <ion-slides
-        *ngIf="mainslide.length > 0"
+        *ngIf="adsData.length > 0"
         pager
-        speed="1000"
+        speed="800"
         effect="slides"
         class="mainslide"
-        autoplay="1000"
         loop="true"
+        autoplay=3000
       >
-        <ion-slide *ngFor="let item of mainslide">
-          <img src="{{ item.Logo }}" alt="" class="header-image" />
+        <ion-slide *ngFor="let item of adsData">
+          <img src="{{ item.Logo }}" alt="" class="header-image" (click)="goToAds(item)"/>
         </ion-slide>
       </ion-slides>
+
     </ng-container>
     <ng-template #elseTemplate style="height:40vh">
-      <ion-slides
+       
+        <div class="maintimeline-wrapper">
+    <div class="maintimeline-item">
+        <div class="mainanimated-background">
+            <div class="mainbackground-masker header-top"></div>
+        </div>
+         
+    </div>
+</div>
+      <!-- <ion-slides
         pager
         speed="1000"
         effect="slides"
         class="mainslide"
-       
+        
         loop="true"
       >
         <ion-slide (click)="gotToAds()">
           <img src="../../assets/Formals.png" alt="" class="header-image" />
         </ion-slide>
-            <ion-slide (click)="gotToAds()">
-          <img src="../../assets/ajio.jpg" alt="" class="header-image" />
-        </ion-slide>
-      </ion-slides>
+      </ion-slides> -->
     </ng-template>
 
     <ion-row>
@@ -88,7 +95,7 @@
     <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="topVisitedStores.length > 0">
-          <h4 class="focus-in-expand">Most Visited Stores</h4>
+          <h5 class="focus-in-expand">Your Top Stores</h5>
           <ion-row>
             <ion-item no-lines class="leftpadding">
               <ion-scroll scrollX="true" scroll-avatar style="height:90px;">
@@ -119,7 +126,7 @@
     </ion-row>
         <ion-row  *ngIf="mVisitedDeals.length > 0">
       <ion-col col-12>
-        <h4>Recently Visted Category</h4>
+        <h5>Your Top Category</h5>
        <ion-item no-lines class="paddingleft">
           <ion-scroll scrollX="true" scroll-avatar class="dealslargecardcontainer">
             <div
@@ -152,7 +159,7 @@
       </ion-col>
       
     </ion-row>
-    <ion-row text-left>
+    <!-- <ion-row text-left>
       <ion-col col-12>
         <ng-container *ngIf="brands.length > 0">
           <h4>Top brands</h4>
@@ -184,13 +191,13 @@
           <ion-spinner name="bubbles"></ion-spinner>
         </ng-template>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row>
       <ion-col col-12 text-left>
-        <h4 *ngIf="substores.length >= 1" style="margin-top: 0px;">
+        <h5 *ngIf="substores.length >= 1" style="margin-top: 0px;">
           Stores by Category
-        </h4>
+        </h5>
       </ion-col>
 
       <ion-col col-12 *ngIf="substores.length > 0" style="    border-bottom: 1px solid #dedede;">
@@ -203,8 +210,8 @@
             [@photosAnimation]="substores.length"
           >
             <div (click)="goToPage(item)" item-start style="border-bottom:0px">
-              <img src="{{item.Logo}}" alt="" />
-              <p style="text-align: center">{{ item?.Name }}</p>
+              <img src="{{item.Logo}}" alt="" style="border-radius: 10%;"/>
+              <p style="text-align: center;margin:0px">{{ item?.Name }}</p>
             </div>
           </ion-col>
         </ion-row>

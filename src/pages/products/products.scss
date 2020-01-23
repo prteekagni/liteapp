@@ -159,7 +159,54 @@ page-products {
 
 
   .scroll-content .mycatego{
-margin-top: 20px;
+// margin-top: 20px;
   }
+ .toolbar-title-md {
+  color: #9b45e4 !important;
+font-size: 2.3rem;
+ font-family: 'CarterOne-Regular' !important;
 
+  padding: 0px 0px !important;
+  // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+  .timeline-item {
+   background: #fff;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100vw;
+    min-height: 165px;
+}
+
+.animated-background {
+    -webkit-animation-duration: 1s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 200px;
+    width: 95vw;
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    margin-top: 32px;
+}
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
 }

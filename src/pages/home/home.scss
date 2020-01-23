@@ -59,7 +59,7 @@ page-home {
     //  background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950);
     // height: 250px;
     width: fit-content;
-    margin-top: 24px;
+    // margin-top: 25px;
   }
 
   .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
@@ -77,7 +77,7 @@ page-home {
   }
 
   .scroll-content {
-    padding-top: 0 !important;
+    // padding-top: 0 !important;
   }
 
   ion-header {
@@ -104,7 +104,8 @@ page-home {
   }
 
   .mainslide {
-    height: 250px;  
+    height: 200px;
+    margin-top: 25px; 
   }
 
   //  .mytextcolor{
@@ -131,9 +132,9 @@ page-home {
     height: 75px !important;
   }
 
-  .label-md {
-    margin: 0 !important;
-  }
+  // .label-md {
+  //   margin: 0 !important;
+  // }
 
   .item-md {
     padding-left: 0px !important;
@@ -258,4 +259,42 @@ body {
    .borderlist >.item-md:last-child.item-block .item-inner  {
      border-bottom : 0px !important;
    }
+    .maintimeline-item {
+   background: #fff;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100vw;
+    min-height: 165px;
+}
+
+.mainanimated-background {
+    -webkit-animation-duration: 1s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 200px;
+    width: 95vw;
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    margin-top: 32px;
+}
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
 }

@@ -26,7 +26,10 @@ import {
   stagger
 } from "@angular/animations";
 import { StorageProvider } from "../../providers/storage/storage";
-
+const animationsOptions = {
+  animation: "ios-transition",
+  duration: 1000
+};
 @IonicPage()
 @Component({
   selector: "page-deals",
@@ -34,19 +37,21 @@ import { StorageProvider } from "../../providers/storage/storage";
   animations: [
     trigger("photosAnimation", [
       transition("* => *", [
-        query(
-          ".dealslist",
-          style({ transform: "translateX(-100%)" }),
-           { optional: true }),
+        query(".dealslist", style({ transform: "translateX(-100%)" }), {
+          optional: true
+        }),
         query(
           ".dealslist",
           stagger("100ms", [
             animate("500ms", style({ transform: "translateX(0)" }))
-          ]), { optional: true })
+          ]),
+          { optional: true }
+        )
       ])
     ])
   ]
 })
+
 export class DealsPage {
   @ViewChild(Content) content: Content;
   @ViewChild(Searchbar) searchbar: Searchbar;
@@ -168,24 +173,35 @@ export class DealsPage {
   }
 
   getAllDeals(data) {
-                      this.storageService
-                        .visitedDealCategory(data)
-                        .then((res: any) => console.log(res));
+    this.storageService
+      .visitedDealCategory(data)
+      .then((res: any) => console.log(res));
 
-                      console.log(data);
-                      this.navCtrl
-                        .push("StabsPage", {
-                          data: data
-                        })
-                        .then(
-                          res => {},
-                          err => {
-                            this.sharedService.createToast("Sorry !!");
-                          }
-                        );
-                    }
+    console.log(data);
+    this.navCtrl
+      .push("StabsPage", {
+        data: data
+      })
+      .then(
+        res => {},
+        err => {
+          this.sharedService.createToast("Sorry !!");
+        }
+      );
+  }
+
+  goToNotification() {
+    // this.firebaseAnalytics
+    //   .logEvent("gTNotification","")
+    //   .then((res: any) => alert(res))
+    //   .catch((error: any) => console.error(error));
+    // this.sharedService.firebaseevent("NotificationPage", "");
+    // this.checkDirectory();
+    this.navCtrl.push("NotificationPage", {}, animationsOptions);
+  }
 
   goToFav() {
-    this.navCtrl.push("FavouritesPage");
+    // this.sharedService.firebaseevent("FavouritePage", "");
+    this.navCtrl.push("FavouritesPage", {}, animationsOptions);
   }
 }

@@ -1,8 +1,8 @@
 <ion-row text-left>
   <ion-col col-12>
-    <h4 style="margin-top:0px;margin-bottom:0px;" class="focus-in-expand">
+    <h5 style="margin-top:0px;margin-bottom:0px;" class="focus-in-expand">
       Best Stores
-    </h4>
+    </h5>
   </ion-col>
   <ng-container
     *ngIf="items.length > 0; then thenTemplate; else elseTemplate"
@@ -16,7 +16,6 @@
               <ion-card class="roundedcorner">
                 <ion-card-content>
                   <img [src]="item.Logo" [ngClass]="{'showcontent':item.Logo == null}" (load)="onImageLoad($event)"/>
-                 <!-- <img [src]="item?.Logo!= 'unknown' ? item.Logo : myImgUrl" /> -->
                 </ion-card-content>
               </ion-card>
             </ion-col>
@@ -32,8 +31,9 @@
                 round
                 (click)="toggleDisplay()"
                 text-center
-                color="danger"
+                color=""
                 [@btnanimation]="btnstate"
+                class="btnclass"
               >
                <span *ngIf="!showMore">
                  Show More
@@ -44,93 +44,40 @@
               </button>
             </ion-col>
           </ion-col>
-          <!-- <ion-col col-12 text-center *ngIf="!showMore">
-            <ion-col col-3>
-              <button ion-button round (click)="toggleDisplay()" color="danger" [@btnanimation]="btnstate">
-                Show More
-              </button>
-            </ion-col>
-          </ion-col> -->
         </ion-row>
       </ng-container>
     </ion-col>
+
+  
   </ng-template>
   <ng-template #elseTemplate>
+ 
     <ion-col col-12>
-      <ion-row #myrow class="grow">
-        <ng-container #mywrapper>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col col-4>
-            <ion-card class="roundedcorner">
-              <ion-card-content>
-                <img src="../../assets/dealslocker1.png" />
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ng-container>
-      </ion-row>
+      
+        <div class="timeline-wrapper">
+    <div class="timeline-item">
+        <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+          <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+            <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+            <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+            <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+            <div class="animated-background">
+            <div class="background-masker header-top"></div>
+        </div>
+         
+    </div>
+</div>
+      
       <ion-row text-center>
         <ion-col col-12 text-center *ngIf="showMore">
           <ion-col col-3>

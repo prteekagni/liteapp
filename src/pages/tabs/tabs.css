@@ -1,0 +1,19 @@
+ 
+
+ .ion-ios-settings, .ion-md-settings {
+        content: url(../../assets/fhome.png);
+        width: 24px;
+    }
+    .ion-ios-settings-outline {
+      content: url(../../assets/fhome.png);
+        width: 24px;
+    }
+    .ion-md-settings[ng-reflect-is-active=false]{
+       content: url(../../assets/fhome.png);
+        width: 24px;
+    }
+
+    .home.tabs-md .tab-button[aria-selected="true"] .tab-button-icon {
+     content: url(../../assets/fhome.png);
+    width: 40px;
+}

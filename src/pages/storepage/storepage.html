@@ -13,7 +13,7 @@
             class="iconspace"
             style="margin-left: 5px;"
           ></ion-icon>
-          <ion-icon ios="ios-notifications" md="md-star" (click)="goToFav()">
+          <ion-icon ios="ios-star-outline" md="ios-star-outline" (click)="goToFav()">
           </ion-icon>
         </ion-col>
       </ion-row>
@@ -141,17 +141,18 @@
         </ng-container> -->
 
     <ion-row text-left>
-      <ion-col col-12>
+      <ion-col col-12 style="padding-left:0px;padding-right:0px">
         <ng-container *ngIf="brands.length > 0">
           <h4>Top brands</h4>
           <ion-row>
-            <ion-item no-lines class="leftpadding">
+            <ion-item no-lines class="brandlist" style="padding-left: 0px;padding-right: 0px;" >
               <ion-scroll scrollX="true" scroll-avatar style="height:130px;">
                 <div
                   class="container"
                   class="scroll-item"
                   *ngFor="let item of brands;let i = index"
                   (click)="brandClick(item)"
+                  style="margin-left:5px"
                 >
                   <div
                     class="image"
@@ -169,7 +170,7 @@
       </ion-col>
     </ion-row>
 
-    <ng-container *ngFor="let item of store; let i = index" class="mycatego">
+    <ng-container class="mycatego">
       <!-- <ion-col col-12> -->
       <!-- <ion-col col-12 text-center>
           <h2 *ngIf="item.Name !== 'Featured'">{{ item.Name }}</h2>
@@ -177,13 +178,34 @@
       <!-- <ion-row>
           <ion-col col-12 text-center class="nopadding"> -->
 
-      <ng-container *ngIf="item.Name !== 'Top Brands'">
-        <dealsgrid
+      
+        <!-- <ion-list >
+          <ion-item  *ngFor="let item of store; let i = index" >
+            <ng-container *ngIf="item.Name !== 'Top Brands'">
+               <dealsgrid
           [items]="item"
           [type]="'substores'"
           *ngIf="item?.ID"
         ></dealsgrid>
-      </ng-container>
+          </ng-container>
+          </ion-item>
+        </ion-list> -->
+     
+    <ion-row>
+      <ion-col col-12>
+           <ion-list >
+          <ion-item  *ngFor="let item of store; let i = index" >
+             <ng-container *ngIf="item.Name !== 'Top Brands'">
+               <dealsgrid
+          [items]="item"
+          [type]="'substores'"
+          *ngIf="item?.ID"
+        ></dealsgrid>
+</ng-container>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
   
       <!-- </ion-col>
         </ion-row> -->

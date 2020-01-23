@@ -51,7 +51,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       
        finalize(() => this.SharedProvider.dismissLoader()),
       catchError((error: HttpErrorResponse) => {
-        // alert(data);
+        console.log(JSON.stringify(error));
+        
         this.SharedProvider.handleError(error);
         return throwError(error);
       })

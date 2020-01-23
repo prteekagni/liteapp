@@ -1,11 +1,12 @@
 <ion-tabs #paymentTab selectedIndex="0">
-  <ion-tab [root]="HomePage" tabTitle="Stores" tabIcon="home" icon-top></ion-tab>
+  <ion-tab [root]="HomePage" tabTitle="Stores" tabIcon="home" icon-top class="home"></ion-tab>
   <ion-tab
     [root]="DealsPage"
     tabTitle="Deals"
     tabIcon="information-circle"
     icon-top
     [rootParams]="tab2Params"
+
   ></ion-tab>
   <ion-tab
     [root]="ProductsPage"
@@ -16,7 +17,8 @@
   <ion-tab
     [root]="MyaccountPage"
     tabTitle="Profile"
-    tabIcon="contacts"
+    tabIcon="settings"
     icon-top
   ></ion-tab>
+   
 </ion-tabs>

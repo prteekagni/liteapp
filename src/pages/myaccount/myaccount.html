@@ -1,6 +1,32 @@
 <ion-header>
   <ion-navbar>
-    <ion-title><span class="titlecolormargin tracking-in-expand">Account</span></ion-title>
+    <ion-title>  <ion-row>
+        <ion-col col-6 text-left>
+          <span class="tracking-in-expand">My Account</span>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <ion-icon
+            ios="ios-notifications-outline"
+            md="ios-notifications-outline"
+            (click)="goToNotification()"
+            class="iconspace"
+            style="margin-left: 5px;font-size: 1em"
+          ></ion-icon>
+          <ion-icon
+            ios="ios-star-outline"
+            md="ios-star-outline"
+            (click)="goToFav()"
+            style="font-size: 1em;"
+          >
+          </ion-icon>
+          <!-- <ion-icon
+            ios="ios-search"
+            md="md-search"
+            style="margin-left: 5px;font-size: 1em"
+            (click)="search()"
+          ></ion-icon> -->
+        </ion-col>
+      </ion-row></ion-title>
   </ion-navbar>
 </ion-header>
 

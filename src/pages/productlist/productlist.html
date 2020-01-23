@@ -65,7 +65,7 @@
     </ion-col>
   </ion-row>
   
-  <!-- <ng-container *ngIf="newItem.length > 0; else noproducttemplate"> -->
+  <ng-container *ngIf="newItem.length > 0; else noproducttemplate">
  <ion-list [virtualScroll]="newItem" approxItemHeight="250px">
     <ion-item *virtualItem="let item">
       <ion-card [ngClass]="{ secondclass: itemfav }" (click)="cardClick(item)" style="border-radius: 10px;">
@@ -99,7 +99,7 @@
       </ion-card>
     </ion-item>
   </ion-list>
-  <!-- </ng-container> -->
+  </ng-container>
   <ng-template #noproducttemplate>
      <div style="height:calc(100% - 130px);;width:100%;position: absolute;">
             <img

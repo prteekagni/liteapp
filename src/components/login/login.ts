@@ -67,7 +67,7 @@ export class LoginComponent {
     this.googlePlus
       .login({})
       .then((res: any) => {
-        alert(JSON.stringify(res));
+        // alert(JSON.stringify(res));
         this.authService.isGoogleLogin();
         this.authService.setUserDetails(res);
         this.authService.setUserLogin();

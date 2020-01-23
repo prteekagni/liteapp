@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-     <span class="titlecolormargin" *ngIf="services !== 'services'">{{deal?.ShortDescription}}</span>
-     <span class="titlecolormargin" *ngIf="services == 'services'">{{deal?.SubCategory.Name}}</span>
+     <span class="titlecolormargin" *ngIf="services !== 'services'" style="color:black;">{{deal?.ShortDescription}}</span>
+     <span class="titlecolormargin" *ngIf="services == 'services'" style="color:black">{{deal?.SubCategory.Name}}</span>
     </ion-title>
     <ion-buttons start color="theme">
       <button ion-button (click)="dismiss()" color="theme">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="md-close" showWhen="android,windows" color="theme"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-fab right bottom>
-    <button ion-fab color="buttons" (click)="shareApp()"><ion-icon name="md-share"></ion-icon></button>
+    <button ion-fab color="buttons" (click)="shareApp(deal)"><ion-icon name="md-share"></ion-icon></button>
      </ion-fab>
 <ng-container *ngIf="deal">
  <ng-container *ngIf="services !== 'services'; else elseTemplate">
@@ -72,8 +72,8 @@
             <ion-col col-12>
               <h6>Coupon Code</h6>
               <!-- <h4>{{deal?.Coupon}}</h4> -->
-              <h2 *ngIf="deal.Coupon" style="color:#ff6700;text-transform: uppercase;">{{deal?.Coupon}}</h2>
-              <h2 *ngIf="!deal.Coupon" style="color:#ff6700;text-transform: uppercase;font-family: GloriaHallelujah-Regular;">No Coupon Required</h2>
+              <h2 *ngIf="deal.Coupon" style="color:#fb595e;text-transform: uppercase;">{{deal?.Coupon}}</h2>
+              <h2 *ngIf="!deal.Coupon" style="color:#fb595e;text-transform: uppercase;font-family: GloriaHallelujah-Regular;">No Coupon Required</h2>
             </ion-col>
           </ion-row>
         <!-- </ion-card-content>
@@ -172,7 +172,7 @@
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
      margin: 0;
-     padding: 0"  color="danger" (click)="getDeal(deal)" *ngIf="this.services !== 'services'">Get Deal</button>
+     padding: 0"  color="theme" (click)="getDeal()" *ngIf="this.services !== 'services'">Get Deal</button>
      <button ion-button full style="border-radius: 2px;
     overflow: hidden;
     height: 4.6rem;
@@ -187,5 +187,5 @@
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
      margin: 0;
-     padding: 0"  color="danger" (click)="getDeal(deal)" *ngIf="this.services == 'services'">Apply</button>
+     padding: 0"  color="theme" (click)="getDeal()" *ngIf="this.services == 'services'">Apply</button>
 </ion-footer>

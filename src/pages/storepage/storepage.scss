@@ -62,6 +62,7 @@ page-storepage {
   .main-content {
     background-color: map-get($colors, dark);
     box-shadow: 0px -1px 13px 1px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
   }
 
   .scroll-content {
@@ -176,7 +177,7 @@ page-storepage {
     margin-top: 0px;
   }
   .toolbar-background-md {
-    background: transparent;
+    background: white;
   }
 
   .inner-image {
@@ -197,5 +198,25 @@ page-storepage {
   div {
     position: relative;
   }
-  $toolbar-background: black;
+
+  .brandlist .label-md{
+margin:-10px 0px 5px 0
+  }
+
+  h4{
+    font-size: 2rem !important;
+  }
+
+  .item-md{
+    padding-left: 0px;
+  }
+
+  .label-md{
+    margin: 0px !important;
+  }
+
+  h5{
+    font-size: 2rem !important;
+  }
 }
+

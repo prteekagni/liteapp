@@ -1,11 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, filter, mergeMap, tap } from "rxjs/operators";
 import { ReplaySubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 const apiUrl = "http://13.235.82.211/api/";
 
-// const apiUrl = "http://localhost:5000/api/";
+// const apiUrl = "http://192.168.225.44:52044/api/";
 
 @Injectable()
 export class DealsProvider {
@@ -63,7 +63,6 @@ export class DealsProvider {
                         }
 
   getStoreCategory():Observable<any> {
-    
     return this.http
       .get(apiUrl + "category")
       // .pipe(map((res: any) => res.filter(resp => resp.CatType == 1)));
@@ -101,12 +100,24 @@ export class DealsProvider {
   }
 
   // get deals for category
-  getDealsByCategory(data) {
-    return this.http.get(apiUrl + "deals/getDealsByCategory/" + data);
+  getDealsByCategory(data , pageNumber) {
+    return this.http.get(
+      apiUrl +
+        "deals/getDealsByCategory/" +
+        data +
+        "?pageNumber=" +
+        pageNumber +
+        "&pageSize=5"
+    );
   }
 
-  getDealsBySubCategory(data){
-    return this.http.get(apiUrl + "deals/getDealsByParentCategory/" + data);
+  getDealsBySubCategory(data , pageNumber){
+    return this.http.get(
+      apiUrl +
+        "deals/getDealsByParentCategory/" +
+        data +
+        "?pageNumber=" + pageNumber +"&pageSize=5"
+    );
   }
 
   // get Deal Details
@@ -115,8 +126,8 @@ export class DealsProvider {
   // get ads data
   getAdsData() {
     return this.http
-      .get(apiUrl + "stores")
-      .pipe(map((res: any) => res.filter((resp: any) => resp.StoreType == 15)));
+      .get(apiUrl + "ads");
+      // .pipe(map((res: any) => res.filter((resp: any) => resp.StoreType == 15)));
   }
 
   //get product category

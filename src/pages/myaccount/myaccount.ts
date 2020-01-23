@@ -2,7 +2,10 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, Events } from "ionic-angular";
 import { GooglePlus } from "@ionic-native/google-plus";
 import { AuthenticateProvider } from "../../providers/authenticate/authenticate";
-
+const animationsOptions = {
+  animation: "ios-transition",
+  duration: 1000
+};
 @IonicPage()
 @Component({
   selector: "page-myaccount",
@@ -29,8 +32,8 @@ export class MyaccountPage {
       this.isLoggedIn = false;
       console.log(this.isLoggedIn);
     });
-   console.log(this.authService.checkUserLogin());
-   this.isLoggedIn = this.authService.checkUserLogin();
+    console.log(this.authService.checkUserLogin());
+    this.isLoggedIn = this.authService.checkUserLogin();
   }
 
   ionViewDidLoad() {
@@ -56,4 +59,19 @@ export class MyaccountPage {
   //       }
   //     );
   // }
+
+  goToNotification() {
+    // this.firebaseAnalytics
+    //   .logEvent("gTNotification","")
+    //   .then((res: any) => alert(res))
+    //   .catch((error: any) => console.error(error));
+    // this.sharedService.firebaseevent("NotificationPage", "");
+    // this.checkDirectory();
+    this.navCtrl.push("NotificationPage", {}, animationsOptions);
+  }
+
+  goToFav() {
+    // this.sharedService.firebaseevent("FavouritePage", "");
+    this.navCtrl.push("FavouritesPage", {}, animationsOptions);
+  }
 }

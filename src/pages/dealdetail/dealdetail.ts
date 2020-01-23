@@ -9,7 +9,6 @@ import {
 import { Clipboard } from "@ionic-native/clipboard";
 import { SharedProvider } from "../../providers/shared/shared";
 import { DealsProvider } from "../../providers/deals/deals";
-import { platformBrowser } from "@angular/platform-browser";
 import { StorageProvider } from "../../providers/storage/storage";
 import { NotificationProvider } from "../../providers/notification/notification";
 declare var cordova;
@@ -40,7 +39,8 @@ export class DealdetailPage {
     this.type = this.navParams.get("data");
 
     // this.type.Description = this.type.Description.replace("/.", "/br");
-    this.description = this.type.Description !== null?this.type.Description.split("."):[];
+    this.description =
+      this.type.Description !== null ? this.type.Description.split(".") : [];
 
     this.storageService.visitedDeals(this.type).then((res: any) => {
       console.log(res);
@@ -53,14 +53,20 @@ export class DealdetailPage {
       this.deal = this.navParams.get("data");
       this.services = this.navParams.get("type");
       if (this.deal.hasOwnProperty("Coupon")) {
-        this.clipboard.copy(this.deal.Coupon).then(
-          res => {
-            this.sharedService.createToast("Coupon Copied" + this.deal.Coupon);
-          },
-          err => {
-            console.log("coupon code not copy");
+        {
+          if (this.deal.Coupon !== null) {
+            this.clipboard.copy(this.deal.Coupon).then(
+              res => {
+                this.sharedService.createToast(
+                  "Coupon Copied " + this.deal.Coupon
+                );
+              },
+              err => {
+                console.log("Error in coping code");
+              }
+            );
           }
-        );
+        }
       }
     }
   }
@@ -72,14 +78,16 @@ export class DealdetailPage {
   dismiss() {
     this.viewController.dismiss();
   }
-  shareApp() {
-    this.sharedService.shareDeals(this.deal);
+  shareApp(data) {
+    this.sharedService.shareDeals(data);
     this.sharedService.firebaseevent("shareDeal", "");
   }
 
-  getDeal(data) {
+  getDeal() {
     this.sharedService.firebaseevent("Opened Deal", "");
-    this.sharedService.openBrowser(data);
+    console.log(this.deal);
+
+    this.sharedService.openBrowser(this.deal);
   }
 
   ionViewWillLeave() {}

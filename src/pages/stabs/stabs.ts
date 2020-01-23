@@ -7,7 +7,8 @@ import {
   Content,
   Platform,
   Modal,
-  ModalController
+  ModalController,
+  Refresher
 } from "ionic-angular";
 import { DealsProvider } from "../../providers/deals/deals";
 import { SharedProvider } from "../../providers/shared/shared";
@@ -83,7 +84,7 @@ import {
 export class StabsPage implements OnInit {
   @ViewChild("SwipedTabsSlider") SwipedTabsSlider: Slides;
   @ViewChild("MultiItemsScrollingTabs") ItemsTitles: Content;
-
+  @ViewChild("refresher") refresher: Refresher;
   dealcard = "more";
   SwipedTabsIndicator: any = null;
   tabTitleWidthArray: any = [];
@@ -98,6 +99,11 @@ export class StabsPage implements OnInit {
   title: string;
   alldeals: any = [];
   clickanm = "active";
+  pageCount = 1;
+  pageNumber = 1;
+  isloading: boolean = false;
+  btnstate: string = "more";
+  isrefresherloading: boolean = false;
   constructor(
     public navCtrl: NavController,
     platform: Platform,
@@ -123,17 +129,14 @@ export class StabsPage implements OnInit {
           this.tabs.push(element);
         });
       });
-    this.dealService.getDealsByCategory(this.data.ID).subscribe((res: any) => {
-      this.alldeals = res;
-      this.alldeals = this.alldeals.map(job => {
-        job.state = "more";
-        return job;
+    this.dealService
+      .getDealsByCategory(this.data.ID, this.pageNumber)
+      .subscribe((res: any) => {
+        this.alldeals = res.data;
+        this.pageCount = 1;
+        console.log(res);
+        this.checkForFavourite(this.alldeals);
       });
-      
-      console.log(this.alldeals);
-
-      this.checkForFavourite(this.alldeals);
-    });
   }
 
   ionViewDidEnter() {
@@ -145,17 +148,40 @@ export class StabsPage implements OnInit {
         );
       this.selectTab(0);
     }
-
-    if (this.tabs.length !== 0) {
-      this.dealService
-        .getDealsBySubCategory(this.tabs[0].ID)
-        .subscribe((res: any) => {
-          this.newItem = res;
-        });
-    }
   }
 
   scrollIndicatiorTab(data) {
+    this.pageCount = 1;
+    this.pageNumber = 1;
+    console.log("Scroll indicator method called");
+    console.log(this.refresher);
+
+    if (this.SwipedTabsSlider.realIndex === 0) {
+      console.log(this.SwipedTabsSlider.realIndex);
+
+      this.dealService
+        .getDealsByCategory(this.data.ID, this.pageCount)
+        .subscribe((res: any) => {
+          this.alldeals = res.data;
+          this.pageCount = 1;
+          this.pageNumber = res.pageNumber;
+          this.checkForFavourite(this.alldeals);
+        });
+    } else {
+      this.dealService
+        .getDealsBySubCategory(
+          this.tabs[this.SwipedTabsSlider.realIndex].ID,
+          this.pageCount
+        )
+        .subscribe((res: any) => {
+          this.newItem = res.data;
+          this.pageCount = res.totalPages;
+          this.pageNumber = res.pageNumber;
+          console.log(res);
+          this.checkForFavourite(this.newItem);
+        });
+    }
+
     this.ItemsTitles.scrollTo(
       this.calculateDistanceToSpnd(this.SwipedTabsSlider.getActiveIndex()) -
         this.screenWidth_px / 2,
@@ -192,14 +218,6 @@ export class StabsPage implements OnInit {
     // }
     this.SwipedTabsIndicator.style.webkitTransform =
       "translate3d(" + this.calculateDistanceToSpnd(index) + "px,0,0)";
-    this.newItem = [];
-    console.log(this.newItem);
-
-    this.dealService
-      .getDealsBySubCategory(this.tabs[this.SwipedTabsSlider.realIndex].ID)
-      .subscribe((res: any) => {
-        this.newItem = res;
-      });
   }
 
   updateIndicatorPositionOnTouchEnd() {
@@ -316,14 +334,109 @@ export class StabsPage implements OnInit {
   checkForFavourite(data) {
     this.storageService.getDeals().then((res: any) => {
       if (res) {
-        this.alldeals.forEach(element => {
-          if (res.ID == element.ID) {
-            this.alldeals.itemfav = true;
+        console.log(res);
+
+        data.forEach(element => {
+          // if (res.ID == element.ID) {
+          //   element.itemfav = true;
+          // }
+          if (res.find(x => x.ID === element.ID)) {
+            element.itemfav = true;
           }
         });
+
+        console.log(data);
       }
     });
   }
 
-  doInfinite(refresher) {}
+  doInfinite(refresher) {
+    console.log(refresher);
+    if (refresher.state == "loading")
+      if (this.pageCount !== 0) {
+        if (this.SwipedTabsSlider.realIndex !== 0) {
+          console.log("Swipe Index " + this.SwipedTabsSlider.realIndex);
+
+          this.dealService
+            .getDealsBySubCategory(
+              this.tabs[this.SwipedTabsSlider.realIndex].ID,
+              this.pageNumber + 1
+            )
+            .subscribe((res: any) => {
+              console.log(res);
+
+              res.data.forEach(element => {
+                this.newItem.push(element);
+              });
+              this.pageNumber = res.pageNumber;
+              this.pageCount--;
+              refresher.complete();
+            });
+          this.checkForFavourite(this.newItem);
+        } else {
+          console.log("Swipe Index " + this.SwipedTabsSlider.realIndex);
+          console.log("pageNumber is" + this.pageNumber);
+
+          this.dealService
+            .getDealsByCategory(this.data.ID, this.pageNumber + 1)
+            .subscribe((res: any) => {
+              console.log(res);
+
+              res.data.forEach(element => {
+                this.alldeals.push(element);
+              });
+              this.pageNumber = res.pageNumber;
+              this.pageCount--;
+              refresher.complete();
+            });
+          this.checkForFavourite(this.alldeals);
+        }
+      }
+  }
+  loadMore(data) {
+    this.btnstate = this.btnstate == "less" ? "more" : "less";
+    this.isloading = this.isloading == true ? true : false;
+    if (data == "alldeals") {
+      if (this.pageCount !== 0) {
+        console.log("Swipe Index " + this.SwipedTabsSlider.realIndex);
+        setTimeout(() => {
+            this.dealService
+              .getDealsByCategory(this.data.ID, this.pageNumber + 1)
+              .subscribe((res: any) => {
+                console.log(res);
+
+                res.data.forEach(element => {
+                  this.alldeals.push(element);
+                });
+                this.pageNumber = res.pageNumber;
+                this.pageCount--;
+              });
+        }, 3000);
+        
+      
+        this.checkForFavourite(this.alldeals);
+      }
+    } else {
+      this.dealService
+        .getDealsBySubCategory(
+          this.tabs[this.SwipedTabsSlider.realIndex].ID,
+          this.pageNumber + 1
+        )
+        .subscribe((res: any) => {
+          console.log(res);
+
+          res.data.forEach(element => {
+            this.newItem.push(element);
+          });
+          this.pageNumber = res.pageNumber;
+          this.pageCount--;
+          
+        });
+      this.checkForFavourite(this.newItem);
+    }
+
+    setTimeout(() => {
+       this.isloading = this.isloading == true ? true : false;
+    }, 1000);
+  }
 }
