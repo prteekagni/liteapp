@@ -58,6 +58,11 @@
 }
 
 @font-face {
+  font-family: 'Patua One';
+  src: url("../assets/fonts/PatuaOne-Regular.ttf");
+}
+
+@font-face {
   font-family: "Ubuntu-Medium";
   src: url("../assets/fonts/Ubuntu-Medium.ttf");
   font-weight: 200;
@@ -123,6 +128,11 @@ font-family: 'Kalam-Regular';
   src: url("../assets/fonts/Kalam-Regular.ttf");
 
 }
+@font-face {
+font-family: 'Raleway';
+  src: url("../assets/fonts/Raleway-Medium.ttf");
+
+}
 
 // span {
 //    font-family: 'Source Code Pro';
@@ -136,7 +146,7 @@ h4,
 h5,
 h6,
 ion-item {
-  font-family: "Merienda", serif;
+  font-family: "Raleway", serif;
   color: black;
 }
 
@@ -159,9 +169,9 @@ ion-content {
   // background-size: cover;
 }
 
-.header-md::after {
-  background-image: none !important;
-}
+// .header-md::after {
+//   background-image: none !important;
+// }
 
 // .mymodal {
 //   -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
@@ -181,9 +191,9 @@ ion-content {
   box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
   background-color: #fafafa;
   position: absolute;
-  top: 50%;
+  
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
   height: 150px;
   width: 90%;
   border-radius: 10px;
@@ -534,42 +544,42 @@ ion-img img{
 //     width: 40px;
 // }
 .tab-button-icon.icon.icon-md.ion-ios-home-outline{
-  content: url(../../assets/homelatest.png);
+  content: url(../../assets/Asset3.png);
   height: 25px;
   width: 27px;
     
 }
 
 .tab-button-icon.icon.icon-md.ion-ios-information-circle-outline{
- content: url(../../assets/dealslatest.png);
+ content: url(../../assets/d.png);
     height: 25px;
 }
 
 .tab-button-icon.icon.icon-md.ion-ios-contacts-outline{
-  content: url(../../assets/serviceslatest.png);
+  content: url(../../assets/services.png);
  height: 25px;   
 }
 
 .tab-button-icon.icon.icon-md.ion-ios-settings-outline{
-  content: url(../../assets/personal.png);
+  content: url(../../assets/computer.png);
 height: 25px;    
 }
 
 .tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-home {
-     content: url(../../assets/homelatestfill.png);
+     content: url(../../assets/home111.png);
    height: 30px;
    width: 30px;
 }
 .tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-information-circle {
-     content: url(../../assets/fdealslatest.png);
+     content: url(../../assets/d2.png);
    height: 30px;
 }
 .tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-contacts {
-     content: url(../../assets/fservices.png);
+     content: url(../../assets/s3.png);
 height: 30px;
 }
 .tabs-md .tab-button[aria-selected="true"] .tab-button-icon.tab-button-icon.icon.icon-md.ion-ios-settings {
-     content: url(../../assets/fpersonal.png);
+     content: url(../../assets/p4.png);
  height: 30px;
 }
 

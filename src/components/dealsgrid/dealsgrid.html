@@ -5,7 +5,7 @@
         <ion-col col-12 text-left>
           <h5
             *ngIf="cards.length !== 0"
-            style="margin-top: 0px;margin-bottom: 0px;"
+            style="margin-top: 0px;margin-bottom: 0px;margin-left: 10px;"
             class="focus-in-expand"
           >
             {{ copyItem?.Name }}
@@ -13,42 +13,41 @@
         </ion-col>
       </ion-row>
       <ion-row>
-   <ion-col col-12 style="padding:0px"> 
-        <ion-item no-lines class="paddingleft">
-          <ion-scroll
-            scrollX="true"
-            scroll-avatar
-            class="largecardcontainer"
-            overflow-scroll="false"
-          >
-            <ion-card
-              class="scroll-item largecard "
-              (click)="getToDeal(item)"
-              *ngFor="let item of cards; index as i"
-              (touchstart)="touchstart($event)"
-              [@photosAnimation]="cards.length"
+        <ion-col col-12 style="padding:0px">
+          <ion-item no-lines class="paddingleft">
+            <ion-scroll
+              scrollX="true"
+              scroll-avatar
+              class="largecardcontainer"
+              overflow-scroll="false"
             >
-              <ng-container>
-                <img
-                  *ngIf="item.Logo != null"
-                  src="{{ item.Logo }}"
-                  class="largecardimg"
-                />
-                <!-- </img> -->
-                <div class="overlay-effect h-100 w-100"></div>
-                <h1 class="textstyle">
-                  {{ item.Name }}
-                </h1>
-              </ng-container>
-            </ion-card>
-          </ion-scroll>
-          <ng-template #loading>
-            dfjghfjkdghjkh
-          </ng-template>
-        </ion-item>
-      </ion-col>
+              <ion-card
+                class="scroll-item largecard"
+                (click)="getToDeal(item)"
+                *ngFor="let item of cards; index as i"
+                (touchstart)="touchstart($event)"
+                [@photosAnimation]="cards.length"
+              >
+                <ng-container>
+                  <img
+                    *ngIf="item.Logo != null"
+                    src="{{ item.Logo }}"
+                    class="largecardimg"
+                  />
+
+                  <div class="overlay-effect h-100 w-100"></div>
+                  <h1 class="textstyle">
+                    {{ item.Name }}
+                  </h1>
+                </ng-container>
+              </ion-card>
+            </ion-scroll>
+            <ng-template #loading>
+              dfjghfjkdghjkh
+            </ng-template>
+          </ion-item>
+        </ion-col>
       </ion-row>
-   
     </ng-container>
     <ng-template #elseTemplate>
       <ion-row>
@@ -87,33 +86,28 @@
   <ng-container *ngIf="directLinks">
     <ion-row>
       <ion-col col-12 text-left>
-        <h5 style="font-size: 2rem;">{{ copyItem?.Name }}</h5>
+        <h5 style="font-size: 1.8rem;margin-left: 10px;">{{ copyItem?.Name }}</h5>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-4 *ngFor="let item of cards" (click)="goToStore(item)">
-  <ion-card style="margin: 0px;
-    border-radius: 8px;
-    width: 100%;
-    font-size: 1.4rem;
-    background: #fff;
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);">
-    <ion-card-content style="    padding: 5px 4px;
+        <ion-card class="cardclassdirect">
+          <ion-card-content
+            style="    padding: 5px 4px;
     font-size: 1.4rem;
     line-height: 1.5;
-    ">
-        <img
-          src="{{ item.Logo }}"
-          alt=""
-          [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
-          style="
+    "
+          >
+            <img
+              src="{{ item.Logo }}"
+              alt=""
+              [ngClass]="{'mobileHeightClass' : item.StoreType == 6 , 'directlinks' : item.StoreType == 1}"
+              style="
   padding: 6px;"
-        />
-    </ion-card-content>
-  </ion-card>
-           </ion-col>
-
+            />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ng-container>
 </ng-container>

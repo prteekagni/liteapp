@@ -181,19 +181,56 @@ page-storepage {
   }
 
   .inner-image {
-    position: absolute;
+       position: absolute;
     top: 50%;
-    left: 52%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 80px;
+    width: 65px;
   }
 
-  div.image.even {
-    content: url(../../assets/blueborder.png);
+  // div.image.even {
+  //   content: url(../../assets/b2.png);
+  //   width: 130px;
+  //   height: 80px;
+  // }
+  // div.image.odd {
+  //   content: url(../../assets/bb1.png);
+  //   width: 130px;
+  //   height: 80px;
+  // }
+
+  .scroll-item:nth-child(3n+0) .image{
+    content: url(../../assets/bb1.png);
+    width: 130px;
+    height: 80px;
   }
-  div.image.odd {
-    content: url(../../assets/pinkborder.png);
+    .scroll-item:nth-child(3n+1) .image{
+    content: url(../../assets/b2.png);
+    width: 130px;
+    height: 80px;
   }
+    .scroll-item:nth-child(3n+2) .image{
+    content: url(../../assets/b3.png);
+    width: 130px;
+    height: 80px;
+  }
+
+
+//   div.image:nth-child(4n+0) {
+//    content: url(../../assets/bb1.png);
+//     width: 130px;
+//     height: 80px;
+// }
+// p:nth-child(4n+1) {
+//   background: yellow;
+// }
+// p:nth-child(4n+2) {
+//   background: blue;
+// }
+// p:nth-child(4n+3) {
+//   background: green;
+// }
 
   div {
     position: relative;

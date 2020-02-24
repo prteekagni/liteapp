@@ -35,7 +35,7 @@ min-height: 62px;
       rgba(236, 240, 247, 1) 11.2%,
       rgba(248, 248, 252, 1) 91.1%
     );
-    margin-top: 20px;
+    margin-top: 30px;
   }
   .SwipedTabs-indicatorSegment {
     // -webkit-transition: 0.2s all;
@@ -53,8 +53,8 @@ min-height: 62px;
     transform-origin: top 0 left 0;
     height: 4px;
     position: relative;
-    top: -6px;
-    background-color: #fb595e !important;
+    top: 0px;
+    background-color: #9455e6 !important;
   }
 
   .SwipedTabs-tabs ion-segment-button {
@@ -66,7 +66,7 @@ min-height: 62px;
   }
 
   .SwipedTabs-tabs ion-segment-button.SwipedTabs-activeTab {
-    color: #fb595e !important;
+    color: #9455e6 !important;
     font-weight: 700;
   }
 
@@ -83,7 +83,7 @@ min-height: 62px;
   }
 
   .tabsContent {
-    height: 44px !important;
+    height: 57px !important;
   }
 
   .segment-button {
@@ -203,5 +203,28 @@ margin-top: 10px !important
 
 .button-small-md {
   padding:0 0.1rem !important;
+}
+.toolbar-content toolbar-content-md{
+  height: 52px;
+}
+.tabsContent .scroll-content{
+  z-index:32;
+  top: 5px;
+}
+
+.toolbar-md{
+  padding-top: 10px;
+}
+.card-md{
+  margin:5px;
+  width: calc(100% - 10px);
+}
+.overflowtext{
+  font-family: Roboto-Regular;
+  font-size: 1.5rem;
+   white-space: normal;
+}
+.dealslist{
+  // min-height: 171px;
 }
 }

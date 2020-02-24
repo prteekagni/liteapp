@@ -77,7 +77,7 @@ export class StorepagePage {
               .getSubStores(element.CatPID, this.brandID)
               .subscribe((res: any) => {
                 this.brands = res;
-                console.log(this.brands);
+                console.log( "brands are " + this.brands);
               });
           }
         });

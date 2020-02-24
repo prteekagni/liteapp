@@ -42,9 +42,9 @@ page-home {
     padding-left: 10px;
   }
 
-  .header-md::after {
-    background-image: none !important;
-  }
+  // .header-md::after {
+  //   background-image: none !important;
+  // }
 
   .item[no-lines],
   .item.item[no-lines] .item-inner {
@@ -94,9 +94,9 @@ page-home {
   //  }
 
   /* Remove bottom border on md */
-  .header-md::after {
-    background-image: none;
-  }
+  // .header-md::after {
+  //   background-image: none;
+  // }
 
   /* Remove bottom border on ios */
   .header-ios ion-toolbar:last-child {
@@ -215,7 +215,7 @@ page-home {
      position: relative;
     text-align: center;
     height: 60px;
-    width: 120px;
+    width: 100px;
     margin-right: 0px;
     padding: 0px;
     margin-left: 10px;

@@ -78,7 +78,7 @@ page-deals {
     white-space: nowrap;
     height: 100%;
     margin-top: 10px;
-  }
+  } 
 
   // horizontal scroll of cards container , it will be removed from ionic 4( need edit )
   ion-scroll[scrollX] {
@@ -138,4 +138,9 @@ font-size: 2.3rem;
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+.scroll-content{
+  top:10px !important;
+}
+
 }

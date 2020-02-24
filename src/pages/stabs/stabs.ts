@@ -101,9 +101,12 @@ export class StabsPage implements OnInit {
   clickanm = "active";
   pageCount = 1;
   pageNumber = 1;
+  allpageCount = 1;
+  allpageNumber = 1;
   isloading: boolean = false;
   btnstate: string = "more";
   isrefresherloading: boolean = false;
+  showButton:boolean = false;
   constructor(
     public navCtrl: NavController,
     platform: Platform,
@@ -130,10 +133,10 @@ export class StabsPage implements OnInit {
         });
       });
     this.dealService
-      .getDealsByCategory(this.data.ID, this.pageNumber)
+      .getDealsByCategory(this.data.ID, this.allpageNumber)
       .subscribe((res: any) => {
         this.alldeals = res.data;
-        this.pageCount = 1;
+        this.allpageCount = 1;
         console.log(res);
         this.checkForFavourite(this.alldeals);
       });
@@ -142,10 +145,14 @@ export class StabsPage implements OnInit {
   ionViewDidEnter() {
     this.SwipedTabsIndicator = document.getElementById("indicator");
     if (this.tabs.length !== 0) {
-      for (let i in this.tabs)
+      for (let i in this.tabs){
+        console.log(i);
+        console.log(document.getElementById("tabTitle" + i).offsetWidth);
+        
         this.tabTitleWidthArray.push(
           document.getElementById("tabTitle" + i).offsetWidth
         );
+      }
       this.selectTab(0);
     }
   }
@@ -157,35 +164,43 @@ export class StabsPage implements OnInit {
     console.log(this.refresher);
 
     if (this.SwipedTabsSlider.realIndex === 0) {
-      console.log(this.SwipedTabsSlider.realIndex);
+      console.log(this.allpageCount);
 
+      console.log(this.allpageNumber);
+      if(this.allpageCount !== 0){
       this.dealService
-        .getDealsByCategory(this.data.ID, this.pageCount)
+        .getDealsByCategory(this.data.ID, this.allpageNumber)
         .subscribe((res: any) => {
-          this.alldeals = res.data;
-          this.pageCount = 1;
-          this.pageNumber = res.pageNumber;
+          // this.alldeals = res.data;
+             res.data.forEach(element => {
+               this.alldeals.push(element);
+             });
+          this.allpageCount = this.allpageCount;
+          this.allpageNumber = res.pageNumber;
           this.checkForFavourite(this.alldeals);
         });
+      }
     } else {
-        this.ItemsTitles.scrollTo(
-          this.calculateDistanceToSpnd(this.SwipedTabsSlider.getActiveIndex()) -
-            this.screenWidth_px / 2,
-          0
-        ).then(res=>{
-             this.dealService
-               .getDealsBySubCategory(
-                 this.tabs[this.SwipedTabsSlider.realIndex].ID,
-                 this.pageCount
-               )
-               .subscribe((res: any) => {
-                 this.newItem = res.data;
-                 this.pageCount = res.totalPages;
-                 this.pageNumber = res.pageNumber;
-                 console.log(res);
-                 this.checkForFavourite(this.newItem);
-               });
-        });
+      this.ItemsTitles.scrollTo(
+        this.calculateDistanceToSpnd(this.SwipedTabsSlider.getActiveIndex()) -
+          this.screenWidth_px / 2,
+        0
+      ).then(res => {
+        setTimeout(() => {
+          this.dealService
+            .getDealsBySubCategory(
+              this.tabs[this.SwipedTabsSlider.realIndex].ID,
+              this.pageCount
+            )
+            .subscribe((res: any) => {
+              this.newItem = res.data;
+              this.pageCount = res.totalPages;
+              this.pageNumber = res.pageNumber;
+              console.log(res);
+              this.checkForFavourite(this.newItem);
+            });
+        }, 300);
+      });
       // this.dealService
       //   .getDealsBySubCategory(
       //     this.tabs[this.SwipedTabsSlider.realIndex].ID,
@@ -199,8 +214,6 @@ export class StabsPage implements OnInit {
       //     this.checkForFavourite(this.newItem);
       //   });
     }
-
-  
   }
 
   selectTab(index) {
@@ -399,8 +412,8 @@ export class StabsPage implements OnInit {
               res.data.forEach(element => {
                 this.alldeals.push(element);
               });
-              this.pageNumber = res.pageNumber;
-              this.pageCount--;
+              this.allpageNumber = res.pageNumber;
+              this.allpageCount--;
               refresher.complete();
             });
           this.checkForFavourite(this.alldeals);
@@ -411,23 +424,22 @@ export class StabsPage implements OnInit {
     this.btnstate = this.btnstate == "less" ? "more" : "less";
     this.isloading = this.isloading == true ? true : false;
     if (data == "alldeals") {
-      if (this.pageCount !== 0) {
+      if (this.allpageCount !== 0) {
         console.log("Swipe Index " + this.SwipedTabsSlider.realIndex);
         setTimeout(() => {
-            this.dealService
-              .getDealsByCategory(this.data.ID, this.pageNumber + 1)
-              .subscribe((res: any) => {
-                console.log(res);
+          this.dealService
+            .getDealsByCategory(this.data.ID, this.allpageNumber + 1)
+            .subscribe((res: any) => {
+              console.log(res);
 
-                res.data.forEach(element => {
-                  this.alldeals.push(element);
-                });
-                this.pageNumber = res.pageNumber;
-                this.pageCount--;
+              res.data.forEach(element => {
+                this.alldeals.push(element);
               });
+              this.allpageNumber = res.pageNumber;
+              this.allpageCount--;
+            });
         }, 500);
-        
-      
+
         this.checkForFavourite(this.alldeals);
       }
     } else {
@@ -444,13 +456,16 @@ export class StabsPage implements OnInit {
           });
           this.pageNumber = res.pageNumber;
           this.pageCount--;
-          
         });
       this.checkForFavourite(this.newItem);
     }
 
     setTimeout(() => {
-       this.isloading = this.isloading == true ? true : false;
+      this.isloading = this.isloading == true ? true : false;
     }, 1000);
   }
+
+  // showButtonToggle() {
+  //   this.showButton = !this.showButton;
+  // }
 }

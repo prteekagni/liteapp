@@ -142,7 +142,7 @@
         <resource-file src="google-services.json" target="app/google-services.json" />
     </platform>
     <platform name="android">
-        <preference name="AndroidLaunchMode" value="singleInstance" />
+        <preference name="AndroidLaunchMode" value="singleTop" />
     </platform>
     <allow-navigation href="*" />
     <allow-navigation href="http://localhost:8100" sessionid="3a653d4b" />

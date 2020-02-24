@@ -4,11 +4,13 @@
       Best Stores
     </h5>
   </ion-col>
+</ion-row>
   <ng-container
     *ngIf="items.length > 0; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    <ion-col col-12 *ngIf="items.length >= 1">
+    <ion-row>
+        <ion-col col-12 *ngIf="items.length >= 1">
       <ion-row #myrow class="grow">
         <ng-container #mywrapper>
           <ng-container *ngFor="let item of tempsubdeals; index as i" >
@@ -47,12 +49,14 @@
         </ion-row>
       </ng-container>
     </ion-col>
-
+    </ion-row>
   
+
   </ng-template>
   <ng-template #elseTemplate>
- 
-    <ion-col col-12>
+  
+ <ion-row>
+  <ion-col col-12>
       
         <div class="timeline-wrapper">
     <div class="timeline-item">
@@ -77,6 +81,9 @@
          
     </div>
 </div>
+</ion-col>
+  </ion-row>
+    
       
       <ion-row text-center>
         <ion-col col-12 text-center *ngIf="showMore">
@@ -93,6 +100,6 @@
           </ion-col>
         </ion-col>
       </ion-row>
-    </ion-col>
+    
   </ng-template>
-</ion-row>
+

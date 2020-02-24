@@ -7,7 +7,7 @@
     <ion-col col-12>
       <div>
         <img
-          src="../../assets/imgs/logo.png"
+          src="assets/logo192.png"
           alt=""
           srcset=""
           class="profileimage"
@@ -88,14 +88,14 @@
 <ng-template #elseTemplate>
   <ion-row text-center>
     <ion-col col-12>
-      <div>
+      
         <img
           src="../../assets/logo192.png"
           alt=""
           srcset=""
           class="profileimage"
         />
-      </div>
+      
     </ion-col>
     <ion-col col-12>
       <h3>{{profile?.displayName}}</h3>
@@ -108,11 +108,11 @@
         <ion-list>
           <ion-item [ngClass]="{'disabled':!editForm}">
             <ion-label floating>Email</ion-label>
-            <!-- <ion-input
+            <ion-input
             type="email"
             [(ngModel)]="profile.email"
             name="Email"
-          ></ion-input> -->
+          ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label floating>Mobile Number</ion-label>

@@ -39,19 +39,30 @@ export class DealdetailPage {
     this.type = this.navParams.get("data");
 
     // this.type.Description = this.type.Description.replace("/.", "/br");
-    this.description =
-      this.type.Description !== null ? this.type.Description.split(".") : [];
+   
 
     this.storageService.visitedDeals(this.type).then((res: any) => {
       console.log(res);
+
     });
     if (this.type.type == "push") {
+
       this.dealService.getDealByID(this.type.id).subscribe((res: any) => {
+        console.log(this.deal);
+        
         this.deal = res;
+         this.description =
+           this.deal.Description !== null
+             ? this.deal.Description.split(".")
+             : [];
       });
     } else {
       this.deal = this.navParams.get("data");
       this.services = this.navParams.get("type");
+         this.description =
+           this.deal.Description !== null
+             ? this.deal.Description.split(".")
+             : [];
       if (this.deal.hasOwnProperty("Coupon")) {
         {
           if (this.deal.Coupon !== null) {

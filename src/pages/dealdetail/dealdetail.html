@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-     <span class="titlecolormargin" *ngIf="services !== 'services'" style="color:black;">{{deal?.ShortDescription}}</span>
+    <ion-title style="margin-left: 10px;">
+     <span class="titlecolormargin" *ngIf="services !== 'services'" style="color:black;">{{deal?.Name}}</span>
      <span class="titlecolormargin" *ngIf="services == 'services'" style="color:black">{{deal?.SubCategory.Name}}</span>
     </ion-title>
     <ion-buttons start color="theme">
